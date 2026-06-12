@@ -6,10 +6,10 @@ description: >-
   white-blue, luxury. Includes sellauth-theme CLI, Nunjucks, settings.json,
   schema.json, premium CSS design system, hero spotlight peek, optical navbar,
   product grid, feature mock UI with scroll animations, Lenis, shop pages, deploy QA, curated Google Fonts pairings per
-  style, premium gaming-neon recipe (not cheap Orbitron slop), client brief interview,
-  AGENTS.md PRODUCT.md DESIGN.md knowledge base before build. Produces themes on par with months of manual polish. Use when user asks to
+  style, premium gaming-neon recipe (not cheap Orbitron slop), multilingual client brief
+  interview, AGENTS.md PRODUCT.md DESIGN.md knowledge base (English) before build. Produces themes on par with months of manual polish. Use when user asks to
   create or edit a SellAuth theme, build a digital shop, sellauth-theme watch or
-  push, theme builder, landing page, or says "make me a site". Do NOT use for
+  push, theme builder, landing page, or says "make me a site" in any language. Do NOT use for
   Shopify Liquid, WooCommerce, WordPress, SellAuth backend APIs, or payment logic.
 license: MIT. See LICENSE file.
 compatibility: >-
@@ -18,7 +18,7 @@ compatibility: >-
   Install via skills.sh or npx skills add.
 metadata:
   author: community
-  version: "4.3.0"
+  version: "4.4.0"
   spec: agentskills.io
   homepage: https://skills.sh
 allowed-tools: Read Write Edit Bash Glob Grep
@@ -26,9 +26,11 @@ allowed-tools: Read Write Edit Bash Glob Grep
 
 # Beautiful MySellAuth Themes — MEGA SKILL
 
-**Mission:** User says *"fais-moi un site"* → agent **asks a short brief**, writes **AGENTS.md + PRODUCT.md + DESIGN.md**, then delivers a **complete, premium, shippable** SellAuth theme tailored to the client — first pass quality bar = months of manual polish encoded here.
+**Mission:** User asks for a new shop (any language) → agent **asks a short brief in the user's language**, writes **AGENTS.md + PRODUCT.md + DESIGN.md** (English KB), then delivers a **complete, premium, shippable** SellAuth theme — first pass quality bar = months of manual polish encoded here.
 
 **Iron rule:** No theme code until the three KB files exist (unless user explicitly skips — then write KB from defaults anyway).
+
+**Language:** Skill docs = English. Interview, questions, summaries = **user's language**. See [references/11-client-brief-kb.md](references/11-client-brief-kb.md#language-policy-mandatory).
 
 ---
 
@@ -78,11 +80,12 @@ You are a **senior SellAuth theme architect**. You do not produce generic Bootst
 [ ] Read all 12 references (full build only)
 
 ═══ PHASE 0.5 — BRIEF & KB (mandatory on new theme) ═══
-[ ] Read 11-client-brief-kb.md
-[ ] Ask user: name, style, accent, fonts, niche, refs, anti-refs, delivery (1–2 rounds max)
-[ ] Write AGENTS.md + PRODUCT.md + DESIGN.md at {BRIEF_ROOT} from assets/templates/
+[ ] Read 11-client-brief-kb.md (language policy)
+[ ] Detect user language — ask brief in THAT language (1–2 rounds max)
+[ ] Write AGENTS.md + PRODUCT.md + DESIGN.md in English at {BRIEF_ROOT}
 [ ] Fill DESIGN.md YAML + derive STYLE_ID / RECIPE / tokens — no TBD on required fields
-[ ] Show 10-line summary → user OK (or already said go)
+[ ] Show 10-line summary in user language → confirm (or already said go)
+[ ] Theme copy placeholders in site locale from brief
 
 ═══ PHASE 1 — DISCOVER (from KB, not guesswork) ═══
 [ ] Read AGENTS.md → PRODUCT.md → DESIGN.md
@@ -324,16 +327,17 @@ Plus: [08-anti-patterns.md](references/08-anti-patterns.md) — zero violations.
 
 ## User prompt → agent action map
 
-| User says | Agent does |
-|-----------|------------|
-| "Fais-moi un site" / "crée un thème" | **Brief first** → AGENTS + PRODUCT + DESIGN → then full workflow |
-| "Fais-moi un site gaming neon" | Interview (name, accent, refs) → KB files → Recipe R3 in DESIGN.md → build |
-| "Fais-moi un site dark gaming vert" | Brief → R3 + `#39ff14` in DESIGN.md |
-| "Theme clair bleu corporate" | Brief → R5 in DESIGN.md |
-| "Skip les questions, defaults" | Write KB from S1 defaults + assumptions in PRODUCT.md → build |
-| "Juste fix les animations features" | Read 05 + 06 (+ existing KB if present) |
-| "Ajoute une section FAQ" | Read 04 + PRODUCT.md → one component + schema |
-| "Change accent orange" | Update DESIGN.md first → sync tokens |
+Detect intent regardless of language. **Reply and brief in the user's language.**
+
+| User intent (examples) | Agent does |
+|------------------------|------------|
+| "Make me a site" / "Fais-moi un site" / "Créame una tienda" | **Brief first** (user lang) → KB (English) → full workflow |
+| "Gaming neon shop" / "site gaming neon vert" | Interview → Recipe R3 in DESIGN.md → build |
+| "Clean white blue corporate" / "theme corporate bleu" | Brief → R5 in DESIGN.md |
+| "Skip questions, use defaults" | KB from S1 defaults + assumptions in PRODUCT.md |
+| "Fix feature animations only" | Read 05 + 06 (+ existing KB if present) |
+| "Add FAQ section" | Read 04 + PRODUCT.md → one component + schema |
+| "Change accent to orange" | Update DESIGN.md first → sync tokens |
 
 ---
 
@@ -371,5 +375,6 @@ Folder name **must** match `name:` in frontmatter. No separate registry submit �
 8. **Never ship Arial/system-only fonts** — always documented in DESIGN.md.
 9. **Gaming neon = Recipe R3** — premium, not arcade cliché.
 10. **DESIGN.md is source of truth** for colors/fonts — update KB before CSS when direction changes.
+11. **Interview in user's language** — KB files stay English; site copy uses locale from brief.
 
 **Deliver like the best MySellAuth theme the user has ever seen — because this skill encodes that standard.**

@@ -22,7 +22,7 @@
 | Never use for UI | Why |
 |------------------|-----|
 | Comic Sans, Papyrus, Impact | Joke fonts |
-| Orbitron / Audiowide / Press Start 2P / Rajdhani **anywhere on gaming** | 2010 arcade cliché — use **Syne** display instead |
+| Orbitron / Audiowide / Press Start 2P / Rajdhani **anywhere on gaming** | 2010 arcade cliche — use **Syne** display instead |
 | System default only | Generic AI slop |
 | More than 2 sans families | Visual noise |
 | Bold 900 on everything | Heavy, amateur |
