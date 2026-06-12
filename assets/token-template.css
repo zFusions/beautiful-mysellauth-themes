@@ -1,0 +1,27 @@
+:root {
+  --t-bg: #000000;
+  --t-surface: #0a0a0a;
+  --t-section-alt: #0e0e0e;
+  --t-card: #111111;
+  --t-text: #fafafa;
+  --t-muted: rgba(255, 255, 255, 0.55);
+  --t-text-faint: rgba(255, 255, 255, 0.35);
+  --t-accent: #6366f1;
+  --t-accent-hover: #818cf8;
+  --t-accent-glow: rgba(99, 102, 241, 0.35);
+  --t-accent-soft: rgba(99, 102, 241, 0.18);
+  --t-text-on-accent: #0a0a1a;
+  --t-border: rgba(255, 255, 255, 0.1);
+  --t-border-subtle: rgba(255, 255, 255, 0.06);
+  --t-radius-btn: 10px;
+  --t-radius-card: 12px;
+  --t-container: min(1200px, 94vw);
+  --t-nav-h: 56px;
+  --t-font-ui: "DM Sans", system-ui, sans-serif;
+  --t-font-display: "Instrument Serif", Georgia, serif;
+  --mock-line-dur: 0.32s;
+  --mock-meter-dur: 2s;
+  --t-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --t-hero-mock-top: clamp(430px, 54vh, 580px);
+  --t-hero-mock-footprint: clamp(380px, 44vh, 480px);
+}
