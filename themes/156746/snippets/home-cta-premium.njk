@@ -1,11 +1,32 @@
-<section class="vl-cta-arc component" data-scroll-section>
+<section class="vl-cta-arc component" data-component-id="{{ componentId }}" data-scroll-section>
   <div class="container vl-cta-arc-inner" data-reveal>
-    <h2 class="vl-cta-arc-title ps-title">Get your order in seconds</h2>
-    <p class="vl-cta-arc-sub ps-subtitle">Scripts, software, licenses and more — web store or Discord shop. Secure checkout, automatic delivery.</p>
+    <h2 class="vl-cta-arc-title ps-title">{{ properties.title | default('Get your order in seconds') | renderString }}</h2>
+    <p class="vl-cta-arc-sub ps-subtitle">{{ properties.subtitle | default('Scripts, software, licenses and more — web store or Discord shop. Secure checkout, automatic delivery.') | renderString }}</p>
     <div class="vl-cta-arc-actions">
-      <a href="{{ '/#products' | shopUrl }}" class="vl-btn-primary vl-cta-arc-btn">Browse products</a>
-      {% if shop.discord_url %}
-      <a href="{{ shop.discord_url }}" target="_blank" rel="noopener" class="vl-btn-ghost vl-cta-arc-btn-ghost">Contact support</a>
+      {% set primary_href = properties.cta | default('/#products') %}
+      {% if primary_href[0] == '#' %}
+        {% set primary_href = ('/' ~ primary_href) | shopUrl %}
+      {% else %}
+        {% set primary_href = primary_href | shopUrl %}
+      {% endif %}
+
+      <a href="{{ primary_href }}" class="vl-btn-primary vl-cta-arc-btn">{{ properties.cta_text | default('Browse products') | renderString }}</a>
+
+      {% set secondary_href = properties.secondary_cta | default('') %}
+      {% set secondary_external = false %}
+      {% if secondary_href %}
+        {% if secondary_href[0] == '#' %}
+          {% set secondary_href = ('/' ~ secondary_href) | shopUrl %}
+        {% else %}
+          {% set secondary_href = secondary_href | shopUrl %}
+        {% endif %}
+      {% elif shop.discord_url %}
+        {% set secondary_href = shop.discord_url %}
+        {% set secondary_external = true %}
+      {% endif %}
+
+      {% if secondary_href %}
+      <a href="{{ secondary_href }}"{% if secondary_external %} target="_blank" rel="noopener"{% endif %} class="vl-btn-ghost vl-cta-arc-btn-ghost">{{ properties.secondary_cta_text | default('Contact support') | renderString }}</a>
       {% endif %}
     </div>
   </div>

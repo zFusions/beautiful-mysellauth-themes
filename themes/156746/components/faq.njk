@@ -3,11 +3,11 @@
     <div class="faq-layout">
       <aside class="faq-aside" data-reveal>
         <header class="faq-aside-head">
-          <span class="vl-faq-eyebrow">Support</span>
-          <h2 class="faq-aside-title">Got questions?<br>We've got answers.</h2>
+          <span class="vl-faq-eyebrow">{{ properties.aside_eyebrow | default('Support') | renderString }}</span>
+          <h2 class="faq-aside-title">{{ properties.aside_title | default("Got questions?<br>We've got answers.") | renderString }}</h2>
         </header>
         <p class="faq-aside-sub">
-          Everything you need to know before you buy. Can't find it? We're one message away.
+          {{ properties.aside_subtitle | default("Everything you need to know before you buy. Can't find it? We're one message away.") | renderString }}
         </p>
 
         <div class="faq-help-card">
@@ -16,14 +16,14 @@
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"></path></svg>
             </div>
             <div class="faq-help-copy">
-              <div class="faq-help-title">Still have questions?</div>
-              <div class="faq-help-text">Our team replies around the clock on Discord.</div>
+              <div class="faq-help-title">{{ properties.help_title | default('Still have questions?') | renderString }}</div>
+              <div class="faq-help-text">{{ properties.help_text | default('Our team replies around the clock on Discord.') | renderString }}</div>
             </div>
           </div>
           {% if shop.discord_url %}
-          <a href="{{ shop.discord_url }}" target="_blank" rel="noopener" class="faq-help-btn">Chat with us</a>
+          <a href="{{ shop.discord_url }}" target="_blank" rel="noopener" class="faq-help-btn">{{ properties.help_button_text | default('Chat with us') | renderString }}</a>
           {% else %}
-          <a href="{{ '/feedback' | shopUrl }}" class="faq-help-btn">Contact support</a>
+          <a href="{{ '/feedback' | shopUrl }}" class="faq-help-btn">{{ properties.help_button_text | default('Contact support') | renderString }}</a>
           {% endif %}
         </div>
       </aside>

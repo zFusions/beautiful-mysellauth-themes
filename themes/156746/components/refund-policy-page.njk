@@ -1,11 +1,9 @@
 <div class="container component vl-page-section" data-component-id="{{ componentId }}">
   <section class="py-5-nav">
-    <div class="section-title">
-      <h1>Refund Policy</h1>
-    </div>
+    {% render_snippet "vl-page-head.njk", properties=properties, fallbackTitle='Refund Policy' %}
     <div class="row">
       <div class="col-lg-8 mx-auto">
-        <div class="editor">
+        <div class="editor vl-page-prose">
           {{ refund_policy | safe }}
         </div>
       </div>

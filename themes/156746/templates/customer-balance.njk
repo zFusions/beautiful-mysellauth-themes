@@ -136,12 +136,6 @@
   </section>
 </div>
 
-<div class="components">
-  {% for componentId in components_order %}
-    {% render_component componentId %}
-  {% endfor %}
-</div>
-
 <script>
   document.addEventListener('alpine:init', () => {
     Alpine.data('topUpBalance', () => ({
@@ -239,60 +233,3 @@
     }));
   });
 </script>
-
-<style>
-  [data-component-id="{{ componentId }}"] .card {
-    background: #ffffff;
-    border: 1px solid var(--border-default, #e8e8e9);
-    border-radius: 1rem;
-    box-shadow: var(--shadow-card, 0 1px 2px rgba(16,24,40,0.04), 0 4px 16px rgba(16,24,40,0.06));
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-  }
-
-  [data-component-id="{{ componentId }}"] .card h4 { color: var(--text-secondary, #7a7a7a); font-weight: 600; }
-  [data-component-id="{{ componentId }}"] .card h5 { color: var(--text-primary, #0a0a0a); font-weight: 700; font-size: 1.6rem; }
-  [data-component-id="{{ componentId }}"] .card p.small { color: var(--text-secondary, #7a7a7a); }
-
-  [data-component-id="{{ componentId }}"] .table {
-    --bs-table-bg: transparent;
-    --bs-table-color: var(--text-primary, #0a0a0a);
-    --bs-table-border-color: var(--border-default, #e8e8e9);
-    color: var(--text-primary, #0a0a0a);
-  }
-
-  [data-component-id="{{ componentId }}"] .table thead th {
-    color: var(--text-secondary, #7a7a7a);
-    font-weight: 700;
-    text-transform: uppercase;
-    font-size: 0.72rem;
-    letter-spacing: 0.04em;
-    border-bottom-color: var(--border-default, #e8e8e9);
-  }
-
-  [data-component-id="{{ componentId }}"] .table td,
-  [data-component-id="{{ componentId }}"] .table th {
-    border-color: var(--border-default, #eef0f2);
-    vertical-align: middle;
-  }
-
-  [data-component-id="{{ componentId }}"] .text-muted {
-    color: var(--text-secondary, #7a7a7a) !important;
-  }
-
-  [data-component-id="{{ componentId }}"] .text-accent-500 {
-    color: var(--blue-primary, #1B44FE) !important;
-  }
-
-  [data-component-id="{{ componentId }}"] a.hover\:underline {
-    color: var(--blue-primary, #1B44FE);
-    text-decoration: none;
-    border-bottom: none;
-    font-weight: 600;
-  }
-
-  [data-component-id="{{ componentId }}"] a.hover\:underline:hover {
-    color: var(--blue-deep, #0000ee);
-    text-decoration: underline;
-  }
-</style>

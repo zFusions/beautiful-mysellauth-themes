@@ -16,6 +16,8 @@ Strategic and visual specs live at the project root — read both before any UI 
 
 **Canonical CSS:** `themes/156746/assets/velora.css` — all `--vl-*` tokens.
 
-**Skills:** `beautiful-mysellauth-themes` (MEGA skill — full premium SellAuth themes, skills.sh / Agent Skills spec), `premium-storefront-da` (optional), `mysellauth-theme-editing`.
+**Skills:** `premium-storefront-da` (**primary** — theme 156746, all pages, DA + builder rules), `beautiful-mysellauth-themes` (generic SellAuth / new themes), `velora-landing-polish` (legacy — prefer premium-storefront-da).
+
+**Visual editor rule:** `.cursor/rules/sellauth-visual-editor.mdc` (always on) — every component must be editable in the SellAuth builder for resale; update the skill after major UI work.
 
 **Impeccable commands:** `$impeccable polish products`, `$impeccable audit themes/156746`, `$impeccable craft cart`.

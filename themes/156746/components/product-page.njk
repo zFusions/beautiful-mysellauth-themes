@@ -1,8 +1,10 @@
-<div class="product-wrapper vl-pdp component" data-component-id="{{ componentId }}">
+<div class="product-wrapper vl-pdp vl-page-section component" data-component-id="{{ componentId }}">
   <div class="container">
-    <section class="py-5-nav">
-      <div class="container px-4 px-lg-5 my-5">
-        <div class="row gx-4 gx-lg-5">
+    <section class="py-5-nav vl-pdp-section">
+      {% if properties.show_back_link != false %}
+      <a href="{{ (properties.back_link | default('/#products')) | shopUrl }}" class="vl-page-back vl-pdp-back">{{ properties.back_text | default('← Back to products') | renderString }}</a>
+      {% endif %}
+      <div class="row gx-4 gx-lg-5 align-items-start">
           <div class="col-lg-6">
             {% if product.image_urls|length > 0 %}
             <div class="carousel slide mb-5" id="productImageCarousel" data-bs-ride="carousel">
@@ -88,10 +90,10 @@
 
               <p class="vl-pdp-delivery-badge">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-                Delivered automatically after payment
+                {{ properties.delivery_badge | default('Delivered automatically after payment') | renderString }}
               </p>
               <p class="vl-pdp-faq-link-wrap">
-                <a href="{{ '/#faq' | shopUrl }}" class="vl-pdp-faq-link">How delivery works →</a>
+                <a href="{{ '/#faq' | shopUrl }}" class="vl-pdp-faq-link">{{ properties.faq_link_text | default('How delivery works →') | renderString }}</a>
               </p>
               {% if product.status_color or product.status_text %}
                 <div class="status mb-2" data-color="{{ product.status_color }}" data-label="{{ product.status_text }}">
@@ -181,12 +183,10 @@
           </div>
         </div>
         {% if productUpsells.length > 0 %}
-          <div class="row gx-4 gx-lg-5 mt-5">
+          <div class="row gx-4 gx-lg-5 mt-5 pt-2">
             <div class="col">
-              <div class="section-title">
-                <h2>
-                  Commonly Bought Together
-                </h2>
+              <div class="section-title vl-pdp-upsells-head">
+                <h2>{{ properties.upsells_title | default('Commonly Bought Together') | renderString }}</h2>
               </div>
               <div class="products-grid-wrap vl-pdp-upsells-grid">
                 {% set ogProduct = product %}
@@ -198,7 +198,6 @@
             </div>
           </div>
         {% endif %}
-      </div>
     </section>
   </div>
 </div>

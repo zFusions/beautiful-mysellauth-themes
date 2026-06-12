@@ -12,20 +12,16 @@
 
     <div class="vl-flow-steps" data-reveal-group>
       {% for feature in properties.features %}
-      {% if loop.index == 1 %}
-        {% set mockType = 'scripts' %}
-      {% elif loop.index == 2 %}
-        {% set mockType = 'discord' %}
-      {% else %}
-        {% set mockType = 'premium' %}
-      {% endif %}
+      {% set mockType = feature.mock_type | default('scripts') %}
       <article class="vl-flow-card" data-reveal>
-        {% render_snippet "vl-flow-spot.njk" %}
+        {% if properties.show_mock_ui != false %}
         <div class="vl-flow-ui" aria-hidden="true">
           <div class="vl-flow-panel">
             {% render_snippet "vl-feature-mock.njk", mock=mockType %}
           </div>
         </div>
+        {% endif %}
+        {% render_snippet "vl-flow-spot.njk" %}
         <div class="vl-flow-body">
           <h3 class="vl-flow-title">{{ feature.title | renderString }}</h3>
           <p class="vl-flow-text">{{ feature.description | renderString }}</p>

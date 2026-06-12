@@ -1,9 +1,10 @@
 <div class="container component vl-cart-page" data-component-id="{{ componentId }}">
   <div x-data="cartPage">
     <section class="vl-cart">
-      <header class="vl-cart-head">
-        <h1 class="vl-cart-title">Your cart</h1>
-        <p class="vl-cart-sub">Review your order — instant delivery after payment.</p>
+      <header class="vl-cart-head vl-page-head">
+        <a href="{{ '/#products' | shopUrl }}" class="vl-page-back">← Back to products</a>
+        <h1 class="vl-cart-title">{{ properties.title | default('Your cart') | renderString }}</h1>
+        <p class="vl-cart-sub vl-page-sub">{{ properties.subtitle | default('Review your order — instant delivery after payment.') | renderString }}</p>
       </header>
 
       <div class="vl-cart-layout">

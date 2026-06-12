@@ -1,0 +1,49 @@
+---
+description: SellAuth visual builder — every theme surface must stay editable for resale
+alwaysApply: true
+---
+
+# SellAuth visual editor (theme 156746)
+
+Builder: https://dash.sellauth.com/builder/visual/156746
+
+This theme is built to be **resold**. Anything a buyer sees on the storefront must be changeable in the SellAuth visual editor without editing code.
+
+## Before shipping any component
+
+1. **schema.json** — add or extend the component entry with every user-facing field (titles, subtitles, lists, links, toggles).
+2. **settings.json** — seed `properties` with the current copy so the builder preview matches production.
+3. **Template** — wire copy through `properties.* | renderString | default('…')`, never hardcode marketing text in `.njk`.
+4. **Builder markers** — root element: `class="component"` + `data-component-id="{{ componentId }}"`.
+5. **Validate** — after each new section, open the visual builder and confirm fields appear and update the preview.
+
+## Mock UI (hero peek, feature panels, how-it-works demos)
+
+- Decorative mocks are **optional**, not core content. Expose a toggle per section: `show_mock_ui` (or `show_hero_mock`).
+- When off: do not render mock markup; JS must no-op if the section/root is missing.
+- Document in schema `help` that mock chrome uses demo labels — buyers who disable mocks get copy + layout only.
+- Prefer real product/checkout flows over fake UI when the platform provides data.
+
+## Snippets
+
+Snippets rendered from components receive `properties` explicitly:
+
+```nunjucks
+{% render_snippet "home-steps.njk", properties=properties, componentId=componentId %}
+```
+
+Inside snippets, treat `properties` as the single source of truth for editable copy.
+
+## Skill maintenance
+
+After **major UI/UX work** on this theme (new sections, layout patterns, motion, mock patterns, token changes):
+
+- Update `.cursor/skills/beautiful-mysellauth-themes/SKILL.md` and the relevant `references/*.md` so future builds inherit the improvement.
+- Capture new builder field patterns, anti-patterns, and quality checks — do not leave knowledge only in theme files.
+
+## Checklist (every PR / session touching theme UI)
+
+- [ ] No new hardcoded headline, CTA, or FAQ aside text
+- [ ] schema.json + settings.json updated together
+- [ ] Mock sections have an off toggle
+- [ ] Builder preview tested (Ctrl+F5 after watch push)

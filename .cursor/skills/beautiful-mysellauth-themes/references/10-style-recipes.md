@@ -2,7 +2,7 @@
 
 Full token + font + hero + mock kits per style. Agent copies recipe, adapts copy, ships.
 
-When user says **"fais-moi un site gaming neon"** → run [11-client-brief-kb.md](11-client-brief-kb.md) interview, write **DESIGN.md** with **Recipe R3** tokens, then build. Do not improvise fonts or colors.
+When user asks for a **gaming neon shop** (any language) → run [11-client-brief-kb.md](11-client-brief-kb.md) interview in the user's language, write **DESIGN.md** with **Recipe R3** tokens, then build. Do not improvise fonts or colors.
 
 ---
 

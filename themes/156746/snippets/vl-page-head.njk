@@ -1,0 +1,9 @@
+<header class="vl-page-head">
+  {% if properties.show_back_link != false %}
+  <a href="{{ (properties.back_link | default('/')) | shopUrl }}" class="vl-page-back">{{ properties.back_text | default('← Back to store') | renderString }}</a>
+  {% endif %}
+  <h1>{{ properties.title | default(fallbackTitle | default('Page')) | renderString }}</h1>
+  {% if properties.subtitle %}
+  <p class="vl-page-sub">{{ properties.subtitle | renderString }}</p>
+  {% endif %}
+</header>

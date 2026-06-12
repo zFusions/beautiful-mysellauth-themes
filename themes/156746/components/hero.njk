@@ -70,6 +70,8 @@
       </div>
     </div>
 
+    {% if properties.show_hero_mock != false %}
     {% render_snippet "hero-dashboard-mock.njk" %}
+    {% endif %}
   </div>
 </section>

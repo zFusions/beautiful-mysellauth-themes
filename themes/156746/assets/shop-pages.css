@@ -7,6 +7,110 @@
 .product-wrapper.vl-pdp {
   background: var(--vl-bg);
   padding-bottom: clamp(3rem, 6vw, 5rem);
+  min-height: calc(100vh - var(--vl-nav-h, 72px) - 120px);
+}
+
+.product-wrapper.vl-pdp .vl-pdp-section {
+  padding-top: clamp(1.5rem, 4vw, 2.5rem);
+}
+
+.product-wrapper.vl-pdp .vl-pdp-upsells-head {
+  margin-bottom: 1.25rem;
+}
+
+.product-wrapper.vl-pdp .live-stats svg {
+  width: 1.125rem;
+  height: 1.125rem;
+  flex-shrink: 0;
+  color: var(--vl-accent);
+  opacity: 0.85;
+}
+
+.product-wrapper.vl-pdp .live-stats p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+.product-wrapper.vl-pdp .status {
+  margin-bottom: 0.75rem;
+}
+
+.product-wrapper.vl-pdp .status .label {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.product-wrapper.vl-pdp .variants .variant .active-indicator svg {
+  color: var(--vl-accent) !important;
+}
+
+.product-wrapper.vl-pdp .btn-outline-danger.stock-indicator {
+  border-color: rgba(239, 68, 68, 0.35);
+  color: #f87171;
+  background: rgba(239, 68, 68, 0.08);
+  pointer-events: none;
+}
+
+.product-wrapper.vl-pdp .form-control.text-center {
+  background: var(--vl-surface);
+  border: 1px solid var(--vl-border);
+  color: var(--vl-accent);
+  border-radius: var(--vl-btn-radius);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.product-wrapper.vl-pdp .alert-warning {
+  background: rgba(249, 153, 38, 0.08);
+  border: 1px solid rgba(249, 153, 38, 0.22);
+  color: var(--vl-text);
+  border-radius: var(--vl-radius);
+  font-size: 14px;
+}
+
+.product-wrapper.vl-pdp .text-danger {
+  color: #f87171 !important;
+}
+
+.product-wrapper.vl-pdp .input-group .input-group-btn {
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Sales notification toast — dark Velora */
+.notification-popup .notification-content {
+  background: var(--vl-card);
+  border: 1px solid var(--vl-border);
+  border-radius: var(--vl-radius);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+  padding: 0.5rem;
+  max-width: min(100vw - 2rem, 360px);
+}
+
+.notification-popup .notification-image {
+  border-radius: var(--vl-btn-radius);
+  border: 1px solid var(--vl-border);
+}
+
+.notification-popup .notification-text-primary,
+.notification-popup .notification-text-tertiary {
+  color: var(--vl-muted) !important;
+}
+
+.notification-popup .notification-text-secondary {
+  color: var(--vl-text);
+  font-weight: 600;
+}
+
+.velora-inner-page .product-wrapper.vl-pdp,
+.velora-inner-page .vl-cart-page,
+.velora-inner-page .vl-page-section {
+  background: var(--vl-bg);
 }
 
 .product-wrapper.vl-pdp h1.display-6 {
@@ -797,12 +901,6 @@
 }
 
 /* ---------- Responsive (shop pages) ---------- */
-.product-wrapper.vl-pdp > .container > section > .container {
-  max-width: 100%;
-  padding-left: 0;
-  padding-right: 0;
-}
-
 @media (max-width: 767px) {
   .product-wrapper.vl-pdp h1.display-6 {
     font-size: clamp(1.5rem, 6vw, 1.875rem);

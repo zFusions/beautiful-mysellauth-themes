@@ -1,123 +1,167 @@
-<section id="how-it-works" class="vl-section vl-steps-section component" data-scroll-section>
+<section id="how-it-works" class="vl-section vl-steps-section component" data-component-id="{{ componentId }}" data-scroll-section data-steps-section>
   <div class="container">
     <header class="vl-section-head vl-section-head--center" data-reveal>
       <h2 class="vl-section-title">
-        <span class="vl-section-sans">Digital orders were always slow.</span>
-        <span class="vl-section-serif">Until we made them instant.</span>
+        <span class="vl-section-sans">{{ properties.title_sans | default('Digital orders were always slow.') | renderString }}</span>
+        <span class="vl-section-serif">{{ properties.title_serif | default('Until we made them instant.') | renderString }}</span>
       </h2>
-      <p class="vl-section-sub">Browse the catalog, pay securely, and receive your order automatically — no waiting, no manual delivery.</p>
+      <p class="vl-section-sub">{{ properties.subtitle | default('Browse the catalog, pay securely, and receive your order automatically — no waiting, no manual delivery.') | renderString }}</p>
     </header>
 
     <div class="vl-flow-steps" data-reveal-group>
-      <article class="vl-flow-card" data-reveal>
-        {% render_snippet "vl-flow-spot.njk" %}
+      {% for step in properties.steps | default([]) %}
+      {% if loop.index <= 3 %}
+      <article class="vl-flow-card" data-reveal{% if loop.index == 1 %} data-step-card="browse"{% elif loop.index == 2 %} data-step-card="checkout"{% else %} data-step-card="delivery"{% endif %}>
+        {% if properties.show_mock_ui != false %}
         <div class="vl-flow-ui" aria-hidden="true">
           <div class="vl-flow-panel">
-            <div class="vl-flow-app">
-              <header class="vl-flow-chrome">
-                <span class="vl-flow-dots"><i></i><i></i><i></i></span>
-                <span class="vl-flow-url">velora.market/catalog</span>
-              </header>
-              <div class="vl-flow-search">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg>
-                <span>Search Boost Bot, token checker…</span>
+            {% if loop.index == 1 %}
+            <div class="vl-flow-app vl-flow-app--browse">
+              <div class="vl-flow-mock-stage" data-step-browse-stage>
+                <div class="vl-flow-mock-stage__body" data-step-browse-form>
+                  <header class="vl-flow-browse-head">
+                    <span>Catalog</span>
+                    <strong>142 products</strong>
+                  </header>
+                  <div class="vl-flow-browse-search">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3-3"/></svg>
+                    <span>Boost Bot, token checker…</span>
+                  </div>
+                  <div class="vl-flow-browse-filters">
+                    <span class="is-on">All</span>
+                    <span>Scripts</span>
+                    <span>Keys</span>
+                  </div>
+                  <ul class="vl-flow-browse-list">
+                    <li class="vl-flow-browse-item is-on" data-step-target="product">
+                      <span class="vl-flow-browse-item-icon" aria-hidden="true"></span>
+                      <span class="vl-flow-browse-item-meta">
+                        <strong>Boost Bot</strong>
+                        <span>Discord · Instant</span>
+                      </span>
+                      <em>€9.99</em>
+                    </li>
+                    <li class="vl-flow-browse-item">
+                      <span class="vl-flow-browse-item-icon" aria-hidden="true"></span>
+                      <span class="vl-flow-browse-item-meta">
+                        <strong>Token checker</strong>
+                        <span>License · API</span>
+                      </span>
+                      <em>€4.99</em>
+                    </li>
+                  </ul>
+                  <span class="vl-flow-cta is-primary" data-step-target="cta">Add to cart · No account</span>
+                </div>
+                <div class="vl-flow-browse-cart" data-step-browse-cart aria-hidden="true">
+                  <header class="vl-flow-chrome">
+                    <span class="vl-flow-dots"><i></i><i></i><i></i></span>
+                    <span class="vl-flow-url">velora.market/cart</span>
+                  </header>
+                  <div class="vl-flow-browse-cart-page">
+                    <div class="vl-flow-receipt vl-flow-receipt--step">
+                      <div class="vl-flow-receipt-head">
+                        <span>Your cart</span>
+                        <em>1 item · No account</em>
+                      </div>
+                      <ul class="vl-flow-browse-cart-lines">
+                        <li class="vl-flow-browse-cart-line" data-step-cart-line>
+                          <span class="vl-flow-browse-cart-line-icon" aria-hidden="true"></span>
+                          <span class="vl-flow-browse-cart-line-meta">
+                            <strong>Boost Bot</strong>
+                            <span>Qty 1 · Discord</span>
+                          </span>
+                          <em>€9.99</em>
+                        </li>
+                      </ul>
+                      <div class="vl-flow-receipt-total" data-step-cart-total>
+                        <span>Subtotal</span>
+                        <strong>€9.99</strong>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="vl-flow-products">
-                <div class="vl-flow-product is-on">
-                  <span class="vl-flow-product-thumb"></span>
-                  <span class="vl-flow-product-meta">
-                    <span class="vl-flow-product-name">Boost Bot</span>
-                    <span class="vl-flow-product-price">€9.99</span>
+            </div>
+            {% elif loop.index == 2 %}
+            <div class="vl-flow-app">
+              <div class="vl-flow-mock-stage" data-step-checkout-stage>
+                <div class="vl-flow-mock-stage__body" data-step-checkout-form>
+                  <div class="vl-flow-form-head">
+                    <span>Checkout</span>
+                    <strong>€24.99</strong>
+                  </div>
+                  <div class="vl-flow-segment">
+                    <span class="is-on">Card</span>
+                    <span>Crypto</span>
+                    <span>PayPal</span>
+                  </div>
+                  <div class="vl-flow-fields">
+                    <span class="vl-flow-field"></span>
+                    <div class="vl-flow-fields-row">
+                      <span class="vl-flow-field"></span>
+                      <span class="vl-flow-field is-sm"></span>
+                    </div>
+                  </div>
+                  <span class="vl-flow-cta is-primary" data-step-target="pay">Pay securely</span>
+                </div>
+                <div class="vl-flow-mock-success" data-step-checkout-success aria-hidden="true">
+                  <span class="vl-flow-success-icon" aria-hidden="true">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                   </span>
-                </div>
-                <div class="vl-flow-product">
-                  <span class="vl-flow-product-thumb"></span>
-                  <span class="vl-flow-product-meta">
-                    <span class="vl-flow-product-name">Token checker</span>
-                    <span class="vl-flow-product-price">€4.99</span>
-                  </span>
+                  <strong class="vl-flow-success-title">Payment confirmed</strong>
+                  <span class="vl-flow-success-sub">Encrypted · €24.99</span>
                 </div>
               </div>
-              <span class="vl-flow-cta">Add to cart · No account</span>
             </div>
+            {% else %}
+            <div class="vl-flow-app vl-flow-app--delivery">
+              <div class="vl-flow-delivery-stage">
+                <ol class="vl-flow-delivery-steps">
+                  <li class="vl-flow-delivery-step" data-step-timeline>
+                    <span class="vl-flow-delivery-step-dot" aria-hidden="true"></span>
+                    <span>Payment</span>
+                  </li>
+                  <li class="vl-flow-delivery-step" data-step-timeline>
+                    <span class="vl-flow-delivery-step-dot" aria-hidden="true"></span>
+                    <span>Processing</span>
+                  </li>
+                  <li class="vl-flow-delivery-step" data-step-timeline>
+                    <span class="vl-flow-delivery-step-dot" aria-hidden="true"></span>
+                    <span>Delivered · 0.4s</span>
+                  </li>
+                </ol>
+                <div class="vl-flow-keycard" data-step-keycard>
+                  <div class="vl-flow-keycard-head">
+                    <span class="vl-flow-keycard-icon" aria-hidden="true">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0 3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>
+                    </span>
+                    <span class="vl-flow-keycard-label">License key</span>
+                    <span class="vl-flow-keycard-badge">Ready</span>
+                  </div>
+                  <div class="vl-flow-keycard-row">
+                    <code class="vl-flow-keycard-value">VMRK-8F2A-****-K9Q1</code>
+                    <span class="vl-flow-keycard-copy" data-step-target="copy">Copy</span>
+                  </div>
+                </div>
+                <div class="vl-flow-delivery-foot">
+                  <span class="vl-flow-status-dot" aria-hidden="true"></span>
+                  Automatic delivery after payment
+                </div>
+              </div>
+            </div>
+            {% endif %}
           </div>
         </div>
-        <div class="vl-flow-body">
-          <span class="vl-flow-step">Step 1</span>
-          <h3 class="vl-flow-title">Browse the full catalog in seconds</h3>
-          <p class="vl-flow-text">Scripts, keys and licenses — on the web store or Discord shop. Add to cart without creating an account.</p>
-        </div>
-      </article>
-
-      <article class="vl-flow-card" data-reveal>
+        {% endif %}
         {% render_snippet "vl-flow-spot.njk" %}
-        <div class="vl-flow-ui" aria-hidden="true">
-          <div class="vl-flow-panel">
-            <div class="vl-flow-app">
-              <div class="vl-flow-form-head">
-                <span>Checkout</span>
-                <strong>€24.99</strong>
-              </div>
-              <div class="vl-flow-segment">
-                <span class="is-on">Card</span>
-                <span>Crypto</span>
-                <span>PayPal</span>
-              </div>
-              <div class="vl-flow-fields">
-                <span class="vl-flow-field"></span>
-                <div class="vl-flow-fields-row">
-                  <span class="vl-flow-field"></span>
-                  <span class="vl-flow-field is-sm"></span>
-                </div>
-              </div>
-              <span class="vl-flow-cta is-primary">Pay securely</span>
-            </div>
-          </div>
-        </div>
         <div class="vl-flow-body">
-          <span class="vl-flow-step">Step 2</span>
-          <h3 class="vl-flow-title">Encrypted checkout in one click</h3>
-          <p class="vl-flow-text">Pay with card, crypto, or PayPal. Every transaction is protected from checkout to confirmation.</p>
+          <span class="vl-flow-step">{{ step.step_label | default('Step ' ~ loop.index) | renderString }}</span>
+          <h3 class="vl-flow-title">{{ step.title | renderString }}</h3>
+          <p class="vl-flow-text">{{ step.text | renderString }}</p>
         </div>
       </article>
-
-      <article class="vl-flow-card" data-reveal>
-        {% render_snippet "vl-flow-spot.njk" %}
-        <div class="vl-flow-ui" aria-hidden="true">
-          <div class="vl-flow-panel">
-            <div class="vl-flow-app">
-              <div class="vl-flow-timeline">
-                <div class="vl-flow-timeline-row is-done" data-reveal>
-                  <span class="vl-flow-timeline-dot"></span>
-                  <span>Payment confirmed</span>
-                </div>
-                <div class="vl-flow-timeline-row is-done" data-reveal>
-                  <span class="vl-flow-timeline-dot"></span>
-                  <span>Order processing</span>
-                </div>
-                <div class="vl-flow-timeline-row is-active" data-reveal>
-                  <span class="vl-flow-timeline-dot"></span>
-                  <span>Delivered · 0.4s</span>
-                </div>
-              </div>
-              <div class="vl-flow-keycard">
-                <span class="vl-flow-keycard-label">License key</span>
-                <code>VMRK-8F2A-****-K9Q1</code>
-                <span class="vl-flow-keycard-copy">Copy</span>
-              </div>
-              <div class="vl-flow-delivery-foot">
-                <span class="vl-flow-status-dot" aria-hidden="true"></span>
-                Automatic delivery after payment
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="vl-flow-body">
-          <span class="vl-flow-step">Step 3</span>
-          <h3 class="vl-flow-title">Delivered instantly, every time</h3>
-          <p class="vl-flow-text">Keys, licenses and access sent automatically the moment payment is confirmed — 24/7, no manual delivery.</p>
-        </div>
-      </article>
+      {% endif %}
+      {% endfor %}
     </div>
   </div>
 </section>

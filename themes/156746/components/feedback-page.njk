@@ -1,11 +1,9 @@
 <div class="container component vl-page-section" data-component-id="{{ componentId }}">
   <section class="py-5-nav">
-    <div class="section-title">
-      <h1>Feedback from users</h1>
-    </div>
-    <div class="testimonials row">
+    {% render_snippet "vl-page-head.njk", properties=properties, fallbackTitle='Feedback from users' %}
+    <div class="vl-feedback-grid testimonials row">
       {% for feedback in feedbacks %}
-      <div class="col-12 col-md-6 col-lg-4 col-xl-3 mb-4">
+      <div class="col-12 col-md-6 col-lg-4 mb-4">
         {% render_snippet "feedback-card.njk", feedback=feedback %}
       </div>
       {% endfor %}
@@ -13,6 +11,12 @@
     {% if feedbacksPaginator and feedbacksPaginator.last_page > 1 %}
       {% render_snippet "pagination.njk", paginator=feedbacksPaginator %}
     {% endif %}
-    <a href="{{ '/#products' | shopUrl }}" class="vl-page-cta">Browse products</a>
+    {% set cta_href = properties.cta | default('/#products') %}
+    {% if cta_href[0] == '#' %}
+      {% set cta_href = ('/' ~ cta_href) | shopUrl %}
+    {% else %}
+      {% set cta_href = cta_href | shopUrl %}
+    {% endif %}
+    <a href="{{ cta_href }}" class="vl-page-cta">{{ properties.cta_text | default('Browse products') | renderString }}</a>
   </section>
 </div>

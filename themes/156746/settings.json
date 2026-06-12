@@ -5,15 +5,52 @@
             "components": {
                 "how-it-works": {
                     "type": "how-it-works",
-                    "properties": {}
+                    "properties": {
+                        "title_sans": "Digital orders were always slow.",
+                        "title_serif": "Until we made them instant.",
+                        "subtitle": "Browse the catalog, pay securely, and receive your order automatically — no waiting, no manual delivery.",
+                        "show_mock_ui": true,
+                        "steps": [
+                            {
+                                "step_label": "Step 1",
+                                "title": "Browse the full catalog in seconds",
+                                "text": "Scripts, keys and licenses — on the web store or Discord shop. Add to cart without creating an account."
+                            },
+                            {
+                                "step_label": "Step 2",
+                                "title": "Encrypted checkout in one click",
+                                "text": "Pay with card, crypto, or PayPal. Every transaction is protected from checkout to confirmation."
+                            },
+                            {
+                                "step_label": "Step 3",
+                                "title": "Delivered instantly, every time",
+                                "text": "Keys, licenses and access sent automatically the moment payment is confirmed — 24/7, no manual delivery."
+                            }
+                        ]
+                    }
                 },
                 "final-cta": {
                     "type": "final-cta",
-                    "properties": {}
+                    "properties": {
+                        "title": "Get your order in seconds",
+                        "subtitle": "Scripts, software, licenses and more — web store or Discord shop. Secure checkout, automatic delivery.",
+                        "cta_text": "Browse products",
+                        "cta": "/#products",
+                        "secondary_cta_text": "Contact support",
+                        "secondary_cta": ""
+                    }
                 },
                 "trust-bar": {
                     "type": "trust-bar",
-                    "properties": {}
+                    "properties": {
+                        "items": [
+                            { "label": "Stripe", "icon": "stripe" },
+                            { "label": "PayPal", "icon": "paypal" },
+                            { "label": "Encrypted checkout", "icon": "shield" },
+                            { "label": "SSL secured", "icon": "lock" },
+                            { "label": "Instant delivery", "icon": "zap" }
+                        ]
+                    }
                 },
                 "hero": {
                     "type": "hero",
@@ -33,7 +70,8 @@
                         "badge_text": "Now Live",
                         "cta_text_2": "Join community",
                         "cta_2": "",
-                        "show_support": true
+                        "show_support": true,
+                        "show_hero_mock": true
                     }
                 },
                 "features": {
@@ -41,21 +79,25 @@
                     "properties": {
                         "title": "One store. Every category.",
                         "subtitle": "Same catalog on the web store and our Discord shop — buy wherever you prefer.",
+                        "show_mock_ui": true,
                         "features": [
                             {
                                 "title": "Scripts & automation",
                                 "description": "Deploy and run Discord bots from one dashboard — live status, instant setup, web store or Discord shop.",
-                                "icon": "fas fa-code"
+                                "icon": "fas fa-code",
+                                "mock_type": "scripts"
                             },
                             {
                                 "title": "Discord shop",
                                 "description": "Browse the catalog, add to cart and pay — Boost Bot, token checker and more, delivered instantly after checkout.",
-                                "icon": "fab fa-discord"
+                                "icon": "fab fa-discord",
+                                "mock_type": "discord"
                             },
                             {
                                 "title": "Premium products",
                                 "description": "Streaming, VPN, cloud credits and bundled subscriptions. Pay once, access in minutes.",
-                                "icon": "fas fa-crown"
+                                "icon": "fas fa-crown",
+                                "mock_type": "premium"
                             }
                         ]
                     }
@@ -70,6 +112,12 @@
                 "faq": {
                     "type": "faq",
                     "properties": {
+                        "aside_eyebrow": "Support",
+                        "aside_title": "Got questions?<br>We've got answers.",
+                        "aside_subtitle": "Everything you need to know before you buy. Can't find it? We're one message away.",
+                        "help_title": "Still have questions?",
+                        "help_text": "Our team replies around the clock on Discord.",
+                        "help_button_text": "Chat with us",
                         "items": [
                             {
                                 "question": "How do I receive my product after purchase?",
@@ -97,6 +145,7 @@
                 "feedbacks": {
                     "type": "feedbacks",
                     "properties": {
+                        "lead": "What our customers say",
                         "title": "Hear What Others Say",
                         "subtitle": "Hear from our customers who have transformed their experience with our products.",
                         "amount": 6
@@ -112,8 +161,8 @@
             },
             "components_order": [
                 "hero",
-                "how-it-works",
                 "features",
+                "how-it-works",
                 "products",
                 "feedbacks",
                 "faq",
@@ -125,7 +174,10 @@
             "components": {
                 "cart-page": {
                     "type": "cart-page",
-                    "properties": []
+                    "properties": {
+                        "title": "Your cart",
+                        "subtitle": "Review your order — instant delivery after payment."
+                    }
                 }
             },
             "components_order": [
@@ -138,6 +190,12 @@
                 "product-page": {
                     "type": "product-page",
                     "properties": {
+                        "show_back_link": true,
+                        "back_text": "← Back to products",
+                        "back_link": "/#products",
+                        "delivery_badge": "Delivered automatically after payment",
+                        "faq_link_text": "How delivery works →",
+                        "upsells_title": "Commonly Bought Together",
                         "hide_add_to_cart": false,
                         "hide_buy_now": false
                     }
@@ -152,7 +210,12 @@
             "components": {
                 "feedback-page": {
                     "type": "feedback-page",
-                    "properties": []
+                    "properties": {
+                        "title": "Feedback from users",
+                        "subtitle": "Real reviews from verified buyers.",
+                        "cta_text": "Browse products",
+                        "cta": "/#products"
+                    }
                 }
             },
             "components_order": [
@@ -164,7 +227,9 @@
             "components": {
                 "terms-page": {
                     "type": "terms-page",
-                    "properties": []
+                    "properties": {
+                        "title": "Terms of Service"
+                    }
                 }
             },
             "components_order": [
@@ -176,11 +241,42 @@
             "components": {
                 "status-page": {
                     "type": "status-page",
-                    "properties": []
+                    "properties": {
+                        "title": "Product Status",
+                        "subtitle": "Live availability across the catalog."
+                    }
                 }
             },
             "components_order": [
                 "status-page"
+            ]
+        },
+        "privacy-policy": {
+            "layout": "master",
+            "components": {
+                "privacy-policy-page": {
+                    "type": "privacy-policy-page",
+                    "properties": {
+                        "title": "Privacy Policy"
+                    }
+                }
+            },
+            "components_order": [
+                "privacy-policy-page"
+            ]
+        },
+        "refund-policy": {
+            "layout": "master",
+            "components": {
+                "refund-policy-page": {
+                    "type": "refund-policy-page",
+                    "properties": {
+                        "title": "Refund Policy"
+                    }
+                }
+            },
+            "components_order": [
+                "refund-policy-page"
             ]
         },
         "customer-dashboard": {

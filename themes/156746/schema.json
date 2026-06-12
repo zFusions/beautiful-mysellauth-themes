@@ -269,6 +269,152 @@
                     "label": "Side Image",
                     "type": "image",
                     "maxImages": 1
+                },
+                "show_hero_mock": {
+                    "label": "Show Hero Dashboard Mock",
+                    "help": "Decorative demo panel below the hero. Disable for a text-only hero when reselling the theme.",
+                    "type": "toggle",
+                    "default": true
+                }
+            }
+        },
+        "how-it-works": {
+            "label": "How It Works",
+            "multiple": true,
+            "properties": {
+                "title_sans": {
+                    "label": "Title (sans)",
+                    "type": "text",
+                    "default": "Digital orders were always slow."
+                },
+                "title_serif": {
+                    "label": "Title (serif accent)",
+                    "type": "text",
+                    "default": "Until we made them instant."
+                },
+                "subtitle": {
+                    "label": "Subtitle",
+                    "type": "textarea",
+                    "default": "Browse the catalog, pay securely, and receive your order automatically — no waiting, no manual delivery."
+                },
+                "show_mock_ui": {
+                    "label": "Show Step Demo Panels",
+                    "help": "Animated checkout/delivery demos. Disable to show step copy only — recommended for some resellers.",
+                    "type": "toggle",
+                    "default": true
+                },
+                "steps": {
+                    "label": "Steps",
+                    "type": "list",
+                    "maxItems": 3,
+                    "properties": {
+                        "step_label": {
+                            "label": "Step label",
+                            "type": "text",
+                            "default": "Step 1"
+                        },
+                        "title": {
+                            "label": "Title",
+                            "type": "text",
+                            "default": "Step title"
+                        },
+                        "text": {
+                            "label": "Description",
+                            "type": "textarea",
+                            "default": "Step description."
+                        }
+                    },
+                    "default": [
+                        {
+                            "step_label": "Step 1",
+                            "title": "Browse the full catalog in seconds",
+                            "text": "Scripts, keys and licenses — on the web store or Discord shop. Add to cart without creating an account."
+                        },
+                        {
+                            "step_label": "Step 2",
+                            "title": "Encrypted checkout in one click",
+                            "text": "Pay with card, crypto, or PayPal. Every transaction is protected from checkout to confirmation."
+                        },
+                        {
+                            "step_label": "Step 3",
+                            "title": "Delivered instantly, every time",
+                            "text": "Keys, licenses and access sent automatically the moment payment is confirmed — 24/7, no manual delivery."
+                        }
+                    ]
+                }
+            }
+        },
+        "final-cta": {
+            "label": "Final CTA",
+            "multiple": true,
+            "properties": {
+                "title": {
+                    "label": "Title",
+                    "type": "text",
+                    "default": "Get your order in seconds"
+                },
+                "subtitle": {
+                    "label": "Subtitle",
+                    "type": "textarea",
+                    "default": "Scripts, software, licenses and more — web store or Discord shop. Secure checkout, automatic delivery."
+                },
+                "cta_text": {
+                    "label": "Primary button text",
+                    "type": "text",
+                    "default": "Browse products"
+                },
+                "cta": {
+                    "label": "Primary button link",
+                    "type": "text",
+                    "default": "/#products"
+                },
+                "secondary_cta_text": {
+                    "label": "Secondary button text",
+                    "type": "text",
+                    "default": "Contact support"
+                },
+                "secondary_cta": {
+                    "label": "Secondary button link",
+                    "help": "Leave empty to use shop Discord URL when available.",
+                    "type": "text",
+                    "default": ""
+                }
+            }
+        },
+        "trust-bar": {
+            "label": "Trust Bar",
+            "multiple": true,
+            "properties": {
+                "items": {
+                    "label": "Trust items",
+                    "type": "list",
+                    "maxItems": 8,
+                    "properties": {
+                        "label": {
+                            "label": "Label",
+                            "type": "text",
+                            "default": "Instant delivery"
+                        },
+                        "icon": {
+                            "label": "Icon",
+                            "type": "select",
+                            "options": [
+                                "stripe",
+                                "paypal",
+                                "shield",
+                                "lock",
+                                "zap"
+                            ],
+                            "default": "zap"
+                        }
+                    },
+                    "default": [
+                        { "label": "Stripe", "icon": "stripe" },
+                        { "label": "PayPal", "icon": "paypal" },
+                        { "label": "Encrypted checkout", "icon": "shield" },
+                        { "label": "SSL secured", "icon": "lock" },
+                        { "label": "Instant delivery", "icon": "zap" }
+                    ]
                 }
             }
         },
@@ -630,6 +776,12 @@
                     ],
                     "default": 3
                 },
+                "show_mock_ui": {
+                    "label": "Show Feature Demo Panels",
+                    "help": "Animated mock UI per card. Disable for title + description only.",
+                    "type": "toggle",
+                    "default": true
+                },
                 "features": {
                     "label": "Items",
                     "type": "list",
@@ -644,6 +796,17 @@
                             "label": "Text",
                             "type": "textarea",
                             "default": "This is a feature."
+                        },
+                        "mock_type": {
+                            "label": "Demo panel type",
+                            "help": "Only used when demo panels are enabled.",
+                            "type": "select",
+                            "options": [
+                                "scripts",
+                                "discord",
+                                "premium"
+                            ],
+                            "default": "scripts"
                         },
                         "icon": {
                             "label": "Icon",
@@ -665,6 +828,11 @@
             "label": "Feedbacks",
             "multiple": true,
             "properties": {
+                "lead": {
+                    "label": "Eyebrow / lead",
+                    "type": "text",
+                    "default": "What our customers say"
+                },
                 "title": {
                     "label": "Title",
                     "type": "text",
@@ -987,6 +1155,36 @@
             "label": "FAQ",
             "multiple": true,
             "properties": {
+                "aside_eyebrow": {
+                    "label": "Aside eyebrow",
+                    "type": "text",
+                    "default": "Support"
+                },
+                "aside_title": {
+                    "label": "Aside title",
+                    "type": "text",
+                    "default": "Got questions? We've got answers."
+                },
+                "aside_subtitle": {
+                    "label": "Aside subtitle",
+                    "type": "textarea",
+                    "default": "Everything you need to know before you buy. Can't find it? We're one message away."
+                },
+                "help_title": {
+                    "label": "Help card title",
+                    "type": "text",
+                    "default": "Still have questions?"
+                },
+                "help_text": {
+                    "label": "Help card text",
+                    "type": "text",
+                    "default": "Our team replies around the clock on Discord."
+                },
+                "help_button_text": {
+                    "label": "Help button text",
+                    "type": "text",
+                    "default": "Chat with us"
+                },
                 "title": {
                     "label": "Title",
                     "type": "text",
@@ -1075,11 +1273,138 @@
                 }
             }
         },
+        "feedback-page": {
+            "label": "Feedback Page",
+            "page": true,
+            "templates": ["feedback"],
+            "properties": {
+                "title": {
+                    "label": "Title",
+                    "type": "text",
+                    "default": "Feedback from users"
+                },
+                "subtitle": {
+                    "label": "Subtitle",
+                    "type": "text",
+                    "default": "Real reviews from verified buyers."
+                },
+                "cta_text": {
+                    "label": "CTA button text",
+                    "type": "text",
+                    "default": "Browse products"
+                },
+                "cta": {
+                    "label": "CTA link",
+                    "type": "text",
+                    "default": "/#products"
+                }
+            }
+        },
+        "status-page": {
+            "label": "Status Page",
+            "page": true,
+            "templates": ["status"],
+            "properties": {
+                "title": {
+                    "label": "Title",
+                    "type": "text",
+                    "default": "Product Status"
+                },
+                "subtitle": {
+                    "label": "Subtitle",
+                    "type": "text",
+                    "default": "Live availability across the catalog."
+                }
+            }
+        },
+        "privacy-policy-page": {
+            "label": "Privacy Policy Page",
+            "page": true,
+            "templates": ["privacy-policy"],
+            "properties": {
+                "title": {
+                    "label": "Title",
+                    "type": "text",
+                    "default": "Privacy Policy"
+                }
+            }
+        },
+        "refund-policy-page": {
+            "label": "Refund Policy Page",
+            "page": true,
+            "templates": ["refund-policy"],
+            "properties": {
+                "title": {
+                    "label": "Title",
+                    "type": "text",
+                    "default": "Refund Policy"
+                }
+            }
+        },
+        "terms-page": {
+            "label": "Terms Page",
+            "page": true,
+            "templates": ["terms"],
+            "properties": {
+                "title": {
+                    "label": "Title",
+                    "type": "text",
+                    "default": "Terms of Service"
+                }
+            }
+        },
+        "cart-page": {
+            "label": "Cart Page",
+            "page": true,
+            "templates": ["cart"],
+            "properties": {
+                "title": {
+                    "label": "Title",
+                    "type": "text",
+                    "default": "Your cart"
+                },
+                "subtitle": {
+                    "label": "Subtitle",
+                    "type": "text",
+                    "default": "Review your order — instant delivery after payment."
+                }
+            }
+        },
         "product-page": {
             "label": "Product Page",
             "page": true,
             "templates": ["product"],
             "properties": {
+                "show_back_link": {
+                    "label": "Show back link",
+                    "type": "toggle",
+                    "default": true
+                },
+                "back_text": {
+                    "label": "Back link text",
+                    "type": "text",
+                    "default": "← Back to products"
+                },
+                "back_link": {
+                    "label": "Back link URL",
+                    "type": "text",
+                    "default": "/#products"
+                },
+                "delivery_badge": {
+                    "label": "Delivery badge",
+                    "type": "text",
+                    "default": "Delivered automatically after payment"
+                },
+                "faq_link_text": {
+                    "label": "FAQ link text",
+                    "type": "text",
+                    "default": "How delivery works →"
+                },
+                "upsells_title": {
+                    "label": "Upsells section title",
+                    "type": "text",
+                    "default": "Commonly Bought Together"
+                },
                 "hide_add_to_cart": {
                     "label": "Hide Add to Cart Button",
                     "type": "toggle",
@@ -1091,18 +1416,6 @@
                     "default": false
                 }
             }
-        },
-        "feedback-page": {
-            "label": "Feedback Page",
-            "page": true,
-            "templates": ["feedback"],
-            "properties": {}
-        },
-        "terms-page": {
-            "label": "Terms Page",
-            "page": true,
-            "templates": ["terms"],
-            "properties": {}
         }
     }
 }

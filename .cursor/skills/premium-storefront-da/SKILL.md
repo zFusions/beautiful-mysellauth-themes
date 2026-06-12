@@ -1,145 +1,154 @@
 ---
 name: premium-storefront-da
 description: >-
-  Generic premium dark storefront design system — colors, soft geometry (10/12px),
-  typography, spotlight, components, motion language. Platform-agnostic. Use when
-  building any digital shop, SaaS landing, or admin UI that needs dark void + single
-  accent + pro soft UI. No client-specific names in content.
+  Velora Market theme 156746 — complete dark storefront DA, all pages (landing,
+  PDP, cart, legal, feedback, status, customer account), builder-resale rules,
+  tokens, and inner-page patterns. Use for ANY work on themes/156746, Velora CSS,
+  shop-pages, or SellAuth inner templates. Generic SellAuth CLI/Nunjucks →
+  beautiful-mysellauth-themes instead.
 ---
 
-# Premium Storefront — Design System
+# Premium Storefront DA — Velora Theme 156746
 
-**Scope :** identité visuelle réutilisable — site, dashboard, admin, landing.
-
-**SellAuth plumbing :** `.cursor/skills/beautiful-mysellauth-themes/`
-
-**Modules :**
-| Fichier | Contenu |
-|---------|---------|
-| [forms-and-shapes.md](forms-and-shapes.md) | Formes, silhouettes, composition |
-| [motion-language.md](motion-language.md) | Vitesse, easing, durées |
-| [tokens.json](tokens.json) | Tokens machine-readable |
+**This skill is the single source for Velora theme work.**  
+Generic reusable DA primitives: [forms-and-shapes.md](forms-and-shapes.md), [motion-language.md](motion-language.md), [tokens.json](tokens.json).  
+**Full theme playbook:** [velora-theme-156746.md](velora-theme-156746.md) — read before every session.
 
 ---
 
-## 1. Principes
+## Quick start
 
-1. **Void first** — fond `#000` ou off-white dominant
-2. **Un accent** — une teinte chaude ou froide, pas de second brand color
-3. **Soft geometry** — 10px boutons, 12px cards, pas pill sur CTA
-4. **Glow sparse** — spotlight hero + un CTA glow max
-5. **Dual typo** — sans UI + serif/display une ligne max
-6. **Peek mock** — panel app sous le fold
+```bash
+cd "D:/8- Projet/2- Velora Market/settings"
+sellauth-theme watch --theme 156746
+```
 
----
-
-## 2. Couleurs (dark default)
-
-| Token | Value | Usage |
-|-------|-------|-------|
-| bg | `#000000` | Page |
-| section-alt | `#0e0e0e` | Bandes alternées |
-| surface | `#0a0a0a` | Zones relevées |
-| card | `#111111` | Cards |
-| text | `#fafafa` | Titres |
-| muted | `rgba(255,255,255,0.55)` | Body |
-| accent | custom | CTA, links |
-| border | `rgba(255,255,255,0.1)` | Inputs, panels |
-
-Gradients headline : blanc → gris clair (`background-clip: text`).
-
-CTA primary : gradient vertical accent + bordure semi-transparente + glow externe.
+| Need | Read |
+|------|------|
+| Tokens, colors, typography | [DESIGN.md](../../../DESIGN.md) + `velora.css` `:root` |
+| All pages, registers, file map | [velora-theme-156746.md](velora-theme-156746.md) |
+| Builder / schema / resale | `.cursor/rules/sellauth-visual-editor.mdc` |
+| SellAuth CLI, forbidden Nunjucks | `beautiful-mysellauth-themes` |
 
 ---
 
-## 3. Formes
+## Velora tokens (accent orange)
 
-→ Détail : [forms-and-shapes.md](forms-and-shapes.md)
+| Token | Value |
+|-------|-------|
+| `--vl-bg` | `#000000` |
+| `--vl-surface` | `#0a0a0a` |
+| `--vl-card` | `#111111` |
+| `--vl-accent` | `#F99926` |
+| `--vl-text` | `#fafafa` |
+| `--vl-muted` | `rgba(255,255,255,0.68)` |
+| `--vl-btn-radius` | `10px` |
+| `--vl-radius` | `12px` |
 
-| Élément | Radius |
-|---------|--------|
-| Boutons, badges | 10px |
-| Cards, panels | 12px |
-| Micro bars 4px | 999px OK |
-
----
-
-## 4. Typographie
-
-| Rôle | Stack |
-|------|-------|
-| UI | Arial, Helvetica, sans-serif |
-| Display | Playfair Display, Georgia, serif |
-
-Hero : `clamp()` sizes, tracking `-0.02em` à `-0.03em`.
+Typography: Arial UI + Playfair Display serif accents on landing headlines.
 
 ---
 
-## 5. Composants
+## Two surfaces
 
-### Bouton primary
-- 38×px height, padding `0 18px`, radius 10px
-- Texte foncé sur accent clair
-- Hover `translateY(-1px)` + glow (hero only)
+### 1. Landing (`shop` template)
 
-### Bouton ghost
-- `rgba(255,255,255,0.03)` bg, border `0.14` alpha
-- Pas de glow
+- Wrapper: `.velora-home.velora-landing-page`
+- Register: **brand** — serif accent lines, hero peek mock, section mocks
+- Top light: `.velora-home::before` — **absolute**, hero height only, scrolls away
+- Every component: `schema.json` + `properties` + `data-component-id`
+- Mock toggles: `show_mock_ui`, `show_hero_mock`
 
-### Navbar
-- 56px height, grid `1fr auto 1fr`
-- Logo gauche, liens centrés viewport, actions droite
+### 2. Inner pages (product, cart, terms, account, …)
 
-### Cards
-- Border `rgba(255,255,255,0.06–0.1)`, radius 12px
-- Shadow large shells only : `0 32px 64px rgba(0,0,0,0.55)`
-
----
-
-## 6. Motion
-
-→ [motion-language.md](motion-language.md) + `beautiful-mysellauth-themes/module-animations.md`
-
-- Lent, fluide, `cubic-bezier(0.16, 1, 0.3, 1)`
-- Mocks feature ~8–12s, scroll-gated
-- Pas bounce/elastic
+- Register: **product** — flat black, no landing glow
+- Shell: `.vl-page-section` + `.vl-page-head` + `.vl-page-prose .editor`
+- Customer: `.velora-customer` — dark cards, orange active nav
+- Styles: `shop-pages.css` (PDP/cart) + `velora.css` (shared inner utilities)
+- **Never** inline `#ffffff` / blue `#1B44FE` styles in templates
 
 ---
 
-## 7. CSS variables template
+## Page work checklist
 
-```css
-:root {
-  --ps-bg: #000000;
-  --ps-surface: #0a0a0a;
-  --ps-card: #111111;
-  --ps-text: #fafafa;
-  --ps-muted: rgba(255, 255, 255, 0.55);
-  --ps-accent: #ff8012;
-  --ps-accent-glow: rgba(255, 128, 18, 0.35);
-  --ps-radius-btn: 10px;
-  --ps-radius-card: 12px;
-  --ps-container: min(1200px, 94vw);
-}
+```
+[ ] Component has data-component-id + class="component"
+[ ] Copy from properties | renderString (pages with schema)
+[ ] Uses --vl-* tokens only
+[ ] No landing light on inner page
+[ ] Ctrl+F5 builder preview
+[ ] Update velora-theme-156746.md if new pattern
 ```
 
 ---
 
-## 8. Anti-patterns ❌
+## Components by area
 
-| Éviter | Pourquoi |
-|--------|----------|
-| Pill CTA | Gaming / dated |
-| Second accent color | Bruit visuel |
-| Glow every card | Cheap |
-| 16px+ card radius | Conflit soft pro |
-| Light theme sans demande | Default = dark |
+**Landing:** hero, features, how-it-works, products, feedbacks, faq, final-cta, navbar, footer
+
+**Shop:** product-page, cart-page
+
+**Legal / info:** terms-page, privacy-policy-page, refund-policy-page, feedback-page, status-page
+
+**Account:** customer-dashboard, customer-invoices, customer-balance, customer-tickets (+ templates)
+
+**Blog:** blog-posts, blog-post-page
+
+**Modals (dark in velora.css):** customer-login-modal, ticket-create-modal, maintenance-login-modal
 
 ---
 
-## 9. Checklist agent
+## Motion
 
-1. Lire ce skill + module formes si layout nouveau
-2. Mapper composants aux specs §5
-3. SellAuth → beautiful-mysellauth-themes pour Nunjucks/CLI
-4. Timings mocks → TIMING object ~25s, pas reduce crush
+| Asset | Scope |
+|-------|-------|
+| `velora-motion.js` | Hero cursor glow, FAQ accordion polish |
+| `velora-flow-mock.js` | Features section mocks |
+| `velora-steps-mock.js` | How-it-works mocks |
+| Lenis | `.velora-home` only (master.njk) |
+
+Inner pages: minimal motion — hover states only.
+
+---
+
+## CSS discipline
+
+1. **One token file:** `velora.css` for shared + landing
+2. **Shop pages:** `shop-pages.css` for `.vl-pdp` and `.vl-cart-*` only
+3. **No sprawl** — no per-template `<style>` blocks with light theme leftovers
+4. Override Bootstrap in page context: `.vl-page-section .btn-primary`, `.velora-customer .table`
+
+---
+
+## Skill maintenance
+
+After major UI/UX on theme 156746:
+
+1. Update [velora-theme-156746.md](velora-theme-156746.md) with new patterns
+2. Bump [tokens.json](tokens.json) if tokens change
+3. Sync [DESIGN.md](../../../DESIGN.md) YAML if brand tokens change
+
+Do **not** duplicate SellAuth platform docs here — link to `beautiful-mysellauth-themes`.
+
+---
+
+## Anti-patterns ❌
+
+| Avoid | Use instead |
+|-------|-------------|
+| Pill CTAs | 10px radius |
+| Second accent | Orange only |
+| Fixed landing light | Absolute on `.velora-home` |
+| Hardcoded page titles | schema `title` property |
+| White customer cards | `.velora-customer` dark |
+| Light pagination | `.vl-pagination` in velora.css |
+
+---
+
+## Agent constraints
+
+1. Read `velora-theme-156746.md` first on any 156746 task
+2. Landing edits → schema + settings together
+3. Inner pages → product register, no hero light
+4. Remove legacy inline styles when touching a file
+5. `beautiful-mysellauth-themes` only for new themes from scratch or full rebuilds

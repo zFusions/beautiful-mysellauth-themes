@@ -100,8 +100,211 @@
   function finishCard(card) {
     card.classList.add('is-done');
     card.classList.remove('is-live');
-    var cta = card.querySelector('.vl-flow-cta');
-    if (cta) cta.classList.add('is-done');
+  }
+
+  function getPointer(panel) {
+    var ptr = panel.querySelector('.vl-mock-pointer');
+    if (!ptr) {
+      ptr = document.createElement('span');
+      ptr.className = 'vl-mock-pointer';
+      ptr.setAttribute('aria-hidden', 'true');
+      ptr.innerHTML =
+        '<svg width="22" height="26" viewBox="0 0 18 21" fill="none" aria-hidden="true">' +
+        '<path d="M2 1.5L2 17.5L6.5 13L9.5 19.5L11.5 18.5L8.5 12L14.5 12L2 1.5Z" fill="white" stroke="black" stroke-width="1.2" stroke-linejoin="round"/>' +
+        '</svg>' +
+        '<span class="vl-mock-pointer__ripple"></span>';
+      panel.appendChild(ptr);
+    }
+    return ptr;
+  }
+
+  function targetCenter(panel, el, offset) {
+    offset = offset || { x: 6, y: 6 };
+    var pr = panel.getBoundingClientRect();
+    var er = el.getBoundingClientRect();
+    return {
+      x: er.left - pr.left + er.width * 0.68 + offset.x,
+      y: er.top - pr.top + er.height * 0.62 + offset.y
+    };
+  }
+
+  function movePointer(ptr, pos, immediate) {
+    ptr.style.transition = immediate
+      ? 'none'
+      : 'transform 480ms cubic-bezier(0.22, 1, 0.36, 1), opacity 0.32s ease';
+    ptr.style.transform = 'translate3d(' + pos.x + 'px,' + pos.y + 'px,0)';
+    ptr.classList.add('is-visible');
+  }
+
+  function clickTarget(card, ptr, target, onDone) {
+    target.classList.add('is-mock-hit');
+    ptr.classList.add('is-clicking');
+    later(card, function () {
+      ptr.classList.remove('is-clicking');
+      target.classList.remove('is-mock-hit');
+      if (onDone) onDone();
+    }, 520);
+  }
+
+  function sequenceMoveClick(card, panel, ptr, target, immediate, onDone) {
+    var pos = targetCenter(panel, target);
+    movePointer(ptr, pos, immediate);
+    later(
+      card,
+      function () {
+        clickTarget(card, ptr, target, onDone);
+      },
+      immediate ? 360 : 640
+    );
+  }
+
+  function resetQrScan(qr) {
+    if (!qr) return;
+    qr.classList.remove('is-scanned');
+  }
+
+  function confirmQrPayment(qr, card, done) {
+    if (!qr) {
+      if (done) done();
+      return;
+    }
+
+    resetQrScan(qr);
+
+    var delay = reduce.matches ? 720 : 2400;
+
+    later(card, function () {
+      qr.classList.add('is-scanned');
+      if (done) done();
+    }, delay);
+  }
+
+  function resetDiscordPay(card) {
+    var pay = card.querySelector('[data-flow-discord-pay]');
+    var qr = card.querySelector('[data-flow-qr]');
+    var status = card.querySelector('[data-flow-pay-status]');
+    if (pay) {
+      pay.classList.remove('is-in', 'is-closing', 'is-closed', 'is-paid');
+      pay.setAttribute('aria-hidden', 'true');
+    }
+    resetQrScan(qr);
+    if (status) status.textContent = 'Waiting for payment…';
+  }
+
+  function resetDiscordSuccess(card) {
+    var cart = card.querySelector('[data-flow-discord-cart]');
+    var success = card.querySelector('[data-flow-discord-success]');
+    if (cart) cart.classList.remove('is-closing', 'is-closed');
+    if (success) {
+      success.classList.remove('is-in');
+      success.setAttribute('aria-hidden', 'true');
+    }
+    resetDiscordPay(card);
+  }
+
+  function showDiscordSuccess(card, skipCartClose) {
+    var cart = card.querySelector('[data-flow-discord-cart]');
+    var success = card.querySelector('[data-flow-discord-success]');
+    var totalEl = card.querySelector('[data-flow-cart-total]');
+    var sub = card.querySelector('[data-flow-success-sub]');
+
+    if (sub && totalEl) {
+      sub.textContent = 'Instant delivery · ' + totalEl.textContent.trim();
+    }
+
+    function revealSuccess() {
+      if (success) {
+        success.classList.add('is-in');
+        success.removeAttribute('aria-hidden');
+      }
+    }
+
+    if (skipCartClose) {
+      revealSuccess();
+      return;
+    }
+
+    if (cart) cart.classList.add('is-closing');
+
+    later(card, function () {
+      if (cart) {
+        cart.classList.add('is-closed');
+        cart.classList.remove('is-closing');
+      }
+      revealSuccess();
+    }, 420);
+  }
+
+  function showDiscordPayThenSuccess(card, onDone) {
+    var cart = card.querySelector('[data-flow-discord-cart]');
+    var pay = card.querySelector('[data-flow-discord-pay]');
+    var amount = card.querySelector('[data-flow-pay-amount]');
+    var totalEl = card.querySelector('[data-flow-cart-total]');
+    var qr = card.querySelector('[data-flow-qr]');
+    var status = card.querySelector('[data-flow-pay-status]');
+
+    if (amount && totalEl) {
+      amount.textContent = totalEl.textContent.trim();
+    }
+
+    if (cart) cart.classList.add('is-closing');
+
+    later(card, function () {
+      if (cart) {
+        cart.classList.add('is-closed');
+        cart.classList.remove('is-closing');
+      }
+      if (pay) {
+        pay.classList.add('is-in');
+        pay.removeAttribute('aria-hidden');
+      }
+      if (status) status.textContent = 'Waiting for payment…';
+
+      confirmQrPayment(qr, card, function () {
+        if (pay) pay.classList.add('is-paid');
+        if (status) status.textContent = 'Payment received';
+
+        later(card, function () {
+          if (pay) pay.classList.add('is-closing');
+
+          later(card, function () {
+            if (pay) {
+              pay.classList.add('is-closed');
+              pay.classList.remove('is-closing', 'is-in', 'is-paid');
+              pay.setAttribute('aria-hidden', 'true');
+            }
+            showDiscordSuccess(card, true);
+            later(card, function () {
+              if (onDone) onDone();
+            }, 880);
+          }, 420);
+        }, 480);
+      });
+    }, 400);
+  }
+
+  function animDiscordCheckoutClick(card) {
+    var panel = card.querySelector('.vl-flow-panel');
+    var checkout = card.querySelector('[data-flow-target="checkout"]');
+    if (!panel || !checkout) {
+      finishCard(card);
+      return;
+    }
+
+    var ptr = getPointer(panel);
+    ptr.classList.remove('is-visible', 'is-clicking');
+    movePointer(ptr, targetCenter(panel, panel, { x: 40, y: 36 }), true);
+
+    later(card, function () {
+      sequenceMoveClick(card, panel, ptr, checkout, false, function () {
+        later(card, function () {
+          ptr.classList.remove('is-visible');
+          showDiscordPayThenSuccess(card, function () {
+            finishCard(card);
+          });
+        }, 180);
+      });
+    }, 300);
   }
 
   function appendTerminalLine(body, line) {
@@ -229,7 +432,7 @@
             });
           }
           later(card, function () {
-            finishCard(card);
+            animDiscordCheckoutClick(card);
           }, ease.cartFinishDelay);
         }, ease.cartTotalDelay);
         return;
@@ -311,6 +514,7 @@
       var totalEl = card.querySelector('[data-flow-cart-total]');
       if (countEl) countEl.textContent = '0 items';
       if (totalEl) totalEl.textContent = '€0.00';
+      resetDiscordSuccess(card);
     } else if (type === 'premium') {
       card.querySelectorAll('[data-flow-meter-bar]').forEach(function (bar) {
         var fill = bar.querySelector('i');
@@ -345,7 +549,9 @@
     played.delete(card);
     card.classList.remove('is-live', 'is-done');
     var cta = card.querySelector('.vl-flow-cta');
-    if (cta) cta.classList.remove('is-done');
+    if (cta) cta.classList.remove('is-done', 'is-mock-hit');
+    var ptr = card.querySelector('.vl-mock-pointer');
+    if (ptr) ptr.classList.remove('is-visible', 'is-clicking');
     initCardState(card);
   }
 

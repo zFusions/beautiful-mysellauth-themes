@@ -1,62 +1,26 @@
-<div class="container component" data-component-id="{{ componentId }}">
+<div class="container component vl-page-section" data-component-id="{{ componentId }}">
   <section class="py-5-nav">
-    <div class="section-title">
-      <h1 class="mx-auto text-center">{{ blogPost.title }}</h1>
-    </div>
+    <header class="vl-page-head">
+      <a href="{{ ('/blog') | shopUrl }}" class="vl-page-back">← Back to blog</a>
+      <h1>{{ blogPost.title }}</h1>
+      {% if blogPost.summary %}
+      <p class="vl-page-sub">{{ blogPost.summary | safe }}</p>
+      {% endif %}
+    </header>
     <div class="row">
       <div class="col-lg-8 mx-auto">
-        <div class="bg-gray rounded p-4">
-          {% if blogPost.summary %}
-            <p class="mb-4 pb-4">{{ blogPost.summary | safe }}</p>
-          {% endif %}
-          {% if blogPost.image_url %}
-            <div class="mb-4">
-              <img src="{{ blogPost.image_url }}" alt="{{ blogPost.title }}" class="img-fluid rounded">
-            </div>
-          {% endif %}
-          <div class="editor">
-            {{ blogPost.content | safe }}
-          </div>
-          <p class="mt-4 pt-4 text-muted">
-            <small>
-              Published at {{ blogPost.created_at | formatDate }}
-            </small>
-          </p>
+        {% if blogPost.image_url %}
+        <div class="vl-blog-featured mb-4">
+          <img src="{{ blogPost.image_url }}" alt="{{ blogPost.title }}" class="img-fluid rounded">
         </div>
+        {% endif %}
+        <div class="editor vl-page-prose">
+          {{ blogPost.content | safe }}
+        </div>
+        <p class="mt-4 pt-4 vl-blog-meta">
+          <small>Published {{ blogPost.created_at | formatDate }}</small>
+        </p>
       </div>
     </div>
   </section>
 </div>
-
-<style>
-  [data-component-id="{{ componentId }}"] .section-title h1 { color: var(--text-primary, #0a0a0a); font-weight: 800; }
-
-  [data-component-id="{{ componentId }}"] .bg-gray.rounded.p-4 {
-    background: #ffffff !important;
-    border: 1px solid var(--border-default, #e8e8e9);
-    border-radius: 1rem !important;
-    box-shadow: var(--shadow-card, 0 1px 2px rgba(16,24,40,0.04), 0 4px 16px rgba(16,24,40,0.06));
-    backdrop-filter: none;
-    -webkit-backdrop-filter: none;
-  }
-
-  [data-component-id="{{ componentId }}"] .bg-gray > p:first-child { color: var(--text-primary, #0a0a0a); font-size: 1.1rem; border-bottom: 1px solid var(--border-default, #eef0f2); }
-
-  [data-component-id="{{ componentId }}"] .text-muted {
-    color: var(--text-secondary, #7a7a7a) !important;
-  }
-
-  [data-component-id="{{ componentId }}"] .editor :is(p, li) {
-    color: var(--text-secondary, #5c5c5c);
-    line-height: 1.7;
-  }
-
-  [data-component-id="{{ componentId }}"] .editor :is(h1, h2, h3, h4, h5, h6) {
-    color: var(--text-primary, #0a0a0a);
-  }
-
-  [data-component-id="{{ componentId }}"] img.rounded {
-    border-radius: 0.85rem !important;
-    border: 1px solid var(--border-default, #e8e8e9);
-  }
-</style>
