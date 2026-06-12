@@ -1,0 +1,175 @@
+<section class="py-20 text-image-block alignment-{{ properties.alignment }} component" data-component-id="{{ componentId }}">
+  <div class="container">
+    <div class="row align-items-center">
+      <!-- Text Column -->
+      <div class="col-12 {{ 'col-lg-6' if properties.alignment != 'center' }}">
+        {% if properties.title %}
+        <div class="section-title">
+        <div class="nexus-badge">
+          {{ properties.badge_text | renderString }}
+        </div>
+          <h2>{{ properties.title | renderString }}</h2>
+        </div>
+        {% endif %}
+        {% if properties.subtitle %}
+        <div class="section-subtitle">
+          <p>{{ properties.subtitle | renderString }}</p>
+        </div>
+        {% endif %}
+        <p class="main-text">{{ properties.text | renderString }}</p>
+        <!-- Features -->
+        {% if properties.features %}
+        <div class="features-list">
+          {% for feature in properties.features %}
+            <div class="feature-item">
+              <span class="icon">{{ feature.icon }}</span> {{ feature.text }}
+            </div>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if properties.cta and properties.cta_text %}
+        <a href="{{ properties.cta | shopUrl }}" class="btn btn-primary">
+          {{ properties.cta_text }}
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" style="height: 1rem; width: 1rem; vertical-align: -0.125em">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+          </svg>
+        </a>
+        {% endif %}
+      </div>
+      <!-- Image Column -->
+      <div class="col-12 {{ 'col-lg-6' if properties.alignment != 'center' }}">
+        <div class="image-container">
+          <img src="{{ properties.image | imageUrl }}" alt="" class="img-fluid" loading="lazy" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+    .text-image-block {
+      color: var(--text-primary, #0a0a0a);
+      position: relative;
+      z-index: 1;
+    }
+
+    .text-image-block::before {
+      content: none;
+      display: none;
+    }
+
+    .text-image-block .section-title h2 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 0.5rem;
+      text-align: {{ properties.alignment }};
+      color: var(--text-primary, #0a0a0a);
+      letter-spacing: -0.02em;
+    }
+
+    .text-image-block .section-subtitle p {
+      font-size: 1.25rem;
+      color: var(--text-secondary, #5c5c5c);
+      margin-bottom: 2rem;
+      text-align: {{ properties.alignment }};
+    }
+
+    .text-image-block p.main-text {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--text-secondary, #5c5c5c);
+      margin-bottom: 2rem;
+      text-align: {{ properties.alignment }};
+    }
+
+    .text-image-block .features-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem 2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .text-image-block .features-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem 2rem;
+      margin-bottom: 2.5rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      box-sizing: border-box;
+    }
+
+    @media (max-width: 576px) {
+      .text-image-block .features-list {
+        gap: 0.75rem 0.75rem;
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+      }
+    }
+
+    .text-image-block .feature-item {
+      flex: 1 1 calc(50% - 1rem);
+      min-width: 160px;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.7rem 1rem;
+      border-radius: 12px;
+      backdrop-filter: none;
+      background: #ffffff;
+      border: 1px solid var(--border-default, #e8e8e9);
+      box-shadow: var(--shadow-sm, 0 2px 8px rgba(16,24,40,0.05));
+      color: var(--text-primary, #0a0a0a);
+    }
+
+    .text-image-block .feature-item .icon {
+      font-size: 1.2rem;
+      color: var(--blue-primary, #1B44FE);
+    }
+    .text-image-block .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 1.7rem;
+      font-weight: 600;
+      border-radius: 12px;
+      border: none;
+      text-decoration: none;
+    }
+
+    .text-image-block .image-container img {
+      width: 100%;
+      height: auto;
+      border-radius: 20px;
+      object-fit: cover;
+    }
+
+    @media (max-width: 992px) {
+      .text-image-block .features-list {
+        flex-direction: column;
+      }
+      .text-image-block .section-title h2,
+      .text-image-block .section-subtitle p,
+      .text-image-block p.main-text {
+        text-align: center;
+      }
+    }
+    .text-image-block {
+      overflow-x: hidden;
+    }
+
+    @media (max-width: 576px) {
+      .text-image-block .container {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+      }
+    }
+
+    .text-image-block::before {
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120%;
+}
+  </style>

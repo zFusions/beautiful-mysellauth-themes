@@ -1,0 +1,253 @@
+<section id="reviews" class="ps-section vl-reviews-section component" data-component-id="{{ componentId }}">
+  <div class="container">
+    <header class="vl-reviews-head ps-head-produce" data-reveal>
+      <p class="vl-reviews-eyebrow">What our customers say</p>
+      <h2 class="vl-reviews-title ps-title">{{ properties.title | default('Hear What Others Say') | renderString }}</h2>
+      <p class="vl-reviews-sub ps-subtitle">
+        {{ properties.subtitle | default('Hear from our customers who have transformed their experience with our products.') | renderString }}
+      </p>
+    </header>
+  </div>
+
+  {% set reviewList = feedbacks.slice(0, properties.amount | default(6)) %}
+
+  <div class="vl-reviews-rows" data-vl-reviews-marquee aria-label="Customer reviews carousel">
+    <div class="vl-reviews-row">
+      <div class="vl-reviews-track" data-vl-reviews-track data-vl-reviews-dir="-1">
+        <div class="vl-reviews-group">
+          {% for feedback in reviewList %}
+            {% render_snippet "review-marquee-card.njk", feedback=feedback %}
+          {% endfor %}
+          {% for feedback in reviewList %}
+            {% render_snippet "review-marquee-card.njk", feedback=feedback %}
+          {% endfor %}
+          {% for feedback in reviewList %}
+            {% render_snippet "review-marquee-card.njk", feedback=feedback %}
+          {% endfor %}
+        </div>
+        <div class="vl-reviews-group" aria-hidden="true">
+          {% for feedback in reviewList %}
+            {% render_snippet "review-marquee-card.njk", feedback=feedback %}
+          {% endfor %}
+          {% for feedback in reviewList %}
+            {% render_snippet "review-marquee-card.njk", feedback=feedback %}
+          {% endfor %}
+          {% for feedback in reviewList %}
+            {% render_snippet "review-marquee-card.njk", feedback=feedback %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <div class="vl-reviews-row vl-reviews-row--alt">
+      <div class="vl-reviews-track" data-vl-reviews-track data-vl-reviews-dir="1">
+        <div class="vl-reviews-group">
+          {% for feedback in reviewList %}
+            {% render_snippet "review-marquee-card.njk", feedback=feedback %}
+          {% endfor %}
+          {% for feedback in reviewList %}
+            {% render_snippet "review-marquee-card.njk", feedback=feedback %}
+          {% endfor %}
+          {% for feedback in reviewList %}
+            {% render_snippet "review-marquee-card.njk", feedback=feedback %}
+          {% endfor %}
+        </div>
+        <div class="vl-reviews-group" aria-hidden="true">
+          {% for feedback in reviewList %}
+            {% render_snippet "review-marquee-card.njk", feedback=feedback %}
+          {% endfor %}
+          {% for feedback in reviewList %}
+            {% render_snippet "review-marquee-card.njk", feedback=feedback %}
+          {% endfor %}
+          {% for feedback in reviewList %}
+            {% render_snippet "review-marquee-card.njk", feedback=feedback %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+#reviews .vl-reviews-rows {
+  position: relative;
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  padding: 12px 0 20px;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 9%, #000 91%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0%, #000 9%, #000 91%, transparent 100%);
+}
+
+#reviews .vl-reviews-rows::before,
+#reviews .vl-reviews-rows::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: min(14vw, 220px);
+  z-index: 3;
+  pointer-events: none;
+}
+
+#reviews .vl-reviews-rows::before {
+  left: 0;
+  background: linear-gradient(90deg, #ffffff 0%, rgba(255, 255, 255, 0.88) 55%, transparent 100%);
+}
+
+#reviews .vl-reviews-rows::after {
+  right: 0;
+  background: linear-gradient(270deg, #ffffff 0%, rgba(255, 255, 255, 0.88) 55%, transparent 100%);
+}
+
+#reviews .vl-reviews-row {
+  overflow: hidden;
+  width: 100%;
+  flex: 0 0 auto;
+  position: relative;
+  isolation: isolate;
+  padding: 4px 0;
+  min-height: 176px;
+}
+
+#reviews .vl-reviews-track {
+  display: flex;
+  width: max-content;
+  flex-shrink: 0;
+  gap: 20px;
+  will-change: transform;
+}
+
+#reviews .vl-reviews-row--alt .vl-reviews-track {
+  --vl-reviews-stagger: -360px;
+}
+
+#reviews .vl-reviews-group {
+  display: flex;
+  flex-shrink: 0;
+  gap: 20px;
+}
+
+#reviews .vl-review-card {
+  width: 340px;
+  flex: 0 0 auto;
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.04);
+}
+
+#reviews .vl-review-card::before,
+#reviews .vl-review-card::after {
+  display: none;
+}
+
+@media (max-width: 575px) {
+  #reviews .vl-review-card {
+    width: 300px;
+  }
+
+  #reviews .vl-reviews-row--alt .vl-reviews-track {
+    --vl-reviews-stagger: -320px;
+  }
+}
+</style>
+
+<script>
+(function () {
+  function initTrack(track, pausedRef) {
+    var dir = parseInt(track.getAttribute('data-vl-reviews-dir') || '-1', 10);
+    var half = 0;
+    var offset = null;
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var speed = reduceMotion ? 0.35 : 0.65;
+
+    function measure() {
+      var nextHalf = track.scrollWidth / 2;
+      if (!nextHalf) nextHalf = 1;
+
+      if (offset === null) {
+        offset = dir > 0 ? -nextHalf : 0;
+      } else if (nextHalf !== half) {
+        offset = (offset / half) * nextHalf;
+      }
+
+      half = nextHalf;
+    }
+
+    function step() {
+      if (!pausedRef.paused && half > 0 && offset !== null) {
+        var stagger = 0;
+        try {
+          stagger = parseFloat(getComputedStyle(track).getPropertyValue('--vl-reviews-stagger')) || 0;
+        } catch (e) {
+          stagger = 0;
+        }
+
+        if (dir < 0) {
+          offset -= speed;
+          if (offset <= -half) offset += half;
+        } else {
+          offset += speed;
+          if (offset >= 0) offset -= half;
+        }
+
+        track.style.transform = 'translate3d(' + (offset + stagger) + 'px, 0, 0)';
+      }
+    }
+
+    measure();
+    return { measure: measure, step: step };
+  }
+
+  function boot() {
+    var root = document.querySelector('[data-vl-reviews-marquee]');
+    if (!root || root.dataset.vlReviewsReady === '1') return;
+
+    var tracks = root.querySelectorAll('[data-vl-reviews-track]');
+    if (!tracks.length) return;
+
+    root.dataset.vlReviewsReady = '1';
+    var pausedRef = { paused: false };
+    var runners = [];
+
+    tracks.forEach(function (track) {
+      track.style.animation = 'none';
+      runners.push(initTrack(track, pausedRef));
+    });
+
+    function measureAll() {
+      runners.forEach(function (r) { r.measure(); });
+    }
+
+    function tick() {
+      runners.forEach(function (r) { r.step(); });
+      requestAnimationFrame(tick);
+    }
+
+    measureAll();
+    window.addEventListener('resize', measureAll);
+    root.addEventListener('mouseenter', function () { pausedRef.paused = true; });
+    root.addEventListener('mouseleave', function () { pausedRef.paused = false; });
+
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(measureAll);
+    }
+
+    setTimeout(measureAll, 120);
+    setTimeout(measureAll, 600);
+    requestAnimationFrame(tick);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+
+  document.addEventListener('shop:page-loaded', boot);
+})();
+</script>

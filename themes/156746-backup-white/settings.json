@@ -1,0 +1,278 @@
+{
+    "templates": {
+        "shop": {
+            "layout": "master",
+            "components": {
+                "hero": {
+                    "type": "hero",
+                    "properties": {
+                        "title": "Premium digital products.<br>Delivered automatically.<br><span class=\"vl-hero-accent\">In under 60 seconds.</span>",
+                        "subtitle": "Discord boosts, tokens and premium bundles — pay with card, crypto, or PayPal. Encrypted checkout and 24/7 support.",
+                        "cta": "#products",
+                        "cta_text": "Browse products",
+                        "show_searchbar": true,
+                        "show_feedback_rating": true,
+                        "show_products_sold": true,
+                        "show_total_customers": true,
+                        "alignment": "center",
+                        "height": "medium",
+                        "background_image": null,
+                        "side_image": null,
+                        "badge_text": "Now Live",
+                        "cta_text_2": "Join Discord",
+                        "cta_2": null,
+                        "show_support": true
+                    }
+                },
+                "features": {
+                    "type": "features",
+                    "properties": {
+                        "title": "Stop waiting.<br>Get premium digital products<br>delivered in seconds",
+                        "subtitle": "",
+                        "features": [
+                            {
+                                "title": "Browse 100+ Products",
+                                "description": "Choose from Nitro, Discord boosts, tokens, and premium bundles — every item is ready to deliver instantly after checkout.",
+                                "icon": "fas fa-bolt"
+                            },
+                            {
+                                "title": "Secure Encrypted Payments",
+                                "description": "Pay with card, crypto, or PayPal. Every transaction is protected with industry-leading encryption from start to finish.",
+                                "icon": "fas fa-shield-alt"
+                            },
+                            {
+                                "title": "24/7 Live Support",
+                                "description": "Our team is always online to help with orders, delivery, and questions — fast replies, real humans, zero waiting.",
+                                "icon": "fas fa-headset"
+                            }
+                        ]
+                    }
+                },
+                "products": {
+                    "type": "products",
+                    "properties": {
+                        "title": "Pick what you need.<br>Delivered automatically.<br>Every single time.",
+                        "subtitle": "",
+                        "badge_text": "Cheap Items"
+                    }
+                },
+                "faq": {
+                    "type": "faq",
+                    "properties": {
+                        "items": [
+                            {
+                                "question": "How do I receive my product after purchase?",
+                                "answer": "All our products are delivered instantly. After payment validation, you will receive your access or boosts directly on the site, via Discord, or by email. If you need help, join our __DISCORD__."
+                            },
+                            {
+                                "question": "What are the official contact methods?",
+                                "answer": "We are mainly available on __DISCORD__ and __TELEGRAM__. Beware of imposters — only use the official links shown here and in our site footer."
+                            },
+                            {
+                                "question": "Are the services guaranteed?",
+                                "answer": "Yes, we offer warranties on our products. Specific warranty details and durations are mentioned in the description of each product. Our 24\/7 support is also available for any assistance."
+                            },
+                            {
+                                "question": "Do you offer discounts for bulk orders?",
+                                "answer": "Absolutely! Contact us on __TELEGRAM__ or open a ticket on __DISCORD__ to discuss bulk pricing for your large orders."
+                            },
+                            {
+                                "question": "How can I contact support if I have a problem?",
+                                "answer": "Our dedicated support team is available 24\/7. You can reach us by opening a ticket on our __DISCORD__ server or messaging us on __TELEGRAM__. We guarantee a response to all inquiries."
+                            }
+                        ]
+                    }
+                },
+                "feedbacks": {
+                    "type": "feedbacks",
+                    "properties": {
+                        "title": "Hear What Others Say",
+                        "subtitle": "Hear from our customers who have transformed their experience with our products.",
+                        "amount": 6
+                    }
+                },
+                "socials": {
+                    "type": "socials",
+                    "properties": {
+                        "title": "Follow our Socials",
+                        "subtitle": null
+                    }
+                }
+            },
+            "components_order": [
+                "hero",
+                "products",
+                "features",
+                "faq"
+            ]
+        },
+        "cart": {
+            "layout": "master",
+            "components": {
+                "cart-page": {
+                    "type": "cart-page",
+                    "properties": []
+                }
+            },
+            "components_order": [
+                "cart-page"
+            ]
+        },
+        "product": {
+            "layout": "master",
+            "components": {
+                "product-page": {
+                    "type": "product-page",
+                    "properties": {
+                        "hide_add_to_cart": false,
+                        "hide_buy_now": false
+                    }
+                }
+            },
+            "components_order": [
+                "product-page"
+            ]
+        },
+        "feedback": {
+            "layout": "master",
+            "components": {
+                "feedback-page": {
+                    "type": "feedback-page",
+                    "properties": []
+                }
+            },
+            "components_order": [
+                "feedback-page"
+            ]
+        },
+        "terms": {
+            "layout": "master",
+            "components": {
+                "terms-page": {
+                    "type": "terms-page",
+                    "properties": []
+                }
+            },
+            "components_order": [
+                "terms-page"
+            ]
+        },
+        "status": {
+            "layout": "master",
+            "components": {
+                "status-page": {
+                    "type": "status-page",
+                    "properties": []
+                }
+            },
+            "components_order": [
+                "status-page"
+            ]
+        },
+        "customer-dashboard": {
+            "layout": "master",
+            "components": {},
+            "components_order": []
+        },
+        "customer-invoices": {
+            "layout": "master",
+            "components": {},
+            "components_order": []
+        },
+        "customer-balance": {
+            "layout": "master",
+            "components": {},
+            "components_order": []
+        }
+    },
+    "global": {
+        "properties": {
+            "theme_color": "#1B44FE",
+            "primary_background_color": "#FFFFFF",
+            "secondary_background_color": "#FFFFFF",
+            "primary_border_color": "#e8e8e9",
+            "font": "INTER SEMI BOLD (Deprecated)",
+            "snow": false,
+            "snow_color": "#ffffff"
+        },
+        "components": {
+            "announcement": {
+                "text": null,
+                "link": null,
+                "link_text": null
+            },
+            "navbar": {
+                "show_shop_name": false,
+                "show_logo": true,
+                "left_links": [
+                    {
+                        "text": "Home",
+                        "link": "/",
+                        "icon": "fas fa-home",
+                        "new_tab": false,
+                        "shape": "regular"
+                    },
+                    {
+                        "text": "Products",
+                        "link": "/#products",
+                        "icon": "fas fa-box-open",
+                        "new_tab": false,
+                        "shape": "regular"
+                    },
+                    {
+                        "text": "Status",
+                        "link": "/status",
+                        "icon": "fas fa-bars-progress",
+                        "new_tab": false,
+                        "shape": "regular"
+                    },
+                    {
+                        "text": "Feedback",
+                        "link": "/feedback",
+                        "icon": "far fa-star-half-stroke",
+                        "new_tab": false,
+                        "shape": "regular"
+                    }
+                ],
+                "right_links": [],
+                "hide_currency_selector": true,
+                "hide_customer_dashboard": true,
+                "hide_cart": true
+            },
+            "footer": {
+                "show_shop_name": true,
+                "show_logo": true,
+                "show_socials": true,
+                "links": [
+                    {
+                        "text": "Home",
+                        "link": "/"
+                    },
+                    {
+                        "text": "Products",
+                        "link": "/#products"
+                    },
+                    {
+                        "text": "Feedback",
+                        "link": "/feedback"
+                    },
+                    {
+                        "text": "Status",
+                        "link": "/status",
+                        "shape": "regular"
+                    },
+                    {
+                        "text": "Terms of Service",
+                        "link": "/terms"
+                    },
+                    {
+                        "text": "Refund",
+                        "link": "/refund-policy",
+                        "new_tab": false
+                    }
+                ],
+                "copyright_text": "© 2025 Velora Market. All rights reserved"
+            }
+        }
+    }
+}

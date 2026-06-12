@@ -1,0 +1,36 @@
+<div class="container component" data-component-id="{{ componentId }}">
+  <section class="py-5-nav">
+    <div class="section-title justify-content-center">
+      <h1>Refund Policy</h1>
+    </div>
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <div class="bg-gray rounded p-4 editor">
+          {{ refund_policy | safe }}
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  [data-component-id="{{ componentId }}"] .section-title h1 { color: var(--text-primary, #0a0a0a); font-weight: 800; }
+
+  [data-component-id="{{ componentId }}"] .bg-gray.editor {
+    background: #ffffff !important;
+    border: 1px solid var(--border-default, #e8e8e9);
+    border-radius: 1rem !important;
+    box-shadow: var(--shadow-card, 0 1px 2px rgba(16,24,40,0.04), 0 4px 16px rgba(16,24,40,0.06));
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  [data-component-id="{{ componentId }}"] .editor :is(p, li) {
+    color: var(--text-secondary, #5c5c5c);
+    line-height: 1.7;
+  }
+
+  [data-component-id="{{ componentId }}"] .editor :is(h1, h2, h3, h4, h5, h6) {
+    color: var(--text-primary, #0a0a0a);
+  }
+</style>

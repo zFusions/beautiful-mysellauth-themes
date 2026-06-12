@@ -1,0 +1,18 @@
+<section class="container py-20 component" data-component-id="{{ componentId }}">
+  <div class="row g-4 align-items-center">
+    <div class="col-12 col-lg-5 text-{{ properties.alignment }}">
+      {% if properties.title %}<h2>{{ properties.title | renderString }}</h2>{% endif %}
+      {% if properties.subtitle %}<p class="text-muted">{{ properties.subtitle | renderString }}</p>{% endif %}
+      {% if properties.text %}<p>{{ properties.text | renderString }}</p>{% endif %}
+      {% if properties.cta and properties.cta_text %}
+        <a href="{{ properties.cta | shopUrl }}" class="btn btn-primary">{{ properties.cta_text | renderString }}</a>
+      {% endif %}
+    </div>
+    <div class="col-12 col-lg-7">
+      {% if properties.model_src %}
+        <model-viewer src="{{ properties.model_src }}" camera-controls auto-rotate style="display: block; width: 100%; min-height: 420px;"></model-viewer>
+      {% endif %}
+    </div>
+  </div>
+</section>
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.1.0/model-viewer.min.js"></script>

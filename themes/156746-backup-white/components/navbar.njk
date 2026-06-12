@@ -1,0 +1,385 @@
+<style>
+/* ============================================
+   NAVBAR — produce.so fixed top bar
+   ============================================ */
+.vl-navbar-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 1050;
+  width: 100%;
+  background: #ffffff;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.simple-navbar {
+  background: #ffffff;
+  width: 100%;
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.simple-navbar.is-scrolled {
+  background: #ffffff;
+  box-shadow: none;
+  border-bottom: 1px solid #ebebeb;
+}
+
+.simple-navbar .container {
+  max-width: min(1280px, 94vw);
+  margin: 0 auto;
+  padding: 0 clamp(1.25rem, 3vw, 2rem);
+}
+
+.vl-nav-row {
+  display: flex;
+  align-items: center;
+  height: 64px;
+  gap: 32px;
+}
+
+/* Logo */
+.vl-nav-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: opacity 0.2s ease;
+}
+.vl-nav-brand:hover { opacity: 0.88; }
+
+.vl-nav-logo {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  background: linear-gradient(180deg, #3d62ff 0%, #1B44FE 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(27, 68, 254, 0.35);
+  flex-shrink: 0;
+}
+
+.vl-nav-name {
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--produce-hero-color, #0A0B10);
+  letter-spacing: -0.5px;
+  line-height: 22.4px;
+  white-space: nowrap;
+}
+
+/* Plain nav links — Inter Medium (produce.so) */
+.vl-nav-menu {
+  display: flex;
+  align-items: center;
+  gap: clamp(20px, 2.5vw, 36px);
+  flex: 1;
+  justify-content: center;
+  font-family: var(--font-body);
+}
+
+.simple-navbar .vl-nav-link {
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 500 !important;
+  font-synthesis: none;
+  color: #626262 !important;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: color 0.15s ease;
+  letter-spacing: -0.5px;
+  line-height: 22.4px;
+}
+
+.simple-navbar .vl-nav-link:hover {
+  color: var(--produce-hero-color, #0A0B10) !important;
+  background: none;
+  text-decoration: none;
+}
+
+.simple-navbar .vl-nav-link.is-active {
+  color: var(--blue-primary, #1B44FE) !important;
+  font-weight: 500;
+  background: none;
+  box-shadow: none;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+}
+
+/* Actions */
+.vl-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+/* Contact — ghost outline (produce.so) */
+.ps-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 38px;
+  padding: 0 18px;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 18px;
+  letter-spacing: -0.3px;
+  color: #0A0B10 !important;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  font-synthesis: none;
+}
+
+.ps-btn-ghost:hover {
+  border-color: #c8c8c8;
+  background: #fafafa;
+  color: #0a0a0a !important;
+}
+
+/* Sign In / CTA — produce.so Sign In specs */
+.ps-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 38px;
+  padding: 0 18px;
+  background: linear-gradient(180deg, #3560ff 0%, #1B44FE 55%, #1640e8 100%);
+  border: none;
+  border-radius: 10px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 18px;
+  letter-spacing: -0.3px;
+  color: #ffffff !important;
+  text-decoration: none;
+  white-space: nowrap;
+  font-synthesis: none;
+  box-shadow:
+    0 1px 2px rgba(27, 68, 254, 0.15),
+    0 4px 16px rgba(27, 68, 254, 0.42),
+    0 0 0 0 rgba(27, 68, 254, 0);
+  transition: box-shadow 0.25s ease, transform 0.2s ease, background 0.2s ease;
+}
+
+.ps-btn-primary:hover {
+  color: #ffffff !important;
+  background: linear-gradient(180deg, #3d68ff 0%, #2048ff 55%, #1844ee 100%);
+  box-shadow:
+    0 2px 4px rgba(27, 68, 254, 0.2),
+    0 8px 24px rgba(27, 68, 254, 0.52);
+  transform: translateY(-1px);
+}
+
+.ps-btn-primary:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(27, 68, 254, 0.38);
+}
+
+/* Mobile */
+.vl-nav-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  background: #fff;
+  color: #0a0a0a;
+  cursor: pointer;
+  margin-left: auto;
+}
+
+.vl-nav-toggle-icon,
+.vl-nav-toggle-icon::before,
+.vl-nav-toggle-icon::after {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.2s ease;
+}
+.vl-nav-toggle-icon { position: relative; }
+.vl-nav-toggle-icon::before,
+.vl-nav-toggle-icon::after { content: ""; position: absolute; left: 0; }
+.vl-nav-toggle-icon::before { top: -6px; }
+.vl-nav-toggle-icon::after { top: 6px; }
+
+.vl-nav-toggle[aria-expanded="true"] .vl-nav-toggle-icon { background: transparent; }
+.vl-nav-toggle[aria-expanded="true"] .vl-nav-toggle-icon::before { top: 0; transform: rotate(45deg); }
+.vl-nav-toggle[aria-expanded="true"] .vl-nav-toggle-icon::after { top: 0; transform: rotate(-45deg); }
+
+.vl-nav-mobile {
+  display: none;
+  border-top: 1px solid #ebebeb;
+  background: #fff;
+}
+
+.vl-nav-mobile-panel {
+  padding: 12px clamp(1.25rem, 3vw, 2rem) 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.vl-nav-mobile .vl-nav-link {
+  height: 44px;
+  padding: 0 4px;
+  font-size: 16px;
+  font-weight: 500 !important;
+  line-height: 22.4px;
+  letter-spacing: -0.5px;
+}
+
+.vl-nav-mobile-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+  padding-top: 12px;
+  border-top: 1px solid #ebebeb;
+}
+
+.vl-nav-mobile-actions .ps-btn-ghost,
+.vl-nav-mobile-actions .ps-btn-primary {
+  width: 100%;
+  justify-content: center;
+  height: 44px;
+}
+
+@media (max-width: 991px) {
+  .vl-nav-row { height: 56px; gap: 12px; }
+  .vl-nav-menu,
+  .vl-nav-actions .ps-btn-ghost,
+  .vl-nav-actions .ps-btn-primary { display: none; }
+  .vl-nav-toggle { display: inline-flex; }
+  .vl-nav-mobile.is-open { display: block; }
+}
+
+@media (min-width: 992px) {
+  .vl-nav-mobile { display: none !important; }
+}
+
+@media (max-width: 1100px) {
+  .vl-nav-menu { gap: 20px; }
+}
+</style>
+
+<nav class="simple-navbar" data-component-id="navbar" aria-label="Main navigation">
+  <div class="container">
+    <div class="vl-nav-row">
+      <a class="vl-nav-brand" href="{{ '/' | shopUrl }}">
+        <span class="vl-nav-logo" aria-hidden="true">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
+        </span>
+        <span class="vl-nav-name">Velora Market</span>
+      </a>
+
+      <nav class="vl-nav-menu d-none d-lg-flex" data-nav-menu aria-label="Sections">
+        <a class="vl-nav-link" href="{{ '/#products' | shopUrl }}" data-nav-target="products">Products</a>
+        <a class="vl-nav-link" href="{{ '/#how-it-works' | shopUrl }}" data-nav-target="how-it-works">How it works</a>
+        <a class="vl-nav-link" href="{{ '/#feature' | shopUrl }}" data-nav-target="feature">Why us</a>
+        <a class="vl-nav-link" href="{{ '/#faq' | shopUrl }}" data-nav-target="faq">FAQ</a>
+      </nav>
+
+      <div class="vl-nav-actions">
+        {% if shop.discord_url %}
+        <a href="{{ shop.discord_url }}" target="_blank" rel="noopener" class="ps-btn-ghost d-none d-lg-inline-flex">Contact</a>
+        {% else %}
+        <a href="{{ '/#faq' | shopUrl }}" class="ps-btn-ghost d-none d-lg-inline-flex">Contact</a>
+        {% endif %}
+        <a href="{{ '/#products' | shopUrl }}" class="ps-btn-primary d-none d-lg-inline-flex">Start shopping</a>
+
+        <button class="vl-nav-toggle d-lg-none" type="button" aria-expanded="false" aria-controls="vlMobileNav" aria-label="Menu">
+          <span class="vl-nav-toggle-icon"></span>
+        </button>
+      </div>
+    </div>
+
+    <div class="vl-nav-mobile" id="vlMobileNav">
+      <div class="vl-nav-mobile-panel">
+        <a class="vl-nav-link" href="{{ '/#products' | shopUrl }}">Products</a>
+        <a class="vl-nav-link" href="{{ '/#how-it-works' | shopUrl }}">How it works</a>
+        <a class="vl-nav-link" href="{{ '/#feature' | shopUrl }}">Why us</a>
+        <a class="vl-nav-link" href="{{ '/#faq' | shopUrl }}">FAQ</a>
+        <a class="vl-nav-link" href="{{ '/status' | shopUrl }}">Status</a>
+        <div class="vl-nav-mobile-actions">
+          {% if shop.discord_url %}
+          <a href="{{ shop.discord_url }}" target="_blank" rel="noopener" class="ps-btn-ghost">Contact</a>
+          {% else %}
+          <a href="{{ '/#faq' | shopUrl }}" class="ps-btn-ghost">Contact</a>
+          {% endif %}
+          <a href="{{ '/#products' | shopUrl }}" class="ps-btn-primary">Start shopping</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+(function () {
+  var nav = document.querySelector('.simple-navbar');
+  var toggle = nav && nav.querySelector('.vl-nav-toggle');
+  var mobile = document.getElementById('vlMobileNav');
+  var links = nav ? nav.querySelectorAll('[data-nav-target]') : [];
+  var sections = ['products', 'how-it-works', 'feature', 'faq', 'reviews'];
+
+  if (toggle && mobile) {
+    toggle.addEventListener('click', function () {
+      var open = mobile.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    mobile.querySelectorAll('a').forEach(function (a) {
+      a.addEventListener('click', function () {
+        mobile.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  function setActive(id) {
+    links.forEach(function (link) {
+      link.classList.toggle('is-active', link.getAttribute('data-nav-target') === id);
+    });
+  }
+
+  function onScrollSpy() {
+    if (window.scrollY < 200) {
+      links.forEach(function (l) { l.classList.remove('is-active'); });
+      return;
+    }
+    var current = 'products';
+    sections.forEach(function (id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      if (el.getBoundingClientRect().top <= 130) current = id;
+    });
+    setActive(current);
+  }
+
+  if (links.length) {
+    onScrollSpy();
+    window.addEventListener('scroll', onScrollSpy, { passive: true });
+  }
+})();
+</script>

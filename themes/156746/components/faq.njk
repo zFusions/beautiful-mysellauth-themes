@@ -1,0 +1,78 @@
+<section id="faq" class="ps-section component faq-modern-red" data-component-id="{{ componentId }}" data-scroll-section>
+  <div class="container">
+    <div class="faq-layout">
+      <aside class="faq-aside" data-reveal>
+        <header class="faq-aside-head">
+          <span class="vl-faq-eyebrow">Support</span>
+          <h2 class="faq-aside-title">Got questions?<br>We've got answers.</h2>
+        </header>
+        <p class="faq-aside-sub">
+          Everything you need to know before you buy. Can't find it? We're one message away.
+        </p>
+
+        <div class="faq-help-card">
+          <div class="faq-help-top">
+            <div class="faq-help-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"></path></svg>
+            </div>
+            <div class="faq-help-copy">
+              <div class="faq-help-title">Still have questions?</div>
+              <div class="faq-help-text">Our team replies around the clock on Discord.</div>
+            </div>
+          </div>
+          {% if shop.discord_url %}
+          <a href="{{ shop.discord_url }}" target="_blank" rel="noopener" class="faq-help-btn">Chat with us</a>
+          {% else %}
+          <a href="{{ '/feedback' | shopUrl }}" class="faq-help-btn">Contact support</a>
+          {% endif %}
+        </div>
+      </aside>
+
+      <div class="faq-main">
+      <div class="faq-accordion-red" id="faq-accordion" data-reveal-group>
+        {% for item in properties.items %}
+        {% set faqId = componentId ~ '-' ~ loop.index %}
+        {% set answerText = item.answer | renderString %}
+        {% if shop.discord_url %}
+          {% set discordAnchor = '<a href="' ~ shop.discord_url ~ '" target="_blank" rel="noopener" class="faq-inline-link">Discord</a>' %}
+          {% set answerText = answerText | replace('__DISCORD__', discordAnchor) %}
+        {% endif %}
+        {% if shop.telegram_url %}
+          {% set telegramAnchor = '<a href="' ~ shop.telegram_url ~ '" target="_blank" rel="noopener" class="faq-inline-link">Telegram</a>' %}
+          {% set answerText = answerText | replace('__TELEGRAM__', telegramAnchor) %}
+        {% endif %}
+        <div class="faq-card-red" data-reveal>
+          <button
+            type="button"
+            class="faq-header-red collapsed"
+            id="faq-btn-{{ faqId }}"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapse-{{ faqId }}"
+            aria-expanded="false"
+            aria-controls="collapse-{{ faqId }}"
+          >
+            <div class="faq-q-icon" aria-hidden="true">
+                <span class="q-mark">?</span>
+              </div>
+              <span class="faq-q-text">{{ item.question | renderString }}</span>
+            <div class="faq-chevron" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="18 15 12 9 6 15"></polyline>
+              </svg>
+            </div>
+          </button>
+
+          <div id="collapse-{{ faqId }}" class="collapse" data-bs-parent="#faq-accordion" role="region" aria-labelledby="faq-btn-{{ faqId }}">
+            <div class="faq-content-red">
+              <div class="faq-content-inner">
+                {{ answerText | safe }}
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,37 @@
+<section class="vl-section vl-features-section component" id="features" data-component-id="{{ componentId }}" data-scroll-section data-flow-section>
+  <div class="vl-flow-cursor-light" aria-hidden="true"></div>
+  <div class="container">
+    <header class="vl-section-head vl-section-head--center" data-reveal>
+      <h2 class="vl-section-title">
+        <span class="vl-section-sans">{{ properties.title | default('Built for speed and trust') | renderString }}</span>
+      </h2>
+      {% if properties.subtitle %}
+      <p class="vl-section-sub">{{ properties.subtitle | renderString }}</p>
+      {% endif %}
+    </header>
+
+    <div class="vl-flow-steps" data-reveal-group>
+      {% for feature in properties.features %}
+      {% if loop.index == 1 %}
+        {% set mockType = 'scripts' %}
+      {% elif loop.index == 2 %}
+        {% set mockType = 'discord' %}
+      {% else %}
+        {% set mockType = 'premium' %}
+      {% endif %}
+      <article class="vl-flow-card" data-reveal>
+        {% render_snippet "vl-flow-spot.njk" %}
+        <div class="vl-flow-ui" aria-hidden="true">
+          <div class="vl-flow-panel">
+            {% render_snippet "vl-feature-mock.njk", mock=mockType %}
+          </div>
+        </div>
+        <div class="vl-flow-body">
+          <h3 class="vl-flow-title">{{ feature.title | renderString }}</h3>
+          <p class="vl-flow-text">{{ feature.description | renderString }}</p>
+        </div>
+      </article>
+      {% endfor %}
+    </div>
+  </div>
+</section>

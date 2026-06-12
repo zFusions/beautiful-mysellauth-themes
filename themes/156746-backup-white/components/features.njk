@@ -1,0 +1,69 @@
+<section class="ps-section component" id="feature" data-component-id="{{ componentId }}">
+  <div class="container">
+    <header class="ps-head ps-head-produce" data-reveal>
+      <h2 class="ps-title ps-title-stack">{{ properties.title | renderString }}</h2>
+      <div class="ps-brand-row">
+        <span class="ps-brand-icon" aria-hidden="true">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
+        </span>
+        <span class="ps-brand-text">With Velora Market</span>
+      </div>
+    </header>
+
+    <div class="vl-produce-grid" data-reveal-group>
+      {% for feature in properties.features %}
+        {% if loop.index <= 3 %}
+      <article class="vl-produce-card" data-reveal>
+        <div class="vl-produce-mock" aria-hidden="true">
+          {% if loop.index == 1 %}
+          <div class="vl-produce-mock-inner">
+            <span class="vl-produce-caption">100+ digital products</span>
+            <div class="vl-produce-tiles">
+              <span class="vl-produce-tile is-active"><i></i><em>Nitro</em></span>
+              <span class="vl-produce-tile"><i></i><em>Discord</em></span>
+              <span class="vl-produce-tile"><i></i><em>Tokens</em></span>
+              <span class="vl-produce-tile"><i></i><em>Boosts</em></span>
+            </div>
+          </div>
+          {% elif loop.index == 2 %}
+          <div class="vl-produce-mock-inner">
+            <div class="vl-produce-shield-wrap">
+              <span class="vl-produce-shield">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+              </span>
+              <div class="vl-produce-pay-tabs vl-produce-pay-tabs--orbit">
+                <span>Visa</span>
+                <span class="is-on">Crypto</span>
+                <span>PayPal</span>
+              </div>
+            </div>
+            <span class="vl-produce-field vl-produce-field--static">Encrypted checkout</span>
+          </div>
+          {% else %}
+          <div class="vl-produce-mock-inner">
+            <div class="vl-produce-chat">
+              <span class="vl-produce-chat-line" style="width:72%"></span>
+              <i></i>
+            </div>
+            <div class="vl-produce-chat is-active">
+              <span class="vl-produce-chat-line" style="width:58%"></span>
+              <i></i>
+            </div>
+            <div class="vl-produce-chat">
+              <span class="vl-produce-chat-line" style="width:64%"></span>
+              <i></i>
+            </div>
+            <span class="vl-produce-online"><i></i>Agent online · 24/7</span>
+          </div>
+          {% endif %}
+        </div>
+        <div class="vl-produce-body">
+          <h3 class="vl-produce-title">{{ feature.title | renderString }}</h3>
+          <p class="vl-produce-text">{{ feature.description | renderString }}</p>
+        </div>
+      </article>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>

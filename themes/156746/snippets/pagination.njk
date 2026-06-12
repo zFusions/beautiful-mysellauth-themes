@@ -1,0 +1,121 @@
+<div class="mt-4">
+    <nav role="navigation" aria-label="Pagination Navigation">
+        <!-- Mobile Pagination -->
+        <div class="d-flex justify-content-between flex-wrap w-100 d-sm-none">
+            {% if paginator.prev_page_url %}
+                <a href="{{ paginator.prev_page_url }}" 
+                   class="btn btn-outline-primary btn-sm">
+                    « Previous
+                </a>
+            {% else %}
+                <span class="btn btn-outline-primary btn-sm disabled" aria-disabled="true">
+                    « Previous
+                </span>
+            {% endif %}
+            {% if paginator.next_page_url %}
+                <a href="{{ paginator.next_page_url }}" 
+                   class="btn btn-outline-primary btn-sm ms-3">
+                    Next »
+                </a>
+            {% else %}
+                <span class="btn btn-outline-primary btn-sm ms-3 disabled" aria-disabled="true">
+                    Next »
+                </span>
+            {% endif %}
+        </div>
+
+        <!-- Desktop Pagination -->
+        <div class="d-none d-sm-flex flex-wrap align-items-center justify-content-between w-100">
+            <div>
+                <p class="text-muted small mb-0">
+                    Showing 
+                    <span class="fw-semibold">{{ paginator.from }}</span> 
+                    to 
+                    <span class="fw-semibold">{{ paginator.to }}</span> 
+                    of 
+                    <span class="fw-semibold">{{ paginator.total }}</span> 
+                    results
+                </p>
+            </div>
+            <div>
+                <ul class="pagination mb-0">
+                    {% if paginator.prev_page_url %}
+                        <li class="page-item">
+                            <a href="{{ paginator.prev_page_url }}" class="page-link" aria-label="« Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled" aria-disabled="true">
+                            <span class="page-link" aria-label="« Previous">&laquo;</span>
+                        </li>
+                    {% endif %}
+
+                    {% for link in paginator.links %}
+                        {% if link.label != '&laquo; Previous' and link.label != 'Next &raquo;' %}
+                            {% if link.url %}
+                                {% if link.active %}
+                                    <li class="page-item active" aria-current="page">
+                                        <span class="page-link">{{ link.label }}</span>
+                                    </li>
+                                {% else %}
+                                    <li class="page-item">
+                                        <a href="{{ link.url }}" class="page-link" aria-label="Go to page {{ link.label }}">
+                                            {{ link.label }}
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if paginator.next_page_url %}
+                        <li class="page-item">
+                            <a href="{{ paginator.next_page_url }}" class="page-link" aria-label="Next »">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    {% else %}
+                        <li class="page-item disabled" aria-disabled="true">
+                            <span class="page-link" aria-label="Next »">&raquo;</span>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+
+<style>
+  .pagination .page-link {
+    background: #ffffff;
+    border: 1px solid var(--border-default, #e8e8e9);
+    color: var(--text-secondary, #5c5c5c);
+    border-radius: 0.6rem;
+    min-width: 42px;
+    text-align: center;
+    margin: 0 4px;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    transition: border-color 0.18s ease, background 0.18s ease, color 0.18s ease;
+  }
+
+  .pagination .page-link:hover {
+    background: var(--bg-surface, #f4f4f6);
+    border-color: var(--blue-primary, #1B44FE);
+    color: var(--blue-primary, #1B44FE);
+  }
+
+  .pagination .page-item.disabled .page-link {
+    opacity: 0.45;
+  }
+
+  .pagination .page-item.active .page-link {
+    background: var(--blue-primary, #1B44FE);
+    border-color: var(--blue-primary, #1B44FE);
+    color: #ffffff;
+  }
+
+  .pagination .text-muted { color: var(--text-secondary, #7a7a7a) !important; }
+  .pagination .fw-semibold { color: var(--text-primary, #0a0a0a); }
+</style>

@@ -1,0 +1,76 @@
+{%- set title = shop.name -%}
+{%- set description = shop.description -%}
+{%- set image = shop.image_url -%}
+{%- set twitterCard = 'summary' -%}
+
+{%- if templateName == 'product' -%}
+  {%- set title = product.meta_title -%}
+  {%- set description = product.meta_description -%}
+  {%- set image = product.meta_image_url -%}
+  {%- set twitterCard = product.meta_twitter_card -%}
+{%- elif templateName == 'cart' -%}
+  {%- set title = 'Shopping Cart - ' ~ shop.name -%}
+  {%- set description = 'Review your shopping cart.' -%}
+{%- elif templateName == 'terms' -%}
+  {%- set title = 'Terms of Service - ' ~ shop.name -%}
+  {%- set description = 'Read our terms of service.' -%}
+{%- elif templateName == 'feedback' -%}
+  {%- set title = 'Reviews - ' ~ shop.name -%}
+  {%- set description = 'Browse ' ~ (feedbacks | length) ~ ' reviews from our customers' -%}
+{%- elif templateName == 'status' -%}
+  {%- set title = 'Status - ' ~ shop.name -%}
+  {%- set description = 'Check the status of our products.' -%}
+{%- elif templateName == 'faq' -%}
+  {%- set title = 'FAQ - ' ~ shop.name -%}
+  {%- set description = 'Read our frequently asked questions.' -%}
+{%- elif templateName == 'customer-dashboard' -%}
+  {%- set title = 'My Dashboard - ' ~ shop.name -%}
+{%- elif templateName == 'customer-invoices' -%}
+  {%- set title = 'My Orders - ' ~ shop.name -%}
+{%- elif templateName == 'customer-balance' -%}
+  {%- set title = 'My Balance - ' ~ shop.name -%}
+{%- elif 'custom-page' in templateName -%}
+  {%- set title = name ~ ' - ' ~ shop.name -%}
+  {%- set description = name -%}
+{%- endif -%}
+
+<title>{{ title }}</title>
+<meta name="description" content="{{ description }}">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta property="og:type" content="{{ 'product' if templateName == 'product' else 'website' }}">
+<meta property="og:site_name" content="{{ shop.name }}">
+<meta property="og:title" content="{{ title }}">
+<meta property="og:description" content="{{ description }}">
+<meta property="og:image" content="{{ image }}">
+<meta name="twitter:title" content="{{ title }}">
+<meta name="twitter:description" content="{{ description }}">
+<meta name="twitter:image" content="{{ image }}">
+<meta name="twitter:card" content="{{ twitterCard }}">
+<link rel="icon" type="image/png" href="{{ shop.favicon_url }}">
+<meta name="theme-color" content="{{ '' | themeColor }}" />
+
+{%- set socials = [] -%}
+{%- if shop.discord_url -%}{%- set socials = socials.concat([shop.discord_url]) -%}{%- endif -%}
+{%- if shop.telegram_url -%}{%- set socials = socials.concat([shop.telegram_url]) -%}{%- endif -%}
+{%- if shop.instagram_url -%}{%- set socials = socials.concat([shop.instagram_url]) -%}{%- endif -%}
+{%- if shop.tiktok_url -%}{%- set socials = socials.concat([shop.tiktok_url]) -%}{%- endif -%}
+{%- if shop.youtube_url -%}{%- set socials = socials.concat([shop.youtube_url]) -%}{%- endif -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "name": {{ shop.name | json }},
+      "description": {{ (shop.description or '') | json }},
+      "logo": {{ (shop.image_url or '') | json }},
+      "sameAs": {{ socials | json }}
+    },
+    {
+      "@type": "WebSite",
+      "name": {{ shop.name | json }},
+      "description": {{ (shop.description or '') | json }}
+    }
+  ]
+}
+</script>

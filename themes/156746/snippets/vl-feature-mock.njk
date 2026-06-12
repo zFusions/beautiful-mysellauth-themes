@@ -1,0 +1,64 @@
+<div class="vl-flow-app" data-flow-mock="{{ mock }}">
+  {% if mock == 'scripts' %}
+  <div class="vl-flow-terminal">
+    <div class="vl-flow-terminal-bar">
+      <span class="vl-flow-terminal-dots"><i></i><i></i><i></i></span>
+      <span>boost-bot · console</span>
+    </div>
+    <div class="vl-flow-terminal-body" data-flow-terminal></div>
+  </div>
+  <span class="vl-flow-cta is-primary">Redeem key</span>
+
+  {% elif mock == 'discord' %}
+  <header class="vl-flow-chrome">
+    <span class="vl-flow-dots"><i></i><i></i><i></i></span>
+    <span class="vl-flow-url">velora.market/discord</span>
+  </header>
+  <div class="vl-flow-receipt">
+    <div class="vl-flow-receipt-head">
+      <span>Your cart</span>
+      <em data-flow-cart-count>0 items</em>
+    </div>
+    <ul class="vl-flow-receipt-lines" data-flow-cart-list>
+      <li class="vl-flow-cart-line" aria-hidden="true"></li>
+      <li class="vl-flow-cart-line" aria-hidden="true"></li>
+      <li class="vl-flow-cart-line" aria-hidden="true"></li>
+    </ul>
+    <div class="vl-flow-receipt-total" data-flow-cart-total-row>
+      <span>Total</span>
+      <strong data-flow-cart-total>€0.00</strong>
+    </div>
+  </div>
+  <span class="vl-flow-cta is-primary">Checkout</span>
+
+  {% else %}
+  <header class="vl-flow-checkout-head">
+    <span>Subscriptions</span>
+    <span class="vl-flow-secure">3 active</span>
+  </header>
+  <div class="vl-flow-meters">
+    <div class="vl-flow-meter is-on">
+      <div class="vl-flow-meter-top">
+        <span>Streaming · 4K</span>
+        <em>Active</em>
+      </div>
+      <span class="vl-flow-meter-bar" data-flow-meter-bar data-target="78" data-duration="2400"><i></i></span>
+    </div>
+    <div class="vl-flow-meter">
+      <div class="vl-flow-meter-top">
+        <span>VPN · 12 months</span>
+        <em>Ready</em>
+      </div>
+      <span class="vl-flow-meter-bar" data-flow-meter-bar data-target="100" data-duration="1900"><i></i></span>
+    </div>
+    <div class="vl-flow-meter">
+      <div class="vl-flow-meter-top">
+        <span>Cloud credits</span>
+        <em>€50 left</em>
+      </div>
+      <span class="vl-flow-meter-bar" data-flow-meter-bar data-target="45" data-duration="1700"><i></i></span>
+    </div>
+  </div>
+  <span class="vl-flow-cta">Access in minutes</span>
+  {% endif %}
+</div>

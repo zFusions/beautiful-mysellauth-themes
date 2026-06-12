@@ -1,0 +1,87 @@
+{% set is_oos = product.stock === 0 and product.type != 'group' %}
+{% set card_href = 'javascript:void(0);' if product.type == 'group' else (('/product/' + product.path) | shopUrl) %}
+{% set card_label = product.name ~ (' — out of stock' if is_oos else (' — from ' ~ formatPrice(product.min_price, product.currency) if product.min_price else '')) %}
+
+<div class="product-card-container"
+     data-reveal
+     data-product-name="{{ product.name }}"
+     data-product-category="{{ product.group_name if product.group_name else 'Uncategorized' }}">
+  {% if is_oos %}
+  <div class="ps-product-card is-out-of-stock" aria-disabled="true" role="group" aria-label="{{ card_label | striptags }}">
+  {% else %}
+  <a
+    class="ps-product-card text-decoration-none {{ 'is-group' if product.type == 'group' }}"
+    href="{{ card_href }}"
+    aria-label="{{ card_label | striptags }}"
+    data-bs-toggle="{{ 'modal' if product.type == 'group' else '' }}"
+    data-bs-target="{{ '#group-modal-' ~ product.id if product.type == 'group' else '' }}"
+  >
+  {% endif %}
+    <div class="ps-product-media">
+      {% if product.image_urls|length > 0 %}
+        <img src="{{ product.image_urls[0] }}" loading="lazy" decoding="async" alt="{{ product.name }}" class="ps-product-img" />
+      {% elif product.image_url %}
+        <img src="{{ product.image_url }}" loading="lazy" decoding="async" alt="{{ product.name }}" class="ps-product-img" />
+      {% else %}
+        <div class="ps-product-placeholder" aria-hidden="true">
+          <span class="ps-product-placeholder-mark">V</span>
+        </div>
+      {% endif %}
+
+      {% if product.type == 'group' and product.products %}
+      <span class="ps-product-chip">{{ product.products | length }} product{{ 's' if product.products | length != 1 }}</span>
+      {% elif product.stock === 0 %}
+      <span class="ps-product-chip is-oos">Out of stock</span>
+      {% elif product.stock %}
+      <span class="ps-product-chip">{{ product.stock }} in stock</span>
+      {% endif %}
+
+      {% if product.product_badges.card|length > 0 %}
+        <div class="ps-product-badges">
+          {% for productBadge in product.product_badges.card %}
+            <span class="ps-product-badge">{{ productBadge.label }}</span>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% if is_oos %}
+      <div class="ps-product-media-veil" aria-hidden="true"></div>
+      {% endif %}
+    </div>
+
+    <div class="ps-product-body">
+      <h3 class="ps-product-name">{{ product.name }}</h3>
+      <div class="ps-product-price-box">
+        <div class="ps-product-prices">
+        {% if product.type == 'group' and product.min_price != product.max_price %}
+          <span class="ps-product-price" x-text="appCurrency.format({{ product.min_price }}, '{{ product.currency }}')">
+            {{ formatPrice(product.min_price, product.currency) }}
+          </span>
+          <span class="ps-product-price-sep" aria-hidden="true"> - </span>
+          <span class="ps-product-price" x-text="appCurrency.format({{ product.max_price }}, '{{ product.currency }}')">
+            {{ formatPrice(product.max_price, product.currency) }}
+          </span>
+        {% elif product.min_price != product.max_price %}
+          <span class="ps-product-price" x-text="appCurrency.format({{ product.min_price }}, '{{ product.currency }}')">
+            {{ formatPrice(product.min_price, product.currency) }}
+          </span>
+          <span class="ps-product-price-sep" aria-hidden="true"> - </span>
+          <span class="ps-product-price" x-text="appCurrency.format({{ product.max_price }}, '{{ product.currency }}')">
+            {{ formatPrice(product.max_price, product.currency) }}
+          </span>
+        {% elif product.min_price %}
+          <span class="ps-product-price" x-text="appCurrency.format({{ product.min_price }}, '{{ product.currency }}')">
+            {{ formatPrice(product.min_price, product.currency) }}
+          </span>
+        {% else %}
+          <span class="ps-product-price-muted">On request</span>
+        {% endif %}
+        </div>
+      </div>
+    </div>
+  {% if is_oos %}
+  </div>
+  {% else %}
+  </a>
+  {% endif %}
+</div>

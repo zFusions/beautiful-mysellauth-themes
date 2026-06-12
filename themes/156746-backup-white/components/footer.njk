@@ -1,0 +1,198 @@
+{% if global.components.footer.show_shop_name or global.components.footer.show_logo or global.components.footer.show_socials or global.components.footer.links.length > 0 %}
+<footer class="footer component nexus-footer" data-component-id="footer">
+  <div class="container">
+    <div class="nexus-footer-content">
+      <div class="footer-grid">
+        <div class="footer-column brand">
+          <div class="nexus-footer-brand">
+            <span class="nexus-footer-name">{{ shop.name }}</span>
+          </div>
+          <p class="footer-brand-text">All the service you need — at the best prices. High quality products with instant delivery.</p>
+          <div class="footer-btns-group">
+            {% if shop.discord_url %}
+            <a href="{{ shop.discord_url }}" class="footer-social-btn discord" target="_blank">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M18.59 5.89c-1.23-.57-2.54-.99-3.92-1.23c-.17.3-.37.71-.5 1.04c-1.46-.22-2.91-.22-4.34 0c-.14-.33-.34-.74-.51-1.04c-1.38.24-2.69.66-3.92 1.23c-2.48 3.74-3.15 7.39-2.82 10.98c1.65 1.23 3.24 1.97 4.81 2.46c.39-.53.73-1.1 1.03-1.69c-.57-.21-1.11-.48-1.62-.79c.14-.1.27-.21.4-.31c3.13 1.46 6.52 1.46 9.61 0c.13.11.26.21.4.31c-.51.31-1.06.57-1.62.79c.3.59.64 1.16 1.03 1.69c1.57-.49 3.17-1.23 4.81-2.46c.39-4.17-.67-7.78-2.82-10.98Zm-9.75 8.78c-.94 0-1.71-.87-1.71-1.94s.75-1.94 1.71-1.94s1.72.87 1.71 1.94c0 1.06-.75 1.94-1.71 1.94Zm6.31 0c-.94 0-1.71-.87-1.71-1.94s.75-1.94 1.71-1.94s1.72.87 1.71 1.94c0 1.06-.75 1.94-1.71 1.94Z"/></svg>
+              Join Discord
+            </a>
+            {% endif %}
+            <a href="https://t.me/velorashp" class="footer-social-btn telegram" target="_blank">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19-.14.75-.42 1-.68 1.03-.58.05-1.02-.38-1.58-.75-.88-.58-1.38-.94-2.23-1.5-.99-.65-.35-1.01.22-1.59.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02-.09.02-1.49.95-4.22 2.79-.4.27-.76.41-1.08.4-.35-.01-1.02-.2-1.53-.37-.62-.2-1.12-.31-1.07-.65.02-.18.27-.36.75-.55 2.92-1.27 4.86-2.11 5.83-2.52 2.78-1.16 3.35-1.36 3.73-1.36.08 0 .27.02.39.12.1.08.13.19.14.27-.01.06.01.24 0 .38z"/></svg>
+              Join Telegram
+            </a>
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h5 class="footer-column-title">Quick Links</h5>
+          <div class="footer-links-list">
+            <a href="{{ '/' | shopUrl }}" class="nexus-footer-link">Home</a>
+            {% for link in global.components.navbar.left_links %}
+              <a href="{{ link.link | shopUrl }}" class="nexus-footer-link">{{ link.text }}</a>
+            {% endfor %}
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h5 class="footer-column-title">Legal</h5>
+          <div class="footer-links-list">
+            <a href="{{ '/terms' | shopUrl }}" class="nexus-footer-link">Terms of Service</a>
+            <a href="{{ '/privacy-policy' | shopUrl }}" class="nexus-footer-link">Privacy Policy</a>
+            <a href="{{ '/refund-policy' | shopUrl }}" class="nexus-footer-link">Refund Policy</a>
+          </div>
+        </div>
+
+        <div class="footer-column">
+          <h5 class="footer-column-title">Support</h5>
+          <div class="footer-links-list">
+            <a href="{{ '/#faq' | shopUrl }}" class="nexus-footer-link">FAQ</a>
+            <a href="{{ '/feedback' | shopUrl }}" class="nexus-footer-link">Reviews</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="nexus-footer-bottom">
+      <div class="nexus-footer-copyright">
+        <span>{{ global.components.footer.copyright_text }}</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+/* ============================================
+   FOOTER — light SaaS (produce.so)
+   ============================================ */
+footer.nexus-footer {
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  position: relative;
+  overflow: hidden;
+  padding: 5rem 0 2.5rem;
+  border-top: 1px solid var(--border-default);
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1fr;
+  gap: 3rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid var(--border-default);
+}
+
+.footer-links-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.footer-btns-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-social-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 20px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.88rem;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  width: fit-content;
+}
+
+.footer-social-btn.discord {
+  background: rgba(88, 101, 242, 0.1);
+  border: 1px solid rgba(88, 101, 242, 0.2);
+  color: #4954d4;
+}
+
+.footer-social-btn.discord:hover {
+  background: #5865F2;
+  color: #fff;
+}
+
+.footer-social-btn.telegram {
+  background: rgba(0, 136, 204, 0.1);
+  border: 1px solid rgba(0, 136, 204, 0.2);
+  color: #0079b5;
+}
+
+.footer-social-btn.telegram:hover {
+  background: #0088cc;
+  color: #fff;
+}
+
+.nexus-footer-logo {
+  height: 2.2rem;
+  width: auto;
+}
+
+.nexus-footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 1.25rem;
+}
+
+.nexus-footer-name {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.footer-brand-text {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin-bottom: 1.75rem;
+  max-width: 320px;
+}
+
+.footer-column-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  margin-bottom: 1.1rem;
+}
+
+.nexus-footer-link {
+  color: var(--text-secondary);
+  font-size: 0.92rem;
+  font-weight: 500;
+  transition: color 0.2s ease;
+  text-decoration: none;
+}
+
+.nexus-footer-link:hover {
+  color: var(--blue-primary);
+}
+
+.nexus-footer-bottom {
+  padding-top: 1.75rem;
+  display: flex;
+  justify-content: center;
+}
+
+.nexus-footer-copyright {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+@media (max-width: 991.98px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+}
+
+@media (max-width: 575.98px) {
+  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+}
+</style>
+{% endif %}

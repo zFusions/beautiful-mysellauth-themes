@@ -1,0 +1,19 @@
+<div class="components velora-home">
+  {% for componentId in components_order %}
+    {% render_component componentId %}
+
+    {% if componentId == 'hero' %}
+      {% render_snippet "home-trust.njk" %}
+    {% endif %}
+
+    {% if componentId == 'products' %}
+      {% render_snippet "home-steps.njk" %}
+    {% endif %}
+  {% endfor %}
+
+  {% if feedbacks is defined and feedbacks | length > 0 %}
+    {% render_component "feedbacks" %}
+  {% endif %}
+
+  {% render_snippet "home-cta.njk" %}
+</div>

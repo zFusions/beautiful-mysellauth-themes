@@ -1,0 +1,82 @@
+<div class="card p-4 nexus-customer-sidebar">
+  <div class="">
+    <h5>
+      Customer Dashboard
+    </h5>
+    <small class="text-muted">
+      Logged in as {{ shop_customer.email }}
+    </small>
+    <hr>
+  </div>
+  <ul class="nav flex-column gap-2 nav-pills">
+    <li class="nav-item">
+      <a href="{{ '/customer/dashboard' | shopUrl }}" class="nav-link {{ 'active' if templateName == 'customer-dashboard' }}">
+        Dashboard
+      </a>
+    </li>
+    <li class="nav-item">
+      <a href="{{ '/customer/invoices' | shopUrl }}" class="nav-link {{ 'active' if templateName == 'customer-invoices' }}">
+        Orders
+      </a>
+    </li>
+    {% if shop.customer_balance_enabled %}
+      <li class="nav-item">
+        <a href="{{ '/customer/balance' | shopUrl }}" class="nav-link {{ 'active' if templateName == 'customer-balance' }}">
+          Balance
+        </a>
+      </li>
+    {% endif %}
+    <li class="nav-item">
+      <button type="button" @click="appCustomer.logout()" class="nav-link">
+        Logout
+      </button>
+    </li>
+  </ul>
+</div>
+
+<style>
+  .nexus-customer-sidebar.card {
+    background: #ffffff;
+    border: 1px solid var(--border-default, #e8e8e9);
+    border-radius: 1rem;
+    box-shadow: var(--shadow-card, 0 1px 2px rgba(16,24,40,0.04), 0 4px 16px rgba(16,24,40,0.06));
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+  }
+
+  .nexus-customer-sidebar h5 {
+    color: var(--text-primary, #0a0a0a);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+
+  .nexus-customer-sidebar .text-muted {
+    color: var(--text-secondary, #7a7a7a) !important;
+  }
+
+  .nexus-customer-sidebar hr {
+    border-color: var(--border-default, #e8e8e9);
+    opacity: 1;
+  }
+
+  .nexus-customer-sidebar .nav-pills .nav-link {
+    color: var(--text-secondary, #5c5c5c);
+    border-radius: 0.7rem;
+    padding: 0.65rem 0.85rem;
+    background: transparent;
+    border: 1px solid transparent;
+    font-weight: 600;
+    transition: color 0.18s ease, background 0.18s ease;
+  }
+
+  .nexus-customer-sidebar .nav-pills .nav-link:hover {
+    color: var(--text-primary, #0a0a0a);
+    background: var(--bg-surface, #f4f4f6);
+  }
+
+  .nexus-customer-sidebar .nav-pills .nav-link.active {
+    color: #ffffff;
+    background: var(--blue-primary, #1B44FE);
+    border-color: var(--blue-primary, #1B44FE);
+  }
+</style>

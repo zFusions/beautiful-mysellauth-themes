@@ -1,0 +1,292 @@
+{
+    "templates": {
+        "shop": {
+            "layout": "master",
+            "components": {
+                "how-it-works": {
+                    "type": "how-it-works",
+                    "properties": {}
+                },
+                "final-cta": {
+                    "type": "final-cta",
+                    "properties": {}
+                },
+                "trust-bar": {
+                    "type": "trust-bar",
+                    "properties": {}
+                },
+                "hero": {
+                    "type": "hero",
+                    "properties": {
+                        "title": "<span class=\"vl-hero-sans\">Scripts, software & licenses</span><span class=\"vl-hero-serif\">Web store & Discord shop.</span>",
+                        "subtitle": "Buy on the website or on our Discord shop — scripts, software keys, licenses, Nitro, boosts and premium products. Delivered automatically after checkout.",
+                        "cta": "#products",
+                        "cta_text": "Browse products",
+                        "show_searchbar": false,
+                        "show_feedback_rating": false,
+                        "show_products_sold": true,
+                        "show_total_customers": true,
+                        "alignment": "center",
+                        "height": "medium",
+                        "background_image": null,
+                        "side_image": null,
+                        "badge_text": "Now Live",
+                        "cta_text_2": "Join community",
+                        "cta_2": "",
+                        "show_support": true
+                    }
+                },
+                "features": {
+                    "type": "features",
+                    "properties": {
+                        "title": "One store. Every category.",
+                        "subtitle": "Same catalog on the web store and our Discord shop — buy wherever you prefer.",
+                        "features": [
+                            {
+                                "title": "Scripts & automation",
+                                "description": "Deploy and run Discord bots from one dashboard — live status, instant setup, web store or Discord shop.",
+                                "icon": "fas fa-code"
+                            },
+                            {
+                                "title": "Discord shop",
+                                "description": "Browse the catalog, add to cart and pay — Boost Bot, token checker and more, delivered instantly after checkout.",
+                                "icon": "fab fa-discord"
+                            },
+                            {
+                                "title": "Premium products",
+                                "description": "Streaming, VPN, cloud credits and bundled subscriptions. Pay once, access in minutes.",
+                                "icon": "fas fa-crown"
+                            }
+                        ]
+                    }
+                },
+                "products": {
+                    "type": "products",
+                    "properties": {
+                        "title": "<span class=\"vl-products-sans\">Scripts, software, licenses & more</span><span class=\"vl-products-serif\">Delivered instantly.</span>",
+                        "subtitle": "Tap a product to open checkout."
+                    }
+                },
+                "faq": {
+                    "type": "faq",
+                    "properties": {
+                        "items": [
+                            {
+                                "question": "How do I receive my product after purchase?",
+                                "answer": "All our products are delivered instantly. After payment, you receive your key, license or access on the site, by email, or in your account. If you need help, join our __DISCORD__."
+                            },
+                            {
+                                "question": "What are the official contact methods?",
+                                "answer": "We are mainly available on __DISCORD__ and __TELEGRAM__. Beware of imposters — only use the official links shown here and in our site footer."
+                            },
+                            {
+                                "question": "Are the services guaranteed?",
+                                "answer": "Yes, we offer warranties on our products. Specific warranty details and durations are mentioned in the description of each product. Our 24\/7 support is also available for any assistance."
+                            },
+                            {
+                                "question": "Do you offer discounts for bulk orders?",
+                                "answer": "Absolutely! Contact us on __TELEGRAM__ or open a ticket on __DISCORD__ to discuss bulk pricing for your large orders."
+                            },
+                            {
+                                "question": "How can I contact support if I have a problem?",
+                                "answer": "Our dedicated support team is available 24\/7. You can reach us by opening a ticket on our __DISCORD__ server or messaging us on __TELEGRAM__. We guarantee a response to all inquiries."
+                            }
+                        ]
+                    }
+                },
+                "feedbacks": {
+                    "type": "feedbacks",
+                    "properties": {
+                        "title": "Hear What Others Say",
+                        "subtitle": "Hear from our customers who have transformed their experience with our products.",
+                        "amount": 6
+                    }
+                },
+                "socials": {
+                    "type": "socials",
+                    "properties": {
+                        "title": "Follow our Socials",
+                        "subtitle": null
+                    }
+                }
+            },
+            "components_order": [
+                "hero",
+                "how-it-works",
+                "features",
+                "products",
+                "feedbacks",
+                "faq",
+                "final-cta"
+            ]
+        },
+        "cart": {
+            "layout": "master",
+            "components": {
+                "cart-page": {
+                    "type": "cart-page",
+                    "properties": []
+                }
+            },
+            "components_order": [
+                "cart-page"
+            ]
+        },
+        "product": {
+            "layout": "master",
+            "components": {
+                "product-page": {
+                    "type": "product-page",
+                    "properties": {
+                        "hide_add_to_cart": false,
+                        "hide_buy_now": false
+                    }
+                }
+            },
+            "components_order": [
+                "product-page"
+            ]
+        },
+        "feedback": {
+            "layout": "master",
+            "components": {
+                "feedback-page": {
+                    "type": "feedback-page",
+                    "properties": []
+                }
+            },
+            "components_order": [
+                "feedback-page"
+            ]
+        },
+        "terms": {
+            "layout": "master",
+            "components": {
+                "terms-page": {
+                    "type": "terms-page",
+                    "properties": []
+                }
+            },
+            "components_order": [
+                "terms-page"
+            ]
+        },
+        "status": {
+            "layout": "master",
+            "components": {
+                "status-page": {
+                    "type": "status-page",
+                    "properties": []
+                }
+            },
+            "components_order": [
+                "status-page"
+            ]
+        },
+        "customer-dashboard": {
+            "layout": "master",
+            "components": {},
+            "components_order": []
+        },
+        "customer-invoices": {
+            "layout": "master",
+            "components": {},
+            "components_order": []
+        },
+        "customer-balance": {
+            "layout": "master",
+            "components": {},
+            "components_order": []
+        }
+    },
+    "global": {
+        "properties": {
+            "theme_color": "#F99926",
+            "primary_background_color": "#000000",
+            "secondary_background_color": "#0a0a0a",
+            "primary_border_color": "rgba(255,255,255,0.1)",
+            "font": "Arial",
+            "snow": false,
+            "snow_color": "#ffffff"
+        },
+        "components": {
+            "announcement": {
+                "text": null,
+                "link": null,
+                "link_text": null
+            },
+            "navbar": {
+                "show_shop_name": true,
+                "show_logo": true,
+                "left_links": [
+                    {
+                        "text": "Home",
+                        "link": "/",
+                        "icon": "fas fa-home",
+                        "new_tab": false,
+                        "shape": "regular"
+                    },
+                    {
+                        "text": "Products",
+                        "link": "/#products",
+                        "icon": "fas fa-box-open",
+                        "new_tab": false,
+                        "shape": "regular"
+                    },
+                    {
+                        "text": "Status",
+                        "link": "/status",
+                        "icon": "fas fa-bars-progress",
+                        "new_tab": false,
+                        "shape": "regular"
+                    },
+                    {
+                        "text": "Feedback",
+                        "link": "/feedback",
+                        "icon": "far fa-star-half-stroke",
+                        "new_tab": false,
+                        "shape": "regular"
+                    }
+                ],
+                "right_links": [],
+                "hide_currency_selector": true,
+                "hide_customer_dashboard": true,
+                "hide_cart": true
+            },
+            "footer": {
+                "show_shop_name": true,
+                "show_logo": true,
+                "show_socials": true,
+                "links": [
+                    {
+                        "text": "Home",
+                        "link": "/"
+                    },
+                    {
+                        "text": "Products",
+                        "link": "/#products"
+                    },
+                    {
+                        "text": "Feedback",
+                        "link": "/feedback"
+                    },
+                    {
+                        "text": "Status",
+                        "link": "/status",
+                        "shape": "regular"
+                    },
+                    {
+                        "text": "Terms of Service",
+                        "link": "/terms"
+                    },
+                    {
+                        "text": "Refund",
+                        "link": "/refund-policy",
+                        "new_tab": false
+                    }
+                ],
+                "copyright_text": "© 2025 Velora Market. All rights reserved"
+            }
+        }
+    }
+}

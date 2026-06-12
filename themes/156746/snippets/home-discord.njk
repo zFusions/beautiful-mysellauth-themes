@@ -1,0 +1,54 @@
+<section id="community" class="vl-discord component">
+  <div class="container">
+    <div class="vl-discord-grid" data-reveal-group>
+      <div class="vl-discord-copy" data-reveal>
+        <p class="vl-discord-kicker">Support</p>
+        <h2 class="vl-discord-title ps-title">We're here when you <span class="vl-discord-accent">need help</span></h2>
+        <p class="vl-discord-sub ps-subtitle">
+          Order questions, product guidance, and account support — our team responds quickly, every day.
+        </p>
+        <div class="vl-discord-pills">
+          <span>Fast response</span>
+          <span>Order tracking</span>
+          <span>Expert help</span>
+        </div>
+        {% if shop.discord_url %}
+        <a href="{{ shop.discord_url }}" target="_blank" rel="noopener" class="vl-discord-btn">
+          Contact support
+        </a>
+        {% else %}
+        <a href="{{ '/#faq' | shopUrl }}" class="vl-discord-btn">Contact support</a>
+        {% endif %}
+      </div>
+
+      <div class="vl-discord-widget" data-reveal aria-hidden="true">
+        <div class="vl-discord-widget-head">
+          <span class="vl-discord-widget-avatar">VM</span>
+          <div>
+            <strong>Velora Market</strong>
+            <span>Support team</span>
+          </div>
+          <span class="vl-discord-widget-join">Online</span>
+        </div>
+        <div class="vl-discord-widget-online">
+          <span class="vl-discord-dot"></span>
+          <span><strong>Available</strong> now</span>
+        </div>
+        <div class="vl-discord-stats">
+          <div class="vl-discord-stat">
+            <span class="vl-discord-stat-val">&lt;5 min</span>
+            <span class="vl-discord-stat-label">Avg. response</span>
+          </div>
+          <div class="vl-discord-stat">
+            <span class="vl-discord-stat-val">24/7</span>
+            <span class="vl-discord-stat-label">Coverage</span>
+          </div>
+          <div class="vl-discord-stat">
+            <span class="vl-discord-stat-val">10k+</span>
+            <span class="vl-discord-stat-label">Orders served</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

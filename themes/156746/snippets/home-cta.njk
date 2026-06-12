@@ -1,0 +1,14 @@
+<section class="vl-section vl-cta">
+  <div class="container">
+    <div class="vl-cta-box">
+      <h2 class="vl-cta-title">Ready to get started?</h2>
+      <p class="vl-cta-sub">Browse the catalog, pay securely, and receive your order in under a minute.</p>
+      <div class="vl-cta-actions">
+        <a href="{{ '/#products' | shopUrl }}" class="vl-btn-primary vl-btn-lg">Browse products</a>
+        {% if shop.discord_url %}
+        <a href="{{ shop.discord_url }}" target="_blank" rel="noopener" class="vl-btn-ghost vl-btn-lg">Contact support</a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>

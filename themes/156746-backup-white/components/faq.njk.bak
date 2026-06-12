@@ -1,0 +1,173 @@
+<section id="faq" class="faq component" data-component-id="{{ componentId }}" style="position: relative;">
+  <div class="container">
+    <div class="text-center mb-5">
+      <div class="hero-badge-modern mx-auto mb-3">
+        <span class="badge-dot"></span>
+        ❓ FAQ
+      </div>
+      <h2 class="hero-title-modern">
+        Frequently Asked <span class="text-glow-blue">Questions</span>
+      </h2>
+      <p class="hero-description-modern mx-auto">
+        Find answers to common questions about our products and services.
+      </p>
+    </div>
+
+    <div class="faq-layout">
+      <div class="faq-wrapper">
+        <div class="accordion" id="faq-accordion">
+          {% for item in properties.items %}
+          {% set faqId = componentId ~ '-' ~ loop.index %}
+          <div class="faq-item-modern">
+            <button class="faq-toggle-modern collapsed" data-bs-toggle="collapse" data-bs-target="#collapse-{{ faqId }}" aria-expanded="false">
+              <div class="left">
+                <span class="q-icon">?</span>
+                <span class="q-text">{{ item.question | renderString }}</span>
+              </div>
+              <div class="arrow">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+              </div>
+            </button>
+
+            <div id="collapse-{{ faqId }}" class="collapse" data-bs-parent="#faq-accordion">
+              <div class="faq-body-modern">
+                {{ item.answer | renderString }}
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="faq-cta-side">
+        <div class="velora-terminal mini-terminal">
+          <div class="terminal-header">
+            <div class="terminal-dots">
+              <span class="dot-red"></span><span class="dot-yellow"></span><span class="dot-green"></span>
+            </div>
+            <div class="terminal-title">support-status.sh</div>
+          </div>
+          <div class="terminal-body">
+            <div class="log-line"><span class="log-type inf">INF</span> Support: <span class="log-success">Online</span></div>
+            <div class="log-line"><span class="log-type inf">INF</span> Wait time: <span class="log-hash">~5 min</span></div>
+            <div class="log-line mt-3">Ready to help you?</div>
+            <a href="https://discord.gg/" target="_blank" class="btn-primary-modern w-100 mt-3" style="padding: 12px; font-size: 0.9rem;">
+              Join Discord
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="faq-separator-bg"></div>
+</section>
+
+<style>
+.faq.component {
+  padding: 8rem 0;
+  background: transparent;
+  margin-bottom: 4rem;
+}
+
+.faq-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+.faq-item-modern {
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.faq-item-modern:hover {
+  border-color: rgba(96, 165, 250, 0.1);
+  background: rgba(255, 255, 255, 0.015);
+}
+
+.faq-toggle-modern {
+  width: 100%;
+  padding: 1.25rem 1.5rem;
+  background: transparent;
+  border: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  color: #fff;
+  text-align: left;
+}
+
+.faq-toggle-modern .left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.q-icon {
+  width: 32px;
+  height: 32px;
+  background: rgba(96, 165, 250, 0.1);
+  color: var(--blue-electric);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.q-text {
+  font-weight: 600;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.faq-toggle-modern .arrow {
+  color: rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.faq-toggle-modern:not(.collapsed) .arrow {
+  transform: rotate(180deg);
+  color: var(--blue-electric);
+}
+
+.faq-body-modern {
+  padding: 0 1.5rem 1.5rem 4.25rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.mini-terminal {
+  max-width: 100%;
+  background: rgba(10, 12, 18, 0.6);
+}
+
+.faq-separator-bg {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 100vw;
+    height: 160px;
+    background: linear-gradient(to bottom, rgba(5, 5, 8, 0), rgba(5, 5, 8, 1));
+    pointer-events: none;
+    z-index: 10;
+}
+
+@media (max-width: 991px) {
+  .faq-layout {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+}
+</style>

@@ -1,0 +1,205 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-06-11T22:00:00.000Z",
+  "title": "Design System: Velora Market",
+  "extensions": {
+    "colorMeta": {
+      "bg-void": {
+        "role": "neutral",
+        "displayName": "Void Black",
+        "canonical": "oklch(0% 0 0)",
+        "tonalRamp": ["#000000", "#0a0a0a", "#111111", "#1a1a1a", "#262626", "#404040", "#595959", "#737373"]
+      },
+      "accent": {
+        "role": "primary",
+        "displayName": "Signal Orange",
+        "canonical": "oklch(72% 0.16 65)",
+        "tonalRamp": ["#4d2a00", "#7a4200", "#a85500", "#d46a00", "#F99926", "#ffab42", "#ffc266", "#ffd699"]
+      },
+      "accent-hot": {
+        "role": "primary",
+        "displayName": "Hot Orange",
+        "canonical": "oklch(68% 0.18 55)",
+        "tonalRamp": ["#4a2000", "#6b3000", "#8c4000", "#b35000", "#ff7a00", "#ff8f1f", "#ffa64d", "#ffbd80"]
+      },
+      "accent-price": {
+        "role": "primary",
+        "displayName": "Price Orange",
+        "canonical": "oklch(78% 0.14 65)",
+        "tonalRamp": ["#4d3200", "#6b4500", "#8c5800", "#b36d00", "#ffb038", "#ffc266", "#ffd699", "#ffe0b3"]
+      },
+      "text-primary": {
+        "role": "neutral",
+        "displayName": "Primary Text",
+        "canonical": "oklch(98% 0 0)",
+        "tonalRamp": ["#262626", "#404040", "#595959", "#737373", "#8c8c8c", "#a6a6a6", "#bfbfbf", "#fafafa"]
+      },
+      "stock-green": {
+        "role": "tertiary",
+        "displayName": "In Stock Green",
+        "canonical": "oklch(78% 0.18 145)",
+        "tonalRamp": ["#052e16", "#064e20", "#047857", "#059669", "#4ade80", "#6ee7a0", "#86efac", "#bbf7d0"]
+      }
+    },
+    "typographyMeta": {
+      "display-sans": {
+        "displayName": "Hero Sans",
+        "purpose": "Hero line 1 and section title sans lines."
+      },
+      "display-serif": {
+        "displayName": "Hero Serif Italic",
+        "purpose": "Hero line 2 only — Playfair Display Italic."
+      },
+      "product-name": {
+        "displayName": "Product Card Title",
+        "purpose": "15px bold Inter; 2-line clamp inside unified card."
+      }
+    },
+    "shadows": [
+      {
+        "name": "dashboard-depth",
+        "value": "0 40px 100px rgba(0, 0, 0, 0.7)",
+        "purpose": "Hero mock panel only."
+      },
+      {
+        "name": "product-hover",
+        "value": "0 16px 48px rgba(0, 0, 0, 0.55)",
+        "purpose": "Product card lift on hover — not at rest."
+      },
+      {
+        "name": "cta-hover-glow",
+        "value": "0 4px 16px rgba(255, 122, 0, 0.28)",
+        "purpose": "Product CTA hover only; blur ≤16px."
+      }
+    ],
+    "motion": [
+      {
+        "name": "ease-standard",
+        "value": "ease",
+        "purpose": "Button and link color transitions (0.15s)."
+      },
+      {
+        "name": "ease-out-product",
+        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Product card transitions (0.22–0.35s)."
+      }
+    ],
+    "breakpoints": [
+      { "name": "xs", "value": "479px", "purpose": "Product grid 1 column." },
+      { "name": "sm", "value": "768px", "purpose": "Product grid 3 columns; flow steps 2 columns." },
+      { "name": "md", "value": "992px", "purpose": "Nav desktop grid; sticky PDP buy off below." },
+      { "name": "lg", "value": "1200px", "purpose": "Product grid 4 columns." }
+    ]
+  },
+  "components": [
+    {
+      "name": "Nav Primary Button",
+      "kind": "button",
+      "refersTo": "button-nav-primary",
+      "description": "Single orange CTA in navbar. Square corners (2px).",
+      "html": "<a class=\"ds-btn-nav-primary\" href=\"#\">Get started</a>",
+      "css": ".ds-btn-nav-primary { display: inline-flex; align-items: center; justify-content: center; height: 30px; padding: 0 12px; border-radius: 2px; border: none; background: #F99926; color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 13px; font-weight: 400; letter-spacing: -0.01em; text-decoration: none; transition: background 0.15s ease; } .ds-btn-nav-primary:hover { background: #ffab42; color: #ffffff; }"
+    },
+    {
+      "name": "Hero Primary Button",
+      "kind": "button",
+      "refersTo": "button-hero-primary",
+      "description": "Main hero CTA — pill shape, hot orange.",
+      "html": "<a class=\"ds-btn-hero-primary\" href=\"#\">Get started free</a>",
+      "css": ".ds-btn-nav-primary:focus-visible, .ds-btn-hero-primary:focus-visible { outline: 2px solid #F99926; outline-offset: 2px; } .ds-btn-hero-primary { display: inline-flex; align-items: center; justify-content: center; height: 44px; padding: 0 26px; border-radius: 999px; border: none; background: #ff7a00; color: #ffffff; font-family: Arial, Helvetica, sans-serif; font-size: 14px; font-weight: 400; text-decoration: none; transition: background 0.15s ease; } .ds-btn-hero-primary:hover { background: #ff8f1f; color: #ffffff; }"
+    },
+    {
+      "name": "Product CTA",
+      "kind": "button",
+      "refersTo": "button-product-cta",
+      "description": "In-stock product card CTA — gradient orange, dark text.",
+      "html": "<span class=\"ds-btn-product-cta\">Get instant access →</span>",
+      "css": ".ds-btn-product-cta { display: flex; align-items: center; justify-content: center; gap: 6px; width: 100%; padding: 11px 14px; border-radius: 4px; border: 1px solid rgba(255, 168, 60, 0.7); background: linear-gradient(180deg, #ffb038 0%, #ff8012 42%, #e87200 100%); color: #1a1000; font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: 600; letter-spacing: -0.01em; box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3); transition: filter 0.15s ease, box-shadow 0.15s ease; cursor: pointer; } .ds-btn-product-cta:hover { filter: brightness(1.08); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 4px 16px rgba(255, 122, 0, 0.28); }"
+    },
+    {
+      "name": "Product Card",
+      "kind": "card",
+      "refersTo": "product-card",
+      "description": "Unified catalog tile — 1:1 media, title + price in same case, whole card clickable.",
+      "html": "<a class=\"ds-product-card\" href=\"#\"><div class=\"ds-product-media\"><img class=\"ds-product-img\" src=\"\" alt=\"Nitro Boost 1 Month\" /><span class=\"ds-product-chip\">19 in stock</span></div><div class=\"ds-product-body\"><h3 class=\"ds-product-name\">Nitro Boost 1 Month</h3><p class=\"ds-product-price\">€2.50</p></div></a>",
+      "css": ".ds-product-card { display: flex; flex-direction: column; width: 100%; overflow: hidden; border-radius: 14px; border: 1px solid rgba(255, 255, 255, 0.1); background: #161616; color: #fafafa; text-decoration: none; transition: transform 0.22s ease, border-color 0.2s ease; } .ds-product-card:hover { transform: translateY(-2px); border-color: rgba(249, 153, 38, 0.32); } .ds-product-card:focus-visible { outline: 2px solid #F99926; outline-offset: 2px; } .ds-product-media { position: relative; aspect-ratio: 1 / 1; overflow: hidden; background: #121212; border-bottom: 1px solid rgba(255, 255, 255, 0.06); } .ds-product-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: center; } .ds-product-chip { position: absolute; top: 8px; right: 8px; padding: 4px 10px; border-radius: 999px; font-family: Inter, system-ui, sans-serif; font-size: 11px; font-weight: 600; color: rgba(255, 255, 255, 0.92); background: rgba(0, 0, 0, 0.55); border: 1px solid rgba(255, 255, 255, 0.1); } .ds-product-body { padding: 12px 14px 14px; display: flex; flex-direction: column; gap: 5px; } .ds-product-name { margin: 0; font-family: Inter, system-ui, sans-serif; font-size: 15px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.3; } .ds-product-price { margin: 0; font-family: Inter, system-ui, sans-serif; font-size: 16px; font-weight: 700; color: #F99926; letter-spacing: -0.02em; }"
+    },
+    {
+      "name": "Flow Panel",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Section UI mock shell with localized orange spotlight.",
+      "html": "<div class=\"ds-flow-card\"><div class=\"ds-flow-spot\"></div><div class=\"ds-flow-panel\"><div class=\"ds-flow-ui\">Mock content</div></div></div>",
+      "css": ".ds-flow-card { position: relative; border-radius: 4px; border: 1px solid rgba(255, 255, 255, 0.08); background: linear-gradient(180deg, #111111 0%, #0a0a0a 100%); overflow: hidden; } .ds-flow-spot { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 50% 85%, rgba(249, 153, 38, 0.16) 0%, transparent 55%); } .ds-flow-panel { position: relative; margin: 14px; padding: 14px; border-radius: 4px; border: 1px solid rgba(255, 255, 255, 0.08); background: rgba(255, 255, 255, 0.02); } .ds-flow-ui { font-family: Arial, Helvetica, sans-serif; font-size: 11px; color: rgba(255, 255, 255, 0.55); }"
+    },
+    {
+      "name": "Nav Link",
+      "kind": "nav",
+      "refersTo": "label",
+      "description": "Centered nav text link — muted default, white hover.",
+      "html": "<a class=\"ds-nav-link\" href=\"#\">Products</a>",
+      "css": ".ds-nav-link { display: inline-flex; align-items: center; padding: 0; font-family: Arial, Helvetica, sans-serif; font-size: 13px; font-weight: 400; letter-spacing: -0.01em; color: rgba(255, 255, 255, 0.55); text-decoration: none; transition: color 0.15s ease; } .ds-nav-link:hover { color: #fafafa; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Orange Spotlight",
+    "overview": "Velora Market reads as a premium dark SaaS storefront. Pure black canvas, warm orange spotlight behind hero, Arial + Playfair Italic pairing, dashboard mock below fold. Section flow mocks and edge-to-edge product banners prove instant delivery. Depth from tonal layering and localized spotlights — not glass or ghost-card shadows.",
+    "keyCharacteristics": [
+      "Drenched black canvas with one committed orange accent",
+      "Seamless #000 void between homepage sections",
+      "Distinct UI mock patterns per flow/features card",
+      "Product banners: dynamic aspect-ratio, contain, stock pill on image",
+      "Flat cards, 4–14px radius max"
+    ],
+    "rules": [
+      {
+        "name": "The One Voice Rule",
+        "body": "Orange appears on ≤10% of any screen outside the hero spotlight zone and product CTAs.",
+        "section": "colors"
+      },
+      {
+        "name": "The Spotlight Rule",
+        "body": "Hero light stack and vl-flow-spot are the only places orange fills large ambient area.",
+        "section": "colors"
+      },
+      {
+        "name": "The Void Rule",
+        "body": "Homepage sections share #000000 with no gray border-top separators.",
+        "section": "colors"
+      },
+      {
+        "name": "The −0.04em Floor Rule",
+        "body": "Display letter-spacing never tighter than −0.04em.",
+        "section": "typography"
+      },
+      {
+        "name": "The Pairing Rule",
+        "body": "Playfair Italic is reserved for the hero second line only.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat-By-Default Rule",
+        "body": "No box-shadow blur ≥16px combined with 1px decorative border on the same element at rest.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do use --vl-* tokens from assets/velora.css for all new landing sections.",
+      "Do keep homepage background seamless #000 between sections.",
+      "Do upload product images as wide banners; let JS set aspect-ratio from natural dimensions.",
+      "Do use distinct UI mock patterns per flow/features card.",
+      "Do verify muted text ≥4.5:1 contrast on black.",
+      "Do label hero dashboard mock as Preview (aria-hidden); use sentence-case .vl-reviews-lead.",
+      "Do keep footer styles in velora.css only — no inline styles in footer.njk."
+    ],
+    "donts": [
+      "Don't look like a dark neon gaming shop with RGB glow.",
+      "Don't use generic AI SaaS patterns: cream body, metric hero, uppercase eyebrow on every section.",
+      "Don't use object-fit: cover on product banners if it crops artwork.",
+      "Don't use wireframe/skeleton placeholders in section mocks.",
+      "Don't pair 1px border with wide soft box-shadow on cards (ghost-card).",
+      "Don't revert to produce.so light blue / Inter without explicit request.",
+      "Don't use Live badges or pulsing status dots on decorative mocks."
+    ]
+  }
+}

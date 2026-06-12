@@ -1,0 +1,12 @@
+<section class="container py-20 component" data-component-id="{{ componentId }}">
+  <div class="text-center mb-5">
+    {% if properties.title %}<h2>{{ properties.title | renderString }}</h2>{% endif %}
+    {% if properties.subtitle %}<p class="text-muted">{{ properties.subtitle | renderString }}</p>{% endif %}
+  </div>
+  <div class="d-flex flex-wrap justify-content-center gap-3">
+    {% if properties.show_bitcoin %}<span class="card px-4 py-3"><i class="fab fa-bitcoin"></i> Bitcoin</span>{% endif %}
+    {% if properties.show_litecoin %}<span class="card px-4 py-3">Litecoin</span>{% endif %}
+    {% if properties.show_stripe %}<span class="card px-4 py-3"><i class="fab fa-stripe"></i> Stripe</span>{% endif %}
+    {% if properties.show_paypal %}<span class="card px-4 py-3"><i class="fab fa-paypal"></i> PayPal</span>{% endif %}
+  </div>
+</section>

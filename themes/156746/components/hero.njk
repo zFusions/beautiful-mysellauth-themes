@@ -1,0 +1,75 @@
+<section class="vl-hero component" data-component-id="{{ componentId }}">
+  <div class="vl-hero-bg" aria-hidden="true">
+    <div class="vl-hero-light">
+      <div class="vl-hero-light__arc">
+        <div class="vl-hero-light__glow">
+          <div class="vl-hero-light__haze"></div>
+          <div class="vl-hero-light__core"></div>
+        </div>
+        <div class="vl-hero-light__grid-relief"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container vl-hero-inner">
+    <div class="vl-hero-copy">
+      <h1 class="vl-hero-title">
+        {{ properties.title | renderString }}
+      </h1>
+
+      <p class="vl-hero-sub">
+        {{ properties.subtitle | renderString }}
+      </p>
+
+      <div class="vl-hero-actions">
+        {% set primary_href = properties.cta | default('#products') %}
+        {% if primary_href[0] == '#' %}
+          {% set primary_href = ('/' ~ primary_href) | shopUrl %}
+        {% else %}
+          {% set primary_href = primary_href | shopUrl %}
+        {% endif %}
+
+        {% set secondary_label = properties.cta_text_2 | default('Join community') %}
+        {% set secondary_href = properties.cta_2 | default('') %}
+        {% set secondary_external = false %}
+
+        {% if secondary_href %}
+          {% if secondary_href[0] == '#' %}
+            {% set secondary_href = ('/' ~ secondary_href) | shopUrl %}
+          {% else %}
+            {% set secondary_href = secondary_href | shopUrl %}
+          {% endif %}
+        {% elif shop.discord_url %}
+          {% set secondary_href = shop.discord_url %}
+          {% set secondary_external = true %}
+        {% elif shop.telegram_url %}
+          {% set secondary_href = shop.telegram_url %}
+          {% set secondary_external = true %}
+        {% else %}
+          {% set secondary_href = '/#faq' | shopUrl %}
+        {% endif %}
+
+        <a href="{{ primary_href }}" class="vl-btn-hero vl-btn-hero-primary">
+          <svg class="vl-btn-hero__icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"></path>
+            <path d="M3 6h18"></path>
+            <path d="M16 10a4 4 0 0 1-8 0"></path>
+          </svg>
+          <span>{{ properties.cta_text | default('Browse products') }}</span>
+        </a>
+
+        <a href="{{ secondary_href }}" class="vl-btn-hero vl-btn-hero-secondary"{% if secondary_external %} target="_blank" rel="noopener noreferrer"{% endif %}>
+          <svg class="vl-btn-hero__icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+          <span>{{ secondary_label }}</span>
+        </a>
+      </div>
+    </div>
+
+    {% render_snippet "hero-dashboard-mock.njk" %}
+  </div>
+</section>

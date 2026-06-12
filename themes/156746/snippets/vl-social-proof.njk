@@ -1,0 +1,30 @@
+{% set ordersCount = (shop.products_sold | default(0)) + (shop.products_sold_offset | default(0)) %}
+{% set customersCount = (shop.total_customers | default(0)) + (shop.total_customers_offset | default(0)) %}
+{% set showOrders = show_products_sold | default(true) and ordersCount > 0 %}
+{% set showCustomers = show_total_customers | default(true) and customersCount > 0 %}
+{% set showRating = show_feedback_rating | default(true) and shop.average_rating and (shop.total_feedbacks | default(0)) > 0 %}
+{% set hasProof = showOrders or showCustomers or showRating %}
+
+{% if hasProof %}
+<div class="vl-social-proof {{ variant | default('') }}" aria-label="Store statistics">
+  {% if showOrders %}
+  <span class="vl-social-proof-item">
+    <strong>{{ ordersCount }}</strong>
+    orders delivered
+  </span>
+  {% endif %}
+  {% if showCustomers %}
+  <span class="vl-social-proof-item">
+    <strong>{{ customersCount }}</strong>
+    happy customers
+  </span>
+  {% endif %}
+  {% if showRating %}
+  <span class="vl-social-proof-item vl-social-proof-item--rating">
+    <strong>{{ shop.average_rating }}</strong>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+    from verified buyers
+  </span>
+  {% endif %}
+</div>
+{% endif %}

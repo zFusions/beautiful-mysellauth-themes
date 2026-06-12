@@ -1,0 +1,23 @@
+<section class="container py-20 component" data-component-id="{{ componentId }}">
+  <div class="text-center mb-5">
+    {% if properties.badge_text %}
+      <div class="hero-badge-modern mx-auto mb-3">{{ properties.badge_text | renderString }}</div>
+    {% endif %}
+    <h2>{{ properties.title | renderString }}</h2>
+    {% if properties.subtitle %}<p class="text-muted">{{ properties.subtitle | renderString }}</p>{% endif %}
+  </div>
+  <div class="row g-4">
+    <div class="col-12 col-md-6">
+      <div class="card h-100 p-3">
+        {% if properties.before_image %}<img src="{{ properties.before_image | imageUrl }}" class="img-fluid rounded" alt="Before">{% endif %}
+        <p class="mt-3 mb-0 text-center">{{ properties.label_before | renderString }}</p>
+      </div>
+    </div>
+    <div class="col-12 col-md-6">
+      <div class="card h-100 p-3">
+        {% if properties.after_image %}<img src="{{ properties.after_image | imageUrl }}" class="img-fluid rounded" alt="After">{% endif %}
+        <p class="mt-3 mb-0 text-center">{{ properties.label_after | renderString }}</p>
+      </div>
+    </div>
+  </div>
+</section>

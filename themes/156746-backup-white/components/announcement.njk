@@ -1,0 +1,79 @@
+<div class="announcement-modern" style="{{ '' if global.components.announcement.text else 'display: none;' }}" data-component-id="announcement">
+  <div class="announcement-container">
+    <div class="announcement-content">
+      <span class="announcement-dot"></span>
+      <span class="announcement-text">{{ global.components.announcement.text | renderString }}</span>
+      {% if global.components.announcement.link %}
+      <a href="{{ global.components.announcement.link }}" class="announcement-link">
+        {% if global.components.announcement.link_text %}
+        {{ global.components.announcement.link_text | renderString }}
+        {% else %}
+        Learn more →
+        {% endif %}
+      </a>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+<style>
+.announcement-modern {
+    background: transparent;
+    padding: 8px 0 0;
+    position: relative;
+    z-index: 1070;
+    width: 100%;
+}
+
+.announcement-container {
+    max-width: min(1100px, calc(94vw - 32px));
+    margin: 0 auto;
+    padding: 0 16px;
+    display: flex;
+    justify-content: center;
+}
+
+.announcement-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+}
+
+.announcement-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--blue-primary);
+    flex-shrink: 0;
+    animation: dotPulse 2s ease-in-out infinite;
+}
+
+.announcement-text {
+    letter-spacing: 0.01em;
+}
+
+.announcement-link {
+    color: var(--blue-primary);
+    text-decoration: none;
+    font-weight: 600;
+    transition: opacity 0.2s ease;
+    margin-left: 4px;
+}
+
+.announcement-link:hover {
+    color: var(--blue-primary);
+    opacity: 0.75;
+}
+
+@media (max-width: 768px) {
+    .announcement-content {
+        font-size: 0.72rem;
+        text-align: center;
+        flex-wrap: wrap;
+    }
+}
+</style>

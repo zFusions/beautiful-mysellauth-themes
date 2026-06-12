@@ -1,0 +1,452 @@
+<section id="faq" class="ps-section component faq-modern-red" data-component-id="{{ componentId }}">
+  <div class="container">
+    <div class="faq-layout">
+      <aside class="faq-aside" data-reveal>
+        <header class="faq-aside-head">
+          <h2 class="faq-aside-title">Got questions?<br>We've got answers.</h2>
+          <div class="faq-aside-brand">
+            <span class="ps-brand-icon" aria-hidden="true">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg>
+            </span>
+            <span class="ps-brand-text">Support</span>
+          </div>
+        </header>
+        <p class="faq-aside-sub">
+          Everything you need to know before you buy. Can't find it? We're one message away.
+        </p>
+
+        <div class="faq-help-card">
+          <div class="faq-help-top">
+            <div class="faq-help-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"></path></svg>
+            </div>
+            <div>
+              <div class="faq-help-title">Still have questions?</div>
+              <div class="faq-help-text">Our team replies around the clock.</div>
+            </div>
+          </div>
+          {% if shop.discord_url %}
+          <a href="{{ shop.discord_url }}" target="_blank" rel="noopener" class="faq-help-btn">Chat with us</a>
+          {% else %}
+          <a href="{{ '/feedback' | shopUrl }}" class="faq-help-btn">Contact support</a>
+          {% endif %}
+        </div>
+      </aside>
+
+      <div class="faq-main">
+      <div class="faq-accordion-red" id="faq-accordion" data-reveal-group>
+        {% for item in properties.items %}
+        {% set faqId = componentId ~ '-' ~ loop.index %}
+        {% set answerText = item.answer | renderString %}
+        {% if shop.discord_url %}
+          {% set discordAnchor = '<a href="' ~ shop.discord_url ~ '" target="_blank" rel="noopener" class="faq-inline-link">Discord</a>' %}
+          {% set answerText = answerText | replace('__DISCORD__', discordAnchor) %}
+        {% endif %}
+        {% if shop.telegram_url %}
+          {% set telegramAnchor = '<a href="' ~ shop.telegram_url ~ '" target="_blank" rel="noopener" class="faq-inline-link">Telegram</a>' %}
+          {% set answerText = answerText | replace('__TELEGRAM__', telegramAnchor) %}
+        {% endif %}
+        <div class="faq-card-red" data-reveal>
+          <button
+            type="button"
+            class="faq-header-red collapsed"
+            id="faq-btn-{{ faqId }}"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapse-{{ faqId }}"
+            aria-expanded="false"
+            aria-controls="collapse-{{ faqId }}"
+          >
+            <div class="faq-q-icon" aria-hidden="true">
+                <span class="q-mark">?</span>
+              </div>
+              <span class="faq-q-text">{{ item.question | renderString }}</span>
+            <div class="faq-chevron" aria-hidden="true">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="18 15 12 9 6 15"></polyline>
+              </svg>
+            </div>
+          </button>
+
+          <div id="collapse-{{ faqId }}" class="collapse" data-bs-parent="#faq-accordion" role="region" aria-labelledby="faq-btn-{{ faqId }}">
+            <div class="faq-content-red">
+              <div class="faq-content-inner">
+                {{ answerText | safe }}
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.faq-modern-red {
+  padding-top: clamp(56px, 7vw, 96px);
+  padding-bottom: clamp(72px, 8vw, 110px);
+  background: transparent;
+}
+
+.faq-layout {
+  display: grid;
+  grid-template-columns: minmax(300px, 400px) minmax(0, 1fr);
+  gap: clamp(48px, 6vw, 88px);
+  align-items: start;
+  width: 100%;
+}
+
+.faq-aside,
+.faq-main {
+  min-width: 0;
+}
+
+.faq-aside {
+  position: sticky;
+  top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.faq-aside-head {
+  margin: 0 0 1rem;
+  padding: 0;
+}
+
+.faq-aside-title {
+  margin: 0 0 0.75rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3.2vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: var(--produce-hero-color, #0A0B10);
+  text-align: left;
+}
+
+.faq-aside-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+}
+
+.faq-aside-brand .ps-brand-text {
+  font-size: clamp(1.75rem, 3.2vw, 2.5rem);
+}
+
+.faq-aside-sub {
+  color: var(--produce-body-color, #626262);
+  font-size: var(--produce-body-size, 16px);
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: -0.3px;
+  margin: 0 0 1.5rem;
+  max-width: 340px;
+  text-align: left;
+}
+
+.faq-help-card {
+  position: relative;
+  z-index: 0;
+  background: transparent;
+  border: none;
+  border-radius: 24px;
+  padding: 24px;
+  width: 100%;
+  max-width: 340px;
+  margin: 0;
+}
+
+.faq-help-card::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  background: #fafafa;
+  border-radius: 30px;
+  z-index: 0;
+}
+
+.faq-help-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #ffffff;
+  border-radius: 24px;
+  z-index: 1;
+  pointer-events: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+.faq-help-card > * {
+  position: relative;
+  z-index: 2;
+}
+
+.faq-help-top {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+}
+
+.faq-help-icon {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  border-radius: 14px;
+  background: rgba(27, 68, 254, 0.08);
+  color: var(--blue-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.faq-help-title {
+  font-weight: 700;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  letter-spacing: -0.02em;
+}
+
+.faq-help-text {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  margin-top: 2px;
+}
+
+.faq-help-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background: var(--blue-primary);
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 12px 18px;
+  border-radius: 12px;
+  text-decoration: none;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 4px 14px rgba(27, 68, 254, 0.22);
+}
+
+.faq-help-btn:hover {
+  background: #1640e8;
+  color: #fff;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(27, 68, 254, 0.28);
+}
+
+.faq-help-btn:focus-visible {
+  outline: 2px solid var(--blue-primary);
+  outline-offset: 2px;
+}
+
+.faq-main {
+  padding-top: 0;
+}
+
+.faq-accordion-red {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  margin: 0;
+  padding: 6px 0;
+}
+
+.faq-card-red {
+  position: relative;
+  z-index: 0;
+  background: transparent;
+  border: none;
+  border-radius: 20px;
+  overflow: visible;
+  width: 100%;
+  margin: 0;
+}
+
+.faq-card-red::before {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  background: #fafafa;
+  border-radius: 25px;
+  z-index: 0;
+  transition: background 0.2s ease;
+}
+
+.faq-card-red::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #ffffff;
+  border-radius: 20px;
+  z-index: 1;
+  pointer-events: none;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+.faq-card-red > * {
+  position: relative;
+  z-index: 2;
+}
+
+.faq-card-red:has(.faq-header-red:not(.collapsed))::before {
+  background: #f8f8f8;
+}
+
+.faq-header-red {
+  width: 100%;
+  padding: 20px 22px;
+  background: transparent;
+  border: none;
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr) 20px;
+  align-items: center;
+  column-gap: 14px;
+  cursor: pointer;
+  color: var(--text-primary);
+  text-align: left;
+}
+
+.faq-header-red:focus-visible {
+  outline: 2px solid var(--blue-primary);
+  outline-offset: -2px;
+  border-radius: 20px;
+  z-index: 3;
+}
+
+.faq-q-icon {
+  width: 26px;
+  height: 26px;
+  background: var(--blue-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(27, 68, 254, 0.2);
+}
+
+.q-mark {
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.82rem;
+  line-height: 1;
+}
+
+.faq-q-text {
+  font-weight: 600;
+  font-size: var(--produce-body-size, 16px);
+  line-height: 1.35;
+  letter-spacing: -0.3px;
+  color: var(--produce-hero-color, #0A0B10);
+  min-width: 0;
+}
+
+.faq-chevron {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #a0a0a0;
+  transition: transform 0.25s ease, color 0.2s ease;
+  opacity: 0.7;
+}
+
+.faq-header-red:not(.collapsed) .faq-q-text { color: var(--blue-primary); }
+
+.faq-header-red:not(.collapsed) .faq-chevron {
+  transform: rotate(0deg);
+  color: var(--blue-primary);
+  opacity: 1;
+}
+
+.faq-header-red.collapsed .faq-chevron { transform: rotate(180deg); }
+
+.faq-content-red {
+  color: var(--produce-body-color, #626262);
+  font-size: var(--produce-body-size, 16px);
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: -0.3px;
+  overflow: hidden;
+  border-radius: 0 0 20px 20px;
+}
+
+.faq-content-inner {
+  padding: 0 22px 22px;
+  padding-left: calc(22px + 26px + 14px);
+}
+
+.faq-inline-link,
+.faq-content-inner a {
+  color: var(--blue-primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.faq-inline-link:hover,
+.faq-content-inner a:hover {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.faq-inline-link:focus-visible,
+.faq-content-inner a:focus-visible {
+  outline: 2px solid var(--blue-primary);
+  outline-offset: 2px;
+}
+
+@media (max-width: 860px) {
+  .faq-layout {
+    grid-template-columns: 1fr;
+    gap: 36px;
+  }
+
+  .faq-aside {
+    position: static;
+    align-items: center;
+  }
+
+  .faq-aside-head,
+  .faq-aside-sub,
+  .faq-help-card {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .faq-aside-title { text-align: center; }
+
+  .faq-aside-brand { justify-content: center; }
+
+  .faq-main { width: 100%; }
+}
+
+@media (max-width: 575px) {
+  .faq-header-red {
+    padding: 18px 18px;
+    grid-template-columns: 24px minmax(0, 1fr) 18px;
+    column-gap: 12px;
+  }
+
+  .faq-q-icon { width: 24px; height: 24px; }
+
+  .faq-content-inner {
+    padding: 0 18px 18px;
+    padding-left: calc(18px + 24px + 12px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-card-red::before,
+  .faq-chevron,
+  .faq-help-btn { transition: none; }
+}
+</style>

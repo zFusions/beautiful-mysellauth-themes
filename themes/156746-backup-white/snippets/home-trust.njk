@@ -1,0 +1,84 @@
+<section class="home-trust component">
+  <div class="container home-trust-container">
+    <div class="home-trust-bar" data-reveal>
+      <div class="home-trust-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue-primary)" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        <span><strong>Instant</strong> automated delivery</span>
+      </div>
+      <div class="home-trust-divider"></div>
+      <div class="home-trust-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue-primary)" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span><strong>Secure</strong> encrypted payments</span>
+      </div>
+      <div class="home-trust-divider"></div>
+      <div class="home-trust-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue-primary)" stroke-width="2"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg>
+        <span><strong>24/7</strong> live support</span>
+      </div>
+      <div class="home-trust-divider"></div>
+      <div class="home-trust-item">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="var(--blue-primary)"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        <span><strong>4.9★</strong> buyer rating</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .home-trust {
+    padding: 0 0 clamp(48px, 6vw, 72px);
+    margin-top: -16px;
+    position: relative;
+    z-index: 2;
+  }
+  .home-trust-container {
+    display: flex;
+    justify-content: center;
+  }
+  .home-trust-bar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0;
+    width: auto;
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 12px 20px;
+    background: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 999px;
+  }
+  .home-trust-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 16px;
+    font-size: var(--produce-body-size, 16px);
+    font-weight: 500;
+    line-height: var(--produce-body-lh, 24px);
+    letter-spacing: var(--produce-body-ls, -0.3px);
+    color: var(--produce-body-color, #626262);
+    white-space: nowrap;
+  }
+  .home-trust-item strong {
+    color: var(--produce-hero-color, #0A0B10);
+    font-weight: 600;
+  }
+  .home-trust-divider {
+    width: 1px;
+    height: 20px;
+    background: var(--border-default);
+    flex-shrink: 0;
+  }
+  @media (max-width: 767px) {
+    .home-trust-bar {
+      border-radius: 20px;
+      flex-direction: column;
+      gap: 10px;
+      padding: 16px 20px;
+    }
+    .home-trust-divider { display: none; }
+    .home-trust-item { padding: 2px 0; }
+  }
+</style>

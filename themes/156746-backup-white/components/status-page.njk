@@ -1,0 +1,25 @@
+<div class="container component" data-component-id="{{ componentId }}">
+  <section class="py-5-nav">
+    <div class="section-title">
+      <h1>Product Status</h1>
+    </div>
+    <div class="row">
+      <div class="status-cards">
+        {% for product in sortedItems %}
+          {% if product.type == 'group' %}
+            <div class="status-group">
+              <h2>{{ product.name }}</h2>
+              <div class="status-cards">
+                {% for product in product.products %}
+                  {% render_snippet "status-card.njk", product=product %}
+                {% endfor %}
+              </div>
+            </div>
+          {% elif not product.group_id %}
+            {% render_snippet "status-card.njk", product=product %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+</div>

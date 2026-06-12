@@ -1,0 +1,1108 @@
+{
+    "global": {
+        "properties": {
+            "theme_color": {
+                "label": "Theme Color",
+                "type": "color"
+            },
+            "primary_background_color": {
+                "label": "Primary Background Color",
+                "type": "color"
+            },
+            "secondary_background_color": {
+                "label": "Secondary Background Color",
+                "type": "color"
+            },
+            "primary_border_color": {
+                "label": "Primary Border Color",
+                "type": "color"
+            },
+            "font": {
+                "label": "Font",
+                "type": "font",
+                "default": "Poppins"
+            },
+            "snow": {
+                "label": "Snow Effect",
+                "type": "toggle",
+                "default": false
+            },
+            "snow_color": {
+                "label": "Snowflake Color",
+                "type": "color",
+                "default": "#ffffff"
+            }
+        }
+    },
+    "components": {
+        "announcement": {
+            "label": "Announcement",
+            "global": true,
+            "order": 0,
+            "properties": {
+                "text": {
+                    "label": "Text",
+                    "type": "text"
+                },
+                "link": {
+                    "label": "Link",
+                    "type": "text"
+                },
+                "link_text": {
+                    "label": "Link Text",
+                    "type": "text"
+                }
+            }
+        },
+        "navbar": {
+            "label": "Navbar",
+            "global": true,
+            "order": 1,
+            "properties": {
+              "show_shop_name": {
+                "label": "Show Shop Name",
+                "help": "Defined in Shop Settings",
+                "type": "toggle",
+                "default": true
+              },
+              "show_logo": {
+                "label": "Show Logo",
+                "help": "Defined in Shop Settings",
+                "type": "toggle",
+                "default": true
+              },
+              "hide_currency_selector": {
+                "label": "Hide Currency Selector",
+                "type": "toggle",
+                "default": false
+              },
+              "hide_customer_dashboard": {
+                "label": "Hide Customer Dashboard",
+                "type": "toggle",
+                "default": false
+              },
+              "hide_cart": {
+                "label": "Hide Cart",
+                "type": "toggle",
+                "default": false
+              },
+              "left_links": {
+                "label": "Left Links",
+                "type": "list",
+                "maxItems": 10,
+                "properties": {
+                  "text": {
+                    "label": "Text",
+                    "type": "text",
+                    "default": "New Link"
+                  },
+                  "link": {
+                    "label": "Link",
+                    "type": "text",
+                    "default": "#"
+                  },
+                  "icon": {
+                    "label": "Icon",
+                    "type": "icon",
+                    "default": "fas fa-home"
+                  },
+                  "new_tab": {
+                    "label": "Open in New Tab",
+                    "type": "toggle",
+                    "default": false
+                  },
+                  "shape": {
+                    "label": "Shape",
+                    "type": "select",
+                    "options": [
+                      "regular",
+                      "button"
+                    ],
+                    "default": "regular"
+                  }
+                },
+                "default": [
+                  {
+                    "text": "Home",
+                    "link": "/",
+                    "icon": "fas fa-home",
+                    "new_tab": false
+                  },
+                  {
+                    "text": "Feedback",
+                    "link": "/feedback",
+                    "icon": "fas fa-star",
+                    "new_tab": false
+                  },
+                  {
+                    "text": "Terms of Service",
+                    "link": "/tos",
+                    "icon": "fas fa-file-contract",
+                    "new_tab": false
+                  }
+                ]
+              },
+              "right_links": {
+                "label": "Right Links",
+                "type": "list",
+                "maxItems": 10,
+                "properties": {
+                  "text": {
+                    "label": "Text",
+                    "type": "text",
+                    "default": "New Link"
+                  },
+                  "link": {
+                    "label": "Link",
+                    "type": "text",
+                    "default": "#"
+                  },
+                  "new_tab": {
+                    "label": "Open in New Tab",
+                    "type": "toggle",
+                    "default": false
+                  },
+                  "shape": {
+                    "label": "Shape",
+                    "type": "select",
+                    "options": [
+                      "regular",
+                      "button"
+                    ],
+                    "default": "regular"
+                  }
+                },
+                "default": [
+                  {
+                    "text": "Products",
+                    "link": "/#products",
+                    "new_tab": false
+                  }
+                ]
+              }
+            }
+        },
+        "hero": {
+            "label": "Hero",
+            "templates": ["shop"],
+            "properties": {
+                "title": {
+                    "label": "Title",
+                    "type": "text",
+                    "default": "Welcome to our shop!"
+                },
+                "subtitle": {
+                    "label": "Subtitle",
+                    "type": "text"
+                },
+                "badge_text": {
+                    "label": "Badge Text",
+                    "type": "text",
+                    "default": "New stock arrived 🚚"
+                  },
+                "cta_text": {
+                    "label": "1.Button Text",
+                    "type": "text",
+                    "default": "Explore Products"
+                },
+                "cta": {
+                    "label": "1.Button Link",
+                    "type": "text",
+                    "default": "/#products"
+                },
+                "cta_text_2": {
+                    "label": "2.Button Text",
+                    "type": "text"                },
+                "cta_2": {
+                    "label": "2.Button Link",
+                    "type": "text"                },
+                "show_searchbar": {
+                    "label": "Show Searchbar",
+                    "type": "toggle",
+                    "default": true
+                },
+                "show_support": {
+                    "label": "Show Support 24/7",
+                    "type": "toggle",
+                    "default": true
+                },
+                "show_feedback_rating": {
+                    "label": "Show Feedback Rating",
+                    "type": "toggle",
+                    "default": true
+                },
+                "show_products_sold": {
+                    "label": "Show Products Sold",
+                    "type": "toggle",
+                    "default": true
+                },
+                "show_total_customers": {
+                    "label": "Show Total Customers",
+                    "type": "toggle",
+                    "default": true
+                },
+                "alignment": {
+                    "label": "Alignment",
+                    "type": "select",
+                    "options": [
+                        "left",
+                        "center",
+                        "right"
+                    ],
+                    "default": "center"
+                },
+                "height": {
+                    "label": "Height",
+                    "type": "select",
+                    "options": [
+                        "short",
+                        "medium",
+                        "tall"
+                    ],
+                    "default": "tall"
+                },
+                "background_image": {
+                    "label": "Background Image",
+                    "type": "image"
+                },
+                "side_image": {
+                    "label": "Side Image",
+                    "type": "image",
+                    "maxImages": 1
+                }
+            }
+        },
+        "before-after": {
+            "label": "Before / After Slider",
+            "global": false,
+            "order": 1,
+            "properties": {
+                "title": {
+                    "label": "Title",
+                    "type": "text",
+                    "default": "Before & After Showcase"
+                },
+                "subtitle": {
+                    "label": "Subtitle",
+                    "type": "text",
+                    "default": "Compare the difference between two images"
+                },
+                "badge_text": {
+                    "label": "Badge Text",
+                    "type": "text",
+                    "default": "New stock arrived 🚚"
+                },
+                "before_image": {
+                    "label": "Before Image",
+                    "type": "image",
+                    "default": "https://images.unsplash.com/photo-1595433707802-6b2626ef1c2c?w=1200&h=800&fit=crop"
+                },
+                "after_image": {
+                    "label": "After Image",
+                    "type": "image",
+                    "default": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&h=800&fit=crop"
+                },
+                "label_before": {
+                    "label": "Before Label",
+                    "type": "text"                },
+                "label_after": {
+                    "label": "After Label",
+                    "type": "text"                }
+            }
+        },
+        "join": {
+          "label": "Join",
+          "multiple": false,
+          "properties": {
+            "title": { "label": "CTA Title", "type": "text", "default": "Contact our support team" },
+            "text": { "label": "CTA Text", "type": "textarea", "default": "Need help or have questions? Our support team is active and ready to assist you." },
+            "button_text": { "label": "Button Text", "type": "text", "default": "Join Discord" },
+            "button_icon": { "label": "Button Icon", "type": "icon", "default": "fab fa-discord" },
+            "button_link": { "label": "Button Link", "type": "text", "default": "#" }
+          }
+        },
+        "tittle": {
+            "label": "Tittle",
+            "multiple": true,
+            "properties": {
+                "text": {
+                    "label": "Text",
+                    "type": "text",
+                    "default": "TEXT&GAME"
+                }
+            }
+        },
+        "reviews": {
+          "label": "Reviews",
+          "multiple": false,
+          "properties": {
+            "heading": {
+              "label": "Heading",
+              "type": "text",
+              "default": "What people say about Your Brand"
+            },
+            "subheading": {
+              "label": "Subheading",
+              "type": "text",
+              "default": "Join our community at your-link-here"
+            },
+            "rows": {
+              "label": "Rows",
+              "type": "list",
+              "maxItems": 2,
+              "properties": {
+                "direction": {
+                  "label": "Scroll Direction",
+                  "type": "select",
+                  "options": ["left", "right"],
+                  "default": "left"
+                },
+                "reviews": {
+                  "label": "Review Cards",
+                  "type": "list",
+                  "maxItems": 10,
+                  "properties": {
+                    "name": {
+                      "label": "Name",
+                      "type": "text",
+                      "default": "John Doe"
+                    },
+                    "role": {
+                      "label": "Role / Description",
+                      "type": "text",
+                      "default": "Customer"
+                    },
+                    "text": {
+                      "label": "Review Text",
+                      "type": "textarea",
+                      "default": "This product is amazing!"
+                    },
+                    "rating": {
+                      "label": "Rating (Stars)",
+                      "type": "number",
+                      "default": 5,
+                      "min": 1,
+                      "max": 5
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "plants": {
+          "label": "Pricing Plans",
+          "multiple": false,
+          "properties": {
+            "title": {
+              "label": "Title",
+              "type": "text",
+              "default": "Shop"
+            },
+            "subtitle": {
+              "label": "Subtitle",
+              "type": "text"
+            },
+            "badge_text": {
+              "label": "Badge Text",
+              "type": "text",
+              "default": "New stock arrived 🚚"
+            },
+            "silver_visible": {
+              "label": "Show Silver Plan",
+              "type": "toggle",
+              "default": true
+            },
+            "silver_title": { "label": "Silver Plan Name", "type": "text", "default": "Silver Plan" },
+
+            "silver_features": {
+              "label": "Silver Features",
+              "type": "list",
+              "maxItems": 50,
+              "properties": {
+                "type": {
+                  "label": "Feature Type (+ or -)",
+                  "type": "select",
+                  "options": ["+", "-"],
+                  "default": "+"
+                },
+                "text": {
+                  "label": "Feature Text",
+                  "type": "text",
+                  "default": "Access to core features"
+                }
+              },
+              "default": [
+                { "type": "+", "text": "Access to core features" },
+                { "type": "+", "text": "Standard performance" },
+                { "type": "-", "text": "Priority support" }
+              ]
+            },
+
+            "silver_price": { "label": "Silver Plan Price", "type": "text", "default": "$50 / month" },
+            "silver_button_text": { "label": "Silver Button Text", "type": "text", "default": "Buy Now" },
+            "silver_button_link": { "label": "Silver Button Link", "type": "text", "default": "#" },
+            "silver_background": { "label": "Silver Background Image", "type": "image" },
+            "silver_border_color": { "label": "Silver Border Color", "type": "text", "default": "#9599a2" },
+            "silver_icon": { "label": "Silver Icon URL", "type": "text", "default": "https://i.ibb.co/Wp0QMZHW/silver.webp" },
+
+
+            "gold_visible": {
+              "label": "Show Gold Plan",
+              "type": "toggle",
+              "default": true
+            },
+            "gold_title": { "label": "Gold Plan Name", "type": "text", "default": "Gold Plan" },
+
+            "gold_features": {
+              "label": "Gold Features",
+              "type": "list",
+              "maxItems": 50,
+              "properties": {
+                "type": {
+                  "label": "Feature Type (+ or -)",
+                  "type": "select",
+                  "options": ["+", "-"],
+                  "default": "+"
+                },
+                "text": {
+                  "label": "Feature Text",
+                  "type": "text",
+                  "default": "Everything in Silver"
+                }
+              },
+              "default": [
+                { "type": "+", "text": "Everything in Silver" },
+                { "type": "+", "text": "Better performance" },
+                { "type": "-", "text": "VIP support" }
+              ]
+            },
+
+            "gold_price": { "label": "Gold Plan Price", "type": "text", "default": "$80 / month" },
+            "gold_button_text": { "label": "Gold Button Text", "type": "text", "default": "Buy Now" },
+            "gold_button_link": { "label": "Gold Button Link", "type": "text", "default": "#" },
+            "gold_background": { "label": "Gold Background Image", "type": "image" },
+            "gold_border_color": { "label": "Gold Border Color", "type": "text", "default": "#facc15" },
+            "gold_icon": { "label": "Gold Icon URL", "type": "text", "default": "https://i.ibb.co/whJGgVCK/gold.webp" },
+
+
+            "diamond_visible": {
+              "label": "Show Diamond Plan",
+              "type": "toggle",
+              "default": true
+            },
+            "diamond_title": { "label": "Diamond Plan Name", "type": "text", "default": "Diamond Plan" },
+
+            "diamond_features": {
+              "label": "Diamond Features",
+              "type": "list",
+              "maxItems": 50,
+              "properties": {
+                "type": {
+                  "label": "Feature Type (+ or -)",
+                  "type": "select",
+                  "options": ["+", "-"],
+                  "default": "+"
+                },
+                "text": {
+                  "label": "Feature Text",
+                  "type": "text",
+                  "default": "Everything in Gold"
+                }
+              },
+              "default": [
+                { "type": "+", "text": "Everything in Gold" },
+                { "type": "+", "text": "Ultra performance" },
+                { "type": "+", "text": "Premium VIP Support" }
+              ]
+            },
+
+            "diamond_price": { "label": "Diamond Plan Price", "type": "text", "default": "$120 / month" },
+            "diamond_button_text": { "label": "Diamond Button Text", "type": "text", "default": "Buy Now" },
+            "diamond_button_link": { "label": "Diamond Button Link", "type": "text", "default": "#" },
+            "diamond_background": { "label": "Diamond Background Image", "type": "image" },
+            "diamond_border_color": { "label": "Diamond Border Color", "type": "text", "default": "#06b6d4" },
+            "diamond_icon": { "label": "Diamond Icon URL", "type": "text", "default": "https://i.ibb.co/VpmvvmfM/diamond.webp" }
+          }
+        },
+        "payment-method": {
+          "label": "Payment Methods",
+          "multiple": false,
+          "order": 10,
+          "properties": {
+            "title": {
+              "label": "Main Title",
+              "type": "text",
+              "default": "Secure Payment Methods"
+            },
+            "subtitle": {
+              "label": "Subtitle",
+              "type": "text",
+              "default": "We use industry-leading security standards to protect your transactions"
+            },
+            "show_bitcoin": {
+              "label": "Show Bitcoin",
+              "type": "toggle",
+              "default": true
+            },
+            "show_litecoin": {
+              "label": "Show Litecoin",
+              "type": "toggle",
+              "default": true
+            },
+            "show_stripe": {
+              "label": "Show Stripe",
+              "type": "toggle",
+              "default": true
+            },
+            "show_paypal": {
+              "label": "Show PayPal",
+              "type": "toggle",
+              "default": true
+            }
+          }
+        },
+        "socials": {
+            "label": "Socials",
+            "multiple": true,
+            "properties": {
+                "title": {
+                    "label": "Title",
+                    "type": "text",
+                    "default": "Follow our Socials"
+                },
+                "subtitle": {
+                    "label": "Subtitle",
+                    "type": "text"
+                },
+                "image": {
+                    "label": "Image",
+                    "type": "image"
+                }
+            }
+        },
+        "products": {
+            "label": "Products",
+            "multiple": true,
+            "properties": {
+                "title": {
+                    "label": "Title",
+                    "type": "text",
+                    "default": "Shop"
+                },
+                "subtitle": {
+                    "label": "Subtitle",
+                    "type": "text"
+                },
+                "badge_text": {
+                    "label": "Badge Text",
+                    "type": "text",
+                    "default": "New stock arrived 🚚"
+                },
+                "ids": {
+                    "label": "Handpick Products and Groups",
+                    "type": "products_and_groups",
+                    "default": []
+                }
+            }
+        },
+        "features": {
+            "label": "Features",
+            "multiple": true,
+            "properties": {
+                "title": {
+                    "label": "Title",
+                    "type": "text",
+                    "default": "Features"
+                },
+                "subtitle": {
+                    "label": "Subtitle",
+                    "type": "text"
+                },
+                "items_per_row": {
+                    "label": "Items per row",
+                    "type": "select",
+                    "options": [
+                        1,
+                        2,
+                        3,
+                        4
+                    ],
+                    "default": 3
+                },
+                "features": {
+                    "label": "Items",
+                    "type": "list",
+                    "maxItems": 10,
+                    "properties": {
+                        "title": {
+                            "label": "Title",
+                            "type": "text",
+                            "default": "New Feature"
+                        },
+                        "description": {
+                            "label": "Text",
+                            "type": "textarea",
+                            "default": "This is a feature."
+                        },
+                        "icon": {
+                            "label": "Icon",
+                            "type": "icon",
+                            "default": "fas fa-star"
+                        }
+                    },
+                    "default": [
+                        {
+                            "title": "Feature 1",
+                            "description": "This is a feature.",
+                            "icon": "fas fa-star"
+                        }
+                    ]
+                }
+            }
+        },
+        "feedbacks": {
+            "label": "Feedbacks",
+            "multiple": true,
+            "properties": {
+                "title": {
+                    "label": "Title",
+                    "type": "text",
+                    "default": "Reviews"
+                },
+                "subtitle": {
+                    "label": "Subtitle",
+                    "type": "text"
+                },
+                "amount": {
+                    "label": "Amount",
+                    "type": "number",
+                    "default": 4
+                }
+            }
+        },
+        "text-block": {
+            "label": "Text",
+            "multiple": true,
+            "properties": {
+                "title": {
+                    "label": "Title",
+                    "type": "text",
+                    "default": "Text Block"
+                },
+                "subtitle": {
+                    "label": "Subtitle",
+                    "type": "text"
+                },
+                "text": {
+                    "label": "Text",
+                    "type": "textarea",
+                    "default": "This is a text block."
+                },
+                "cta": {
+                    "label": "Button Link",
+                    "type": "text"
+                },
+                "cta_text": {
+                    "label": "Button Text",
+                    "type": "text"
+                },
+                "alignment": {
+                    "label": "Alignment",
+                    "type": "select",
+                    "options": [
+                        "left",
+                        "center",
+                        "right"
+                    ],
+                    "default": "left"
+                },
+                "background": {
+                    "label": "Background",
+                    "type": "select",
+                    "options": [
+                        "primary",
+                        "secondary"
+                    ],
+                    "default": "primary"
+                }
+            }
+        },
+        "text-image-block": {
+          "label": "Text & Image",
+          "multiple": true,
+          "properties": {
+            "title": {
+              "label": "Title",
+              "type": "text",
+              "default": "Text & Image Block"
+            },
+            "badge_text": {
+              "label": "Badge Text",
+              "type": "text",
+              "default": "New stock arrived 🚚"
+            },
+            "subtitle": {
+              "label": "Subtitle",
+              "type": "text"
+            },
+            "text": {
+              "label": "Text",
+              "type": "textarea",
+              "default": "This is a text & image block."
+            },
+            "image": {
+              "label": "Image",
+              "type": "image"
+            },
+            "cta": {
+              "label": "Button Link",
+              "type": "text"
+            },
+            "cta_text": {
+              "label": "Button Text",
+              "type": "text"
+            },
+            "image_position": {
+              "label": "Image Position",
+              "type": "select",
+              "options": ["left", "right"],
+              "default": "right"
+            },
+            "alignment": {
+              "label": "Text Alignment",
+              "type": "select",
+              "options": ["left", "center", "right"],
+              "default": "left"
+            },
+            "background": {
+              "label": "Background",
+              "type": "select",
+              "options": ["primary", "secondary"],
+              "default": "primary"
+            },
+            "aspect_ratio": {
+              "label": "Aspect Ratio",
+              "type": "select",
+              "options": ["Default", "1/1", "4/3", "16/9"],
+              "default": "16/9"
+            },
+            "features": {
+              "label": "Features",
+              "type": "list",
+              "maxItems": 10,
+              "properties": {
+                "icon": {
+                  "label": "Icon",
+                  "type": "text",
+                  "default": "✔️"
+                },
+                "text": {
+                  "label": "Text",
+                  "type": "text",
+                  "default": "Feature"
+                }
+              }
+            }
+          }
+        },
+        "text-video-block": {
+            "label": "Text & Video",
+            "multiple": true,
+            "properties": {
+                "title": {
+                    "label": "Title",
+                    "type": "text",
+                    "default": "Text & Video Block"
+                },
+                "subtitle": {
+                    "label": "Subtitle",
+                    "type": "text"
+                },
+                "text": {
+                    "label": "Text",
+                    "type": "textarea",
+                    "default": "This is a text & video block."
+                },
+                "video_link": {
+                    "label": "YouTube Video Link",
+                    "type": "text"
+                },
+                "cta": {
+                    "label": "Button Link",
+                    "type": "text"
+                },
+                "cta_text": {
+                    "label": "Button Text",
+                    "type": "text"
+                },
+                "alignment": {
+                    "label": "Alignment",
+                    "type": "select",
+                    "options": [
+                        "left",
+                        "center",
+                        "right"
+                    ],
+                    "default": "left"
+                },
+                "background": {
+                    "label": "Background",
+                    "type": "select",
+                    "options": [
+                        "primary",
+                        "secondary"
+                    ],
+                    "default": "primary"
+                }
+            }
+        },
+        "3d-models": {
+            "label": "3D Models",
+            "multiple": true,
+            "properties": {
+              "title": {
+                "label": "Title",
+                "type": "text",
+                "default": "3D Model Showcase"
+              },
+              "subtitle": {
+                "label": "Subtitle",
+                "type": "text",
+                "default": "Check out this interactive 3D model"
+              },
+              "text": {
+                "label": "Description",
+                "type": "textarea",
+                "default": "This is a 3D model viewer block. You can describe the model here."
+              },
+              "model_src": {
+                "label": "3D Model URL (.glb)",
+                "type": "text",
+                "default": "https://raw.githubusercontent.com/Niece7/3dunmmy/main/tec-9_flame.glb"
+              },
+              "cta": {
+                "label": "Button Link",
+                "type": "text"
+              },
+              "cta_text": {
+                "label": "Button Text",
+                "type": "text"
+              },
+              "alignment": {
+                "label": "Text Alignment",
+                "type": "select",
+                "options": [
+                  "left",
+                  "center",
+                  "right"
+                ],
+                "default": "left"
+              },
+              "background": {
+                "label": "Background",
+                "type": "select",
+                "options": [
+                  "primary",
+                  "secondary"
+                ],
+                "default": "primary"
+              },
+              "aspect_ratio": {
+                "label": "Aspect Ratio",
+                "type": "select",
+                "options": [
+                  "Default",
+                  "1/1",
+                  "4/3",
+                  "16/9"
+                ],
+                "default": "16:9"
+              }
+            }
+        },
+        "image-gallery": {
+            "label": "Image Gallery",
+            "multiple": true,
+            "properties": {
+                "title": {
+                    "label": "Title",
+                    "type": "text",
+                    "default": "Gallery"
+                },
+                "subtitle": {
+                    "label": "Subtitle",
+                    "type": "text"
+                },
+                "items_per_row": {
+                    "label": "Items per row",
+                    "type": "select",
+                    "options": [
+                        1,
+                        2,
+                        3,
+                        4
+                    ],
+                    "default": 3
+                },
+                "aspect_ratio": {
+                    "label": "Aspect Ratio",
+                    "type": "select",
+                    "options": [
+                        "Default",
+                        "1/1",
+                        "4/3 ",
+                        "16/9"
+                    ],
+                    "default": "16:9"
+                },
+                "images": {
+                    "type": "image",
+                    "maxImages": 50,
+                    "default": []
+                }
+            }
+        },
+        "scroll-to-top": {
+          "label": "Scroll to Top Button",
+          "properties": {
+            "show": {
+              "type": "boolean",
+              "label": "Show Button",
+              "default": true
+            },
+            "color": {
+              "type": "color",
+              "label": "Button Color",
+              "default": "#0d6efd"
+            },
+            "icon": {
+              "type": "icon",
+              "label": "Icon",
+              "default": "fa-solid fa-arrow-up"
+            }
+          }
+        },
+        "faq": {
+            "label": "FAQ",
+            "multiple": true,
+            "properties": {
+                "title": {
+                    "label": "Title",
+                    "type": "text",
+                    "default": "FAQ"
+                },
+                "subtitle": {
+                    "label": "Subtitle",
+                    "type": "text"
+                },
+                "items": {
+                    "label": "Items",
+                    "type": "list",
+                    "maxItems": 10,
+                    "properties": {
+                        "question": {
+                            "label": "Question",
+                            "type": "text",
+                            "default": "New Question"
+                        },
+                        "answer": {
+                            "label": "Answer",
+                            "type": "textarea",
+                            "default": "New Answer"
+                        }
+                    },
+                    "default": [
+                        {
+                            "question": "What is this?",
+                            "answer": "This is a FAQ item."
+                        }
+                    ]
+                },
+                "background": {
+                    "label": "Background",
+                    "type": "select",
+                    "options": [
+                        "primary",
+                        "secondary"
+                    ],
+                    "default": "primary"
+                }
+            }
+        },
+        "footer": {
+            "label": "Footer",
+            "global": true,
+            "order": -1,
+            "properties": {
+                "show_shop_name": {
+                    "label": "Show Shop Name",
+                    "help": "Defined in Shop Settings",
+                    "type": "toggle",
+                    "default": true
+                },
+                "show_logo": {
+                    "label": "Show Logo",
+                    "help": "Defined in Shop Settings",
+                    "type": "toggle",
+                    "default": true
+                },
+                "show_socials": {
+                    "label": "Show Socials",
+                    "type": "toggle",
+                    "default": true
+                },
+                "links": {
+                    "label": "Links",
+                    "type": "list",
+                    "maxItems": 10,
+                    "properties": {
+                        "text": { "label": "Text", "type": "text", "default": "New Link" },
+                        "link": { "label": "Link", "type": "text", "default": "#" },
+                        "new_tab": { "label": "Open in New Tab", "type": "toggle", "default": false }
+                    },
+                    "default": [
+                        { "text": "Home", "link": "/", "new_tab": false },
+                        { "text": "Products", "link": "/#products", "new_tab": false },
+                        { "text": "Feedback", "link": "/feedback", "new_tab": false },
+                        { "text": "Terms of Service", "link": "/tos", "new_tab": false }
+                    ]
+                },
+                "copyright_text": {
+                    "label": "Copyright Text",
+                    "type": "text",
+                    "default": "© 2025 SuperCheat II. All rights reserved."
+                }
+            }
+        },
+        "product-page": {
+            "label": "Product Page",
+            "page": true,
+            "templates": ["product"],
+            "properties": {
+                "hide_add_to_cart": {
+                    "label": "Hide Add to Cart Button",
+                    "type": "toggle",
+                    "default": false
+                },
+                "hide_buy_now": {
+                    "label": "Hide Buy Now Button",
+                    "type": "toggle",
+                    "default": false
+                }
+            }
+        },
+        "feedback-page": {
+            "label": "Feedback Page",
+            "page": true,
+            "templates": ["feedback"],
+            "properties": {}
+        },
+        "terms-page": {
+            "label": "Terms Page",
+            "page": true,
+            "templates": ["terms"],
+            "properties": {}
+        }
+    }
+}

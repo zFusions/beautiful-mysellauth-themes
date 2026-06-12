@@ -1,0 +1,12 @@
+<section class="vl-cta-arc component" data-scroll-section>
+  <div class="container vl-cta-arc-inner" data-reveal>
+    <h2 class="vl-cta-arc-title ps-title">Get your order in seconds</h2>
+    <p class="vl-cta-arc-sub ps-subtitle">Scripts, software, licenses and more — web store or Discord shop. Secure checkout, automatic delivery.</p>
+    <div class="vl-cta-arc-actions">
+      <a href="{{ '/#products' | shopUrl }}" class="vl-btn-primary vl-cta-arc-btn">Browse products</a>
+      {% if shop.discord_url %}
+      <a href="{{ shop.discord_url }}" target="_blank" rel="noopener" class="vl-btn-ghost vl-cta-arc-btn-ghost">Contact support</a>
+      {% endif %}
+    </div>
+  </div>
+</section>

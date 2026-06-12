@@ -1,0 +1,209 @@
+{
+    "templates": {
+        "shop": {
+            "layout": "master",
+            "components": {
+                "hero": {
+                    "type": "hero",
+                    "properties": {
+                        "title": "Welcome to {{ shop.name }}!",
+                        "subtitle": "{{ shop.description }}",
+                        "cta": null,
+                        "cta_text": null,
+                        "show_searchbar": true,
+                        "show_feedback_rating": true,
+                        "show_products_sold": true,
+                        "show_total_customers": true,
+                        "alignment": "center",
+                        "height": "medium",
+                        "background_image": null,
+                        "side_image": null
+                    }
+                },
+                "products": {
+                    "type": "products",
+                    "properties": {
+                        "title": "Shop",
+                        "subtitle": null
+                    }
+                },
+                "feedbacks": {
+                    "type": "feedbacks",
+                    "properties": {
+                        "title": "Reviews",
+                        "subtitle": null,
+                        "amount": 4
+                    }
+                },
+                "socials": {
+                    "type": "socials",
+                    "properties": {
+                        "title": "Follow our Socials",
+                        "subtitle": null
+                    }
+                }
+            },
+            "components_order": [
+                "hero",
+                "products",
+                "feedbacks",
+                "socials"
+            ]
+        },
+        "cart": {
+            "layout": "master",
+            "components": {
+                "cart-page": {
+                    "type": "cart-page",
+                    "properties": []
+                }
+            },
+            "components_order": [
+                "cart-page"
+            ]
+        },
+        "product": {
+            "layout": "master",
+            "components": {
+                "product-page": {
+                    "type": "product-page",
+                    "properties": {
+                        "hide_add_to_cart": false,
+                        "hide_buy_now": false
+                    }
+                }
+            },
+            "components_order": [
+                "product-page"
+            ]
+        },
+        "feedback": {
+            "layout": "master",
+            "components": {
+                "feedback-page": {
+                    "type": "feedback-page",
+                    "properties": []
+                }
+            },
+            "components_order": [
+                "feedback-page"
+            ]
+        },
+        "terms": {
+            "layout": "master",
+            "components": {
+                "terms-page": {
+                    "type": "terms-page",
+                    "properties": []
+                }
+            },
+            "components_order": [
+                "terms-page"
+            ]
+        },
+        "status": {
+            "layout": "master",
+            "components": {
+                "status-page": {
+                    "type": "status-page",
+                    "properties": []
+                }
+            },
+            "components_order": [
+                "status-page"
+            ]
+        },
+        "customer-dashboard": {
+            "layout": "master",
+            "components": {},
+            "components_order": []
+        },
+        "customer-invoices": {
+            "layout": "master",
+            "components": {},
+            "components_order": []
+        },
+        "customer-balance": {
+            "layout": "master",
+            "components": {},
+            "components_order": []
+        }
+    },
+    "global": {
+        "properties": {
+            "theme_color": "#6571FF",
+            "primary_background_color": "#0C1427",
+            "secondary_background_color": "#0A1122",
+            "primary_border_color": "#000F26",
+            "secondary_border_color": "#142238",
+            "font": "Poppins",
+            "snow": false,
+            "snow_color": "#ffffff"
+        },
+        "components": {
+            "announcement": {
+                "text": null,
+                "link": null,
+                "link_text": null
+            },
+            "navbar": {
+                "show_shop_name": true,
+                "show_logo": true,
+                "left_links": [
+                    {
+                        "text": "Home",
+                        "link": "\/",
+                        "shape": "regular"
+                    },
+                    {
+                        "text": "Products",
+                        "link": "\/#products",
+                        "shape": "regular"
+                    },
+                    {
+                        "text": "Status",
+                        "link": "\/status",
+                        "shape": "regular"
+                    },
+                    {
+                        "text": "Feedback",
+                        "link": "\/feedback",
+                        "shape": "regular"
+                    }
+                ],
+                "right_links": [],
+                "hide_currency_selector": false,
+                "hide_customer_dashboard": false,
+                "hide_cart": false
+            },
+            "footer": {
+                "show_shop_name": true,
+                "show_logo": false,
+                "show_socials": true,
+                "links": [
+                    {
+                        "text": "Home",
+                        "link": "\/"
+                    },
+                    {
+                        "text": "Products",
+                        "link": "\/#products"
+                    },
+                    {
+                        "text": "Feedback",
+                        "link": "\/feedback"
+                    },
+                    {
+                        "text": "Status",
+                        "link": "\/status",
+                        "shape": "regular"
+                    },
+                    {
+                        "text": "Terms of Service",
+                        "link": "\/terms"
+                    }
+                ]
+            }
+        }
+    }
+}

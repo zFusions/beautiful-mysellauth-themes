@@ -1,0 +1,165 @@
+<section id="reviews" class="ps-section vl-reviews-section component" data-component-id="{{ componentId }}" data-scroll-section>
+  <div class="container vl-reviews-container">
+    <header class="vl-reviews-head" data-reveal>
+      <p class="vl-reviews-lead">What our customers say</p>
+      <h2 class="vl-reviews-title">{{ properties.title | default('Hear What Others Say') | renderString }}</h2>
+      <p class="vl-reviews-sub">
+        {{ properties.subtitle | default('Real feedback from buyers — instant delivery, Discord tools, and premium products.') | renderString }}
+      </p>
+    </header>
+  </div>
+
+  {% set reviewList = feedbacks.slice(0, properties.amount | default(6)) %}
+
+  <div class="vl-reviews-rows" data-vl-reviews-marquee aria-label="Customer reviews carousel">
+    <div class="vl-reviews-row">
+      <div class="vl-reviews-track" data-vl-reviews-track data-vl-reviews-dir="-1">
+        <div class="vl-reviews-group">
+          {% for feedback in reviewList %}
+            {% render_snippet "review-marquee-card.njk", feedback=feedback %}
+          {% endfor %}
+          {% for feedback in reviewList %}
+            {% render_snippet "review-marquee-card.njk", feedback=feedback %}
+          {% endfor %}
+          {% for feedback in reviewList %}
+            {% render_snippet "review-marquee-card.njk", feedback=feedback %}
+          {% endfor %}
+        </div>
+        <div class="vl-reviews-group" aria-hidden="true">
+          {% for feedback in reviewList %}
+            {% render_snippet "review-marquee-card.njk", feedback=feedback %}
+          {% endfor %}
+          {% for feedback in reviewList %}
+            {% render_snippet "review-marquee-card.njk", feedback=feedback %}
+          {% endfor %}
+          {% for feedback in reviewList %}
+            {% render_snippet "review-marquee-card.njk", feedback=feedback %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <div class="vl-reviews-row vl-reviews-row--alt">
+      <div class="vl-reviews-track" data-vl-reviews-track data-vl-reviews-dir="1">
+        <div class="vl-reviews-group">
+          {% for feedback in reviewList %}
+            {% render_snippet "review-marquee-card.njk", feedback=feedback %}
+          {% endfor %}
+          {% for feedback in reviewList %}
+            {% render_snippet "review-marquee-card.njk", feedback=feedback %}
+          {% endfor %}
+          {% for feedback in reviewList %}
+            {% render_snippet "review-marquee-card.njk", feedback=feedback %}
+          {% endfor %}
+        </div>
+        <div class="vl-reviews-group" aria-hidden="true">
+          {% for feedback in reviewList %}
+            {% render_snippet "review-marquee-card.njk", feedback=feedback %}
+          {% endfor %}
+          {% for feedback in reviewList %}
+            {% render_snippet "review-marquee-card.njk", feedback=feedback %}
+          {% endfor %}
+          {% for feedback in reviewList %}
+            {% render_snippet "review-marquee-card.njk", feedback=feedback %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function () {
+  function initTrack(track, pausedRef) {
+    var dir = parseInt(track.getAttribute('data-vl-reviews-dir') || '-1', 10);
+    var half = 0;
+    var offset = null;
+    var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var speed = reduceMotion ? 0.35 : 0.65;
+
+    function measure() {
+      var nextHalf = track.scrollWidth / 2;
+      if (!nextHalf) nextHalf = 1;
+
+      if (offset === null) {
+        offset = dir > 0 ? -nextHalf : 0;
+      } else if (nextHalf !== half) {
+        offset = (offset / half) * nextHalf;
+      }
+
+      half = nextHalf;
+    }
+
+    function step() {
+      if (!pausedRef.paused && half > 0 && offset !== null) {
+        var stagger = 0;
+        try {
+          stagger = parseFloat(getComputedStyle(track).getPropertyValue('--vl-reviews-stagger')) || 0;
+        } catch (e) {
+          stagger = 0;
+        }
+
+        if (dir < 0) {
+          offset -= speed;
+          if (offset <= -half) offset += half;
+        } else {
+          offset += speed;
+          if (offset >= 0) offset -= half;
+        }
+
+        track.style.transform = 'translate3d(' + (offset + stagger) + 'px, 0, 0)';
+      }
+    }
+
+    measure();
+    return { measure: measure, step: step };
+  }
+
+  function boot() {
+    var root = document.querySelector('[data-vl-reviews-marquee]');
+    if (!root || root.dataset.vlReviewsReady === '1') return;
+
+    var tracks = root.querySelectorAll('[data-vl-reviews-track]');
+    if (!tracks.length) return;
+
+    root.dataset.vlReviewsReady = '1';
+    var pausedRef = { paused: false };
+    var runners = [];
+
+    tracks.forEach(function (track) {
+      track.style.animation = 'none';
+      runners.push(initTrack(track, pausedRef));
+    });
+
+    function measureAll() {
+      runners.forEach(function (r) { r.measure(); });
+    }
+
+    function tick() {
+      runners.forEach(function (r) { r.step(); });
+      requestAnimationFrame(tick);
+    }
+
+    measureAll();
+    window.addEventListener('resize', measureAll);
+    root.addEventListener('mouseenter', function () { pausedRef.paused = true; });
+    root.addEventListener('mouseleave', function () { pausedRef.paused = false; });
+
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(measureAll);
+    }
+
+    setTimeout(measureAll, 120);
+    setTimeout(measureAll, 600);
+    requestAnimationFrame(tick);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
+  }
+
+  document.addEventListener('shop:page-loaded', boot);
+})();
+</script>

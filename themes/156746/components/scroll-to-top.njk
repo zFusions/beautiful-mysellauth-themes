@@ -1,0 +1,5 @@
+{% if properties.show %}
+  <button type="button" class="btn btn-primary component position-fixed bottom-0 end-0 m-4" data-component-id="{{ componentId }}" onclick="window.scrollTo({ top: 0, behavior: 'smooth' });" aria-label="Back to top" style="background-color: {{ properties.color }}; z-index: 1030;">
+    <i class="{{ properties.icon }}"></i>
+  </button>
+{% endif %}

@@ -1,0 +1,138 @@
+{% set items = sortedItems | default([]) %}
+
+{% if items | length > 0 %}
+<section class="home-marquee component" aria-label="Featured products carousel">
+  <div class="home-marquee-track">
+    <div class="home-marquee-group">
+      {% for product in items if product.type != 'group' %}
+        {% if loop.index <= 8 %}
+          <a class="home-marquee-card" href="{{ ('/product/' + product.path) | shopUrl }}">
+            <div class="home-marquee-img">
+              {% if product.image_urls|length > 0 %}
+                <img src="{{ product.image_urls[0] }}" alt="{{ product.name }}" loading="lazy" />
+              {% elif product.image_url %}
+                <img src="{{ product.image_url }}" alt="{{ product.name }}" loading="lazy" />
+              {% else %}
+                <span class="home-marquee-ph">{{ product.name | truncate(1, true, '') }}</span>
+              {% endif %}
+            </div>
+            <div class="home-marquee-meta">
+              <span class="home-marquee-name">{{ product.name }}</span>
+              {% if product.min_price %}
+              <span class="home-marquee-price" x-text="appCurrency.format({{ product.min_price }}, '{{ product.currency }}')">{{ formatPrice(product.min_price, product.currency) }}</span>
+              {% endif %}
+            </div>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+    <div class="home-marquee-group" aria-hidden="true">
+      {% for product in items if product.type != 'group' %}
+        {% if loop.index <= 8 %}
+          <a class="home-marquee-card" href="{{ ('/product/' + product.path) | shopUrl }}" tabindex="-1">
+            <div class="home-marquee-img">
+              {% if product.image_urls|length > 0 %}
+                <img src="{{ product.image_urls[0] }}" alt="{{ product.name }}" loading="lazy" />
+              {% elif product.image_url %}
+                <img src="{{ product.image_url }}" alt="{{ product.name }}" loading="lazy" />
+              {% else %}
+                <span class="home-marquee-ph">{{ product.name | truncate(1, true, '') }}</span>
+              {% endif %}
+            </div>
+            <div class="home-marquee-meta">
+              <span class="home-marquee-name">{{ product.name }}</span>
+              {% if product.min_price %}
+              <span class="home-marquee-price" x-text="appCurrency.format({{ product.min_price }}, '{{ product.currency }}')">{{ formatPrice(product.min_price, product.currency) }}</span>
+              {% endif %}
+            </div>
+          </a>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+  .home-marquee {
+    padding: 8px 0 56px;
+    overflow: hidden;
+    position: relative;
+    -webkit-mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+    mask-image: linear-gradient(90deg, transparent, black 8%, black 92%, transparent);
+  }
+
+  .home-marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marqueeScroll 38s linear infinite;
+  }
+  .home-marquee:hover .home-marquee-track { animation-play-state: paused; }
+
+  .home-marquee-group {
+    display: flex;
+    gap: 20px;
+    padding-right: 20px;
+  }
+
+  .home-marquee-card {
+    width: 230px;
+    flex: 0 0 auto;
+    background: #ffffff;
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    text-decoration: none;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+  .home-marquee-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--blue-primary);
+    box-shadow: var(--shadow-md);
+  }
+
+  .home-marquee-img {
+    height: 140px;
+    background: var(--bg-surface);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border-default);
+  }
+  .home-marquee-img img { width: 100%; height: 100%; object-fit: cover; }
+  .home-marquee-ph { font-weight: 800; font-size: 1.6rem; color: var(--blue-primary); text-transform: uppercase; }
+
+  .home-marquee-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 12px 14px;
+  }
+  .home-marquee-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .home-marquee-price {
+    font-family: var(--font-display);
+    font-weight: 800;
+    font-size: 0.85rem;
+    color: var(--blue-primary);
+    flex: 0 0 auto;
+  }
+
+  @keyframes marqueeScroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .home-marquee-track { animation: none; }
+  }
+</style>
+{% endif %}
