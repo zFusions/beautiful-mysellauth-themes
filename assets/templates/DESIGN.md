@@ -90,6 +90,8 @@ theme_id: "{{THEME_ID}}"
 
 **The Glow Rule.** {{GLOW_RULE}}
 
+**The Depth Rule.** Hero spotlight lives in the hero component only. Below the fold, use alternating `--{{PREFIX}}-bg` / `--{{PREFIX}}-section-alt` bands — not full-page orange grids or section-title radials. Optional: footer glow ~50% opacity; ultrawide neutral edge lift. See [03-design-system.md](../references/03-design-system.md#page-depth--background-dark-saas).
+
 ## Typography
 
 **UI / body:** {{FONT_UI}}  
@@ -152,7 +154,7 @@ Google Fonts (master.njk):
 ### Shop pages (PDP / cart)
 
 - **CSS split:** `shop-pdp.css` (PDP only) + `shop-pages.css` (cart, checkout) — no duplicate rules
-- **Layout:** Nebula grid — media + accordions | sticky buy rail (992px+)
+- **Layout:** Two-column PDP — media + accordions | sticky buy rail (992px+)
 - **Glass DA:** backdrop-filter cards with solid fallback; top-edge accent highlight
 - **Volume discounts:** Alpine reactive `totalPrice`; tier nudge meter — see [07-shop-pages.md](../references/07-shop-pages.md)
 - **Register:** `product` — override landing fonts per Product Font Rule above

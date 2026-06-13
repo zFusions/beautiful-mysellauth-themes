@@ -60,15 +60,22 @@ Catalog positioning: **{{CATALOG_POSITIONING}}** — not {{CATALOG_NOT}}.
 
 ## Surfaces
 
-| Surface | Register | Notes |
-|---------|----------|-------|
-| Homepage | brand | {{HOMEPAGE_NOTES}} |
-| Navbar | brand | Sticky; grid `1fr auto 1fr`; links viewport-centered |
-| Hero | brand | {{HERO_NOTES}} |
-| Product grid & cards | brand → product | {{PRODUCT_GRID_NOTES}} |
-| How it works / Features | brand | 3 distinct mock patterns — feed / list / meters |
-| Product page, cart, checkout | product | Match tokens from DESIGN.md |
-| FAQ, footer, support links | brand | {{SUPPORT_CHANNELS}} |
+Complete SellAuth page catalog: [14-sellauth-surfaces.md](../../references/14-sellauth-surfaces.md). Document which surfaces this project ships in `components_order` and PRODUCT notes below.
+
+| Surface | Register | Priority | Notes |
+|---------|----------|----------|-------|
+| Homepage (`shop`) | brand | P0 | {{HOMEPAGE_NOTES}} |
+| Navbar / footer (global) | brand | P0 | Sticky; grid `1fr auto 1fr`; links viewport-centered |
+| Hero | brand | P0 | {{HERO_NOTES}} |
+| Product grid & cards | brand → product | P0 | {{PRODUCT_GRID_NOTES}} |
+| How it works / Features | brand | P0 | 3 distinct mock patterns — feed / list / meters |
+| Product page, cart, checkout | product | P0 | Match tokens from DESIGN.md |
+| Maintenance | brand | P0 | Branded offline page |
+| Terms, privacy, refund | brand | P1 | Shared prose layout |
+| Status, feedback | brand | P1 | Trust surfaces |
+| Customer area (dashboard, invoices, balance, tickets) | product | P1 | Shared account shell |
+| FAQ, footer, support links | brand | P0/P1 | {{SUPPORT_CHANNELS}} |
+| Blog / custom pages | brand | P2 | If enabled in builder |
 
 ## Constraints
 

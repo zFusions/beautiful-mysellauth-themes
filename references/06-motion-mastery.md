@@ -71,7 +71,7 @@ Lenis / scroll / resize → `scanReveal()` fallback.
 
 ## Layer 3 — Lenis smooth scroll
 
-Homepage only (`.shop-home` wrapper):
+Homepage only (`.t-home` wrapper):
 
 ```javascript
 var lenis = new Lenis({

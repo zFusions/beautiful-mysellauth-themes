@@ -173,9 +173,11 @@ Document choice in AGENTS.md.
 
 ### DESIGN.md — *how it looks*
 
+YAML frontmatter + narrative. Must include **Depth Rule** (hero-only spotlight + section alternation) and **Glow Rule** — see [03-design-system.md](03-design-system.md#page-depth--background-dark-saas). Fill `section-alt` with visible step from `bg` (~3–5% luminance).
+
 - YAML frontmatter: name, colors, typography, radius, spacing (machine-readable)
 - Creative north star (1 paragraph)
-- Color system with named rules
+- Color system with named rules (One Accent, Glow, **Depth**)
 - Typography hierarchy + font URLs
 - Components (buttons, cards, hero, nav)
 - Do's and Don'ts tied to this client

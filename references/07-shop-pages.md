@@ -2,7 +2,7 @@
 
 Landing beauty means nothing if product pages look like default Bootstrap.
 
-**Reference implementation:** Velora theme 156746 — Nebula PDP + glassmorphism product register.
+Applies to **any** premium theme — use `{prefix}` from DESIGN.md (e.g. `t-`, `shop-`).
 
 ---
 
@@ -22,7 +22,7 @@ Split shop CSS by surface. **Never duplicate PDP rules in cart CSS or vice versa
 pro.css → custom.css → theme.css → shop-pdp.css → shop-pages.css
 ```
 
-**Anti-pattern:** Copying `.vl-pdp-card` glass rules into `shop-pages.css` or `velora.css`. Cart reuses the *pattern*, not duplicated selectors — mirror tokens locally on `.vl-cart-page`.
+**Anti-pattern:** Copying `{prefix}-pdp-card` glass rules into `shop-pages.css` or landing CSS. Cart reuses the *pattern*, not duplicated selectors — mirror tokens on `{prefix}-cart-page`.
 
 ---
 
@@ -50,7 +50,7 @@ Load Inter (or product font) in master.njk even if landing uses a different UI f
 
 ---
 
-## Nebula PDP layout
+## Premium two-column PDP layout
 
 Two-column grid with sticky buy rail. Mobile stacks: media → rail → accordions.
 

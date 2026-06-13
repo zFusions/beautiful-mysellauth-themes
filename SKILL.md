@@ -3,13 +3,12 @@ name: beautiful-mysellauth-themes
 description: >-
   Builds world-class SellAuth and MySellAuth storefront themes — dark SaaS, gaming
   neon, light, corporate, luxury. Covers sellauth-theme CLI, Nunjucks, schema.json,
-  visual editor resale, hero peek, feature mocks, Lenis motion, and premium shop pages:
-  Nebula PDP layout, glassmorphism product register, shop-pdp.css split architecture,
-  volume discount Alpine.js price sync, dual-font PDP (Inter title/price/CTAs). Includes
-  AGENTS/PRODUCT/DESIGN KB workflow and style recipes R1–R7. Use when creating or editing
-  a SellAuth theme, PDP, cart, product-form, shop-pages CSS, volume discounts, theme
-  builder, landing page, sellauth-theme watch or push, or "make me a site". Do NOT use for
-  Shopify Liquid, WooCommerce, WordPress, SellAuth backend APIs, or payment logic.
+  visual editor resale, hero peek, feature mocks, Lenis motion, premium shop pages
+  (shop-pdp.css split, volume discounts), universal theme architecture, and page depth
+  via section alternation. Includes AGENTS/PRODUCT/DESIGN KB and style recipes R1–R7.
+  Use when creating or editing any SellAuth theme, PDP, cart, landing page,
+  sellauth-theme push, or "make me a site". Do NOT use for Shopify Liquid, WooCommerce,
+  WordPress, SellAuth backend APIs, or payment logic.
 license: MIT. See LICENSE file.
 compatibility: >-
   Requires Node.js, sellauth-theme-cli, filesystem, network for npm and push.
@@ -17,7 +16,7 @@ compatibility: >-
   Install via skills.sh or npx skills add.
 metadata:
   author: community
-  version: "4.6.0"
+  version: "5.0.0"
   spec: agentskills.io
   homepage: https://skills.sh
 allowed-tools: Read Write Edit Bash Glob Grep
@@ -39,22 +38,27 @@ When user requests a **new theme** or **full rebuild**, read **ALL** references 
 
 | Order | File | Content |
 |-------|------|---------|
-| 1 | [references/00-quality-bar.md](references/00-quality-bar.md) | What "perfect" means — 11 pillars |
+| 1 | [references/00-quality-bar.md](references/00-quality-bar.md) | What "perfect" means — 12 pillars |
 | 2 | [references/11-client-brief-kb.md](references/11-client-brief-kb.md) | **Interview + AGENTS/PRODUCT/DESIGN KB** |
 | 3 | [references/01-discovery.md](references/01-discovery.md) | Style matrix, mock selection, copy structure |
 | 4 | [references/02-sellauth-platform.md](references/02-sellauth-platform.md) | CLI, files, Nunjucks, settings |
-| 5 | [references/03-design-system.md](references/03-design-system.md) | Tokens, spotlight, buttons, typography |
-| 6 | [references/04-components.md](references/04-components.md) | Navbar, hero, products, features, FAQ |
-| 7 | [references/05-mock-ui-mastery.md](references/05-mock-ui-mastery.md) | Full mock engine + triggers |
-| 8 | [references/06-motion-mastery.md](references/06-motion-mastery.md) | Reveal, Lenis, hero entrance |
-| 9 | [references/07-shop-pages.md](references/07-shop-pages.md) | PDP, cart, checkout |
-| 10 | [references/08-anti-patterns.md](references/08-anti-patterns.md) | Never ship list |
-| 11 | [references/09-typography-fonts.md](references/09-typography-fonts.md) | **Fonts — mandatory Google Fonts pairings** |
-| 12 | [references/10-style-recipes.md](references/10-style-recipes.md) | **Full kits — gaming neon R3, SaaS R1, etc.** |
+| 5 | [references/13-theme-architecture.md](references/13-theme-architecture.md) | **Universal folder/CSS/component structure (any theme)** |
+| 6 | [references/03-design-system.md](references/03-design-system.md) | Tokens, spotlight, buttons, typography |
+| 7 | [references/04-components.md](references/04-components.md) | Navbar, hero, products, features, FAQ |
+| 8 | [references/05-mock-ui-mastery.md](references/05-mock-ui-mastery.md) | Full mock engine + triggers |
+| 9 | [references/06-motion-mastery.md](references/06-motion-mastery.md) | Reveal, Lenis, hero entrance |
+| 10 | [references/07-shop-pages.md](references/07-shop-pages.md) | PDP, cart, checkout |
+| 11 | [references/08-anti-patterns.md](references/08-anti-patterns.md) | Never ship list |
+| 12 | [references/09-typography-fonts.md](references/09-typography-fonts.md) | **Fonts — mandatory Google Fonts pairings** |
+| 13 | [references/10-style-recipes.md](references/10-style-recipes.md) | **Full kits — gaming neon R3, SaaS R1, etc.** |
+| 14 | [references/14-sellauth-surfaces.md](references/14-sellauth-surfaces.md) | **All pages & surfaces — P0/P1/P2 checklist** |
+| 15 | [references/12-skill-authoring.md](references/12-skill-authoring.md) | **Skill maintenance — Agent Skills spec, publish, sync** |
 
 Template: [assets/token-template.css](assets/token-template.css)  
 Font head snippet: [assets/master-font-head.snippet.html](assets/master-font-head.snippet.html)  
 KB templates: [assets/templates/AGENTS.md](assets/templates/AGENTS.md), [PRODUCT.md](assets/templates/PRODUCT.md), [DESIGN.md](assets/templates/DESIGN.md)
+
+For **scaffold / new theme structure**: read [13-theme-architecture.md](references/13-theme-architecture.md) + [14-sellauth-surfaces.md](references/14-sellauth-surfaces.md) + [02-sellauth-platform.md](references/02-sellauth-platform.md) first.
 
 For **small edits** (one section, color tweak): read only relevant reference(s).
 
@@ -93,7 +97,7 @@ Themes built with this skill must work in the SellAuth visual builder so a buyer
 - When off: omit mock markup; JS must no-op if nodes are missing.
 - Schema `help` text: demo chrome uses placeholder labels — disable for copy-only layout.
 
-**After major UI/UX changes** on a live theme: update this skill (`SKILL.md` + relevant `references/*.md`) so patterns, checklists, and anti-patterns stay current.
+**After major UI/UX changes** on a live theme: update this skill per [references/12-skill-authoring.md](references/12-skill-authoring.md) — `SKILL.md`, README, relevant `references/*.md`, bump `metadata.version`.
 
 Validate each section in https://dash.sellauth.com/builder/visual/{ID} before adding the next.
 
@@ -103,7 +107,7 @@ Validate each section in https://dash.sellauth.com/builder/visual/{ID} before ad
 
 ```
 ═══ PHASE 0 — READ ═══
-[ ] Read all 12 references (full build only)
+[ ] Read all 15 references (full build only)
 
 ═══ PHASE 0.5 — BRIEF & KB (mandatory on new theme) ═══
 [ ] Read 11-client-brief-kb.md (language policy)
@@ -134,20 +138,29 @@ Validate each section in https://dash.sellauth.com/builder/visual/{ID} before ad
 [ ] Features #features (3 mocks — 05-mock-ui-mastery.md)
 [ ] FAQ #faq + Footer
 
-═══ PHASE 4 — SHOP ═══
-[ ] shop-pdp.css — Nebula PDP, glass DA, volume promo (single source — no dupes)
-[ ] shop-pages.css — cart, checkout (comment: PDP lives in shop-pdp.css)
+═══ PHASE 4 — SHOP (P0) ═══
+[ ] shop-pdp.css — two-column PDP, glass DA, volume promo (single source — no dupes)
+[ ] shop-pages.css — cart, checkout, customer shell (comment: PDP lives in shop-pdp.css)
 [ ] product-form.njk — Alpine productForm: totalPrice, volume tiers, qty clamp
 [ ] Cart volume discount parity with PDP getters
+[ ] maintenance.njk — branded offline page
+
+═══ PHASE 4.5 — TRUST & ACCOUNT (P1) ═══
+[ ] terms + privacy-policy + refund-policy — shared prose layout
+[ ] status + feedback templates
+[ ] customer-dashboard + invoices + balance + tickets (+ affiliate if enabled)
+[ ] customer-login-modal + sidebar snippets
+See [14-sellauth-surfaces.md](references/14-sellauth-surfaces.md) for full checklist.
 
 ═══ PHASE 5 — MOTION ═══
 [ ] theme:motion-start bus
 [ ] Scroll reveal (data-reveal)
 [ ] theme-feature-mocks.js + IO trigger
-[ ] Lenis on .shop-home only
+[ ] Lenis on `.t-home` only (landing wrapper)
 
 ═══ PHASE 6 — SHIP ═══
 [ ] Quality bar self-review (00-quality-bar.md)
+[ ] 14-sellauth-surfaces full-ship checklist
 [ ] sellauth-theme push + binary upload
 [ ] Ctrl+F5 desktop + mobile mental check
 ```
@@ -195,14 +208,16 @@ Clear value prop
 
 ## File architecture
 
+See [references/13-theme-architecture.md](references/13-theme-architecture.md) for the full universal layout. Summary:
+
 | File | Role |
 |------|------|
 | `settings.json` | Config + `components_order` |
 | `schema.json` | Every editable builder field |
-| `layouts/master.njk` | Shell, CSS order, motion inline or linked |
+| `layouts/master.njk` | Shell, CSS order, motion |
 | `assets/pro.css` | Platform — **never break** |
-| `assets/theme.css` | **Entire** landing design system |
-| `assets/shop-pdp.css` | **PDP only** — Nebula layout, glass, volume promo |
+| `assets/theme.css` | **Entire** landing design system (`{CSS_FILE}` from DESIGN.md) |
+| `assets/shop-pdp.css` | **PDP only** — two-column layout, glass, volume promo |
 | `assets/shop-pages.css` | Cart, checkout, shared inner shell |
 | `assets/theme-feature-mocks.js` | Mock engine |
 
@@ -235,8 +250,8 @@ Full detail: [02-sellauth-platform.md](references/02-sellauth-platform.md)
 - Body = readable sans; display = headlines only
 - Buttons: 38px height, radius per recipe (8px gaming, 10px pro)
 - Headline gradient text OK on display; body flat muted
-- Section alternation dark `#000` / `#0e0e0e`
-- Hero spotlight: max 2 blur layers (dark) OR wash 6% (light)
+- Section alternation: `--t-bg` / `--t-section-alt` via nth-child (see 03-design-system.md **Page depth**)
+- Hero spotlight: max 2 blur layers (dark) OR wash 6% (light) — **hero component only**, not full page
 
 ### Homepage funnel
 
@@ -291,7 +306,7 @@ Transparent on hero. Sticky. 56px height.
 Loader → theme:motion-start
   → Hero entrance (0/80/160/240ms)
   → data-reveal scroll
-  → Lenis (.shop-home)
+  → Lenis (.t-home)
   → __featureMockCheck
 ```
 
@@ -305,7 +320,7 @@ Full spec: [06-motion-mastery.md](references/06-motion-mastery.md)
 
 PDP + cart + checkout must use same tokens. No raw Bootstrap blue.
 
-**Premium pattern (R7):** Nebula two-column PDP, glassmorphism cards, Inter on title/price/CTAs, Alpine volume discount sync.
+**Premium pattern (R7):** Two-column PDP, glassmorphism cards, Inter on title/price/CTAs, Alpine volume discount sync.
 
 Full spec: [07-shop-pages.md](references/07-shop-pages.md)  
 Recipe kit: [10-style-recipes.md](references/10-style-recipes.md#recipe-r7--glassmorphism-product-register-pdpcart-da)  
@@ -345,6 +360,7 @@ From [00-quality-bar.md](references/00-quality-bar.md):
 10. Typography — Google Fonts documented in DESIGN.md
 11. Mobile OK
 12. **Visual builder** — all sections editable; mock toggles documented; builder preview verified
+13. **Page depth** — section alternation or intentional surfaces; hero spotlight not duplicated globally
 
 Plus: [08-anti-patterns.md](references/08-anti-patterns.md) — zero violations.
 
@@ -361,6 +377,9 @@ Plus: [08-anti-patterns.md](references/08-anti-patterns.md) — zero violations.
 | Hero copy jumps | 04-components — flex spacer |
 | Style incoherent | 01-discovery — one STYLE_ID; sync DESIGN.md |
 | Built wrong colors/fonts | 11-client-brief-kb — KB must exist before code |
+| Site feels flat / too dark | 03-design-system — section alternation; avoid full-page grid |
+| Ambient glow "does nothing" | 08-anti-patterns — `#app` opaque blocks body layers |
+| Glow looks weird / user removes it | 03-design-system Page depth — no section title radials |
 | Price doesn't update on qty change | 07-shop-pages — Alpine totalPrice getters |
 | Volume discount wrong tier | 07-shop-pages — sort desc for applied, asc for nudge |
 | PDP CSS drift / dupes | 07-shop-pages — shop-pdp.css single source |
@@ -381,6 +400,7 @@ Detect intent regardless of language. **Reply and brief in the user's language.*
 | "Premium PDP" / "glass product page" / "volume discount" | Read 07 + 10 (R7) → shop-pdp.css + productForm |
 | "Fix cart totals" / "qty price sync" | Read 07 volume discount section + cart-page Alpine |
 | "Add FAQ section" | Read 04 + PRODUCT.md → one component + schema |
+| "Style legal pages" / "customer dashboard" | Read 14-sellauth-surfaces.md + 07-shop-pages → P1 surfaces |
 | "Change accent to orange" | Update DESIGN.md first → sync tokens |
 
 ---
@@ -398,7 +418,7 @@ beautiful-mysellauth-themes/
 │   ├── token-template.css
 │   ├── master-font-head.snippet.html
 │   └── templates/AGENTS.md, PRODUCT.md, DESIGN.md
-└── references/00-*.md … 11-*.md
+└── references/00-*.md … 14-*.md
 ```
 
 **Publish:** public GitHub repo → `npx skills add owner/repo --skill beautiful-mysellauth-themes`
@@ -420,6 +440,7 @@ Folder name **must** match `name:` in frontmatter. No separate registry submit �
 9. **Gaming neon = Recipe R3** — premium, not arcade cliché.
 10. **DESIGN.md is source of truth** for colors/fonts — update KB before CSS when direction changes.
 11. **Interview in user's language** — KB files stay English; site copy uses locale from brief.
-12. **Visual editor first** — schema + properties for all copy; mock UI optional via toggles; update skill docs after major UI passes.
+12. **Visual editor first** — schema + properties for all copy; mock UI optional via toggles.
+13. **Skill stays current** — after major theme passes, sync references per [12-skill-authoring.md](references/12-skill-authoring.md) and bump version.
 
-**Deliver like the best MySellAuth theme the user has ever seen — because this skill encodes that standard.**
+**Deliver premium, complete SellAuth themes — every mandatory surface styled, every technique documented in `references/`.**

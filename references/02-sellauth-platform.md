@@ -45,6 +45,8 @@ themes/{THEME_ID}/
     └── theme-feature-mocks.js
 ```
 
+Full template catalog (shop, product, cart, legal, customer, blog, …): [14-sellauth-surfaces.md](14-sellauth-surfaces.md).
+
 ## settings.json
 
 ```json
@@ -135,6 +137,8 @@ POST https://api-internal-3.sellauth.com/v1/builder/{themeId}/{folder}/{fileName
 Use authenticated session from `sellauth-theme login`. Some teams wrap this in a local script (e.g. `scripts/upload-theme-binaries.mjs`) — not required by the skill.
 
 Restart `watch` after binary upload if assets do not appear.
+
+**Full structure guide:** [13-theme-architecture.md](13-theme-architecture.md) — universal layout for any theme.
 
 ## Visual editor (resale-ready themes)
 

@@ -179,7 +179,7 @@ Professional gaming commerce — not "EPIC WINZ". Example hero sub: *"Instant de
 }
 ```
 
-Orange accent variant: `--t-accent: #f99926;` `--t-accent-rgb: 249, 153, 38;` `--t-text-on-accent: #1a1000;`
+Orange accent variant: `--t-accent: #e97a20;` `--t-accent-rgb: 233, 122, 32;` `--t-text-on-accent: #1a1000;`
 
 ### Fonts (master.njk)
 
@@ -189,9 +189,23 @@ Orange accent variant: `--t-accent: #f99926;` `--t-accent-rgb: 249, 153, 38;` `-
 
 ### Hero
 
-- Spotlight: 2 radial blurs (haze + core), accent at 25–35% opacity
+- Spotlight: 2 radial blurs (haze + core), accent at 25–35% opacity — **scoped to `.t-hero` only**
 - Optional serif italic on hero line 2 only
 - Peek mock: dashboard / order status panel below fold
+
+### Homepage depth (below hero)
+
+- **No** full-page orange fade into how-it-works — causes horizontal glow band
+- Alternate section backgrounds:
+
+```css
+.t-home > .component { background: var(--t-section-alt) !important; }
+.t-home > .component:nth-child(even) { background: var(--t-bg) !important; }
+.t-home > .component.t-hero { background: transparent !important; }
+```
+
+- `--t-section-alt: #0c0c0c` with `--t-bg: #030303` (warm accent variant) or `#000` / `#0e0e0e` (cool variant)
+- Hide redundant per-card spot glows on steps/features when hero already carries brand light
 
 ---
 
@@ -225,12 +239,12 @@ Orange accent variant: `--t-accent: #f99926;` `--t-accent-rgb: 249, 153, 38;` `-
 
 ## Recipe R7 — Glassmorphism product register (PDP/cart DA)
 
-Use when landing is premium dark (R1/R3/R6) but shop pages need **Nebula PDP + glass cards** — proven on Velora 156746.
+Use when landing is premium dark (R1/R3/R6) but shop pages need **two-column PDP + glass cards** — see [13-theme-architecture.md](13-theme-architecture.md) for file split.
 
 ### What it adds (on top of landing recipe)
 
 - Separate `shop-pdp.css` — PDP single source of truth (see [07-shop-pages.md](07-shop-pages.md))
-- Nebula two-column layout: media + accordions | sticky buy rail
+- Two-column layout: media + accordions | sticky buy rail
 - Glass surfaces: `rgba(255,255,255,0.035)` + `backdrop-filter: blur(22px) saturate(145%)`
 - Top-edge accent gradient line on cards (`::after`)
 - Ambient radial wash behind PDP/cart sections
@@ -261,7 +275,7 @@ Alpine `productForm` with reactive `totalPrice`, tier nudge meter, strikethrough
 
 | Signal | Action |
 |--------|--------|
-| User wants "premium PDP", "glass cards", "Nebula layout" | R7 on shop pages |
+| User wants "premium PDP", "glass cards", "two-column product page" | R7 on shop pages |
 | Digital goods with qty tiers / bulk discount | R7 + volume discount getters |
 | Simple shop, no custom PDP | R1/R3 landing + basic shop-pages.css only |
 
@@ -275,7 +289,7 @@ Alpine `productForm` with reactive `totalPrice`, tier nudge meter, strikethrough
 |---------------------|--------|
 | gaming, neon, crypto, cyber, esports | **R3** (+ R7 for PDP if premium shop) |
 | saas, pro, dark, startup | R1 (+ R7 optional) |
-| glass PDP, nebula product page, premium cart | **R7** |
+| glass PDP, premium product page, premium cart | **R7** |
 | light, clean, minimal shop | R4 |
 | corporate, blue, white, business | R5 |
 | luxury, gold, premium | R6 (+ R7 optional) |

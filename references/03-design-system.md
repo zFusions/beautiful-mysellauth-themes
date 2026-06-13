@@ -163,13 +163,62 @@ Body text: flat `--t-muted` — no gradient on paragraphs.
 
 Stock badge: small rounded rect 10px, not pill.
 
-## Section alternation
+## Page depth & background (dark SaaS)
+
+**Problem:** Pure `#000` everywhere feels flat and "too dark" on ultrawide. **Wrong fix:** full-page orange grid/glow overlapping the hero spotlight — looks weird and fights the hero grid.
+
+### Recommended stack (priority order)
+
+1. **Hero spotlight only in `.t-hero`** — `t-hero-light` arc + haze + core + grid relief. Max 2 blur layers. Grid masked to hero arc, not full viewport.
+2. **Section alternation** — rhythm via surface color, not extra glows:
+
+```css
+/* Hero transparent; even sections black, odd sections gray */
+.t-home > .component { background: var(--t-section-alt) !important; }
+.t-home > .component:nth-child(even) { background: var(--t-bg) !important; }
+.t-home > .component.t-hero { background: transparent !important; }
+```
+
+Typical order after hero: how-it-works **black** → products **gray** → features **black** → …
+
+Use `--t-section-alt: #0c0c0c` (or `#0e0e0e`) — visible but still dark. Difference ~3–5% luminance is enough.
+
+3. **Footer anchor (optional)** — low-opacity bottom glow (`opacity: 0.45–0.55`) on footer only. Hide per-card spot glows on steps/features if redundant with hero.
+
+4. **Ultrawide edge lift (optional)** — neutral charcoal radial on `body` at 1280px+, **not** orange:
+
+```css
+@media (min-width: 1280px) {
+  body.t-home-page {
+    background:
+      radial-gradient(ellipse 36% 88% at 0% 50%, rgba(14, 11, 8, 0.55) 0%, transparent 58%),
+      radial-gradient(ellipse 36% 88% at 100% 50%, rgba(14, 11, 8, 0.55) 0%, transparent 58%),
+      var(--t-bg) !important;
+  }
+}
+```
+
+### Do NOT (see 08-anti-patterns.md)
+
+| ❌ | Why |
+|----|-----|
+| `body::before` grid while `#app { background: #000 !important }` | Layer hidden — zero visible effect |
+| Full-viewport grid + hero grid | Double grid, moiré, "AI slop" |
+| Accent radial on every section title | Band of light behind copy — remove it |
+| Extending hero fade into next section | Harsh horizontal glow strip |
+| Fixed ambient div + opaque `#app` without testing | Often invisible on SellAuth stack |
+
+### CSS layering note (SellAuth)
+
+`#app` / `.flex-wrapper` often has solid `background: var(--t-bg) !important`. Any fixed ambient layer **behind** `#app` only works if `#app` is transparent **and** child sections are transparent or use gradients — prefer **section-level** backgrounds instead.
+
+## Section alternation (manual class)
 
 ```css
 .t-section--alt { background: var(--t-section-alt); }
 ```
 
-Hero + how-it-works often share `#000`. Features/reviews alternate.
+Prefer **nth-child alternation** on `.t-home > .component` for automatic rhythm. Hero stays transparent.
 
 ## Container
 
