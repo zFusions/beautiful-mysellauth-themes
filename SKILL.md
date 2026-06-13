@@ -1,15 +1,14 @@
 ---
 name: beautiful-mysellauth-themes
 description: >-
-  The complete playbook for building world-class SellAuth and MySellAuth
-  storefront themes in any style — dark SaaS, gaming, crypto, sober pro, light,
-  white-blue, luxury. Includes sellauth-theme CLI, Nunjucks, settings.json,
-  schema.json, premium CSS design system, hero spotlight peek, optical navbar,
-  product grid, feature mock UI with scroll animations, Lenis, shop pages, deploy QA, curated Google Fonts pairings per
-  style, premium gaming-neon recipe (not cheap Orbitron slop), multilingual client brief
-  interview, AGENTS.md PRODUCT.md DESIGN.md knowledge base (English) before build. Produces themes on par with months of manual polish. Use when user asks to
-  create or edit a SellAuth theme, build a digital shop, sellauth-theme watch or
-  push, theme builder, landing page, or says "make me a site" in any language. Do NOT use for
+  Builds world-class SellAuth and MySellAuth storefront themes — dark SaaS, gaming
+  neon, light, corporate, luxury. Covers sellauth-theme CLI, Nunjucks, schema.json,
+  visual editor resale, hero peek, feature mocks, Lenis motion, and premium shop pages:
+  Nebula PDP layout, glassmorphism product register, shop-pdp.css split architecture,
+  volume discount Alpine.js price sync, dual-font PDP (Inter title/price/CTAs). Includes
+  AGENTS/PRODUCT/DESIGN KB workflow and style recipes R1–R7. Use when creating or editing
+  a SellAuth theme, PDP, cart, product-form, shop-pages CSS, volume discounts, theme
+  builder, landing page, sellauth-theme watch or push, or "make me a site". Do NOT use for
   Shopify Liquid, WooCommerce, WordPress, SellAuth backend APIs, or payment logic.
 license: MIT. See LICENSE file.
 compatibility: >-
@@ -18,7 +17,7 @@ compatibility: >-
   Install via skills.sh or npx skills add.
 metadata:
   author: community
-  version: "4.4.0"
+  version: "4.6.0"
   spec: agentskills.io
   homepage: https://skills.sh
 allowed-tools: Read Write Edit Bash Glob Grep
@@ -59,6 +58,10 @@ KB templates: [assets/templates/AGENTS.md](assets/templates/AGENTS.md), [PRODUCT
 
 For **small edits** (one section, color tweak): read only relevant reference(s).
 
+For **PDP / cart / volume discount work**: read [07-shop-pages.md](references/07-shop-pages.md) + [10-style-recipes.md](references/10-style-recipes.md) (Recipe R7).
+
+**Progressive disclosure:** This file = workflow + gates. Detailed markup, CSS, and Alpine getters live in `references/` — read on demand, one level deep.
+
 ---
 
 ## Agent role
@@ -70,6 +73,29 @@ You are a **senior SellAuth theme architect**. You do not produce generic Bootst
 - One cohesive design system file
 - Shop pages matching the landing
 - Builder-safe Nunjucks + complete schema.json
+- **Visual-editor complete** — every buyer-facing string editable in the builder (resale-ready)
+
+---
+
+## Visual editor & resale (mandatory)
+
+Themes built with this skill must work in the SellAuth visual builder so a buyer can rebrand without code.
+
+**Every component:**
+1. Entry in `schema.json` for each editable field (text, textarea, list, link, toggle, image).
+2. Matching defaults in `settings.json`.
+3. Template uses `properties.* | renderString | default('…')` — no hardcoded marketing copy.
+4. Root: `class="component"` + `data-component-id="{{ componentId }}"`.
+5. Snippets receive `properties` explicitly from the parent component.
+
+**Mock UI** (hero peek, feature panels, how-it-works demos):
+- Add `show_mock_ui` / `show_hero_mock` toggle per section.
+- When off: omit mock markup; JS must no-op if nodes are missing.
+- Schema `help` text: demo chrome uses placeholder labels — disable for copy-only layout.
+
+**After major UI/UX changes** on a live theme: update this skill (`SKILL.md` + relevant `references/*.md`) so patterns, checklists, and anti-patterns stay current.
+
+Validate each section in https://dash.sellauth.com/builder/visual/{ID} before adding the next.
 
 ---
 
@@ -96,7 +122,7 @@ You are a **senior SellAuth theme architect**. You do not produce generic Bootst
 
 ═══ PHASE 2 — SCAFFOLD ═══
 [ ] themes/{ID}/ folder structure
-[ ] settings.json + schema.json (copy aligned with PRODUCT.md voice)
+[ ] settings.json + schema.json (copy aligned with PRODUCT.md voice; **every field in schema wired in templates**)
 [ ] master.njk: fonts from DESIGN.md + CSS stack + motion
 [ ] theme.css tokens copied from DESIGN.md frontmatter / recipe
 
@@ -109,7 +135,10 @@ You are a **senior SellAuth theme architect**. You do not produce generic Bootst
 [ ] FAQ #faq + Footer
 
 ═══ PHASE 4 — SHOP ═══
-[ ] shop-pages.css — PDP, cart, checkout
+[ ] shop-pdp.css — Nebula PDP, glass DA, volume promo (single source — no dupes)
+[ ] shop-pages.css — cart, checkout (comment: PDP lives in shop-pdp.css)
+[ ] product-form.njk — Alpine productForm: totalPrice, volume tiers, qty clamp
+[ ] Cart volume discount parity with PDP getters
 
 ═══ PHASE 5 — MOTION ═══
 [ ] theme:motion-start bus
@@ -137,8 +166,10 @@ You are a **senior SellAuth theme architect**. You do not produce generic Bootst
 | S4 | Light shop | `#f8f9fb` | `#2563eb` |
 | S5 | Corporate blue | `#fff` | `#1d4ed8` |
 | S6 | Luxury dark | `#0a0a0a` | gold |
+| R7 | Glass PDP register | inherits landing | + Inter product font, shop-pdp.css |
 
 User says *"gaming neon"* → **Recipe R3** + fonts Syne + Plus Jakarta Sans — NOT Orbitron body.  
+User says *"premium PDP"* / *"glass product page"* → **Recipe R7** on shop pages — see 07-shop-pages.md.  
 User says *"gaming neon green"* → R3 + accent `#39ff14`.  
 User says *"clean white blue corporate"* → R5.  
 User says nothing → R1 for digital goods.
@@ -171,10 +202,13 @@ Clear value prop
 | `layouts/master.njk` | Shell, CSS order, motion inline or linked |
 | `assets/pro.css` | Platform — **never break** |
 | `assets/theme.css` | **Entire** landing design system |
-| `assets/shop-pages.css` | PDP, cart, checkout |
+| `assets/shop-pdp.css` | **PDP only** — Nebula layout, glass, volume promo |
+| `assets/shop-pages.css` | Cart, checkout, shared inner shell |
 | `assets/theme-feature-mocks.js` | Mock engine |
 
-CSS order: pro → custom → theme → shop-pages.
+CSS order: pro → custom → theme → **shop-pdp** → shop-pages.
+
+**Iron rule:** PDP styles live in `shop-pdp.css` only — never duplicate in `shop-pages.css` or landing CSS.
 
 ---
 
@@ -271,7 +305,11 @@ Full spec: [06-motion-mastery.md](references/06-motion-mastery.md)
 
 PDP + cart + checkout must use same tokens. No raw Bootstrap blue.
 
-[07-shop-pages.md](references/07-shop-pages.md)
+**Premium pattern (R7):** Nebula two-column PDP, glassmorphism cards, Inter on title/price/CTAs, Alpine volume discount sync.
+
+Full spec: [07-shop-pages.md](references/07-shop-pages.md)  
+Recipe kit: [10-style-recipes.md](references/10-style-recipes.md#recipe-r7--glassmorphism-product-register-pdpcart-da)  
+Typography split: [09-typography-fonts.md](references/09-typography-fonts.md#product-register-split-pdpcart)
 
 ---
 
@@ -306,6 +344,7 @@ From [00-quality-bar.md](references/00-quality-bar.md):
 9. Shop pages styled
 10. Typography — Google Fonts documented in DESIGN.md
 11. Mobile OK
+12. **Visual builder** — all sections editable; mock toggles documented; builder preview verified
 
 Plus: [08-anti-patterns.md](references/08-anti-patterns.md) — zero violations.
 
@@ -322,6 +361,9 @@ Plus: [08-anti-patterns.md](references/08-anti-patterns.md) — zero violations.
 | Hero copy jumps | 04-components — flex spacer |
 | Style incoherent | 01-discovery — one STYLE_ID; sync DESIGN.md |
 | Built wrong colors/fonts | 11-client-brief-kb — KB must exist before code |
+| Price doesn't update on qty change | 07-shop-pages — Alpine totalPrice getters |
+| Volume discount wrong tier | 07-shop-pages — sort desc for applied, asc for nudge |
+| PDP CSS drift / dupes | 07-shop-pages — shop-pdp.css single source |
 
 ---
 
@@ -336,6 +378,8 @@ Detect intent regardless of language. **Reply and brief in the user's language.*
 | "Clean white blue corporate" / "theme corporate bleu" | Brief → R5 in DESIGN.md |
 | "Skip questions, use defaults" | KB from S1 defaults + assumptions in PRODUCT.md |
 | "Fix feature animations only" | Read 05 + 06 (+ existing KB if present) |
+| "Premium PDP" / "glass product page" / "volume discount" | Read 07 + 10 (R7) → shop-pdp.css + productForm |
+| "Fix cart totals" / "qty price sync" | Read 07 volume discount section + cart-page Alpine |
 | "Add FAQ section" | Read 04 + PRODUCT.md → one component + schema |
 | "Change accent to orange" | Update DESIGN.md first → sync tokens |
 
@@ -376,5 +420,6 @@ Folder name **must** match `name:` in frontmatter. No separate registry submit �
 9. **Gaming neon = Recipe R3** — premium, not arcade cliché.
 10. **DESIGN.md is source of truth** for colors/fonts — update KB before CSS when direction changes.
 11. **Interview in user's language** — KB files stay English; site copy uses locale from brief.
+12. **Visual editor first** — schema + properties for all copy; mock UI optional via toggles; update skill docs after major UI passes.
 
 **Deliver like the best MySellAuth theme the user has ever seen — because this skill encodes that standard.**

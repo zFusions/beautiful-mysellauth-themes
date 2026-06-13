@@ -223,15 +223,62 @@ Orange accent variant: `--t-accent: #f99926;` `--t-accent-rgb: 249, 153, 38;` `-
 
 ---
 
+## Recipe R7 — Glassmorphism product register (PDP/cart DA)
+
+Use when landing is premium dark (R1/R3/R6) but shop pages need **Nebula PDP + glass cards** — proven on Velora 156746.
+
+### What it adds (on top of landing recipe)
+
+- Separate `shop-pdp.css` — PDP single source of truth (see [07-shop-pages.md](07-shop-pages.md))
+- Nebula two-column layout: media + accordions | sticky buy rail
+- Glass surfaces: `rgba(255,255,255,0.035)` + `backdrop-filter: blur(22px) saturate(145%)`
+- Top-edge accent gradient line on cards (`::after`)
+- Ambient radial wash behind PDP/cart sections
+- **Dual-font product register:** system/Arial body + **Inter** for title, price, CTAs
+
+### Product-register tokens (add to theme.css or shop-pdp.css)
+
+```css
+:root {
+  --t-font-product: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --t-pdp-card-bg-glass: rgba(255, 255, 255, 0.035);
+  --t-pdp-radius: 14px;
+  --t-stock-green: #4ade80;
+}
+```
+
+Load Inter in master.njk even when landing uses DM Sans / Syne:
+
+```html
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&display=swap" rel="stylesheet">
+```
+
+### Volume discount UI
+
+Alpine `productForm` with reactive `totalPrice`, tier nudge meter, strikethrough — full spec in [07-shop-pages.md](07-shop-pages.md#volume-discount--price-sync-alpinejs).
+
+### When to use
+
+| Signal | Action |
+|--------|--------|
+| User wants "premium PDP", "glass cards", "Nebula layout" | R7 on shop pages |
+| Digital goods with qty tiers / bulk discount | R7 + volume discount getters |
+| Simple shop, no custom PDP | R1/R3 landing + basic shop-pages.css only |
+
+**Do not** apply glass blur to landing hero — keep glass for product register only.
+
+---
+
 ## Recipe selection map
 
 | User prompt keywords | Recipe |
 |---------------------|--------|
-| gaming, neon, crypto, cyber, esports | **R3** |
-| saas, pro, dark, startup | R1 |
+| gaming, neon, crypto, cyber, esports | **R3** (+ R7 for PDP if premium shop) |
+| saas, pro, dark, startup | R1 (+ R7 optional) |
+| glass PDP, nebula product page, premium cart | **R7** |
 | light, clean, minimal shop | R4 |
 | corporate, blue, white, business | R5 |
-| luxury, gold, premium | R6 |
+| luxury, gold, premium | R6 (+ R7 optional) |
 | sober, minimal dark | S2 in 01-discovery |
 
-**Always load fonts from recipe before CSS.**
+**Always load fonts from recipe before CSS. Product register may add Inter via R7.**

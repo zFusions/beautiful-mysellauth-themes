@@ -6,7 +6,7 @@
 
 ## Iron rules
 
-1. **Max 2 families** on landing (display + UI). Mono is a **third exception** for mock terminals only.
+1. **Max 2 families** on landing (display + UI). Mono is a **third exception** for mock terminals only. A **fourth exception** — product font (e.g. Inter) — applies only on PDP/cart (`product` register); see [Product register split](#product-register-split-pdpcart) below.
 2. **Load via Google Fonts** in `master.njk` with `preconnect` + `display=swap`.
 3. **Subset weights** — only load what you use (400, 500, 600, 700 — not every weight).
 4. **Body = highly readable sans** — never a display/gaming font for paragraphs.
@@ -218,15 +218,47 @@ Never gradient on body paragraphs.
 
 ---
 
+## Product register split (PDP/cart)
+
+Landing and shop pages may use different registers. Document both in DESIGN.md.
+
+| Register | Body / labels | Commerce (title, price, buttons) |
+|----------|---------------|----------------------------------|
+| `brand` (landing) | Google Fonts UI (`--t-font-ui`) | Display font on hero/sections only |
+| `product` (PDP/cart) | System sans or Arial (`--font-body`) | **Inter** or dedicated `--t-font-product` |
+
+```css
+/* shop-pdp.css — scoped to product wrapper */
+.product-wrapper.t-pdp {
+  --t-pdp-font: var(--font-body, var(--t-font-ui, system-ui, sans-serif));
+  --t-pdp-font-product: var(--t-font-product, Inter, system-ui, sans-serif);
+  font-family: var(--t-pdp-font);
+}
+.t-pdp-title,
+.t-pdp-price,
+.t-pdp-form .btn { font-family: var(--t-pdp-font-product); }
+```
+
+**Rules:**
+- Inter (or product font) on H1 title, price, qty, CTAs — never on long description body
+- Accordion / trust / stock labels stay on body/system font
+- Load product font in master.njk even when landing uses different families
+- Recipe R7 in [10-style-recipes.md](10-style-recipes.md) ships this stack
+
+**Anti-pattern:** Using display font (Syne, Instrument Serif) on PDP price — too decorative for commerce.
+
+---
+
 ## Agent checklist (typography)
 
 - [ ] Google Fonts link in master.njk with preconnect
 - [ ] `--t-font-ui` and `--t-font-display` in :root
-- [ ] Body uses UI font only
+- [ ] Body uses UI font only (landing)
 - [ ] Hero/section titles use display font
 - [ ] Mono scoped to mocks
+- [ ] `--t-font-product` documented if PDP uses Inter split
 - [ ] clamp() sizes applied
-- [ ] No forbidden fonts
+- [ ] No forbidden fonts on landing
 - [ ] Weights limited to 3–4 max in URL
 
-See also: [10-style-recipes.md](10-style-recipes.md) for full gaming neon recipe.
+See also: [10-style-recipes.md](10-style-recipes.md) for full gaming neon recipe; [07-shop-pages.md](07-shop-pages.md) for PDP font wiring.

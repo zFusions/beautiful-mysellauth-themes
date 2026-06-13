@@ -136,6 +136,29 @@ Use authenticated session from `sellauth-theme login`. Some teams wrap this in a
 
 Restart `watch` after binary upload if assets do not appear.
 
+## Visual editor (resale-ready themes)
+
+Every storefront string a buyer might change must exist in `schema.json` and render from `properties` in the matching `.njk`.
+
+```nunjucks
+<section class="t-section component" data-component-id="{{ componentId }}">
+  <h2>{{ properties.title | default('Section title') | renderString }}</h2>
+  {% for item in properties.items | default([]) %}
+    <p>{{ item.text | renderString }}</p>
+  {% endfor %}
+</section>
+```
+
+Snippets called from components:
+
+```nunjucks
+{% render_snippet "section-body.njk", properties=properties, componentId=componentId %}
+```
+
+**Mock UI** (hero peek, feature demos, step animations): expose `show_mock_ui` / `show_hero_mock` toggles. When disabled, skip mock HTML; keep title, subtitle, and list copy editable.
+
+**Checklist before ship:** open Builder → select each homepage section → confirm fields update the preview → Ctrl+F5.
+
 ## Builder live reload
 
 Include builder snippet that on reload:

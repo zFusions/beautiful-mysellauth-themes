@@ -46,6 +46,21 @@
 | Global `.btn` override on homepage | Breaks shop pages |
 | Hardcoded hex scattered | Unmaintainable |
 | No prefix on custom classes | Bootstrap conflicts |
+| PDP rules duplicated in shop-pages.css AND shop-pdp.css | Drift, double maintenance |
+| Glass styles only in velora.css with no `@supports` fallback | Broken cards on old browsers |
+| Volume discount price hardcoded in Nunjucks | Breaks on qty change — use Alpine getters |
+
+## Shop pages / PDP
+
+| ❌ | Why |
+|----|-----|
+| Empty frame when product has no image | Broken PDP — use auto banner |
+| Display font on product price | Illegible, wrong register |
+| Sticky rail without mobile stack test | CTA buried below fold |
+| Volume tier sort wrong (asc for applied) | Applies lowest tier instead of best |
+| Missing `$watch` on variant → quantity desync | Price/stock mismatch |
+| Lenis on checkout | Modal scroll bugs |
+| Cart totals without volume discount parity | User sees different price vs PDP |
 
 ## CRO / copy
 
