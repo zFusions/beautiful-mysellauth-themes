@@ -1,22 +1,45 @@
-<div class="container component vl-page-section" data-component-id="{{ componentId }}">
-  <section class="py-5-nav">
-    {% render_snippet "vl-page-head.njk", properties=properties, fallbackTitle='Feedback from users' %}
-    <div class="vl-feedback-grid testimonials row">
-      {% for feedback in feedbacks %}
-      <div class="col-12 col-md-6 col-lg-4 mb-4">
-        {% render_snippet "feedback-card.njk", feedback=feedback %}
+<div class="component vl-premium-page vl-feedback-page" data-component-id="{{ componentId }}">
+  <section class="vl-legal-section vl-terms-section" aria-labelledby="vl-feedback-title">
+    <div class="vl-legal-shell vl-terms-shell">
+      {% if properties.show_back_link != false %}
+      <a href="{{ (properties.back_link | default('/')) | shopUrl }}" class="vl-page-back vl-legal-back" data-reveal>{{ properties.back_text | default('← Back to store') | renderString }}</a>
+      {% endif %}
+
+      <header class="vl-legal-hero vl-terms-hero" data-reveal>
+        <h1 id="vl-feedback-title" class="vl-legal-title vl-terms-title">
+          <span class="vl-terms-title-plain">{{ properties.title_prefix | default('Customer') | renderString }}</span>
+          <em class="vl-terms-title-accent">{{ properties.title_accent | default('Reviews') | renderString }}</em>
+        </h1>
+        {% if properties.subtitle %}
+        <p class="vl-legal-sub vl-terms-sub">{{ properties.subtitle | renderString }}</p>
+        {% endif %}
+      </header>
+
+      <div class="vl-legal-panel vl-terms-panel" data-reveal>
+        <div class="vl-feedback-grid testimonials row" data-reveal-group>
+          {% for feedback in feedbacks %}
+          <div class="col-12 col-md-6 col-lg-4 mb-4" data-reveal>
+            {% render_snippet "feedback-card.njk", feedback=feedback %}
+          </div>
+          {% endfor %}
+        </div>
+
+        {% if feedbacksPaginator and feedbacksPaginator.last_page > 1 %}
+        <div class="vl-premium-pagination" data-reveal>
+          {% render_snippet "pagination.njk", paginator=feedbacksPaginator %}
+        </div>
+        {% endif %}
+
+        {% set cta_href = properties.cta | default('/#products') %}
+        {% if cta_href[0] == '#' %}
+          {% set cta_href = ('/' ~ cta_href) | shopUrl %}
+        {% else %}
+          {% set cta_href = cta_href | shopUrl %}
+        {% endif %}
+        <div class="vl-premium-cta-wrap" data-reveal>
+          <a href="{{ cta_href }}" class="vl-page-cta vl-premium-cta">{{ properties.cta_text | default('Browse products') | renderString }}</a>
+        </div>
       </div>
-      {% endfor %}
     </div>
-    {% if feedbacksPaginator and feedbacksPaginator.last_page > 1 %}
-      {% render_snippet "pagination.njk", paginator=feedbacksPaginator %}
-    {% endif %}
-    {% set cta_href = properties.cta | default('/#products') %}
-    {% if cta_href[0] == '#' %}
-      {% set cta_href = ('/' ~ cta_href) | shopUrl %}
-    {% else %}
-      {% set cta_href = cta_href | shopUrl %}
-    {% endif %}
-    <a href="{{ cta_href }}" class="vl-page-cta">{{ properties.cta_text | default('Browse products') | renderString }}</a>
   </section>
 </div>

@@ -1,4 +1,4 @@
-<header class="vl-page-head">
+<header class="vl-page-head" data-reveal>
   {% if properties.show_back_link != false %}
   <a href="{{ (properties.back_link | default('/')) | shopUrl }}" class="vl-page-back">{{ properties.back_text | default('← Back to store') | renderString }}</a>
   {% endif %}

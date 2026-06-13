@@ -37,8 +37,11 @@ document.addEventListener('alpine:init', () => {
         }
 
         window.addEventListener('load', () => {
-          if (document.querySelector('.currency-selector select')) {
-            document.querySelectorAll('.currency-selector select').forEach((element) => {
+          if (typeof Choices === 'undefined' || !document.querySelector('.currency-selector select')) {
+            return;
+          }
+
+          document.querySelectorAll('.currency-selector select').forEach((element) => {
               const choices = new Choices(element, { 
                 searchPlaceholderValue: 'Currency', 
                 shouldSort: false, 
@@ -58,7 +61,6 @@ document.addEventListener('alpine:init', () => {
                 choices._highlightChoice(selectedChoiceElement);
               }
             });
-          }
         });
       },
     },
@@ -126,6 +128,86 @@ document.addEventListener('alpine:init', () => {
       modalOtpError: '',
       modalLoading: false,
       altchaPayload: null,
+      loginRedirectPath: '/customer/dashboard',
+
+      getLoginModalElement() {
+        return document.getElementById('customer-login-modal');
+      },
+
+      showLoginModal() {
+        const modalEl = this.getLoginModalElement();
+        if (!modalEl || typeof bootstrap === 'undefined') {
+          return false;
+        }
+
+        bootstrap.Modal.getOrCreateInstance(modalEl).show();
+        return true;
+      },
+
+      hideLoginModal() {
+        const modalEl = this.getLoginModalElement();
+        if (!modalEl || typeof bootstrap === 'undefined') {
+          return;
+        }
+
+        const instance = bootstrap.Modal.getInstance(modalEl);
+        if (instance) {
+          instance.hide();
+        }
+      },
+
+      resetModalState() {
+        this.modalEmail = '';
+        this.modalOtpDigits = Array(6).fill('');
+        this.modalStep = 1;
+        this.modalEmailError = '';
+        this.modalOtpError = '';
+        this.modalLoading = false;
+      },
+
+      resolveLoginRedirectPath(backParam) {
+        if (!backParam || backParam === 'dashboard') {
+          return '/customer/dashboard';
+        }
+
+        if (backParam.startsWith('/')) {
+          return backParam;
+        }
+
+        if (backParam.startsWith('customer/')) {
+          return `/${backParam}`;
+        }
+
+        return `/customer/${backParam.replace(/^\/+/, '')}`;
+      },
+
+      handleLoginQuery() {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('login') !== '1') {
+          return;
+        }
+
+        this.loginRedirectPath = this.resolveLoginRedirectPath(params.get('back'));
+
+        if (window.shopCustomer) {
+          window.location.href = this.loginRedirectPath;
+          return;
+        }
+
+        params.delete('login');
+        params.delete('back');
+        const query = params.toString();
+        const cleanUrl = `${window.location.pathname}${query ? `?${query}` : ''}${window.location.hash}`;
+        window.history.replaceState({}, '', cleanUrl);
+
+        const openModal = () => {
+          if (!this.showLoginModal()) {
+            window.setTimeout(openModal, 50);
+          }
+        };
+
+        openModal();
+      },
 
       addAltchaEventListener: function () {
         window.alpineApp.$refs['appCustomer.altcha'].addEventListener('statechange', (event) => {
@@ -141,23 +223,23 @@ document.addEventListener('alpine:init', () => {
       modalOpen() {
         this.modalIsOpen = true;
         this.modalStep = 1;
-        document.body.style.overflow = 'hidden';
+        this.showLoginModal();
 
         window.alpineApp.$nextTick(() => {
-          window.alpineApp.$refs['appCustomer.modalEmailInput'].focus();
+          const emailInput = window.alpineApp.$refs['appCustomer.modalEmailInput'];
+          if (emailInput) {
+            emailInput.focus();
+          }
         });
       },
   
       modalClose() {
         this.modalIsOpen = false;
-        
+        this.hideLoginModal();
+
         setTimeout(() => {
-          this.modalEmail = '';
-          this.otp = '';
-          this.modalStep = 1;
-          this.modalEmailError = '';
-          this.modalOtpError = '';
-        }, 300); // Transition
+          this.resetModalState();
+        }, 300);
 
         document.body.style.overflow = 'auto';
       },
@@ -263,7 +345,7 @@ document.addEventListener('alpine:init', () => {
   
           if (data.token) {
             Cookies.set('shop_customer_token', data.token, { expires: 30, path: '/' });
-            window.location.href = '/customer/dashboard';
+            window.location.href = this.loginRedirectPath || '/customer/dashboard';
           } else {
             this.modalOtpError = data?.message || 'Invalid credentials.';
           }
@@ -314,6 +396,22 @@ document.addEventListener('alpine:init', () => {
         if (window.alpineApp.$refs['appCustomer.modalOtpInputs[0]']) {
           window.alpineApp.$refs['appCustomer.modalOtpInputs[0]'].addEventListener('paste', (event) => this.modalOtpHandlePaste(event));
         }
+
+        const modalEl = this.getLoginModalElement();
+        if (modalEl) {
+          modalEl.addEventListener('hidden.bs.modal', () => {
+            this.modalIsOpen = false;
+            document.body.style.overflow = 'auto';
+            window.setTimeout(() => this.resetModalState(), 300);
+          });
+
+          modalEl.addEventListener('shown.bs.modal', () => {
+            this.modalIsOpen = true;
+            document.body.style.overflow = 'hidden';
+          });
+        }
+
+        this.handleLoginQuery();
       }
     },
 

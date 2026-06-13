@@ -1,13 +1,15 @@
-<div class="container component vl-page-section">
-  <section class="py-5-nav">
-    <header class="vl-page-head">
-      <a href="{{ '/' | shopUrl }}" class="vl-page-back">← Back to store</a>
-      <h1>{{ name }}</h1>
-    </header>
+<div class="component vl-premium-page vl-custom-page" data-component-id="{{ componentId }}">
+  <section class="vl-legal-section vl-terms-section" aria-labelledby="vl-custom-page-title">
+    <div class="vl-legal-shell vl-terms-shell">
+      <a href="{{ '/' | shopUrl }}" class="vl-page-back vl-legal-back" data-reveal>← Back to store</a>
+      <header class="vl-legal-hero vl-terms-hero" data-reveal>
+        <h1 id="vl-custom-page-title" class="vl-legal-title vl-terms-title">{{ name }}</h1>
+      </header>
+    </div>
   </section>
 </div>
 
-<div class="components">
+<div class="components vl-custom-page-body">
   {% for componentId in components_order %}
     {% render_component componentId %}
   {% endfor %}

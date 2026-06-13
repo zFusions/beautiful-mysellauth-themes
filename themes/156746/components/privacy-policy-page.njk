@@ -1,12 +1,11 @@
-<div class="container component vl-page-section" data-component-id="{{ componentId }}">
-  <section class="py-5-nav">
-    {% render_snippet "vl-page-head.njk", properties=properties, fallbackTitle='Privacy Policy' %}
-    <div class="row">
-      <div class="col-lg-8 mx-auto">
-        <div class="editor vl-page-prose">
-          {{ privacy_policy | safe }}
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
+{% render_snippet "vl-legal-page.njk",
+  properties=properties,
+  componentId=componentId,
+  page_class='vl-privacy-page',
+  title_id='vl-privacy-title',
+  fallback_prefix='Privacy',
+  fallback_accent='Policy',
+  show_extra=(properties.show_shop_content != false and privacy_policy),
+  extra_content=privacy_policy,
+  extra_heading=properties.shop_content_heading
+%}

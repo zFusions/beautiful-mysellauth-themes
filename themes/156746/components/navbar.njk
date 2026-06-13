@@ -2,17 +2,11 @@
   <div class="container">
     <div class="vl-nav-row">
       <a class="vl-nav-brand" href="{{ '/' | shopUrl }}">
-        {% if global.components.navbar.show_logo and shop.image_url %}
-        <img
-          class="vl-nav-logo-img"
-          src="{{ shop.image_url }}"
-          alt=""
-          width="28"
-          height="28"
-          loading="eager"
-        />
+        {% if global.components.navbar.show_logo %}
+        {% render_snippet "velora-brand-lockup.njk", size=26, eager=true %}
+        {% else %}
+        <span class="vl-brand-wordmark vl-brand-wordmark--solo">{{ shop.name }}</span>
         {% endif %}
-        <span class="vl-nav-name">{{ shop.name }}</span>
       </a>
 
       <nav class="vl-nav-menu d-none d-lg-flex" data-nav-menu aria-label="Sections">
@@ -20,6 +14,7 @@
         <a class="vl-nav-link" href="{{ '/#how-it-works' | shopUrl }}" data-nav-target="how-it-works">How it works</a>
         <a class="vl-nav-link" href="{{ '/#features' | shopUrl }}" data-nav-target="features">Why us</a>
         <a class="vl-nav-link" href="{{ '/#faq' | shopUrl }}" data-nav-target="faq">FAQ</a>
+        <a class="vl-nav-link" href="{{ '/status' | shopUrl }}">Status</a>
         {% if shop.discord_url %}
         <a class="vl-nav-link" href="{{ shop.discord_url }}" target="_blank" rel="noopener">Support</a>
         {% else %}
@@ -28,8 +23,8 @@
       </nav>
 
       <div class="vl-nav-actions">
-        <a href="{{ '/customer/dashboard' | shopUrl }}" class="vl-nav-action-link d-none d-lg-inline-flex">Login</a>
-        <a href="{{ '/#products' | shopUrl }}" class="vl-nav-cta d-none d-lg-inline-flex">Get Started</a>
+        <button type="button" @click="appCustomer.loginOrRedirect()" class="vl-nav-action-link d-none d-lg-inline-flex">Login</button>
+        <a href="{{ '/#products' | shopUrl }}" class="vl-nav-cta d-none d-lg-inline-flex">Browse products</a>
 
         <button class="vl-nav-toggle d-lg-none" type="button" aria-expanded="false" aria-controls="vlMobileNav" aria-label="Menu">
           <span class="vl-nav-toggle-icon"></span>
@@ -43,15 +38,15 @@
         <a class="vl-nav-link" href="{{ '/#how-it-works' | shopUrl }}">How it works</a>
         <a class="vl-nav-link" href="{{ '/#features' | shopUrl }}">Why us</a>
         <a class="vl-nav-link" href="{{ '/#faq' | shopUrl }}">FAQ</a>
+        <a class="vl-nav-link" href="{{ '/status' | shopUrl }}">Status</a>
         {% if shop.discord_url %}
         <a class="vl-nav-link" href="{{ shop.discord_url }}" target="_blank" rel="noopener">Support</a>
         {% else %}
         <a class="vl-nav-link" href="{{ '/#faq' | shopUrl }}">Support</a>
         {% endif %}
-        <a class="vl-nav-link" href="{{ '/status' | shopUrl }}">Status</a>
         <div class="vl-nav-mobile-actions">
-          <a href="{{ '/customer/dashboard' | shopUrl }}" class="vl-nav-action-link">Login</a>
-          <a href="{{ '/#products' | shopUrl }}" class="vl-nav-cta">Get Started</a>
+          <button type="button" @click="appCustomer.loginOrRedirect()" class="vl-nav-action-link">Login</button>
+          <a href="{{ '/#products' | shopUrl }}" class="vl-nav-cta">Browse products</a>
         </div>
       </div>
     </div>

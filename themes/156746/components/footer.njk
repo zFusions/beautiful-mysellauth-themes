@@ -1,13 +1,21 @@
 {% if global.components.footer.show_shop_name or global.components.footer.show_logo or global.components.footer.show_socials or global.components.footer.links.length > 0 %}
 <footer class="footer component nexus-footer" data-component-id="footer">
+  <div class="vl-footer-light" aria-hidden="true">
+    <span class="vl-footer-light__haze"></span>
+    <span class="vl-footer-light__core"></span>
+  </div>
   <div class="container">
     <div class="nexus-footer-content">
       <div class="footer-grid">
         <div class="footer-column brand">
           <div class="nexus-footer-brand">
-            <span class="nexus-footer-name">{{ shop.name }}</span>
+            {% if global.components.footer.show_logo %}
+            {% render_snippet "velora-brand-lockup.njk", size=34, class='vl-brand-lockup vl-brand-lockup--footer' %}
+            {% else %}
+            <span class="vl-brand-wordmark vl-brand-wordmark--footer vl-brand-wordmark--solo">{{ shop.name }}</span>
+            {% endif %}
           </div>
-          <p class="footer-brand-text">Web store & Discord shop — scripts, software, licenses and premium products. Secure payments, instant delivery.</p>
+          <p class="footer-brand-text">{{ global.components.footer.brand_text | default('Web store & Discord shop — scripts, software, licenses and premium products. Secure payments, instant delivery.') | renderString }}</p>
           <div class="footer-btns-group">
             {% if shop.discord_url %}
             <a href="{{ shop.discord_url }}" class="footer-social-btn discord" target="_blank">
@@ -25,9 +33,10 @@
         <div class="footer-column">
           <h5 class="footer-column-title">Quick Links</h5>
           <div class="footer-links-list">
-            <a href="{{ '/' | shopUrl }}" class="nexus-footer-link">Home</a>
             {% for link in global.components.navbar.left_links %}
               <a href="{{ link.link | shopUrl }}" class="nexus-footer-link">{{ link.text }}</a>
+            {% else %}
+              <a href="{{ '/' | shopUrl }}" class="nexus-footer-link">Home</a>
             {% endfor %}
           </div>
         </div>
@@ -46,6 +55,7 @@
           <div class="footer-links-list">
             <a href="{{ '/#faq' | shopUrl }}" class="nexus-footer-link">FAQ</a>
             <a href="{{ '/feedback' | shopUrl }}" class="nexus-footer-link">Reviews</a>
+            <a href="{{ '/status' | shopUrl }}" class="nexus-footer-link">Status</a>
           </div>
         </div>
       </div>

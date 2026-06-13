@@ -1,8 +1,8 @@
 /* Velora dark — minimal overrides on SellAuth base */
 :root {
   --cl-accent: #F99926;
-  --cl-background-primary: #000000;
-  --cl-background-secondary: #0a0a0a;
+  --cl-background-primary: #030303;
+  --cl-background-secondary: #070707;
   --cl-border: rgba(255, 255, 255, 0.1);
   --vl-motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
   --vl-reveal-distance: 3rem;
@@ -10,11 +10,6 @@
 }
 
 /* Reveal motion is driven by inline JS transitions in master.njk */
-
-html.lenis,
-html.lenis body {
-  height: auto;
-}
 
 html.lenis.lenis-smooth {
   scroll-behavior: auto !important;
@@ -24,6 +19,11 @@ html.lenis.lenis-smooth body {
   overflow-x: hidden;
 }
 
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
 html.lenis #app,
 html.lenis .site-background-fixed {
   overflow-x: hidden;
@@ -31,4 +31,9 @@ html.lenis .site-background-fixed {
 
 .lenis.lenis-stopped {
   overflow: hidden;
+}
+
+.velora-home .vl-flow-card,
+.velora-home .ps-product-card {
+  contain: layout style;
 }

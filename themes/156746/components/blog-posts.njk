@@ -1,36 +1,66 @@
 {% if templateName == 'blog' %}
-<section class="container component vl-page-section" data-component-id="{{ componentId }}">
-  <div class="py-5-nav">
+<div class="component vl-premium-page vl-blog-page" data-component-id="{{ componentId }}">
+  <section class="vl-legal-section vl-terms-section" aria-labelledby="vl-blog-title">
+    <div class="vl-legal-shell vl-terms-shell">
+      {% if properties.show_back_link != false %}
+      <a href="{{ (properties.back_link | default('/')) | shopUrl }}" class="vl-page-back vl-legal-back" data-reveal>{{ properties.back_text | default('← Back to store') | renderString }}</a>
+      {% endif %}
+
+      <header class="vl-legal-hero vl-terms-hero" data-reveal>
+        <h1 id="vl-blog-title" class="vl-legal-title vl-terms-title">
+          <span class="vl-terms-title-plain">{{ properties.title_prefix | default('Our') | renderString }}</span>
+          <em class="vl-terms-title-accent">{{ properties.title_accent | default('Blog') | renderString }}</em>
+        </h1>
+        {% if properties.subtitle %}
+        <p class="vl-legal-sub vl-terms-sub">{{ properties.subtitle | renderString }}</p>
+        {% endif %}
+      </header>
+
+      <div class="vl-legal-panel vl-terms-panel" data-reveal>
+        {% if blogPosts.data|length > 0 %}
+        <div class="row products vl-blog-grid" data-reveal-group>
+          {% for blogPost in blogPosts.data.slice(0, (properties.amount if properties.amount else blogPosts.data|length)) %}
+            {% render_snippet "blog-post-card.njk", blogPost=blogPost %}
+          {% endfor %}
+        </div>
+        {% if blogPosts.last_page > 1 %}
+        <div class="vl-premium-pagination" data-reveal>
+          {% render_snippet "pagination.njk", paginator=blogPosts %}
+        </div>
+        {% endif %}
+        {% else %}
+        <div class="vl-premium-empty" data-reveal><p>No blog posts yet.</p></div>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+</div>
 {% else %}
 <section class="py-20 text-block component" data-component-id="{{ componentId }}">
   <div class="container">
-{% endif %}
-
     {% if properties.title %}
-      <div class="section-title">
-        <h2>{{ properties.title | renderString }}</h2>
-      </div>
+    <div class="section-title">
+      <h2>{{ properties.title | renderString }}</h2>
+    </div>
     {% endif %}
     {% if properties.subtitle %}
-      <div class="section-subtitle">
-        <p>{{ properties.subtitle | renderString }}</p>
-      </div>
+    <div class="section-subtitle">
+      <p>{{ properties.subtitle | renderString }}</p>
+    </div>
     {% endif %}
 
     {% if blogPosts.data|length > 0 %}
-      <div class="row products">
-        {% for blogPost in blogPosts.data.slice(0, (properties.amount if properties.amount else blogPosts.data|length)) %}
-          {% render_snippet "blog-post-card.njk", blogPost=blogPost %}
-        {% endfor %}
-      </div>
-      
-      {% if blogPosts.last_page > 1 %}
-        {% render_snippet "pagination.njk", paginator=blogPosts %}
-      {% endif %}
+    <div class="row products">
+      {% for blogPost in blogPosts.data.slice(0, (properties.amount if properties.amount else blogPosts.data|length)) %}
+        {% render_snippet "blog-post-card.njk", blogPost=blogPost %}
+      {% endfor %}
+    </div>
+    {% if blogPosts.last_page > 1 %}
+      {% render_snippet "pagination.njk", paginator=blogPosts %}
+    {% endif %}
     {% else %}
-      <div class="alert alert-info">
-        No Blog Posts Yet.
-      </div>
+    <div class="alert alert-info">No Blog Posts Yet.</div>
     {% endif %}
   </div>
 </section>
+{% endif %}

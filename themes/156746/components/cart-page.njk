@@ -1,14 +1,16 @@
-<div class="container component vl-cart-page" data-component-id="{{ componentId }}">
+<div class="component vl-cart-page" data-component-id="{{ componentId }}">
   <div x-data="cartPage">
-    <section class="vl-cart">
-      <header class="vl-cart-head vl-page-head">
-        <a href="{{ '/#products' | shopUrl }}" class="vl-page-back">← Back to products</a>
-        <h1 class="vl-cart-title">{{ properties.title | default('Your cart') | renderString }}</h1>
-        <p class="vl-cart-sub vl-page-sub">{{ properties.subtitle | default('Review your order — instant delivery after payment.') | renderString }}</p>
-      </header>
+    <section class="vl-cart-section" aria-labelledby="vl-cart-title">
+      <div class="vl-cart-shell">
+        <header class="vl-cart-head vl-page-head" data-reveal>
+          <a href="{{ '/#products' | shopUrl }}" class="vl-page-back">← Back to products</a>
+          <h1 id="vl-cart-title" class="vl-cart-title">{{ properties.title | default('Your cart') | renderString }}</h1>
+          <p class="vl-cart-sub vl-page-sub">{{ properties.subtitle | default('Review your order — instant delivery after payment.') | renderString }}</p>
+          {% render_snippet "vl-cart-trust.njk" %}
+        </header>
 
-      <div class="vl-cart-layout">
-        <div class="vl-cart-main">
+        <div class="vl-cart-layout" data-reveal-group>
+        <div class="vl-cart-main" data-reveal>
           <div x-cloak x-show="fullCartShowMessages" class="vl-cart-alert vl-cart-alert--warning" role="status">
             <template x-for="(message, index) in fullCartMessages" :key="index">
               <p x-text="message"></p>
@@ -31,9 +33,9 @@
                       <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
                     </svg>
                   </div>
-                  <h2 class="vl-cart-empty-title">Your cart is empty</h2>
-                  <p class="vl-cart-empty-sub">Browse Boost Bot, token checker, and scripts — delivered instantly.</p>
-                  <a href="{{ '/' | shopUrl }}#products" class="vl-cart-empty-cta">Browse products</a>
+                  <h2 class="vl-cart-empty-title">{{ properties.empty_title | default('Your cart is empty') | renderString }}</h2>
+                  <p class="vl-cart-empty-sub">{{ properties.empty_subtitle | default('Browse our catalog — instant delivery after payment.') | renderString }}</p>
+                  <a href="{{ properties.empty_cta_link | default('/#products') | shopUrl }}" class="vl-cart-empty-cta">{{ properties.empty_cta_text | default('Browse products') | renderString }}</a>
                 </div>
               </template>
 
@@ -47,7 +49,7 @@
                         </template>
                         <template x-if="!cartItem.product.image_url">
                           <div class="vl-cart-item-placeholder" aria-hidden="true">
-                            <span>V</span>
+                            <img src="{{ 'velora-mark-512.png' | assetUrl }}" alt="" width="32" height="32" decoding="async" />
                           </div>
                         </template>
                       </div>
@@ -65,7 +67,7 @@
                         <div class="vl-cart-item-foot">
                           <div class="vl-cart-qty" role="group" :aria-label="'Quantity for ' + cartItem.product.name">
                             <button type="button" class="vl-cart-qty-btn" @click="changeQuantity(index, cartItem.quantity - 1)" :disabled="cartItem.quantity <= getMinQuantity(index)" aria-label="Decrease quantity">−</button>
-                            <input type="number" x-model.number="cartItem.quantity" class="vl-cart-qty-input" :aria-label="'Quantity for ' + cartItem.product.name" min="1" />
+                            <input type="number" x-model.number="cartItem.quantity" @change="changeQuantity(index, cartItem.quantity)" class="vl-cart-qty-input" :aria-label="'Quantity for ' + cartItem.product.name" :min="getMinQuantity(index)" :max="getMaxQuantity(index)" />
                             <button type="button" class="vl-cart-qty-btn" @click="changeQuantity(index, cartItem.quantity + 1)" :disabled="cartItem.quantity >= getMaxQuantity(index)" aria-label="Increase quantity">+</button>
                           </div>
                           <p class="vl-cart-item-price" x-text="appCurrency.format(getItemSinglePrice(index), cartItem.product.currency)"></p>
@@ -79,9 +81,9 @@
           </template>
         </div>
 
-        <aside class="vl-cart-summary" aria-labelledby="vl-cart-summary-title">
+        <aside class="vl-cart-summary" data-reveal aria-labelledby="vl-cart-summary-title">
           {% render_snippet "vl-trust-micro.njk" %}
-          <form @submit.prevent="checkout" class="vl-cart-summary-form">
+          <form @submit.prevent="checkout" class="vl-cart-summary-form" x-ref="checkoutForm">
             <h2 id="vl-cart-summary-title" class="vl-cart-summary-title">Order summary</h2>
             <div class="vl-cart-summary-row">
               <span class="vl-cart-summary-label">Subtotal</span>
@@ -127,8 +129,33 @@
             <p class="vl-cart-trust-note">No account required · Encrypted checkout · Instant delivery</p>
           </form>
         </aside>
+        </div>
       </div>
     </section>
+
+    <div
+      class="vl-cart-mobile-bar"
+      x-cloak
+      x-show="!fullCartLoading && fullCart.length > 0"
+      role="region"
+      aria-label="Quick checkout"
+    >
+      <div class="vl-cart-mobile-bar-inner">
+        <div class="vl-cart-mobile-bar-total">
+          <span class="vl-cart-mobile-bar-label">Total</span>
+          <span class="vl-cart-mobile-bar-value" x-text="appCurrency.format(cartTotalPrice, cartCurrency)"></span>
+        </div>
+        <button
+          type="button"
+          class="vl-cart-mobile-bar-btn"
+          @click="$refs.checkoutForm.requestSubmit()"
+          :disabled="fullCartLoading || fullCart.length === 0 || isSubmitting || submitDisabled"
+        >
+          <span x-show="!isSubmitting">Pay securely</span>
+          <span x-show="isSubmitting">Processing…</span>
+        </button>
+      </div>
+    </div>
   </div>
 </div>
 

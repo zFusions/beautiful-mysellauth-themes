@@ -28,6 +28,10 @@ typography:
   font-mono:
     family: "{{FONT_MONO}}"
     scope: mocks-only
+  font-product:
+    family: "Inter"
+    scope: product-register-only
+    weights: [500, 600, 700]
   hero-title:
     fontFamily: "{{FONT_DISPLAY}}"
     fontSize: "clamp(2rem, 2.4vw + 0.75rem, 3.5rem)"
@@ -86,11 +90,14 @@ theme_id: "{{THEME_ID}}"
 
 **The Glow Rule.** {{GLOW_RULE}}
 
+**The Depth Rule.** Hero spotlight lives in the hero component only. Below the fold, use alternating `--{{PREFIX}}-bg` / `--{{PREFIX}}-section-alt` bands — not full-page orange grids or section-title radials. Optional: footer glow ~50% opacity; ultrawide neutral edge lift. See [03-design-system.md](../references/03-design-system.md#page-depth--background-dark-saas).
+
 ## Typography
 
 **UI / body:** {{FONT_UI}}  
 **Display:** {{FONT_DISPLAY}}  
-**Mono (mocks only):** {{FONT_MONO}}
+**Mono (mocks only):** {{FONT_MONO}}  
+**Product register (PDP/cart):** Inter or {{FONT_UI}} — title, price, CTAs only
 
 Google Fonts (master.njk):
 
@@ -110,6 +117,8 @@ Google Fonts (master.njk):
 **The Display Scope Rule.** Display font on hero + section titles only — never body paragraphs.
 
 **The Mono Scope Rule.** JetBrains Mono (or chosen mono) only inside mock stages.
+
+**The Product Font Rule.** On PDP/cart, use `--{{PREFIX}}-font-product` (typically Inter) for title, price, qty, and CTAs. Body copy and accordions use UI/system font — never display serif on prices.
 
 ## Components
 
@@ -141,6 +150,14 @@ Google Fonts (master.njk):
 
 - Match landing tokens; accent on price or CTA per style recipe
 - 44px touch targets on mobile
+
+### Shop pages (PDP / cart)
+
+- **CSS split:** `shop-pdp.css` (PDP only) + `shop-pages.css` (cart, checkout) — no duplicate rules
+- **Layout:** Two-column PDP — media + accordions | sticky buy rail (992px+)
+- **Glass DA:** backdrop-filter cards with solid fallback; top-edge accent highlight
+- **Volume discounts:** Alpine reactive `totalPrice`; tier nudge meter — see [07-shop-pages.md](../references/07-shop-pages.md)
+- **Register:** `product` — override landing fonts per Product Font Rule above
 
 ## Motion
 

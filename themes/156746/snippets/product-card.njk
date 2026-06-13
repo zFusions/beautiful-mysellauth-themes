@@ -24,7 +24,7 @@
         <img src="{{ product.image_url }}" loading="lazy" decoding="async" alt="{{ product.name }}" class="ps-product-img" />
       {% else %}
         <div class="ps-product-placeholder" aria-hidden="true">
-          <span class="ps-product-placeholder-mark">V</span>
+          <img class="ps-product-placeholder-mark" src="{{ 'velora-mark-512.png' | assetUrl }}" alt="" width="48" height="48" decoding="async" loading="lazy" />
         </div>
       {% endif %}
 

@@ -1,0 +1,12 @@
+{% set markSize = size | default(28) %}
+{% set markClass = class | default('vl-brand-mark') %}
+<img
+  class="{{ markClass }}"
+  src="{{ 'velora-mark-512.png' | assetUrl }}"
+  alt=""
+  width="{{ markSize }}"
+  height="{{ markSize }}"
+  loading="{{ 'eager' if eager else 'lazy' }}"
+  {% if eager %}fetchpriority="high"{% endif %}
+  decoding="async"
+/>

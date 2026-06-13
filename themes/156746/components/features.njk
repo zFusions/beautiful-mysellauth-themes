@@ -11,7 +11,7 @@
     </header>
 
     <div class="vl-flow-steps" data-reveal-group>
-      {% for feature in properties.features %}
+      {% for feature in properties.features | default([]) %}
       {% set mockType = feature.mock_type | default('scripts') %}
       <article class="vl-flow-card" data-reveal>
         {% if properties.show_mock_ui != false %}

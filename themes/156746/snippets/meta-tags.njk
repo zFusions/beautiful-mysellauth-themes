@@ -1,13 +1,20 @@
+{%- set vlBrandMark = 'velora-mark-512.png' | assetUrl -%}
+{%- set vlBrandOg = 'velora-logo-1140.png' | assetUrl -%}
+{%- set vlBrandFavicon = 'velora-mark-32.png' | assetUrl -%}
 {%- set title = shop.name -%}
 {%- set description = shop.description -%}
-{%- set image = shop.image_url -%}
+{%- set image = vlBrandOg -%}
 {%- set twitterCard = 'summary' -%}
 
 {%- if templateName == 'product' -%}
   {%- set title = product.meta_title -%}
   {%- set description = product.meta_description -%}
-  {%- set image = product.meta_image_url -%}
+  {%- set image = product.meta_image_url or product.image_url or vlBrandOg -%}
   {%- set twitterCard = product.meta_twitter_card -%}
+  {%- set lcpImage = product.image_urls[0] if product.image_urls|length > 0 else product.image_url -%}
+  {%- if lcpImage -%}
+<link rel="preload" as="image" href="{{ lcpImage }}" fetchpriority="high">
+  {%- endif -%}
 {%- elif templateName == 'cart' -%}
   {%- set title = 'Shopping Cart - ' ~ shop.name -%}
   {%- set description = 'Review your shopping cart.' -%}
@@ -46,15 +53,12 @@
 <meta name="twitter:description" content="{{ description }}">
 <meta name="twitter:image" content="{{ image }}">
 <meta name="twitter:card" content="{{ twitterCard }}">
-<link rel="icon" type="image/png" href="{{ shop.favicon_url }}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ vlBrandFavicon }}">
+<link rel="icon" type="image/png" sizes="128x128" href="{{ 'velora-mark-128.png' | assetUrl }}">
+<link rel="apple-touch-icon" href="{{ 'velora-mark-128.png' | assetUrl }}">
 <meta name="theme-color" content="{{ '' | themeColor }}" />
 
-{%- set socials = [] -%}
-{%- if shop.discord_url -%}{%- set socials = socials.concat([shop.discord_url]) -%}{%- endif -%}
-{%- if shop.telegram_url -%}{%- set socials = socials.concat([shop.telegram_url]) -%}{%- endif -%}
-{%- if shop.instagram_url -%}{%- set socials = socials.concat([shop.instagram_url]) -%}{%- endif -%}
-{%- if shop.tiktok_url -%}{%- set socials = socials.concat([shop.tiktok_url]) -%}{%- endif -%}
-{%- if shop.youtube_url -%}{%- set socials = socials.concat([shop.youtube_url]) -%}{%- endif -%}
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -63,14 +67,48 @@
       "@type": "Organization",
       "name": {{ shop.name | json }},
       "description": {{ (shop.description or '') | json }},
-      "logo": {{ (shop.image_url or '') | json }},
-      "sameAs": {{ socials | json }}
+      "logo": {{ vlBrandMark | json }},
+      "sameAs": [
+{%- if shop.discord_url -%}
+        {{ shop.discord_url | json }}
+{%- endif -%}
+{%- if shop.telegram_url -%}
+{%- if shop.discord_url -%},{%- endif -%}
+        {{ shop.telegram_url | json }}
+{%- endif -%}
+{%- if shop.instagram_url -%}
+{%- if shop.discord_url or shop.telegram_url -%},{%- endif -%}
+        {{ shop.instagram_url | json }}
+{%- endif -%}
+{%- if shop.tiktok_url -%}
+{%- if shop.discord_url or shop.telegram_url or shop.instagram_url -%},{%- endif -%}
+        {{ shop.tiktok_url | json }}
+{%- endif -%}
+{%- if shop.youtube_url -%}
+{%- if shop.discord_url or shop.telegram_url or shop.instagram_url or shop.tiktok_url -%},{%- endif -%}
+        {{ shop.youtube_url | json }}
+{%- endif -%}
+      ]
     },
     {
       "@type": "WebSite",
       "name": {{ shop.name | json }},
       "description": {{ (shop.description or '') | json }}
     }
+{%- if templateName == 'product' -%}
+    ,
+    {
+      "@type": "Product",
+      "name": {{ product.name | json }},
+      "description": {{ (product.meta_description or product.description | striptags | truncate(240)) | json }},
+      "image": {{ (product.meta_image_url or product.image_url or vlBrandMark) | json }},
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": {{ product.currency | json }},
+        "availability": "https://schema.org/{{ 'InStock' if product.stock != 0 else 'OutOfStock' }}"
+      }
+    }
+{%- endif -%}
   ]
 }
 </script>

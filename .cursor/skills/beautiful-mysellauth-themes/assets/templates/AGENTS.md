@@ -35,8 +35,15 @@ pro.css → custom.css → {{CSS_FILE}} → shop-pages.css
 | `themes/{{THEME_ID}}/layouts/master.njk` | Shell, fonts, motion |
 | `themes/{{THEME_ID}}/components/` | Landing sections |
 | `themes/{{THEME_ID}}/assets/{{CSS_FILE}}` | Landing design system |
-| `themes/{{THEME_ID}}/assets/shop-pages.css` | PDP, cart, checkout |
+| `themes/{{THEME_ID}}/assets/shop-pdp.css` | PDP-only styles (if used) |
+| `themes/{{THEME_ID}}/assets/shop-pages.css` | Cart, checkout |
 | `themes/{{THEME_ID}}/assets/theme-feature-mocks.js` | Feature mock engine |
+
+## Page depth (landing)
+
+- Hero spotlight: **inside hero component only** — see DESIGN.md Depth Rule
+- Below hero: alternate `--{{PREFIX}}-bg` / `--{{PREFIX}}-section-alt` on `.t-home > .component`
+- Do **not** stack full-page grids or section-title orange radials
 
 ## Build recipe
 

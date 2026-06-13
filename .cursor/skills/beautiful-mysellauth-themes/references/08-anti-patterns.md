@@ -25,6 +25,12 @@
 | Light theme + heavy orange glow | Washed |
 | Mix gaming + luxury serif | Incoherent |
 | Moving hero copy when tuning mock peek | Breaks approved layout |
+| Full-page CSS grid + hero spotlight grid | Double grid, visual noise |
+| Orange glow band behind section titles | Looks like a bug; user removes it |
+| `body::before` ambient with opaque `#app` | No visible change — wasted complexity |
+| Side orange washes at high opacity | "Weird" wash, not premium |
+| Per-card spot glow + hero spot glow + section glow | Glow stacking — cheap |
+| Copy competitor compare layouts (VS scores, 10/10 columns) | Generic reseller trope — use own proof mocks |
 
 ## Motion
 
@@ -46,6 +52,21 @@
 | Global `.btn` override on homepage | Breaks shop pages |
 | Hardcoded hex scattered | Unmaintainable |
 | No prefix on custom classes | Bootstrap conflicts |
+| PDP rules duplicated in shop-pages.css AND shop-pdp.css | Drift, double maintenance |
+| Glass styles only in landing CSS with no `@supports` fallback | Broken cards on old browsers |
+| Volume discount price hardcoded in Nunjucks | Breaks on qty change — use Alpine getters |
+
+## Shop pages / PDP
+
+| ❌ | Why |
+|----|-----|
+| Empty frame when product has no image | Broken PDP — use auto banner |
+| Display font on product price | Illegible, wrong register |
+| Sticky rail without mobile stack test | CTA buried below fold |
+| Volume tier sort wrong (asc for applied) | Applies lowest tier instead of best |
+| Missing `$watch` on variant → quantity desync | Price/stock mismatch |
+| Lenis on checkout | Modal scroll bugs |
+| Cart totals without volume discount parity | User sees different price vs PDP |
 
 ## CRO / copy
 
@@ -69,3 +90,5 @@
 | Change accent in CSS only without updating DESIGN.md | KB drift; next agent breaks style |
 | Copy another shop's brand in skill examples | Not universal |
 | Skip mobile mental check | Broken responsive |
+| Ship theme changes without updating skill references | Next agent repeats same mistakes |
+| Client brand names in skill markdown | Skill must stay universal — brand in KB only |

@@ -1,0 +1,13 @@
+<div class="vl-premium-page vl-customer-page">
+  <section class="vl-legal-section vl-terms-section">
+    <div class="vl-legal-shell vl-terms-shell vl-legal-shell--wide">
+      <header class="vl-legal-hero vl-terms-hero" data-reveal>
+        <h1 class="vl-legal-title vl-terms-title">
+          <span class="vl-terms-title-plain">{{ prefix | default('My') | renderString }}</span>
+          <em class="vl-terms-title-accent">{{ accent | default('Account') | renderString }}</em>
+        </h1>
+        {% if subtitle %}
+        <p class="vl-legal-sub vl-terms-sub">{{ subtitle | renderString }}</p>
+        {% endif %}
+      </header>
+      <div class="vl-legal-panel vl-terms-panel vl-customer-panel" data-reveal>

@@ -1,8 +1,8 @@
-# Quality bar — what "best MySellAuth theme ever" means
+# Quality bar — premium SellAuth theme standard
 
 This is the bar every theme must hit before ship. Not "good enough" — **premium**.
 
-## The 11 pillars of excellence
+## The 12 pillars of excellence
 
 | # | Pillar | Pass criteria |
 |---|--------|---------------|
@@ -17,6 +17,7 @@ This is the bar every theme must hit before ship. Not "good enough" — **premiu
 | 9 | **Shop parity** | PDP + cart match landing tokens. Not a default Bootstrap afterthought. |
 | 10 | **Typography** | Google Fonts pairing in master.njk. Body = readable sans. Gaming = Syne + Plus Jakarta, not Orbitron. |
 | 11 | **Mobile first** | Hero readable. Mocks acceptable crop. 44px touch targets. |
+| 12 | **Page depth** | Section alternation or surfaces — not flat void black below hero. No full-page glow/grid stacking. |
 
 ## What separates amateur from premium
 
@@ -27,6 +28,8 @@ This is the bar every theme must hit before ship. Not "good enough" — **premiu
 | "Get started free" CTA | Browse products / Shop now |
 | 5 CSS files fighting | One `theme.css` design system |
 | Glow on every element | Glow on hero + one CTA |
+| Full-page grid + hero grid | One grid — hero arc only |
+| Flat black below hero | Alternating `--t-bg` / `--t-section-alt` sections |
 | Animations on page load | Scroll-gated, play once |
 | Pill buttons everywhere | Soft rectangle 10px |
 | Generic lorem ipsum | Niche-aware copy structure (user fills text) |
@@ -34,9 +37,21 @@ This is the bar every theme must hit before ship. Not "good enough" — **premiu
 
 ## Section rhythm (homepage)
 
-Alternate surfaces for depth:
-- Dark: `#000` hero → `#0e0e0e` bands → `#000` how-it-works → `#0e0e0e` features
-- Light: `#fff` → `#f1f5f9` → `#fff`
+**Depth without glow spam** — alternate surfaces (see [03-design-system.md](03-design-system.md#page-depth--background-dark-saas)):
+
+```css
+.t-home > .component { background: var(--t-section-alt) !important; }
+.t-home > .component:nth-child(even) { background: var(--t-bg) !important; }
+.t-home > .component.t-hero { background: transparent !important; }
+```
+
+Typical dark values: `--t-bg` at base canvas · `--t-section-alt` ~3–5% lighter (e.g. `#000` / `#0e0e0e` or `#030303` / `#0c0c0c`).
+
+- Hero: spotlight **inside hero only** — not full-page orange grid
+- Optional: footer glow at ~50% opacity · ultrawide neutral edge lift (charcoal, not orange)
+- **Avoid:** section title radials, double grids, opaque `#app` + hidden `body::before`
+
+Light themes: `#fff` → `#f1f5f9` → `#fff`
 
 Vertical spacing: `clamp(12px, 1.6vw, 18px)` between section head and content.
 

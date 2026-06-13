@@ -1,12 +1,8 @@
-<div class="container component vl-page-section" data-component-id="{{ componentId }}">
-  <section class="py-5-nav">
-    {% render_snippet "vl-page-head.njk", properties=properties, fallbackTitle='Terms of Service' %}
-    <div class="row">
-      <div class="col-lg-8 mx-auto">
-        <div class="editor vl-page-prose">
-          {{ shop.terms | safe }}
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
+{% render_snippet "vl-legal-page.njk",
+  properties=properties,
+  componentId=componentId,
+  title_id='vl-terms-title',
+  show_extra=(properties.show_shop_terms != false and shop.terms),
+  extra_content=shop.terms,
+  extra_heading=properties.shop_terms_heading
+%}

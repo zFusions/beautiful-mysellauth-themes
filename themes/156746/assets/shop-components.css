@@ -1,0 +1,398 @@
+/* ============================================================
+   Velora — builder components & secondary pages
+   Maintenance, socials, text blocks, pricing cards, gallery…
+   ============================================================ */
+
+/* ---------- Shared builder section ---------- */
+.vl-builder-section {
+  position: relative;
+  z-index: 1;
+  color: var(--vl-muted);
+}
+
+.vl-builder-section .section-title h2,
+.vl-builder-section > .container > .text-center h2,
+.vl-builder-section h2 {
+  font-family: var(--vl-font-header-sans);
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--vl-text);
+}
+
+.vl-builder-section .section-subtitle p,
+.vl-builder-section .text-muted {
+  color: var(--vl-muted) !important;
+}
+
+.vl-builder-card {
+  border: 1px solid var(--vl-border);
+  border-radius: var(--vl-product-radius);
+  background: rgba(255, 255, 255, 0.035);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  color: var(--vl-text);
+}
+
+@supports ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
+  .vl-builder-card {
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+  }
+}
+
+.vl-builder-section .btn-primary,
+.velora-inner-page .vl-builder-section .btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 20px;
+  border: 1px solid rgba(255, 200, 90, 0.5) !important;
+  border-radius: var(--vl-btn-radius) !important;
+  background: linear-gradient(165deg, rgba(255, 210, 100, 0.95) 0%, rgba(249, 140, 20, 0.88) 100%) !important;
+  color: #1a0d00 !important;
+  font-family: var(--vl-font-header-sans);
+  font-weight: 700;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35), 0 6px 20px rgba(249, 153, 38, 0.32);
+}
+
+.vl-builder-section .btn-primary:hover {
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+}
+
+/* ---------- Maintenance ---------- */
+.vl-maintenance {
+  min-height: 100vh;
+  background: var(--vl-bg);
+  position: relative;
+  overflow: hidden;
+}
+
+.vl-maintenance::before {
+  content: "";
+  position: absolute;
+  top: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(700px, 100vw);
+  height: 700px;
+  background: radial-gradient(circle, rgba(249, 153, 38, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.vl-maintenance-icon {
+  width: 120px;
+  height: 120px;
+  margin-inline: auto;
+  border-radius: 28px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(249, 153, 38, 0.28);
+  background: rgba(249, 153, 38, 0.08);
+  color: var(--vl-accent);
+}
+
+.vl-maintenance-icon svg {
+  width: 64px;
+  height: 64px;
+}
+
+.vl-maintenance h1 {
+  color: var(--vl-text) !important;
+  letter-spacing: -0.02em;
+}
+
+.vl-maintenance-accent {
+  color: var(--vl-accent);
+}
+
+.vl-maintenance .lead {
+  color: var(--vl-muted) !important;
+}
+
+.vl-maintenance .btn-primary {
+  border-radius: var(--vl-btn-radius) !important;
+  padding: 0.85rem 1.5rem;
+  font-weight: 700;
+}
+
+/* ---------- Socials / Discord CTA ---------- */
+.vl-socials-section .discord-cta-box {
+  border: 1px solid var(--vl-border);
+  border-radius: var(--vl-product-radius);
+  padding: 2rem 2.25rem;
+  background: rgba(255, 255, 255, 0.035);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 12px 32px rgba(0, 0, 0, 0.28);
+}
+
+@supports ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
+  .vl-socials-section .discord-cta-box {
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+  }
+}
+
+.vl-socials-section .discord-cta-title {
+  font-family: var(--vl-font-header-sans);
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  margin: 0;
+  color: var(--vl-text);
+  letter-spacing: -0.02em;
+}
+
+.vl-socials-section .discord-cta-text {
+  font-size: 1rem;
+  color: var(--vl-muted);
+  margin: 0;
+}
+
+.vl-socials-section .social-icon {
+  width: 3.5rem;
+  height: 3.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid var(--vl-border);
+  border-radius: var(--vl-btn-radius);
+  background: rgba(255, 255, 255, 0.04);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.vl-socials-section .social-icon:hover {
+  transform: translateY(-2px);
+  border-color: rgba(249, 153, 38, 0.45);
+  box-shadow: 0 8px 20px rgba(249, 153, 38, 0.15);
+}
+
+.vl-socials-section .social-icon svg {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+/* ---------- Text + image block ---------- */
+.vl-text-image-block {
+  color: var(--vl-text);
+}
+
+.vl-text-image-block .section-title h2 {
+  text-align: inherit;
+}
+
+.vl-text-image-block .section-subtitle p,
+.vl-text-image-block p.main-text {
+  color: var(--vl-muted);
+  line-height: 1.75;
+}
+
+.vl-text-image-block .nexus-badge {
+  display: inline-block;
+  margin-bottom: 12px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  border: 1px solid rgba(249, 153, 38, 0.35);
+  background: rgba(249, 153, 38, 0.1);
+  color: var(--vl-accent);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.vl-text-image-block .feature-item {
+  flex: 1 1 calc(50% - 1rem);
+  min-width: 160px;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.7rem 1rem;
+  border-radius: var(--vl-radius);
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid var(--vl-border);
+  color: var(--vl-text);
+}
+
+.vl-text-image-block .feature-item .icon {
+  color: var(--vl-accent);
+}
+
+.vl-text-image-block .features-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.vl-text-image-block .image-container img {
+  width: 100%;
+  border-radius: var(--vl-product-radius);
+  object-fit: cover;
+}
+
+.vl-text-image-block.alignment-center .section-title h2,
+.vl-text-image-block.alignment-center .section-subtitle p,
+.vl-text-image-block.alignment-center p.main-text {
+  text-align: center;
+}
+
+/* ---------- Text / video blocks ---------- */
+.vl-text-block,
+.vl-text-video-block {
+  color: var(--vl-muted);
+}
+
+.vl-text-video-block .video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  border-radius: var(--vl-product-radius);
+  overflow: hidden;
+  border: 1px solid var(--vl-border);
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.vl-text-video-block .video-wrapper iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- Pricing cards (plants) ---------- */
+.vl-pricing-section .vl-builder-card h3 {
+  font-family: var(--vl-font-product);
+  color: var(--vl-text);
+}
+
+.vl-pricing-section .vl-builder-card ul {
+  padding-left: 1.1rem;
+  color: var(--vl-muted);
+}
+
+.vl-pricing-section .vl-builder-card .fs-4 {
+  font-family: var(--vl-font-product);
+  color: var(--vl-accent);
+}
+
+/* ---------- Before / after ---------- */
+.vl-before-after .vl-builder-card img {
+  border-radius: var(--vl-radius);
+}
+
+.vl-before-after .vl-builder-card p {
+  color: var(--vl-muted);
+  font-weight: 600;
+}
+
+/* ---------- Image gallery ---------- */
+.vl-image-gallery .section-title h2,
+.vl-image-gallery .section-subtitle p {
+  text-align: center;
+}
+
+.vl-image-gallery .list img {
+  border-radius: var(--vl-radius);
+  border: 1px solid var(--vl-border);
+}
+
+/* ---------- 3D model viewer ---------- */
+.vl-model-section model-viewer {
+  border-radius: var(--vl-product-radius);
+  border: 1px solid var(--vl-border);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* ---------- Scroll to top ---------- */
+.vl-scroll-top {
+  width: 48px;
+  height: 48px;
+  border-radius: 50% !important;
+  border: 1px solid rgba(255, 200, 90, 0.45) !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35) !important;
+  z-index: 1030;
+}
+
+/* ---------- Announcement strip ---------- */
+.announcement-modern {
+  background: transparent;
+  padding: 8px 0 0;
+  position: relative;
+  z-index: 1070;
+  width: 100%;
+}
+
+.announcement-dot {
+  background: var(--vl-accent) !important;
+}
+
+.announcement-link {
+  color: var(--vl-accent) !important;
+}
+
+.announcement-text {
+  color: var(--vl-muted);
+}
+
+/* ---------- Blog ---------- */
+.vl-page-section .alert-info {
+  border: 1px solid var(--vl-border);
+  border-radius: var(--vl-radius);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--vl-muted);
+}
+
+.vl-blog-featured img {
+  border-radius: var(--vl-product-radius);
+  border: 1px solid var(--vl-border);
+}
+
+.vl-blog-meta {
+  color: var(--vl-text-faint);
+  border-top: 1px solid var(--vl-border) !important;
+}
+
+/* ---------- Hosted checkout (extra) ---------- */
+body.velora-inner-page,
+.velora-inner-page {
+  background: var(--vl-bg) !important;
+}
+
+.velora-inner-page .card,
+.velora-inner-page .checkout-card,
+.velora-inner-page [class*="checkout"] .card {
+  border: 1px solid var(--vl-border) !important;
+  border-radius: var(--vl-product-radius) !important;
+  background: rgba(14, 14, 14, 0.85) !important;
+  color: var(--vl-text);
+}
+
+.velora-inner-page .btn-primary,
+.velora-inner-page button[type="submit"].btn-primary {
+  border: 1px solid rgba(255, 200, 90, 0.5) !important;
+  background: linear-gradient(165deg, #ffba4a 0%, #f99926 100%) !important;
+  color: #1a0d00 !important;
+  font-weight: 700;
+  border-radius: var(--vl-btn-radius) !important;
+}
+
+.velora-inner-page label,
+.velora-inner-page .form-label {
+  color: var(--vl-muted);
+}
+
+@media (max-width: 768px) {
+  .vl-socials-section .discord-cta-box {
+    flex-direction: column;
+    align-items: center;
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .vl-socials-section .social-left {
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
+
+  .vl-text-image-block .features-list {
+    flex-direction: column;
+  }
+}

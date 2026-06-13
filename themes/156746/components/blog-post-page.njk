@@ -1,23 +1,27 @@
-<div class="container component vl-page-section" data-component-id="{{ componentId }}">
-  <section class="py-5-nav">
-    <header class="vl-page-head">
-      <a href="{{ ('/blog') | shopUrl }}" class="vl-page-back">← Back to blog</a>
-      <h1>{{ blogPost.title }}</h1>
-      {% if blogPost.summary %}
-      <p class="vl-page-sub">{{ blogPost.summary | safe }}</p>
-      {% endif %}
-    </header>
-    <div class="row">
-      <div class="col-lg-8 mx-auto">
+<div class="component vl-premium-page vl-blog-post-page" data-component-id="{{ componentId }}">
+  <section class="vl-legal-section vl-terms-section" aria-labelledby="vl-blog-post-title">
+    <div class="vl-legal-shell vl-terms-shell">
+      <a href="{{ ('/blog') | shopUrl }}" class="vl-page-back vl-legal-back" data-reveal>← Back to blog</a>
+
+      <header class="vl-legal-hero vl-terms-hero" data-reveal>
+        <h1 id="vl-blog-post-title" class="vl-legal-title vl-terms-title vl-legal-title--post">
+          {{ blogPost.title }}
+        </h1>
+        {% if blogPost.summary %}
+        <p class="vl-legal-sub vl-terms-sub">{{ blogPost.summary | safe }}</p>
+        {% endif %}
+      </header>
+
+      <div class="vl-legal-panel vl-terms-panel" data-reveal>
         {% if blogPost.image_url %}
-        <div class="vl-blog-featured mb-4">
-          <img src="{{ blogPost.image_url }}" alt="{{ blogPost.title }}" class="img-fluid rounded">
+        <div class="vl-blog-featured" data-reveal>
+          <img src="{{ blogPost.image_url }}" alt="{{ blogPost.title }}" class="vl-blog-featured-img" loading="eager" decoding="async" />
         </div>
         {% endif %}
-        <div class="editor vl-page-prose">
+        <div class="editor vl-legal-prose vl-terms-prose vl-page-prose">
           {{ blogPost.content | safe }}
         </div>
-        <p class="mt-4 pt-4 vl-blog-meta">
+        <p class="vl-blog-meta">
           <small>Published {{ blogPost.created_at | formatDate }}</small>
         </p>
       </div>

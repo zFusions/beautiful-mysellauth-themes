@@ -11,8 +11,9 @@ description: >-
 # Premium Storefront DA — Velora Theme 156746
 
 **This skill is the single source for Velora theme work.**  
+**DA complète A→Z (pixel perfect, sans code) :** [VELORA-DA.md](VELORA-DA.md) — **lire en premier pour tout nouveau produit Velora.**  
 Generic reusable DA primitives: [forms-and-shapes.md](forms-and-shapes.md), [motion-language.md](motion-language.md), [tokens.json](tokens.json).  
-**Full theme playbook:** [velora-theme-156746.md](velora-theme-156746.md) — read before every session.
+**Full theme playbook:** [velora-theme-156746.md](velora-theme-156746.md) — read before every theme session.
 
 ---
 
@@ -25,8 +26,9 @@ sellauth-theme watch --theme 156746
 
 | Need | Read |
 |------|------|
+| **DA complète A→Z (tous produits Velora)** | [VELORA-DA.md](VELORA-DA.md) |
 | Tokens, colors, typography | [DESIGN.md](../../../DESIGN.md) + `velora.css` `:root` |
-| All pages, registers, file map | [velora-theme-156746.md](velora-theme-156746.md) |
+| All pages, registers, file map, price logic | [velora-theme-156746.md](velora-theme-156746.md) |
 | Builder / schema / resale | `.cursor/rules/sellauth-visual-editor.mdc` |
 | SellAuth CLI, forbidden Nunjucks | `beautiful-mysellauth-themes` |
 
@@ -36,16 +38,25 @@ sellauth-theme watch --theme 156746
 
 | Token | Value |
 |-------|-------|
-| `--vl-bg` | `#000000` |
-| `--vl-surface` | `#0a0a0a` |
-| `--vl-card` | `#111111` |
+| `--vl-bg` | `#030303` |
+| `--vl-surface` | `#070707` |
+| `--vl-card` | `#0c0c0c` |
 | `--vl-accent` | `#F99926` |
+| `--vl-stock-green` | `#4ade80` |
 | `--vl-text` | `#fafafa` |
 | `--vl-muted` | `rgba(255,255,255,0.68)` |
 | `--vl-btn-radius` | `10px` |
 | `--vl-radius` | `12px` |
 
-Typography: Arial UI + Playfair Display serif accents on landing headlines.
+---
+
+## Typography
+
+| Role | Font | Scope |
+|------|------|-------|
+| UI / body | **Arial** (`--font-body`) | Nav, labels, cart copy, PDP accordions, qty UI |
+| Product display | **Inter** (`--vl-font-product`) | Catalog name/price, PDP title/price/CTAs, cart line prices |
+| Hero accent | **Playfair Display** italic | Hero line 2 only — not shop pages |
 
 ---
 
@@ -61,11 +72,34 @@ Typography: Arial UI + Playfair Display serif accents on landing headlines.
 
 ### 2. Inner pages (product, cart, terms, account, …)
 
-- Register: **product** — flat black, no landing glow
+- Register: **product** — flat `#030303`, no landing glow
 - Shell: `.vl-page-section` + `.vl-page-head` + `.vl-page-prose .editor`
 - Customer: `.velora-customer` — dark cards, orange active nav
-- Styles: `shop-pages.css` (PDP/cart) + `velora.css` (shared inner utilities)
 - **Never** inline `#ffffff` / blue `#1B44FE` styles in templates
+
+---
+
+## CSS discipline
+
+**Load order:** pro → custom → velora → shop-pages → shop-pdp
+
+| File | Scope |
+|------|-------|
+| `velora.css` | Tokens, landing, product grid, customer, modals, shared utilities |
+| `shop-pages.css` | Cart glass DA, inner ambient — **no PDP** |
+| `shop-pdp.css` | PDP v2 only — **single source of truth** |
+
+1. **One token file:** `velora.css` for `--vl-*` + landing
+2. **No sprawl** — no per-template `<style>` blocks with light theme leftovers
+3. Override Bootstrap in page context: `.vl-page-section .btn-primary`, `.velora-customer .table`
+
+---
+
+## Shop highlights (see velora-theme-156746.md for detail)
+
+- **PDP v2:** `.vl-pdp` grid, glass cards, stock status bar, volume BAMP promo
+- **Price logic:** `totalPrice` syncs qty; “You save” **only** on volume discount applied; strikethrough for `price_slash` / volume subtotal
+- **Cart:** glass DA in `shop-pages.css`, mobile pay bar
 
 ---
 
@@ -76,6 +110,8 @@ Typography: Arial UI + Playfair Display serif accents on landing headlines.
 [ ] Copy from properties | renderString (pages with schema)
 [ ] Uses --vl-* tokens only
 [ ] No landing light on inner page
+[ ] PDP edits → shop-pdp.css only
+[ ] Cart edits → shop-pages.css only
 [ ] Ctrl+F5 builder preview
 [ ] Update velora-theme-156746.md if new pattern
 ```
@@ -86,7 +122,7 @@ Typography: Arial UI + Playfair Display serif accents on landing headlines.
 
 **Landing:** hero, features, how-it-works, products, feedbacks, faq, final-cta, navbar, footer
 
-**Shop:** product-page, cart-page
+**Shop:** product-page, cart-page (+ `product-form.njk` snippet)
 
 **Legal / info:** terms-page, privacy-policy-page, refund-policy-page, feedback-page, status-page
 
@@ -108,15 +144,6 @@ Typography: Arial UI + Playfair Display serif accents on landing headlines.
 | Lenis | `.velora-home` only (master.njk) |
 
 Inner pages: minimal motion — hover states only.
-
----
-
-## CSS discipline
-
-1. **One token file:** `velora.css` for shared + landing
-2. **Shop pages:** `shop-pages.css` for `.vl-pdp` and `.vl-cart-*` only
-3. **No sprawl** — no per-template `<style>` blocks with light theme leftovers
-4. Override Bootstrap in page context: `.vl-page-section .btn-primary`, `.velora-customer .table`
 
 ---
 
@@ -142,6 +169,8 @@ Do **not** duplicate SellAuth platform docs here — link to `beautiful-mysellau
 | Hardcoded page titles | schema `title` property |
 | White customer cards | `.velora-customer` dark |
 | Light pagination | `.vl-pagination` in velora.css |
+| PDP rules in shop-pages.css | shop-pdp.css |
+| “You save” for price_slash only | Strikethrough + volume-only save line |
 
 ---
 

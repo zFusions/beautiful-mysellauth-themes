@@ -1,5 +1,5 @@
-<div class="container component velora-customer" data-component-id="{{ componentId }}">
-  <section class="py-5-nav">
+{% render_snippet "vl-customer-shell-open.njk", prefix='My', accent='Orders' %}
+<div class="container-fluid px-0 component velora-customer" data-component-id="{{ componentId }}">
     <div class="row">
       <div class="col-12 col-lg-3 mb-4">
         {% render_snippet "customer-sidebar.njk" %}
@@ -53,5 +53,5 @@
         {% endif %}
       </div>
     </div>
-  </section>
 </div>
+{% render_snippet "vl-customer-shell-close.njk" %}

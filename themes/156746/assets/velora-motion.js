@@ -129,16 +129,14 @@
   }
 
   function boot() {
-    if (!document.querySelector('.velora-home')) return;
-    if (booted) {
-      initFaqAccordion();
-      return;
-    }
-    booted = true;
-    initCursorLight();
     initFaqAccordion();
     initSearchFocus();
     initRevealPop();
+
+    if (!document.querySelector('.velora-home')) return;
+    if (booted) return;
+    booted = true;
+    initCursorLight();
   }
 
   document.addEventListener('velora:motion-start', boot);

@@ -2,12 +2,12 @@
 name: Velora Market
 description: Dark SaaS digital storefront — orange spotlight, instant delivery, Discord tools
 colors:
-  bg-void: "#000000"
-  section-alt: "#0e0e0e"
-  surface: "#0a0a0a"
-  card: "#111111"
-  product-card: "#161616"
-  product-media: "#121212"
+  bg-void: "#030303"
+  section-alt: "#090909"
+  surface: "#070707"
+  card: "#0c0c0c"
+  product-card: "#101010"
+  product-media: "#070707"
   text-primary: "#fafafa"
   text-muted: "rgba(255, 255, 255, 0.68)"
   text-on-accent-dark: "#1a1000"
@@ -146,11 +146,11 @@ The palette is monochrome black/gray with one saturated orange family and a gree
 
 ### Neutral
 
-- **Void Black** (`#000000`): Page background, hero — `--vl-bg`.
-- **Section Alt** (`#0e0e0e`): Alternating homepage bands from section 3 — `--vl-section-alt`.
-- **Product Card** (`#161616`): Unified product tile shell — `--vl-product-card`.
-- **Product Media** (`#121212`): Image area inside card — `--vl-product-media`.
-- **Surface Charcoal** (`#0a0a0a` / `#111111`): Panels, mocks — `--vl-surface`, `--vl-card`.
+- **Void Black** (`#030303`): Page background, hero, inner pages — `--vl-bg`.
+- **Section Alt** (`#090909`): Alternating homepage bands from section 3 — `--vl-section-alt`.
+- **Product Card** (`#101010`): Unified product tile shell — `--vl-product-card`.
+- **Product Media** (`#070707`): Image area inside card — `--vl-product-media`.
+- **Surface Charcoal** (`#070707` / `#0c0c0c`): Panels, mocks — `--vl-surface`, `--vl-card`.
 - **Primary Text** (`#fafafa`): Headlines, nav brand — `--vl-text`.
 - **Muted Text** (`rgba(255, 255, 255, 0.68)` minimum on body): Nav links, section subcopy — `--vl-muted`.
 - **Price Orange** (`#F99926`): Product price on cards — `.ps-product-price`.
@@ -158,7 +158,7 @@ The palette is monochrome black/gray with one saturated orange family and a gree
 
 ### Status
 
-- **In Stock Green** (`#4ade80`): Flow mock live indicators only; catalog stock uses dark pill on image (`X in stock`).
+- **In Stock Green** (`#4ade80`): PDP stock count + bar, “You save” line, flow mock indicators; catalog stock uses dark pill on image (`X in stock`).
 
 ### Named Rules
 
@@ -172,10 +172,10 @@ The palette is monochrome black/gray with one saturated orange family and a gree
 
 **Display Sans:** Arial, Helvetica, sans-serif  
 **Display Serif:** Playfair Display (Google Fonts), Georgia fallback  
-**Body / UI:** Arial Normal (400)  
-**Catalog UI:** Inter (400–700) for product grid, search, reviews, FAQ
+**Body / UI:** Arial Normal (400) — `--font-body` in `master.njk`  
+**Product display:** Inter (400–700) — `--vl-font-product` for catalog, PDP title/price/CTAs, cart line prices
 
-**Character:** Utilitarian sans for speed and trust; serif italic for the hero emotional payoff line only. Inter on the catalog for crisp product names and prices at small sizes.
+**Character:** Utilitarian sans for speed and trust; serif italic for the hero emotional payoff line only. Inter on product surfaces for crisp names, prices, and checkout CTAs at small sizes.
 
 ### Hierarchy
 
@@ -193,7 +193,28 @@ The palette is monochrome black/gray with one saturated orange family and a gree
 
 **The Pairing Rule.** Playfair Italic is reserved for the hero second line only. Do not use in nav, buttons, section headings, or product cards.
 
-**The Inter Catalog Rule.** Inter is used for product grid, search, reviews marquee, and FAQ body — not for hero or section display lines.
+**The Inter Product Rule.** Inter is used for product grid, PDP rail (title, price, Add to cart / Buy now), cart line prices, search, reviews marquee, and FAQ body — not for hero or section display lines.
+
+## Shop pages (PDP + cart)
+
+Register: **product** — flat `#030303`, subtle top ambient only (no hero spotlight).
+
+**CSS ownership:** `shop-pdp.css` (PDP) · `shop-pages.css` (cart) · shared tokens in `velora.css`. Load order: pro → custom → velora → shop-pages → shop-pdp.
+
+### PDP v2
+
+- Wrapper: `.product-wrapper.vl-pdp` — two-column grid, sticky rail, glass cards
+- Typography: Arial UI labels; Inter title, price, CTA buttons
+- Stock: green pulsing count + progress bar (`--vl-stock-green`)
+- Volume promo: BAMP meter toward next discount tier
+- Price: main display = `totalPrice` (qty × price − volume tier); strikethrough for `price_slash` or pre-volume subtotal; “You save” **only** when a volume discount is applied
+
+### Cart
+
+- Glass cards (blur + `rgba(255,255,255,0.035)`) matching PDP DA
+- Arial UI + Inter product names/prices; mobile sticky pay bar
+
+Full spec: `.cursor/skills/premium-storefront-da/VELORA-DA.md` (sections 12–14) · `.cursor/skills/premium-storefront-da/velora-theme-156746.md`
 
 ## Elevation
 

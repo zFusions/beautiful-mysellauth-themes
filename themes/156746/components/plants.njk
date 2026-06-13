@@ -1,4 +1,4 @@
-<section class="container py-20 component" data-component-id="{{ componentId }}">
+<section class="container py-20 vl-pricing-section vl-builder-section component" data-component-id="{{ componentId }}">
   <div class="text-center mb-5">
     {% if properties.badge_text %}<div class="hero-badge-modern mx-auto mb-3">{{ properties.badge_text | renderString }}</div>{% endif %}
     {% if properties.title %}<h2>{{ properties.title | renderString }}</h2>{% endif %}
@@ -7,30 +7,30 @@
   <div class="row g-4">
     {% if properties.silver_visible %}
       <div class="col-12 col-lg-4">
-        <div class="card h-100 p-4">
+        <div class="vl-builder-card h-100 p-4">
           <h3>{{ properties.silver_title | renderString }}</h3>
           <p class="fs-4 fw-bold">{{ properties.silver_price | renderString }}</p>
-          <ul>{% for item in properties.silver_features %}<li>{{ item.text | renderString }}</li>{% endfor %}</ul>
+          <ul>{% for item in properties.silver_features | default([]) %}<li>{{ item.text | renderString }}</li>{% endfor %}</ul>
           <a href="{{ properties.silver_button_link | shopUrl }}" class="btn btn-primary mt-auto">{{ properties.silver_button_text | renderString }}</a>
         </div>
       </div>
     {% endif %}
     {% if properties.gold_visible %}
       <div class="col-12 col-lg-4">
-        <div class="card h-100 p-4">
+        <div class="vl-builder-card h-100 p-4">
           <h3>{{ properties.gold_title | renderString }}</h3>
           <p class="fs-4 fw-bold">{{ properties.gold_price | renderString }}</p>
-          <ul>{% for item in properties.gold_features %}<li>{{ item.text | renderString }}</li>{% endfor %}</ul>
+          <ul>{% for item in properties.gold_features | default([]) %}<li>{{ item.text | renderString }}</li>{% endfor %}</ul>
           <a href="{{ properties.gold_button_link | shopUrl }}" class="btn btn-primary mt-auto">{{ properties.gold_button_text | renderString }}</a>
         </div>
       </div>
     {% endif %}
     {% if properties.diamond_visible %}
       <div class="col-12 col-lg-4">
-        <div class="card h-100 p-4">
+        <div class="vl-builder-card h-100 p-4">
           <h3>{{ properties.diamond_title | renderString }}</h3>
           <p class="fs-4 fw-bold">{{ properties.diamond_price | renderString }}</p>
-          <ul>{% for item in properties.diamond_features %}<li>{{ item.text | renderString }}</li>{% endfor %}</ul>
+          <ul>{% for item in properties.diamond_features | default([]) %}<li>{{ item.text | renderString }}</li>{% endfor %}</ul>
           <a href="{{ properties.diamond_button_link | shopUrl }}" class="btn btn-primary mt-auto">{{ properties.diamond_button_text | renderString }}</a>
         </div>
       </div>

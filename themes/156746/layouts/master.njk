@@ -4,7 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
+    {% set isLanding = templateName == 'shop' %}
+    {% set isProduct = templateName == 'product' %}
+    {% set hideCurrency = global.components.navbar.hide_currency_selector | default(false) %}
+
     {% render_snippet "meta-tags.njk" %}
+
+    {% if isLanding %}
+    <link rel="preload" href="{{ 'velora-mark-128.png' | assetUrl }}" as="image" type="image/png">
+    {% endif %}
+
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+
+    <script>document.documentElement.classList.add('vl-js-motion');</script>
 
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
@@ -58,18 +71,30 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600&display=swap" rel="stylesheet" id="theme-font">
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@500;600;700&family=Playfair+Display:wght@400;600&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'"
+      id="theme-font"
+    >
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Montserrat:wght@500;600;700&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+    </noscript>
 
     <link href="{{ 'pro.css' | assetUrl }}" rel="stylesheet"/>
     <link href="{{ 'custom.css' | assetUrl }}" rel="stylesheet"/>
     <link href="{{ 'velora.css' | assetUrl }}" rel="stylesheet"/>
-    <script>document.documentElement.classList.add('vl-js-motion');</script>
 
     <link href="{{ 'shop-pages.css' | assetUrl }}" rel="stylesheet"/>
+    {% if isProduct %}
+    <link href="{{ 'shop-pdp.css' | assetUrl }}" rel="stylesheet"/>
+    {% endif %}
+    <link rel="preload" href="{{ 'shop-components.css' | assetUrl }}" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="{{ 'shop-components.css' | assetUrl }}" rel="stylesheet"></noscript>
 
     <style>
       .site-background-fixed {
-        background-color: var(--cl-background-primary, #000000);
         position: relative;
         min-height: 100vh;
       }
@@ -81,7 +106,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        background: #000000;
+        background: var(--cl-background-primary, #030303);
         transition: opacity 500ms ease, visibility 500ms ease;
       }
 
@@ -89,6 +114,38 @@
         opacity: 0;
         visibility: hidden;
         pointer-events: none;
+      }
+
+      #page-loader.page-loader--fast .loader-circle {
+        width: 72px;
+        height: 72px;
+        border-width: 2px;
+      }
+
+      #page-loader.page-loader--fast .loader-content {
+        width: 120px;
+        height: 120px;
+      }
+
+      .loader-mark {
+        position: relative;
+        z-index: 1;
+        width: 56px;
+        height: 56px;
+        object-fit: contain;
+        animation: pulse-logo 1.8s ease-in-out infinite;
+      }
+
+      #page-loader.page-loader--fast .loader-mark {
+        width: 40px;
+        height: 40px;
+      }
+
+      html.vl-page-exit #app {
+        opacity: 0;
+        filter: blur(10px);
+        transform: scale(0.985);
+        transition: opacity 200ms ease, filter 200ms ease, transform 200ms ease;
       }
 
       .loader-content {
@@ -111,12 +168,7 @@
       }
 
       .loader-wordmark {
-        font-family: var(--font-display);
-        font-weight: 500;
-        font-size: 1.05rem;
-        letter-spacing: -0.03em;
-        color: #F99926;
-        animation: pulse-logo 1.8s ease-in-out infinite;
+        display: none;
       }
 
       @keyframes spin {
@@ -130,14 +182,26 @@
       }
     </style>
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/choices.js@10.2.0/public/assets/styles/choices.min.css" rel="stylesheet" integrity="sha256-gS3HxgWFFFqEo0wQoALebu5XlWdYr3gqd4/Tk5wt8Ig=" crossorigin="anonymous" />
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet"></noscript>
+    {% if not hideCurrency %}
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/choices.js@10.2.0/public/assets/styles/choices.min.css" as="style" integrity="sha256-gS3HxgWFFFqEo0wQoALebu5XlWdYr3gqd4/Tk5wt8Ig=" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://cdn.jsdelivr.net/npm/choices.js@10.2.0/public/assets/styles/choices.min.css" rel="stylesheet" integrity="sha256-gS3HxgWFFFqEo0wQoALebu5XlWdYr3gqd4/Tk5wt8Ig=" crossorigin="anonymous"></noscript>
+    {% endif %}
   </head>
-  <body class="site-background-fixed velora-home-page{% if templateName == 'shop' %} velora-landing-page{% else %} velora-inner-page{% endif %}">
-    <div id="page-loader" aria-hidden="true">
+  <body class="site-background-fixed velora-home-page{% if isLanding %} velora-landing-page{% else %} velora-inner-page{% endif %}">
+    <div id="page-loader" class="{{ 'page-loader--fast' if not isLanding else '' }}" aria-hidden="true">
       <div class="loader-content">
         <div class="loader-circle"></div>
-        <span class="loader-wordmark">Velora</span>
+        <img
+          class="loader-mark"
+          src="{{ 'velora-mark-512.png' | assetUrl }}"
+          alt=""
+          width="56"
+          height="56"
+          decoding="async"
+        />
+        <span class="loader-wordmark" aria-hidden="true">Velora</span>
       </div>
     </div>
 
@@ -146,7 +210,9 @@
         <header class="vl-navbar-wrap">
           {% render_component "navbar" %}
         </header>
-        {{ templateContent | safe }}
+        <main class="vl-page-content">
+          {{ templateContent | safe }}
+        </main>
       </div>
       {% render_component "footer" %}
       {% render_snippet "customer-login-modal.njk" %}
@@ -173,357 +239,49 @@
     {% endif %}
 
     <script
+      defer
       src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js"
       integrity="sha256-WCzAhd2P6gRJF9Hv3oOOd+hFJi/QJbv+Azn4CGB8gfY="
       crossorigin="anonymous"
     ></script>
+    {% if not hideCurrency %}
     <script
+      defer
       src="https://cdn.jsdelivr.net/npm/choices.js@10.2.0/public/assets/scripts/choices.min.js"
       integrity="sha256-P+JgcxEeZtxwYS1+TAAuusKFM646SB8Oodk0TYu9zuo="
       crossorigin="anonymous"
     ></script>
-    <script src="{{ 'script.js' | assetUrl }}"></script>
-    <script src="{{ 'velora-boost-mock.js' | assetUrl }}"></script>
-    <script src="{{ 'velora-flow-mock.js' | assetUrl }}"></script>
-    <script src="{{ 'velora-steps-mock.js' | assetUrl }}"></script>
-    <script src="{{ 'velora-motion.js' | assetUrl }}"></script>
+    {% endif %}
+    <script defer src="{{ 'script.js' | assetUrl }}"></script>
+    {% if isLanding %}
+    <script defer src="{{ 'velora-boost-mock.js' | assetUrl }}"></script>
+    <script defer src="{{ 'velora-flow-mock.js' | assetUrl }}"></script>
+    <script defer src="{{ 'velora-steps-mock.js' | assetUrl }}"></script>
+    {% endif %}
+    <script defer src="{{ 'lenis.min.js' | assetUrl }}"></script>
+    <script defer src="{{ 'velora-reveal.js' | assetUrl }}"></script>
+    <script defer src="{{ 'velora-motion.js' | assetUrl }}"></script>
     <script
+      defer
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
       crossorigin="anonymous"
     ></script>
     <script
+      defer
       src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.3/dist/cdn.min.js"
       integrity="sha256-aJ9ROXjRHWn00zeU9ylsmlhqLlXeebtEfN28P0dPnwc="
       crossorigin="anonymous"
     ></script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js" crossorigin="anonymous"></script>
 
     {% if global.properties.snow %}
       <div id="snow"></div>
-      <script>snow({ count: 200 });</script>
+      <script defer>snow({ count: 200 });</script>
     {% endif %}
 
     {% render_snippet "script-integrations.njk" %}
 
-    <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.23/dist/lenis.min.js"></script>
-    <script>
-      (function () {
-        'use strict';
-
-        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
-        var observer = null;
-        var EASE = 'cubic-bezier(0.22, 1, 0.36, 1)';
-
-        function motionMs() {
-          return reduce.matches ? 450 : 900;
-        }
-
-        function motionY() {
-          return reduce.matches ? '24px' : '48px';
-        }
-
-        function motionBlur() {
-          return reduce.matches ? '6px' : '12px';
-        }
-
-        function parseDelay(el) {
-          var raw = getComputedStyle(el).getPropertyValue('--reveal-delay').trim();
-          if (!raw) return 0;
-          if (raw.endsWith('ms')) return parseFloat(raw) || 0;
-          if (raw.endsWith('s')) return (parseFloat(raw) || 0) * 1000;
-          return parseFloat(raw) || 0;
-        }
-
-        function staggerDelays() {
-          document.querySelectorAll('[data-reveal-group]').forEach(function (group) {
-            Array.prototype.filter.call(group.children, function (el) {
-              return el.hasAttribute('data-reveal');
-            }).forEach(function (el, i) {
-              el.style.setProperty('--reveal-delay', Math.min(i * 80, 480) + 'ms');
-            });
-          });
-        }
-
-        function getRevealNodes() {
-          return Array.prototype.filter.call(document.querySelectorAll('[data-reveal]'), function (el) {
-            if (el.closest('.vl-hero')) return false;
-            if (el.getAttribute('aria-hidden') === 'true') return false;
-            return true;
-          });
-        }
-
-        function setHidden(el) {
-          el.style.transition = 'none';
-          el.style.opacity = '0';
-          el.style.transform = 'translate3d(0, ' + motionY() + ', 0)';
-          el.style.filter = 'blur(' + motionBlur() + ')';
-          el.classList.remove('is-visible');
-        }
-
-        function animateIn(el, extraDelay) {
-          var dur = motionMs();
-          var delay = (extraDelay || 0) + parseDelay(el);
-          void el.offsetHeight;
-          el.style.transition =
-            'opacity ' + dur + 'ms ' + EASE + ', transform ' + dur + 'ms ' + EASE + ', filter ' + dur + 'ms ' + EASE;
-          el.style.transitionDelay = delay + 'ms';
-          el.style.opacity = '1';
-          el.style.transform = 'translate3d(0, 0, 0)';
-          el.style.filter = 'blur(0)';
-          el.classList.add('is-visible');
-          window.setTimeout(function () {
-            el.style.transition = '';
-            el.style.transitionDelay = '';
-          }, dur + delay + 80);
-        }
-
-        function playReveal(el) {
-          if (el.dataset.vlRevealed === '1') return;
-          el.dataset.vlRevealed = '1';
-          setHidden(el);
-          requestAnimationFrame(function () {
-            requestAnimationFrame(function () {
-              animateIn(el, 0);
-            });
-          });
-        }
-
-        function scanReveal() {
-          var vh = window.innerHeight || document.documentElement.clientHeight;
-          getRevealNodes().forEach(function (el) {
-            if (el.dataset.vlRevealed === '1') return;
-            var rect = el.getBoundingClientRect();
-            if (rect.top <= vh * 0.92 && rect.bottom >= vh * 0.08) {
-              playReveal(el);
-            }
-          });
-        }
-
-        function bootReveal() {
-          staggerDelays();
-
-          getRevealNodes().forEach(function (el) {
-            if (el.dataset.vlRevealed !== '1') setHidden(el);
-          });
-
-          if (observer) observer.disconnect();
-
-          if ('IntersectionObserver' in window) {
-            observer = new IntersectionObserver(
-              function (entries) {
-                entries.forEach(function (entry) {
-                  if (!entry.isIntersecting) return;
-                  playReveal(entry.target);
-                  observer.unobserve(entry.target);
-                });
-              },
-              { threshold: 0.05, rootMargin: '0px 0px -6% 0px' }
-            );
-            getRevealNodes().forEach(function (el) {
-              if (el.dataset.vlRevealed !== '1') observer.observe(el);
-            });
-          }
-
-          requestAnimationFrame(scanReveal);
-        }
-
-        window.__vlRevealInit = function () {
-          getRevealNodes().forEach(function (el) {
-            delete el.dataset.vlRevealed;
-            el.classList.remove('is-visible');
-            el.style.opacity = '';
-            el.style.transform = '';
-            el.style.filter = '';
-            el.style.transition = '';
-            el.style.transitionDelay = '';
-          });
-          bootReveal();
-          scanReveal();
-        };
-
-        function playHeroEntrance() {
-          var dur = motionMs();
-          var steps = [
-            ['.vl-hero-title', 0],
-            ['.vl-hero-sub', 80],
-            ['.vl-hero-actions', 160],
-            ['.vl-hero-mock', 240]
-          ];
-          steps.forEach(function (pair) {
-            var el = document.querySelector('.velora-home .vl-hero ' + pair[0]);
-            if (!el) return;
-            el.style.transition = 'none';
-            el.style.opacity = '0';
-            el.style.transform = 'translate3d(0, 32px, 0)';
-            el.style.filter = 'blur(10px)';
-            void el.offsetHeight;
-            requestAnimationFrame(function () {
-              el.style.transition =
-                'opacity ' + dur + 'ms ' + EASE + ', transform ' + dur + 'ms ' + EASE + ', filter ' + dur + 'ms ' + EASE;
-              el.style.transitionDelay = pair[1] + 'ms';
-              el.style.opacity = '1';
-              el.style.transform = 'translate3d(0, 0, 0)';
-              el.style.filter = 'blur(0)';
-            });
-          });
-        }
-
-        document.addEventListener('velora:motion-start', playHeroEntrance);
-
-        function setupLenis() {
-          if (window.__lenis) return window.__lenis;
-          if (typeof Lenis === 'undefined') return null;
-          if (!document.querySelector('.velora-home')) return null;
-
-          var lenis = new Lenis({
-            duration: reduce.matches ? 1.05 : 1.75,
-            easing: function (t) {
-              return 1 - Math.pow(1 - t, 4);
-            },
-            smoothWheel: true,
-            syncTouch: true,
-            wheelMultiplier: 1,
-            touchMultiplier: reduce.matches ? 1.2 : 1.85,
-            infinite: false,
-            autoRaf: false,
-            allowNestedScroll: true
-          });
-
-          window.__lenis = lenis;
-
-          function onLenisScroll(e) {
-            scanReveal();
-            if (typeof window.__vlFlowMockCheck === 'function') {
-              window.__vlFlowMockCheck();
-            }
-            if (typeof window.__vlStepsMockCheck === 'function') {
-              window.__vlStepsMockCheck();
-            }
-            if (reduce.matches) return;
-            var y = typeof e === 'object' && e.scroll != null ? e.scroll : lenis.scroll;
-            var heroMock = document.querySelector('.velora-home .vl-hero-mock-stage');
-            if (heroMock && y < window.innerHeight * 1.4) {
-              heroMock.style.transform = 'translate3d(0, ' + (y * 0.08) + 'px, 0)';
-            }
-          }
-
-          lenis.on('scroll', onLenisScroll);
-
-          function raf(time) {
-            lenis.raf(time);
-            requestAnimationFrame(raf);
-          }
-          requestAnimationFrame(raf);
-
-          document.addEventListener('show.bs.modal', function () {
-            lenis.stop();
-          });
-          document.addEventListener('hidden.bs.modal', function () {
-            lenis.start();
-          });
-
-          return lenis;
-        }
-
-        var anchorsBound = false;
-        function setupAnchors() {
-          if (anchorsBound) return;
-          anchorsBound = true;
-          document.addEventListener('click', function (e) {
-            var a = e.target.closest('a[href]');
-            if (!a) return;
-            var href = a.getAttribute('href');
-            if (!href || href.indexOf('#') === -1) return;
-            var id = href.substring(href.indexOf('#') + 1);
-            if (!id) return;
-            var target = document.getElementById(id);
-            if (!target) return;
-
-            e.preventDefault();
-
-            if (window.__lenis) {
-              window.__lenis.scrollTo(target, {
-                offset: -80,
-                duration: reduce.matches ? 0.6 : 1.65,
-                easing: function (t) {
-                  return 1 - Math.pow(1 - t, 4);
-                }
-              });
-            } else {
-              target.scrollIntoView({ behavior: reduce.matches ? 'auto' : 'smooth' });
-            }
-
-            var mobile = document.getElementById('vlMobileNav');
-            var toggle = document.querySelector('.vl-nav-toggle');
-            if (mobile && mobile.classList.contains('is-open')) {
-              mobile.classList.remove('is-open');
-              if (toggle) toggle.setAttribute('aria-expanded', 'false');
-            }
-          });
-        }
-
-        var scrollBound = false;
-        function bindScroll() {
-          if (scrollBound) return;
-          scrollBound = true;
-          if (!window.__lenis) {
-            window.addEventListener('scroll', scanReveal, { passive: true });
-          }
-          window.addEventListener('resize', scanReveal, { passive: true });
-        }
-
-        function bootMotion() {
-          bootReveal();
-          bindScroll();
-          setupAnchors();
-        }
-
-        function bootLenis() {
-          setupLenis();
-          scanReveal();
-        }
-
-        if (document.readyState === 'loading') {
-          document.addEventListener('DOMContentLoaded', bootMotion);
-        } else {
-          bootMotion();
-        }
-
-        window.addEventListener('load', bootLenis);
-        document.addEventListener('velora:motion-start', bootLenis);
-        document.addEventListener('shop:page-loaded', bootReveal);
-
-        if (typeof reduce.addEventListener === 'function') {
-          reduce.addEventListener('change', bootReveal);
-        } else if (typeof reduce.addListener === 'function') {
-          reduce.addListener(bootReveal);
-        }
-      })();
-    </script>
-
-    <script>
-      (function () {
-        var loader = document.getElementById('page-loader');
-        if (!loader) return;
-
-        window.addEventListener('load', function () {
-          loader.classList.add('is-hidden');
-          document.documentElement.classList.add('vl-motion-play');
-          document.dispatchEvent(new CustomEvent('velora:motion-start'));
-          window.setTimeout(function () { loader.remove(); }, 400);
-        });
-
-        window.setTimeout(function () {
-          if (!loader.classList.contains('is-hidden')) {
-            loader.classList.add('is-hidden');
-            document.documentElement.classList.add('vl-motion-play');
-            document.dispatchEvent(new CustomEvent('velora:motion-start'));
-            window.setTimeout(function () { loader.remove(); }, 400);
-          }
-        }, 6000);
-      })();
-    </script>
+    <script defer src="{{ 'velora-loader.js' | assetUrl }}"></script>
 
 {% if isBuilder %}
 <!-- __SELLAUTH_LIVE_RELOAD__ -->

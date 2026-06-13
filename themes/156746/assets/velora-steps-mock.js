@@ -188,6 +188,7 @@
               ptr.classList.remove('is-visible');
               showBrowseCart(card);
               later(card, function () {
+                resetBrowseCart(card);
                 finishCard(card, ptr);
               }, 1100);
             }, 180);
@@ -448,7 +449,10 @@
       });
     }
 
-    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('scroll', function () {
+      if (window.__lenis) return;
+      onScroll();
+    }, { passive: true });
     window.addEventListener('resize', onScroll, { passive: true });
 
     function bindLenis() {

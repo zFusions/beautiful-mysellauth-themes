@@ -33,7 +33,7 @@
                     "type": "final-cta",
                     "properties": {
                         "title": "Get your order in seconds",
-                        "subtitle": "Scripts, software, licenses and more — web store or Discord shop. Secure checkout, automatic delivery.",
+                        "subtitle": "Pay on the web store or Discord shop. Keys and access land in your inbox seconds after checkout.",
                         "cta_text": "Browse products",
                         "cta": "/#products",
                         "secondary_cta_text": "Contact support",
@@ -55,20 +55,20 @@
                 "hero": {
                     "type": "hero",
                     "properties": {
-                        "title": "<span class=\"vl-hero-sans\">Scripts, software & licenses</span><span class=\"vl-hero-serif\">Web store & Discord shop.</span>",
-                        "subtitle": "Buy on the website or on our Discord shop — scripts, software keys, licenses, Nitro, boosts and premium products. Delivered automatically after checkout.",
+                        "title": "<span class=\"vl-hero-sans\">Digital products, delivered in seconds</span><span class=\"vl-hero-serif\">Scripts, keys & Discord tools.</span>",
+                        "subtitle": "Pay once on the web store or Discord shop. Keys and access arrive automatically after checkout — no waiting, no manual delivery.",
                         "cta": "#products",
                         "cta_text": "Browse products",
                         "show_searchbar": false,
                         "show_feedback_rating": false,
-                        "show_products_sold": true,
-                        "show_total_customers": true,
+                        "show_products_sold": false,
+                        "show_total_customers": false,
                         "alignment": "center",
                         "height": "medium",
                         "background_image": null,
                         "side_image": null,
                         "badge_text": "Now Live",
-                        "cta_text_2": "Join community",
+                        "cta_text_2": "Join Discord",
                         "cta_2": "",
                         "show_support": true,
                         "show_hero_mock": true
@@ -138,6 +138,18 @@
                             {
                                 "question": "How can I contact support if I have a problem?",
                                 "answer": "Our dedicated support team is available 24\/7. You can reach us by opening a ticket on our __DISCORD__ server or messaging us on __TELEGRAM__. We guarantee a response to all inquiries."
+                            },
+                            {
+                                "question": "How fast is delivery?",
+                                "answer": "Digital products are delivered automatically within seconds after payment is confirmed — 24\/7, no manual processing. Check your email and customer dashboard for order details."
+                            },
+                            {
+                                "question": "What is your refund policy?",
+                                "answer": "Refund eligibility depends on the product type and whether digital goods have been delivered or used. Read our Refund Policy page, or contact support on __DISCORD__ before opening a dispute."
+                            },
+                            {
+                                "question": "Can I buy from your Discord shop?",
+                                "answer": "Yes — the same catalog is available on our web store and Discord shop. Browse, pay securely, and receive automatic delivery on both channels."
                             }
                         ]
                     }
@@ -157,14 +169,23 @@
                         "title": "Follow our Socials",
                         "subtitle": null
                     }
+                },
+                "home-discord": {
+                    "type": "home-discord",
+                    "properties": {}
+                },
+                "home-compare": {
+                    "type": "home-compare",
+                    "properties": {}
                 }
             },
             "components_order": [
                 "hero",
-                "features",
                 "how-it-works",
                 "products",
+                "features",
                 "feedbacks",
+                "home-compare",
                 "faq",
                 "final-cta"
             ]
@@ -211,7 +232,8 @@
                 "feedback-page": {
                     "type": "feedback-page",
                     "properties": {
-                        "title": "Feedback from users",
+                        "title_prefix": "Customer",
+                        "title_accent": "Reviews",
                         "subtitle": "Real reviews from verified buyers.",
                         "cta_text": "Browse products",
                         "cta": "/#products"
@@ -228,7 +250,58 @@
                 "terms-page": {
                     "type": "terms-page",
                     "properties": {
-                        "title": "Terms of Service"
+                        "title_prefix": "Terms of",
+                        "title_accent": "Service",
+                        "subtitle": "Purchasing or using our products means you accept the conditions below.",
+                        "highlights": [
+                            {
+                                "title": "No refunds",
+                                "text": "All sales are final unless we say it clearly.",
+                                "icon": "x"
+                            },
+                            {
+                                "title": "Product-based warranty",
+                                "text": "Each product has its own support window.",
+                                "icon": "shield"
+                            },
+                            {
+                                "title": "Proof needed",
+                                "text": "To replace something, we need evidence.",
+                                "icon": "info"
+                            }
+                        ],
+                        "sections": [
+                            {
+                                "title": "1) Refunds",
+                                "intro": "We do not offer refunds on digital products. Please read carefully before purchasing.",
+                                "items": [
+                                    { "text": "All sales are final.", "type": "x" },
+                                    { "text": "Chargebacks or payment disputes may result in a permanent ban.", "type": "x" },
+                                    { "text": "Replacements are only offered when a product fails to deliver as described.", "type": "check" },
+                                    { "text": "Contact support with your order ID before opening a dispute.", "type": "info" }
+                                ]
+                            },
+                            {
+                                "title": "2) Warranty & support",
+                                "intro": "Support windows vary by product. Check the product page for specific coverage.",
+                                "items": [
+                                    { "text": "Instant delivery products — support within 24 hours of purchase.", "type": "check" },
+                                    { "text": "Subscription-based products — warranty until expiry date shown at checkout.", "type": "dot" },
+                                    { "text": "Boost / upgrade services — warranty covers the full purchased period.", "type": "dot" },
+                                    { "text": "Abuse, sharing, or reselling voids all warranty.", "type": "x" }
+                                ]
+                            },
+                            {
+                                "title": "3) Replacements",
+                                "intro": "If something goes wrong, we will help — but we need proof.",
+                                "items": [
+                                    { "text": "Provide your order ID and a clear description of the issue.", "type": "check" },
+                                    { "text": "Screenshots or screen recordings may be required.", "type": "info" },
+                                    { "text": "False claims or repeated abuse will result in account termination.", "type": "x" },
+                                    { "text": "Replacements are issued at our discretion within the warranty window.", "type": "check" }
+                                ]
+                            }
+                        ]
                     }
                 }
             },
@@ -242,7 +315,8 @@
                 "status-page": {
                     "type": "status-page",
                     "properties": {
-                        "title": "Product Status",
+                        "title_prefix": "Product",
+                        "title_accent": "Status",
                         "subtitle": "Live availability across the catalog."
                     }
                 }
@@ -257,7 +331,43 @@
                 "privacy-policy-page": {
                     "type": "privacy-policy-page",
                     "properties": {
-                        "title": "Privacy Policy"
+                        "title_prefix": "Privacy",
+                        "title_accent": "Policy",
+                        "subtitle": "How we collect, use and protect your information.",
+                        "highlights": [
+                            { "title": "Minimal data", "text": "We only collect what's needed to deliver your order.", "icon": "check" },
+                            { "title": "Secure checkout", "text": "Payments are encrypted via trusted providers.", "icon": "shield" },
+                            { "title": "Never sold", "text": "We do not sell your personal data to third parties.", "icon": "info" }
+                        ],
+                        "sections": [
+                            {
+                                "title": "1) Data we collect",
+                                "intro": "We collect only the information required to process orders and provide support.",
+                                "items": [
+                                    { "text": "Email address for delivery and order updates.", "type": "dot" },
+                                    { "text": "Payment data handled by our payment processor — never stored on our servers.", "type": "check" },
+                                    { "text": "IP address and browser data for fraud prevention.", "type": "info" }
+                                ]
+                            },
+                            {
+                                "title": "2) How we use your data",
+                                "intro": "Your data is used solely to operate the store and support you.",
+                                "items": [
+                                    { "text": "Deliver digital products instantly after payment.", "type": "check" },
+                                    { "text": "Send order confirmations and support replies.", "type": "check" },
+                                    { "text": "We do not send marketing emails without consent.", "type": "x" }
+                                ]
+                            },
+                            {
+                                "title": "3) Your rights",
+                                "intro": "You can request access, correction or deletion of your data.",
+                                "items": [
+                                    { "text": "Contact support to request a copy of your data.", "type": "check" },
+                                    { "text": "Account deletion available on request.", "type": "info" },
+                                    { "text": "We respond to privacy requests within 30 days.", "type": "dot" }
+                                ]
+                            }
+                        ]
                     }
                 }
             },
@@ -271,7 +381,42 @@
                 "refund-policy-page": {
                     "type": "refund-policy-page",
                     "properties": {
-                        "title": "Refund Policy"
+                        "title_prefix": "Refund",
+                        "title_accent": "Policy",
+                        "subtitle": "Our refund and replacement rules for digital products.",
+                        "highlights": [
+                            { "title": "All sales final", "text": "Digital products cannot be returned once delivered.", "icon": "x" },
+                            { "title": "Replacements available", "text": "Faulty products may qualify for a free replacement.", "icon": "check" },
+                            { "title": "Contact first", "text": "Reach support before opening a payment dispute.", "icon": "info" }
+                        ],
+                        "sections": [
+                            {
+                                "title": "1) Refund eligibility",
+                                "intro": "Due to the nature of digital goods, refunds are generally not available.",
+                                "items": [
+                                    { "text": "No refunds after the product has been delivered.", "type": "x" },
+                                    { "text": "Accidental purchases are not eligible for refunds.", "type": "x" },
+                                    { "text": "Duplicate charges will be refunded after verification.", "type": "check" }
+                                ]
+                            },
+                            {
+                                "title": "2) Replacements",
+                                "intro": "If a product doesn't work as described, we may offer a replacement.",
+                                "items": [
+                                    { "text": "Report the issue within the product warranty window.", "type": "check" },
+                                    { "text": "Provide your order ID and proof of the issue.", "type": "info" },
+                                    { "text": "One replacement per order unless otherwise stated.", "type": "dot" }
+                                ]
+                            },
+                            {
+                                "title": "3) Chargebacks",
+                                "intro": "Opening a dispute without contacting us first may result in a ban.",
+                                "items": [
+                                    { "text": "Contact support before initiating a chargeback.", "type": "check" },
+                                    { "text": "Fraudulent chargebacks lead to permanent account suspension.", "type": "x" }
+                                ]
+                            }
+                        ]
                     }
                 }
             },
@@ -298,8 +443,8 @@
     "global": {
         "properties": {
             "theme_color": "#F99926",
-            "primary_background_color": "#000000",
-            "secondary_background_color": "#0a0a0a",
+            "primary_background_color": "#030303",
+            "secondary_background_color": "#070707",
             "primary_border_color": "rgba(255,255,255,0.1)",
             "font": "Arial",
             "snow": false,

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet" />
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #030303; padding: 24px 32px; }
+  .velora-brand { display: inline-flex; align-items: center; gap: 8px; }
+  .velora-brand-mark { width: 20px; height: 20px; flex-shrink: 0; }
+  .velora-brand-wordmark {
+    font-family: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+    font-weight: 600; font-size: 14px; line-height: 1.25;
+    letter-spacing: -0.02em; color: #fafafa; white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+  <div class="velora-brand" id="brand">
+    <svg class="velora-brand-mark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <defs><linearGradient id="mark" x1="16" y1="3" x2="16" y2="28" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#ffb038"/><stop offset="48%" stop-color="#F99926"/><stop offset="100%" stop-color="#e87200"/></linearGradient></defs>
+  <path d="M 16 8.25 C 19.45 8.25 22.25 7.05 22.25 5.575 C 22.25 4.1 19.45 2.9 16 2.9 C 12.55 2.9 9.75 4.1 9.75 5.575 C 9.75 7.05 12.55 8.25 16 8.25 Z" fill="url(#mark)" opacity="0.22"/>
+  <path d="M 10.25 4.25 C 10.25 3.49 10.87 2.875 11.625 2.875 H 20.375 C 21.13 2.875 21.75 3.49 21.75 4.25 V 5.625 C 21.75 6.385 21.13 7 20.375 7 H 11.625 C 10.87 7 10.25 6.385 10.25 5.625 Z" fill="url(#mark)"/>
+  <path d="M 6.625 9.875 C 6.625 9.125 7.125 8.625 7.875 8.625 H 11.625 C 12.25 8.625 12.75 9 12.875 9.625 L 15.625 26.125 L 12.875 26.125 Z" fill="url(#mark)"/>
+  <path d="M 25.375 9.875 C 25.375 9.125 24.875 8.625 24.125 8.625 H 20.375 C 19.75 8.625 19.25 9 19.125 9.625 L 16.375 26.125 L 19.125 26.125 Z" fill="url(#mark)"/>
+</svg>
+    <span class="velora-brand-wordmark">VELORA</span>
+  </div>
+</body>
+</html>

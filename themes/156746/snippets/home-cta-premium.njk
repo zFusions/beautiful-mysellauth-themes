@@ -1,7 +1,8 @@
 <section class="vl-cta-arc component" data-component-id="{{ componentId }}" data-scroll-section>
   <div class="container vl-cta-arc-inner" data-reveal>
     <h2 class="vl-cta-arc-title ps-title">{{ properties.title | default('Get your order in seconds') | renderString }}</h2>
-    <p class="vl-cta-arc-sub ps-subtitle">{{ properties.subtitle | default('Scripts, software, licenses and more — web store or Discord shop. Secure checkout, automatic delivery.') | renderString }}</p>
+    <p class="vl-cta-arc-sub ps-subtitle">{{ properties.subtitle | default('Pay on the web store or Discord shop. Keys and access land in your inbox seconds after checkout.') | renderString }}</p>
+    <p class="vl-cta-arc-trust">Encrypted checkout · Instant delivery · 24/7 support</p>
     <div class="vl-cta-arc-actions">
       {% set primary_href = properties.cta | default('/#products') %}
       {% if primary_href[0] == '#' %}

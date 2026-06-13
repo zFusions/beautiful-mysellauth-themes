@@ -43,6 +43,7 @@ Catalog positioning emphasizes **Discord-native tools** (Boost Bot, token checke
 - Produce.so light blue canvas (superseded — do not revert unless explicitly requested)
 - Repeated identical UI mocks across sections (each card must use a distinct pattern)
 - Wireframe / skeleton placeholder mocks
+- **Nebula Market clone patterns** — generic VS compare with 10/10 scores, « Tired of waiting » headlines, uppercase section eyebrows everywhere, « Get Started » nav CTA disconnected from shop copy
 
 ## Design Principles
 
@@ -60,9 +61,9 @@ Catalog positioning emphasizes **Discord-native tools** (Boost Bot, token checke
 
 ## Context
 
-- **Stack**: SellAuth theme **156746** (Nunjucks, `settings.json`, CSS). Preview: `sellauth-theme watch --theme 156746`; push: `sellauth-theme push --theme 156746`.
+- **Stack**: SellAuth theme **156746** (Nunjucks, `settings.json`, CSS). Live: [veloramarket.mysellauth.com](https://veloramarket.mysellauth.com/). Preview: `sellauth-theme watch --theme 156746`; push: `sellauth-theme push --theme 156746`.
 - **Register override**: **product** for shop catalog, product detail, cart, checkout, customer account.
-- **Stage**: **homepage live** — `components_order`: hero → how-it-works → features → products → feedbacks → faq → final-cta. PDP/cart polish in progress.
+- **Stage**: **homepage live** — `components_order`: hero → how-it-works → products → features → feedbacks → home-compare → faq → final-cta.
 
 ## Surfaces
 
@@ -70,9 +71,10 @@ Catalog positioning emphasizes **Discord-native tools** (Boost Bot, token checke
 |---------|----------|-------|
 | Homepage (`templates/shop.njk`) | brand | Full funnel sections; seamless void bg; flow mocks in how-it-works + features |
 | Navbar | brand | Sticky dark blur bar; grid `1fr auto 1fr`; text links + one orange CTA |
-| Hero | brand | Spotlight + grid, Arial + Playfair Display Italic, dashboard mock |
-| Product grid & cards | brand → product | Banner media edge-to-edge; dynamic aspect from image; stock badge on image; orange gradient CTA in-stock |
-| How it works / Features | brand | `vl-flow-spot` + `vl-flow-panel`; three distinct mock patterns per section |
+| Hero | brand | Spotlight + grid, Arial + Playfair Italic, dashboard mock |
+| Product grid & cards | brand → product | Unified cards, banner media, stock badges |
+| How it works / Features | brand | Flow mocks with glass panels |
+| Why Velora | brand | Split copy + 2×2 glass benefit cards (no VS layout) |
 | Product page, cart, checkout | product | Functional clarity; match dark tokens — next polish target |
 | Customer account / auth | product | Minimal, trustworthy; dark theme parity |
 | FAQ, footer, legal | brand | Readable prose; official contact links |

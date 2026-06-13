@@ -652,7 +652,10 @@
       });
     }
 
-    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('scroll', function () {
+      if (window.__lenis) return;
+      onScroll();
+    }, { passive: true });
     window.addEventListener('resize', onScroll, { passive: true });
 
     function bindLenis() {

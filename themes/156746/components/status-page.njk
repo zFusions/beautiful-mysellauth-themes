@@ -1,14 +1,27 @@
-<div class="container component vl-page-section" data-component-id="{{ componentId }}">
-  <section class="py-5-nav">
-    {% render_snippet "vl-page-head.njk", properties=properties, fallbackTitle='Product Status' %}
-    <div class="row">
-      <div class="col-lg-10 mx-auto">
-        <div class="status-cards vl-status-grid">
+<div class="component vl-premium-page vl-status-page" data-component-id="{{ componentId }}">
+  <section class="vl-legal-section vl-terms-section" aria-labelledby="vl-status-title">
+    <div class="vl-legal-shell vl-terms-shell">
+      {% if properties.show_back_link != false %}
+      <a href="{{ (properties.back_link | default('/')) | shopUrl }}" class="vl-page-back vl-legal-back" data-reveal>{{ properties.back_text | default('← Back to store') | renderString }}</a>
+      {% endif %}
+
+      <header class="vl-legal-hero vl-terms-hero" data-reveal>
+        <h1 id="vl-status-title" class="vl-legal-title vl-terms-title">
+          <span class="vl-terms-title-plain">{{ properties.title_prefix | default('Product') | renderString }}</span>
+          <em class="vl-terms-title-accent">{{ properties.title_accent | default('Status') | renderString }}</em>
+        </h1>
+        {% if properties.subtitle %}
+        <p class="vl-legal-sub vl-terms-sub">{{ properties.subtitle | renderString }}</p>
+        {% endif %}
+      </header>
+
+      <div class="vl-legal-panel vl-terms-panel" data-reveal>
+        <div class="status-cards vl-status-grid" data-reveal-group>
           {% for product in sortedItems %}
             {% if product.type == 'group' %}
-              <div class="status-group">
-                <h2>{{ product.name }}</h2>
-                <div class="status-cards">
+              <div class="status-group" data-reveal>
+                <h2 class="vl-status-group-title">{{ product.name }}</h2>
+                <div class="status-cards vl-status-grid vl-status-grid--nested">
                   {% for product in product.products %}
                     {% render_snippet "status-card.njk", product=product %}
                   {% endfor %}

@@ -38,7 +38,8 @@ Inside snippets, treat `properties` as the single source of truth for editable c
 
 After **major UI/UX work** on this theme (new sections, layout patterns, motion, mock patterns, token changes):
 
-- Update `.cursor/skills/beautiful-mysellauth-themes/SKILL.md` and the relevant `references/*.md` so future builds inherit the improvement.
+- Update `.cursor/skills/premium-storefront-da/velora-theme-156746.md` (and `SKILL.md` / `tokens.json` if tokens or CSS ownership change).
+- Update `.cursor/skills/beautiful-mysellauth-themes/SKILL.md` and the relevant `references/*.md` for patterns reusable across themes.
 - Capture new builder field patterns, anti-patterns, and quality checks — do not leave knowledge only in theme files.
 
 ## Checklist (every PR / session touching theme UI)

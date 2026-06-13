@@ -418,6 +418,16 @@
                 }
             }
         },
+        "home-discord": {
+            "label": "Support section",
+            "multiple": true,
+            "properties": {}
+        },
+        "home-compare": {
+            "label": "Why Velora",
+            "multiple": true,
+            "properties": {}
+        },
         "before-after": {
             "label": "Before / After Slider",
             "global": false,
@@ -1185,6 +1195,21 @@
                     "type": "text",
                     "default": "Chat with us"
                 },
+                "page_title_prefix": {
+                    "label": "Standalone page title (first part)",
+                    "type": "text",
+                    "default": "Frequently"
+                },
+                "page_title_accent": {
+                    "label": "Standalone page title (accent)",
+                    "type": "text",
+                    "default": "Asked"
+                },
+                "page_subtitle": {
+                    "label": "Standalone page subtitle",
+                    "type": "text",
+                    "default": "Everything you need to know before you buy."
+                },
                 "title": {
                     "label": "Title",
                     "type": "text",
@@ -1270,6 +1295,11 @@
                     "label": "Copyright Text",
                     "type": "text",
                     "default": "© 2025 SuperCheat II. All rights reserved."
+                },
+                "brand_text": {
+                    "label": "Brand description",
+                    "type": "text",
+                    "default": "Web store & Discord shop — scripts, software, licenses and premium products. Secure payments, instant delivery."
                 }
             }
         },
@@ -1278,15 +1308,35 @@
             "page": true,
             "templates": ["feedback"],
             "properties": {
-                "title": {
-                    "label": "Title",
+                "title_prefix": {
+                    "label": "Title (first part)",
                     "type": "text",
-                    "default": "Feedback from users"
+                    "default": "Customer"
+                },
+                "title_accent": {
+                    "label": "Title (accent word)",
+                    "type": "text",
+                    "default": "Reviews"
                 },
                 "subtitle": {
                     "label": "Subtitle",
                     "type": "text",
                     "default": "Real reviews from verified buyers."
+                },
+                "show_back_link": {
+                    "label": "Show back link",
+                    "type": "toggle",
+                    "default": true
+                },
+                "back_text": {
+                    "label": "Back link text",
+                    "type": "text",
+                    "default": "← Back to store"
+                },
+                "back_link": {
+                    "label": "Back link URL",
+                    "type": "text",
+                    "default": "/"
                 },
                 "cta_text": {
                     "label": "CTA button text",
@@ -1305,15 +1355,35 @@
             "page": true,
             "templates": ["status"],
             "properties": {
-                "title": {
-                    "label": "Title",
+                "title_prefix": {
+                    "label": "Title (first part)",
                     "type": "text",
-                    "default": "Product Status"
+                    "default": "Product"
+                },
+                "title_accent": {
+                    "label": "Title (accent word)",
+                    "type": "text",
+                    "default": "Status"
                 },
                 "subtitle": {
                     "label": "Subtitle",
                     "type": "text",
                     "default": "Live availability across the catalog."
+                },
+                "show_back_link": {
+                    "label": "Show back link",
+                    "type": "toggle",
+                    "default": true
+                },
+                "back_text": {
+                    "label": "Back link text",
+                    "type": "text",
+                    "default": "← Back to store"
+                },
+                "back_link": {
+                    "label": "Back link URL",
+                    "type": "text",
+                    "default": "/"
                 }
             }
         },
@@ -1322,11 +1392,76 @@
             "page": true,
             "templates": ["privacy-policy"],
             "properties": {
-                "title": {
-                    "label": "Title",
-                    "type": "text",
-                    "default": "Privacy Policy"
-                }
+                "title_prefix": { "label": "Title (first part)", "type": "text", "default": "Privacy" },
+                "title_accent": { "label": "Title (accent word)", "type": "text", "default": "Policy" },
+                "subtitle": { "label": "Subtitle", "type": "text", "default": "How we collect, use and protect your information." },
+                "show_back_link": { "label": "Show back link", "type": "toggle", "default": true },
+                "back_text": { "label": "Back link text", "type": "text", "default": "← Back to store" },
+                "back_link": { "label": "Back link URL", "type": "text", "default": "/" },
+                "highlights": {
+                    "label": "Summary highlights",
+                    "type": "list",
+                    "maxItems": 4,
+                    "properties": {
+                        "title": { "label": "Title", "type": "text", "default": "Minimal data" },
+                        "text": { "label": "Description", "type": "textarea", "default": "We only collect what we need." },
+                        "icon": { "label": "Icon", "type": "select", "options": ["check", "shield", "info", "x"], "default": "check" }
+                    },
+                    "default": [
+                        { "title": "Minimal data", "text": "We only collect what's needed to deliver your order.", "icon": "check" },
+                        { "title": "Secure checkout", "text": "Payments are encrypted via trusted providers.", "icon": "shield" },
+                        { "title": "Never sold", "text": "We do not sell your personal data to third parties.", "icon": "info" }
+                    ]
+                },
+                "sections": {
+                    "label": "Policy sections",
+                    "type": "list",
+                    "maxItems": 12,
+                    "properties": {
+                        "title": { "label": "Section title", "type": "text", "default": "1) Data we collect" },
+                        "intro": { "label": "Section intro", "type": "textarea", "default": "" },
+                        "items": {
+                            "label": "Rows",
+                            "type": "list",
+                            "maxItems": 24,
+                            "properties": {
+                                "text": { "label": "Text", "type": "textarea", "default": "Policy row text." },
+                                "type": { "label": "Icon", "type": "select", "options": ["check", "x", "info", "dot"], "default": "check" }
+                            }
+                        }
+                    },
+                    "default": [
+                        {
+                            "title": "1) Data we collect",
+                            "intro": "We collect only the information required to process orders and provide support.",
+                            "items": [
+                                { "text": "Email address for delivery and order updates.", "type": "dot" },
+                                { "text": "Payment data handled by our payment processor — never stored on our servers.", "type": "check" },
+                                { "text": "IP address and browser data for fraud prevention.", "type": "info" }
+                            ]
+                        },
+                        {
+                            "title": "2) How we use your data",
+                            "intro": "Your data is used solely to operate the store and support you.",
+                            "items": [
+                                { "text": "Deliver digital products instantly after payment.", "type": "check" },
+                                { "text": "Send order confirmations and support replies.", "type": "check" },
+                                { "text": "We do not send marketing emails without consent.", "type": "x" }
+                            ]
+                        },
+                        {
+                            "title": "3) Your rights",
+                            "intro": "You can request access, correction or deletion of your data.",
+                            "items": [
+                                { "text": "Contact support to request a copy of your data.", "type": "check" },
+                                { "text": "Account deletion available on request.", "type": "info" },
+                                { "text": "We respond to privacy requests within 30 days.", "type": "dot" }
+                            ]
+                        }
+                    ]
+                },
+                "show_shop_content": { "label": "Show shop privacy policy (Shop Settings)", "type": "toggle", "default": false },
+                "shop_content_heading": { "label": "Shop policy heading", "type": "text", "default": "Full privacy policy" }
             }
         },
         "refund-policy-page": {
@@ -1334,11 +1469,75 @@
             "page": true,
             "templates": ["refund-policy"],
             "properties": {
-                "title": {
-                    "label": "Title",
-                    "type": "text",
-                    "default": "Refund Policy"
-                }
+                "title_prefix": { "label": "Title (first part)", "type": "text", "default": "Refund" },
+                "title_accent": { "label": "Title (accent word)", "type": "text", "default": "Policy" },
+                "subtitle": { "label": "Subtitle", "type": "text", "default": "Our refund and replacement rules for digital products." },
+                "show_back_link": { "label": "Show back link", "type": "toggle", "default": true },
+                "back_text": { "label": "Back link text", "type": "text", "default": "← Back to store" },
+                "back_link": { "label": "Back link URL", "type": "text", "default": "/" },
+                "highlights": {
+                    "label": "Summary highlights",
+                    "type": "list",
+                    "maxItems": 4,
+                    "properties": {
+                        "title": { "label": "Title", "type": "text", "default": "No refunds" },
+                        "text": { "label": "Description", "type": "textarea", "default": "All sales are final." },
+                        "icon": { "label": "Icon", "type": "select", "options": ["check", "shield", "info", "x"], "default": "x" }
+                    },
+                    "default": [
+                        { "title": "All sales final", "text": "Digital products cannot be returned once delivered.", "icon": "x" },
+                        { "title": "Replacements available", "text": "Faulty products may qualify for a free replacement.", "icon": "check" },
+                        { "title": "Contact first", "text": "Reach support before opening a payment dispute.", "icon": "info" }
+                    ]
+                },
+                "sections": {
+                    "label": "Policy sections",
+                    "type": "list",
+                    "maxItems": 12,
+                    "properties": {
+                        "title": { "label": "Section title", "type": "text", "default": "1) Refund eligibility" },
+                        "intro": { "label": "Section intro", "type": "textarea", "default": "" },
+                        "items": {
+                            "label": "Rows",
+                            "type": "list",
+                            "maxItems": 24,
+                            "properties": {
+                                "text": { "label": "Text", "type": "textarea", "default": "Policy row text." },
+                                "type": { "label": "Icon", "type": "select", "options": ["check", "x", "info", "dot"], "default": "check" }
+                            }
+                        }
+                    },
+                    "default": [
+                        {
+                            "title": "1) Refund eligibility",
+                            "intro": "Due to the nature of digital goods, refunds are generally not available.",
+                            "items": [
+                                { "text": "No refunds after the product has been delivered.", "type": "x" },
+                                { "text": "Accidental purchases are not eligible for refunds.", "type": "x" },
+                                { "text": "Duplicate charges will be refunded after verification.", "type": "check" }
+                            ]
+                        },
+                        {
+                            "title": "2) Replacements",
+                            "intro": "If a product doesn't work as described, we may offer a replacement.",
+                            "items": [
+                                { "text": "Report the issue within the product warranty window.", "type": "check" },
+                                { "text": "Provide your order ID and proof of the issue.", "type": "info" },
+                                { "text": "One replacement per order unless otherwise stated.", "type": "dot" }
+                            ]
+                        },
+                        {
+                            "title": "3) Chargebacks",
+                            "intro": "Opening a dispute without contacting us first may result in a ban.",
+                            "items": [
+                                { "text": "Contact support before initiating a chargeback.", "type": "check" },
+                                { "text": "Fraudulent chargebacks lead to permanent account suspension.", "type": "x" }
+                            ]
+                        }
+                    ]
+                },
+                "show_shop_content": { "label": "Show shop refund policy (Shop Settings)", "type": "toggle", "default": false },
+                "shop_content_heading": { "label": "Shop policy heading", "type": "text", "default": "Full refund policy" }
             }
         },
         "terms-page": {
@@ -1346,10 +1545,152 @@
             "page": true,
             "templates": ["terms"],
             "properties": {
-                "title": {
-                    "label": "Title",
+                "title_prefix": {
+                    "label": "Title (first part)",
                     "type": "text",
-                    "default": "Terms of Service"
+                    "default": "Terms of"
+                },
+                "title_accent": {
+                    "label": "Title (accent word)",
+                    "type": "text",
+                    "default": "Service"
+                },
+                "subtitle": {
+                    "label": "Subtitle",
+                    "type": "text",
+                    "default": "Purchasing or using our products means you accept the conditions below."
+                },
+                "show_back_link": {
+                    "label": "Show back link",
+                    "type": "toggle",
+                    "default": true
+                },
+                "back_text": {
+                    "label": "Back link text",
+                    "type": "text",
+                    "default": "← Back to store"
+                },
+                "back_link": {
+                    "label": "Back link URL",
+                    "type": "text",
+                    "default": "/"
+                },
+                "highlights": {
+                    "label": "Summary highlights",
+                    "type": "list",
+                    "maxItems": 4,
+                    "properties": {
+                        "title": {
+                            "label": "Title",
+                            "type": "text",
+                            "default": "No refunds"
+                        },
+                        "text": {
+                            "label": "Description",
+                            "type": "textarea",
+                            "default": "All sales are final unless stated otherwise."
+                        },
+                        "icon": {
+                            "label": "Icon",
+                            "type": "select",
+                            "options": ["check", "shield", "info", "x"],
+                            "default": "check"
+                        }
+                    },
+                    "default": [
+                        {
+                            "title": "No refunds",
+                            "text": "All sales are final unless we say it clearly.",
+                            "icon": "x"
+                        },
+                        {
+                            "title": "Product-based warranty",
+                            "text": "Each product has its own support window.",
+                            "icon": "shield"
+                        },
+                        {
+                            "title": "Proof needed",
+                            "text": "To replace something, we need evidence.",
+                            "icon": "info"
+                        }
+                    ]
+                },
+                "sections": {
+                    "label": "Terms sections",
+                    "type": "list",
+                    "maxItems": 12,
+                    "properties": {
+                        "title": {
+                            "label": "Section title",
+                            "type": "text",
+                            "default": "1) Refunds"
+                        },
+                        "intro": {
+                            "label": "Section intro",
+                            "type": "textarea",
+                            "default": ""
+                        },
+                        "items": {
+                            "label": "Rows",
+                            "type": "list",
+                            "maxItems": 24,
+                            "properties": {
+                                "text": {
+                                    "label": "Text",
+                                    "type": "textarea",
+                                    "default": "Terms row text."
+                                },
+                                "type": {
+                                    "label": "Icon",
+                                    "type": "select",
+                                    "options": ["check", "x", "info", "dot"],
+                                    "default": "check"
+                                }
+                            }
+                        }
+                    },
+                    "default": [
+                        {
+                            "title": "1) Refunds",
+                            "intro": "We do not offer refunds on digital products. Please read carefully before purchasing.",
+                            "items": [
+                                { "text": "All sales are final.", "type": "x" },
+                                { "text": "Chargebacks or payment disputes may result in a permanent ban.", "type": "x" },
+                                { "text": "Replacements are only offered when a product fails to deliver as described.", "type": "check" },
+                                { "text": "Contact support with your order ID before opening a dispute.", "type": "info" }
+                            ]
+                        },
+                        {
+                            "title": "2) Warranty & support",
+                            "intro": "Support windows vary by product. Check the product page for specific coverage.",
+                            "items": [
+                                { "text": "Instant delivery products — support within 24 hours of purchase.", "type": "check" },
+                                { "text": "Subscription-based products — warranty until expiry date shown at checkout.", "type": "dot" },
+                                { "text": "Boost / upgrade services — warranty covers the full purchased period.", "type": "dot" },
+                                { "text": "Abuse, sharing, or reselling voids all warranty.", "type": "x" }
+                            ]
+                        },
+                        {
+                            "title": "3) Replacements",
+                            "intro": "If something goes wrong, we will help — but we need proof.",
+                            "items": [
+                                { "text": "Provide your order ID and a clear description of the issue.", "type": "check" },
+                                { "text": "Screenshots or screen recordings may be required.", "type": "info" },
+                                { "text": "False claims or repeated abuse will result in account termination.", "type": "x" },
+                                { "text": "Replacements are issued at our discretion within the warranty window.", "type": "check" }
+                            ]
+                        }
+                    ]
+                },
+                "show_shop_terms": {
+                    "label": "Show shop terms (from Shop Settings)",
+                    "type": "toggle",
+                    "default": false
+                },
+                "shop_terms_heading": {
+                    "label": "Shop terms heading",
+                    "type": "text",
+                    "default": "Additional terms"
                 }
             }
         },
@@ -1367,6 +1708,26 @@
                     "label": "Subtitle",
                     "type": "text",
                     "default": "Review your order — instant delivery after payment."
+                },
+                "empty_title": {
+                    "label": "Empty cart title",
+                    "type": "text",
+                    "default": "Your cart is empty"
+                },
+                "empty_subtitle": {
+                    "label": "Empty cart subtitle",
+                    "type": "text",
+                    "default": "Browse our catalog — instant delivery after payment."
+                },
+                "empty_cta_text": {
+                    "label": "Empty cart button",
+                    "type": "text",
+                    "default": "Browse products"
+                },
+                "empty_cta_link": {
+                    "label": "Empty cart button link",
+                    "type": "text",
+                    "default": "/#products"
                 }
             }
         },
@@ -1414,6 +1775,21 @@
                     "label": "Hide Buy Now Button",
                     "type": "toggle",
                     "default": false
+                },
+                "trust_1": {
+                    "label": "Trust badge 1",
+                    "type": "text",
+                    "default": "Verified quality"
+                },
+                "trust_2": {
+                    "label": "Trust badge 2",
+                    "type": "text",
+                    "default": "Instant delivery"
+                },
+                "trust_3": {
+                    "label": "Trust badge 3",
+                    "type": "text",
+                    "default": "Fresh"
                 }
             }
         }

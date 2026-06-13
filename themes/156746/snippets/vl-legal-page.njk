@@ -1,0 +1,90 @@
+<div class="component vl-legal-page vl-terms-page vl-premium-page {{ page_class | default('') }}" data-component-id="{{ componentId }}">
+  <section class="vl-legal-section vl-terms-section" aria-labelledby="{{ title_id | default('vl-legal-title') }}">
+    <div class="vl-legal-shell vl-terms-shell">
+      {% if properties.show_back_link != false %}
+      <a href="{{ (properties.back_link | default('/')) | shopUrl }}" class="vl-page-back vl-legal-back vl-terms-back" data-reveal>{{ properties.back_text | default('← Back to store') | renderString }}</a>
+      {% endif %}
+
+      <header class="vl-legal-hero vl-terms-hero" data-reveal>
+        <h1 id="{{ title_id | default('vl-legal-title') }}" class="vl-legal-title vl-terms-title">
+          <span class="vl-legal-title-plain vl-terms-title-plain">{{ properties.title_prefix | default(fallback_prefix | default('Terms of')) | renderString }}</span>
+          <em class="vl-legal-title-accent vl-terms-title-accent">{{ properties.title_accent | default(fallback_accent | default('Service')) | renderString }}</em>
+        </h1>
+        {% if properties.subtitle %}
+        <p class="vl-legal-sub vl-terms-sub">{{ properties.subtitle | renderString }}</p>
+        {% endif %}
+      </header>
+
+      <div class="vl-legal-panel vl-terms-panel" data-reveal>
+        {% set highlights = properties.highlights | default([]) %}
+        {% if highlights|length > 0 %}
+        <div class="vl-legal-highlights vl-terms-highlights" data-reveal-group>
+          {% for item in highlights %}
+          <article class="vl-legal-highlight vl-terms-highlight" data-reveal>
+            <div class="vl-legal-highlight-icon vl-terms-highlight-icon vl-terms-highlight-icon--{{ item.icon | default('check') }}" aria-hidden="true">
+              {% if item.icon == 'shield' %}
+              <svg class="vl-legal-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              {% elif item.icon == 'x' %}
+              <svg class="vl-legal-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+              {% elif item.icon == 'info' %}
+              <svg class="vl-legal-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+              {% else %}
+              <svg class="vl-legal-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+              {% endif %}
+            </div>
+            <div class="vl-legal-highlight-copy vl-terms-highlight-copy">
+              <h2 class="vl-legal-highlight-title vl-terms-highlight-title">{{ item.title | renderString }}</h2>
+              <p class="vl-legal-highlight-text vl-terms-highlight-text">{{ item.text | renderString }}</p>
+            </div>
+          </article>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        {% set sections = properties.sections | default([]) %}
+        {% if sections|length > 0 %}
+        <div class="vl-legal-sections vl-terms-sections">
+          {% for section in sections %}
+          <section class="vl-legal-block vl-terms-block" data-reveal>
+            <h2 class="vl-legal-block-title vl-terms-block-title">{{ section.title | renderString }}</h2>
+            {% if section.intro %}
+            <p class="vl-legal-block-intro vl-terms-block-intro">{{ section.intro | renderString }}</p>
+            {% endif %}
+            {% set rows = section.items | default([]) %}
+            {% if rows|length > 0 %}
+            <ul class="vl-legal-rows vl-terms-rows" data-reveal-group>
+              {% for row in rows %}
+              <li class="vl-legal-row vl-terms-row vl-terms-row--{{ row.type | default('check') }}" data-reveal>
+                <span class="vl-legal-row-icon vl-terms-row-icon" aria-hidden="true">
+                  {% if row.type == 'x' %}
+                  <svg class="vl-legal-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                  {% elif row.type == 'info' %}
+                  <svg class="vl-legal-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>
+                  {% elif row.type == 'dot' %}
+                  <svg class="vl-legal-icon vl-legal-icon--dot" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3" fill="currentColor"/></svg>
+                  {% else %}
+                  <svg class="vl-legal-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
+                  {% endif %}
+                </span>
+                <span class="vl-legal-row-text vl-terms-row-text">{{ row.text | renderString }}</span>
+              </li>
+              {% endfor %}
+            </ul>
+            {% endif %}
+          </section>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        {% if show_extra and extra_content %}
+        <div class="vl-legal-extra vl-terms-extra" data-reveal>
+          {% if extra_heading %}
+          <h2 class="vl-legal-block-title vl-terms-block-title">{{ extra_heading | renderString }}</h2>
+          {% endif %}
+          <div class="vl-legal-prose vl-terms-prose editor">{{ extra_content | safe }}</div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </section>
+</div>

@@ -1,4 +1,4 @@
-<form @submit.prevent="buyNow">
+<form @submit.prevent="buyNow" class="vl-pdp-form">
   <div class="row mb-2">
     {% if product.variants.length > 1 %}
       <div class="mb-3 col-12">
@@ -74,9 +74,9 @@
       </div>
     {% endif %}
 
-    <div class="mb-3 col-12">
+    <div class="mb-3 col-12 vl-pdp-qty-field">
       <label for="quantity" class="form-label">Quantity</label>
-      <div class="input-group col-4">
+      <div class="input-group vl-pdp-qty-input">
         <button
           @click="changeQuantity(quantity - 1)"
           type="button"
@@ -102,6 +102,9 @@
           class="form-control"
           name="quantity"
           x-model.number="quantity"
+          @change="changeQuantity(quantity)"
+          :min="minQuantity"
+          :max="maxQuantity"
           :disabled="outOfStock"
         />
         <button
@@ -134,11 +137,6 @@
         Please enter a valid quantity (from <span x-text="minQuantity"></span> to <span x-text="maxQuantity"></span>).
       </small>
 
-      <div x-show="availableVolumeDiscount" {{ 'x-cloak' if not product.volume_discounts }}>
-        <div class="form-control text-center mt-2">
-          Buy <span x-text="availableVolumeDiscount?.quantity - quantity"></span> more to get a <span x-text="availableVolumeDiscount?.percentage"></span>% discount.
-        </div>
-      </div>
     </div>
 
     {% if altcha and not properties.hide_buy_now %}
@@ -181,41 +179,24 @@
       ></div>
     </div>
     
-    <div class="d-flex flex flex-column flex-lg-row mt-4 gap-3 buy-buttons">
-      {% if not properties.hide_buy_now %}
-        <div class="col">
-          <button
-            type="submit"
-            class="w-100 btn btn-primary"
-            :disabled="outOfStock || product.visibility == 'on_hold' || buyingNow || buyNowDisabled"
-          >
-            <span>Get instant delivery</span>
-            <template x-if="!buyingNow">
-              <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="currentColor" viewBox="0 0 256 256"><path d="M237.66,122.34l-96-96A8,8,0,0,0,128,32V72H104a8,8,0,0,0-8,8v96a8,8,0,0,0,8,8h24v40a8,8,0,0,0,13.66,5.66l96-96A8,8,0,0,0,237.66,122.34ZM144,204.69V176a8,8,0,0,0-8-8H112V88h24a8,8,0,0,0,8-8V51.31L220.69,128ZM48,80v96a8,8,0,0,1-16,0V80a8,8,0,0,1,16,0Zm32,0v96a8,8,0,0,1-16,0V80a8,8,0,0,1,16,0Z"></path></svg>
-            </template>
-            <template x-if="buyingNow">
-              <svg xmlns="http://www.w3.org/2000/svg" class="size-5 animate-spin" fill="currentColor" viewBox="0 0 256 256"><path d="M232,128a104,104,0,0,1-208,0c0-41,23.81-78.36,60.66-95.27a8,8,0,0,1,6.68,14.54C60.15,61.59,40,93.27,40,128a88,88,0,0,0,176,0c0-34.73-20.15-66.41-51.34-80.73a8,8,0,0,1,6.68-14.54C208.19,49.64,232,87,232,128Z"></path></svg>
-            </template>
-          </button>
-        </div>
-      {% endif %}
+    <div class="vl-pdp-buy-actions buy-buttons">
       {% if not properties.hide_add_to_cart %}
-      <div class="col">
+      <div class="vl-pdp-buy-action">
         <button
           type="button"
           x-on:click="addToCart"
-          class="w-100 btn btn-outline-primary"
+          class="w-100 btn btn-primary"
           :disabled="outOfStock || product.visibility == 'on_hold' || cartLimitReached || addingToCart"
         >
           <template x-if="!addingToCart && !addedToCart">
             <span class="d-flex align-items-center justify-content-center gap-2">
-              <span x-text="cartLimitReached ? 'Cart limit reached' : 'Add to cart & keep browsing'"></span>
+              <span x-text="cartLimitReached ? 'Cart limit reached' : 'Add to cart'"></span>
               <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="currentColor" viewBox="0 0 256 256"><path d="M230.14,58.87A8,8,0,0,0,224,56H62.68L56.6,22.57A8,8,0,0,0,48.73,16H24a8,8,0,0,0,0,16h18L67.56,172.29a24,24,0,0,0,5.33,11.27,28,28,0,1,0,44.4,8.44h45.42A27.75,27.75,0,0,0,160,204a28,28,0,1,0,28-28H91.17a8,8,0,0,1-7.87-6.57L80.13,152h116a24,24,0,0,0,23.61-19.71l12.16-66.86A8,8,0,0,0,230.14,58.87ZM104,204a12,12,0,1,1-12-12A12,12,0,0,1,104,204Zm96,0a12,12,0,1,1-12-12A12,12,0,0,1,200,204Zm4-74.57A8,8,0,0,1,196.1,136H77.22L65.59,72H214.41Z"></path></svg>
             </span>
           </template>
           <template x-if="addingToCart">
             <span class="d-flex align-items-center justify-content-center gap-2">
-              <span>Adding...&nbsp;&nbsp;</span>
+              <span>Adding...</span>
               <svg xmlns="http://www.w3.org/2000/svg" class="size-5 animate-spin" fill="currentColor" viewBox="0 0 256 256"><path d="M232,128a104,104,0,0,1-208,0c0-41,23.81-78.36,60.66-95.27a8,8,0,0,1,6.68,14.54C60.15,61.59,40,93.27,40,128a88,88,0,0,0,176,0c0-34.73-20.15-66.41-51.34-80.73a8,8,0,0,1,6.68-14.54C208.19,49.64,232,87,232,128Z"></path></svg>
             </span>
           </template>
@@ -228,7 +209,43 @@
         </button>
       </div>
       {% endif %}
+      {% if not properties.hide_buy_now %}
+        <div class="vl-pdp-buy-action vl-pdp-buy-action--secondary">
+          <button
+            type="submit"
+            class="w-100 btn btn-outline-primary vl-pdp-btn-buy-now"
+            :disabled="outOfStock || product.visibility == 'on_hold' || buyingNow || buyNowDisabled"
+          >
+            <span class="d-flex align-items-center justify-content-center gap-2">
+              <span x-show="!buyingNow">Buy now</span>
+              <span x-show="buyingNow" x-cloak>Processing…</span>
+              <template x-if="!buyingNow">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-5" fill="currentColor" viewBox="0 0 256 256"><path d="M237.66,122.34l-96-96A8,8,0,0,0,128,32V72H104a8,8,0,0,0-8,8v96a8,8,0,0,0,8,8h24v40a8,8,0,0,0,13.66,5.66l96-96A8,8,0,0,0,237.66,122.34ZM144,204.69V176a8,8,0,0,0-8-8H112V88h24a8,8,0,0,0,8-8V51.31L220.69,128ZM48,80v96a8,8,0,0,1-16,0V80a8,8,0,0,1,16,0Zm32,0v96a8,8,0,0,1-16,0V80a8,8,0,0,1,16,0Z"></path></svg>
+              </template>
+              <template x-if="buyingNow">
+                <svg xmlns="http://www.w3.org/2000/svg" class="size-5 animate-spin" fill="currentColor" viewBox="0 0 256 256"><path d="M232,128a104,104,0,0,1-208,0c0-41,23.81-78.36,60.66-95.27a8,8,0,0,1,6.68,14.54C60.15,61.59,40,93.27,40,128a88,88,0,0,0,176,0c0-34.73-20.15-66.41-51.34-80.73a8,8,0,0,1,6.68-14.54C208.19,49.64,232,87,232,128Z"></path></svg>
+              </template>
+            </span>
+          </button>
+        </div>
+      {% endif %}
     </div>
+
+    {% if product.volume_discounts and product.volume_discounts|length > 0 %}
+    <div class="vl-pdp-volume-promo" x-show="availableVolumeDiscount" x-cloak>
+      <div class="vl-pdp-volume-promo-body">
+        <div class="vl-pdp-volume-promo-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><path d="M22 4 12 14.01l-3-3"/></svg>
+        </div>
+        <p class="vl-pdp-volume-promo-text">
+          Add <strong x-text="volumeDiscountRemaining"></strong> more item<span x-show="volumeDiscountRemaining !== 1">s</span> to unlock <strong x-text="availableVolumeDiscount?.percentage"></strong>% off (at <strong x-text="availableVolumeDiscount?.quantity"></strong> pcs).
+        </p>
+      </div>
+      <div class="vl-pdp-volume-promo-meter" aria-hidden="true">
+        <div class="vl-pdp-volume-promo-bar" :style="`width: ${volumeDiscountProgress}%`"></div>
+      </div>
+    </div>
+    {% endif %}
   </div>
 </form>
 
@@ -252,14 +269,17 @@
 
       init: function () {
         // Choose the first variant that has stock.
+        let hasStockVariant = false;
+
         for (let i = 0; i < this.product.variants.length; i++) {
           if (this.product.variants[i].stock !== 0) {
             this.activeVariant = i;
+            hasStockVariant = true;
             break;
           }
         }
 
-        if (!this.activeVariant) {
+        if (!hasStockVariant) {
           this.activeVariant = 0;
         }
 
@@ -274,6 +294,7 @@
             this.quantity = this.variant.quantity_min;
           }
 
+          this.changeQuantity(this.quantity);
           this.addedToCart = false;
         });
 
@@ -287,7 +308,7 @@
         const urlParams = new URLSearchParams(window.location.search);
 
         if (urlParams.has('quantity')) {
-          this.quantity = parseInt(urlParams.get('quantity'));
+          this.changeQuantity(parseInt(urlParams.get('quantity'), 10));
         }
 
         if (urlParams.has('variant')) {
@@ -297,23 +318,109 @@
           }
         }
 
+        this.changeQuantity(this.quantity);
+
         {% if altcha and not properties.hide_buy_now %}
           this.addAltchaEventListener();
         {% endif %}
       },
 
-      get availableVolumeDiscount() {
-        if (this.product.volume_discounts) {
-          const volumeDiscounts = this.product.volume_discounts.sort((a, b) => a.quantity - b.quantity);
+      get hasVolumeDiscounts() {
+        return Array.isArray(this.product.volume_discounts) && this.product.volume_discounts.length > 0;
+      },
 
-          for (const volumeDiscount of volumeDiscounts) {
-            if (this.quantity < parseInt(volumeDiscount.quantity)) {
-              return volumeDiscount;
-            }
+      get subtotalPrice() {
+        if (!this.variant) return 0;
+        return parseFloat(this.variant.price) * this.quantity;
+      },
+
+      get appliedVolumeDiscount() {
+        if (!this.hasVolumeDiscounts) return null;
+
+        const volumeDiscounts = [...this.product.volume_discounts].sort((a, b) => b.quantity - a.quantity);
+
+        for (const volumeDiscount of volumeDiscounts) {
+          if (this.quantity >= parseInt(volumeDiscount.quantity, 10)) {
+            return volumeDiscount;
           }
         }
 
         return null;
+      },
+
+      get availableVolumeDiscount() {
+        if (!this.hasVolumeDiscounts) return null;
+
+        const volumeDiscounts = [...this.product.volume_discounts].sort((a, b) => a.quantity - b.quantity);
+
+        for (const volumeDiscount of volumeDiscounts) {
+          if (this.quantity < parseInt(volumeDiscount.quantity, 10)) {
+            return volumeDiscount;
+          }
+        }
+
+        return null;
+      },
+
+      get volumeDiscountRemaining() {
+        if (!this.availableVolumeDiscount) return 0;
+        return Math.max(0, parseInt(this.availableVolumeDiscount.quantity, 10) - this.quantity);
+      },
+
+      get volumeDiscountProgress() {
+        if (!this.availableVolumeDiscount) return 0;
+        const target = parseInt(this.availableVolumeDiscount.quantity, 10);
+        if (!target) return 0;
+        return Math.min(100, Math.round((this.quantity / target) * 100));
+      },
+
+      get unitSaveAmount() {
+        if (!this.variant?.price_slash) return 0;
+        const slash = parseFloat(this.variant.price_slash);
+        const price = parseFloat(this.variant.price);
+        if (slash <= price) return 0;
+        return slash - price;
+      },
+
+      get compareTotalPrice() {
+        if (!this.variant?.price_slash) return 0;
+        const slash = parseFloat(this.variant.price_slash);
+        const price = parseFloat(this.variant.price);
+        if (slash <= price) return 0;
+        return slash * this.quantity;
+      },
+
+      get strikethroughPrice() {
+        const total = parseFloat(this.totalPrice);
+
+        if (this.appliedVolumeDiscount) {
+          const subtotal = this.subtotalPrice;
+          return subtotal > total ? subtotal : 0;
+        }
+
+        const slashTotal = this.compareTotalPrice;
+        return slashTotal > total ? slashTotal : 0;
+      },
+
+      get showStrikethroughPrice() {
+        return this.strikethroughPrice > 0.001;
+      },
+
+      get volumeSaveAmount() {
+        if (!this.appliedVolumeDiscount) return 0;
+        const total = parseFloat(this.totalPrice);
+        const save = this.subtotalPrice - total;
+        return save > 0 ? save : 0;
+      },
+
+      get showVolumeSave() {
+        return this.appliedVolumeDiscount && this.volumeSaveAmount > 0.001;
+      },
+
+      get stockBarPercent() {
+        if (!this.variant || this.variant.stock <= 0) return 0;
+        if (this.variant.stock === -1) return 100;
+        return Math.min(100, this.variant.stock);
       },
 
       get totalPrice() {
@@ -321,12 +428,12 @@
         let priceBeforeDiscounts = price;
 
         // Apply volume discounts
-        if (this.product.volume_discounts) {
-          const volumeDiscounts = this.product.volume_discounts.sort((a, b) => b.quantity - a.quantity);
+        if (this.hasVolumeDiscounts) {
+          const volumeDiscounts = [...this.product.volume_discounts].sort((a, b) => b.quantity - a.quantity);
 
           for (const volumeDiscount of volumeDiscounts) {
-            if (this.quantity >= parseInt(volumeDiscount.quantity)) {
-              price = price - (priceBeforeDiscounts * parseInt(volumeDiscount.percentage) / 100);
+            if (this.quantity >= parseInt(volumeDiscount.quantity, 10)) {
+              price = price - (priceBeforeDiscounts * parseInt(volumeDiscount.percentage, 10) / 100);
               break;
             }
           }

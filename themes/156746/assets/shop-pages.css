@@ -1,471 +1,98 @@
 /* ============================================================
-   SHOP PAGES — product + cart (Velora dark DA)
-   Shared utilities (trust-micro, customer, vl-page): velora.css
-   Tokens: --vl-* defined in velora.css :root
+   SHOP PAGES — cart + shared inner (Velora product register)
+   PDP layout/styles: shop-pdp.css
    ============================================================ */
-
-.product-wrapper.vl-pdp {
-  background: var(--vl-bg);
-  padding-bottom: clamp(3rem, 6vw, 5rem);
-  min-height: calc(100vh - var(--vl-nav-h, 72px) - 120px);
-}
-
-.product-wrapper.vl-pdp .vl-pdp-section {
-  padding-top: clamp(1.5rem, 4vw, 2.5rem);
-}
-
-.product-wrapper.vl-pdp .vl-pdp-upsells-head {
-  margin-bottom: 1.25rem;
-}
-
-.product-wrapper.vl-pdp .live-stats svg {
-  width: 1.125rem;
-  height: 1.125rem;
-  flex-shrink: 0;
-  color: var(--vl-accent);
-  opacity: 0.85;
-}
-
-.product-wrapper.vl-pdp .live-stats p {
-  margin: 0;
-  font-size: 13px;
-  line-height: 1.45;
-}
-
-.product-wrapper.vl-pdp .status {
-  margin-bottom: 0.75rem;
-}
-
-.product-wrapper.vl-pdp .status .label {
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.product-wrapper.vl-pdp .variants .variant .active-indicator svg {
-  color: var(--vl-accent) !important;
-}
-
-.product-wrapper.vl-pdp .btn-outline-danger.stock-indicator {
-  border-color: rgba(239, 68, 68, 0.35);
-  color: #f87171;
-  background: rgba(239, 68, 68, 0.08);
-  pointer-events: none;
-}
-
-.product-wrapper.vl-pdp .form-control.text-center {
-  background: var(--vl-surface);
-  border: 1px solid var(--vl-border);
-  color: var(--vl-accent);
-  border-radius: var(--vl-btn-radius);
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.product-wrapper.vl-pdp .alert-warning {
-  background: rgba(249, 153, 38, 0.08);
-  border: 1px solid rgba(249, 153, 38, 0.22);
-  color: var(--vl-text);
-  border-radius: var(--vl-radius);
-  font-size: 14px;
-}
-
-.product-wrapper.vl-pdp .text-danger {
-  color: #f87171 !important;
-}
-
-.product-wrapper.vl-pdp .input-group .input-group-btn {
-  min-width: 44px;
-  min-height: 44px;
-  padding: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Sales notification toast — dark Velora */
-.notification-popup .notification-content {
-  background: var(--vl-card);
-  border: 1px solid var(--vl-border);
-  border-radius: var(--vl-radius);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
-  padding: 0.5rem;
-  max-width: min(100vw - 2rem, 360px);
-}
-
-.notification-popup .notification-image {
-  border-radius: var(--vl-btn-radius);
-  border: 1px solid var(--vl-border);
-}
-
-.notification-popup .notification-text-primary,
-.notification-popup .notification-text-tertiary {
-  color: var(--vl-muted) !important;
-}
-
-.notification-popup .notification-text-secondary {
-  color: var(--vl-text);
-  font-weight: 600;
-}
 
 .velora-inner-page .product-wrapper.vl-pdp,
 .velora-inner-page .vl-cart-page,
-.velora-inner-page .vl-page-section {
+.velora-inner-page .vl-page-section,
+.velora-inner-page .vl-terms-page,
+.velora-inner-page .vl-premium-page {
   background: var(--vl-bg);
 }
 
-.product-wrapper.vl-pdp h1.display-6 {
-  font-family: var(--vl-font-header-sans);
-  font-size: clamp(1.75rem, 4vw, 2.25rem);
-  font-weight: 500;
-  letter-spacing: -0.03em;
-  line-height: 1.12;
-  color: var(--vl-text);
-  margin-bottom: 12px;
-}
-
-.product-wrapper.vl-pdp .fs-5 {
-  font-size: 1.375rem;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  color: var(--vl-text);
-}
-
-.product-wrapper.vl-pdp .text-muted {
-  color: var(--vl-muted) !important;
-}
-
-.product-wrapper.vl-pdp .section-title h2 {
-  font-family: var(--vl-font-header-sans);
-  font-size: clamp(1.5rem, 3vw, 2rem);
-  font-weight: 500;
-  letter-spacing: -0.03em;
-  color: var(--vl-text);
-}
-
-.product-wrapper.vl-pdp .carousel img,
-.product-wrapper.vl-pdp .card-img-top,
-.product-wrapper.vl-pdp .product-img-placeholder {
-  border-radius: var(--vl-radius);
-  border: 1px solid var(--vl-border);
-  background: var(--vl-card);
-}
-
-.product-wrapper.vl-pdp .product-img-placeholder {
-  padding: 3rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.product-wrapper.vl-pdp .thumbnails button {
-  border-radius: var(--vl-radius);
-  border: 1px solid var(--vl-border);
-  overflow: hidden;
-  padding: 0;
-  background: var(--vl-card);
-  opacity: 1;
-}
-
-.product-wrapper.vl-pdp .thumbnails button:not(.active) {
-  opacity: 0.55;
-}
-
-.product-wrapper.vl-pdp .thumbnails button.active {
-  border-color: var(--vl-accent);
-  box-shadow: 0 0 0 2px var(--vl-accent-glow);
-}
-
-.product-wrapper.vl-pdp .editor {
-  padding: 1.25rem;
-  border: 1px solid var(--vl-border);
-  border-radius: var(--vl-radius);
-  background: var(--vl-surface);
-  color: var(--vl-muted);
-}
-
-.product-wrapper.vl-pdp .product-tabs .btn {
-  font-weight: 600;
-  font-size: 0.875rem;
-  border-radius: var(--vl-btn-radius);
-  padding: 0.5rem 1rem;
-}
-
-.product-wrapper.vl-pdp .product-tabs .btn-primary {
-  background: var(--vl-nav-cta-bg);
-  border-color: var(--vl-nav-cta-bg);
-  color: #fff;
-}
-
-.product-wrapper.vl-pdp .product-tabs .btn-outline-primary {
-  background: transparent;
-  border-color: var(--vl-border);
-  color: var(--vl-muted);
-}
-
-.product-wrapper.vl-pdp .product-tabs .btn-outline-primary:hover {
-  border-color: var(--vl-border-hover);
-  color: var(--vl-text);
-  background: var(--vl-surface);
-}
-
-.product-wrapper.vl-pdp .badges div {
-  background: rgba(249, 153, 38, 0.1);
-  color: var(--vl-accent);
-  border: 1px solid rgba(249, 153, 38, 0.2);
-  padding: 6px 12px;
-  border-radius: var(--vl-btn-radius);
-  font-size: 0.75rem;
-  font-weight: 600;
-}
-
-.product-wrapper.vl-pdp .variants .variant {
-  background: var(--vl-surface);
-  border: 1px solid var(--vl-border);
-  border-radius: var(--vl-radius);
-  color: var(--vl-text);
-}
-
-.product-wrapper.vl-pdp .variants .variant.active {
-  border-color: var(--vl-accent);
-  box-shadow: 0 0 0 2px var(--vl-accent-glow);
-}
-
-.product-wrapper.vl-pdp .variants .variant .description,
-.product-wrapper.vl-pdp .variants .variant .stock {
-  color: var(--vl-muted);
-}
-
-.product-wrapper.vl-pdp .variants .variant .price {
-  background: var(--vl-card);
-  color: var(--vl-text);
-  border-radius: var(--vl-btn-radius);
-  font-weight: 600;
-}
-
-.product-wrapper.vl-pdp .form-label {
-  font-weight: 600;
-  font-size: 0.875rem;
-  color: var(--vl-text);
-}
-
-.product-wrapper.vl-pdp .input-group .form-control {
-  background: var(--vl-surface);
-  border-color: var(--vl-border);
-  color: var(--vl-text);
-}
-
-.product-wrapper.vl-pdp .input-group .form-control:focus {
-  border-color: var(--vl-accent);
-  box-shadow: 0 0 0 3px var(--vl-accent-glow);
-}
-
-.product-wrapper.vl-pdp .input-group .btn.btn-outline-primary {
-  background: var(--vl-surface);
-  border-color: var(--vl-border);
-  color: var(--vl-muted);
-}
-
-.product-wrapper.vl-pdp .input-group .btn.btn-outline-primary:hover {
-  border-color: var(--vl-accent);
-  color: var(--vl-accent);
-}
-
-.product-wrapper.vl-pdp .buy-buttons .btn {
-  border-radius: var(--vl-btn-radius);
-  font-weight: 600;
-  padding: 0.75rem 1rem;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.product-wrapper.vl-pdp .vl-pdp-delivery-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  margin-bottom: 0.35rem;
-}
-
-.vl-pdp-faq-link-wrap {
-  margin: 0 0 1rem;
-}
-
-.vl-pdp-faq-link {
-  font-size: 13px;
-  font-weight: 500;
-  letter-spacing: -0.01em;
-  color: var(--vl-accent);
-  text-decoration: none;
-  transition: color 0.15s ease;
-}
-
-.vl-pdp-faq-link:hover {
-  color: var(--vl-accent-hover);
-  text-decoration: underline;
-}
-
-.product-wrapper.vl-pdp .buy-buttons .btn-primary {
-  background: var(--vl-nav-cta-bg);
-  border-color: var(--vl-nav-cta-bg);
-  color: #fff;
-}
-
-.product-wrapper.vl-pdp .buy-buttons .btn-primary:hover {
-  background: var(--vl-nav-cta-bg-hover);
-  border-color: var(--vl-nav-cta-bg-hover);
-  color: #fff;
-}
-
-.product-wrapper.vl-pdp .buy-buttons .btn-outline-primary {
-  background: transparent;
-  border: 1px solid var(--vl-border);
-  color: var(--vl-text);
-}
-
-.product-wrapper.vl-pdp .buy-buttons .btn-outline-primary:hover {
-  border-color: var(--vl-border-hover);
-  color: var(--vl-text);
-  background: var(--vl-surface);
-}
-
-.product-wrapper.vl-pdp .stock-indicator.btn-outline-primary {
-  border-radius: var(--vl-btn-radius);
-  font-size: 0.75rem;
-  font-weight: 600;
-  pointer-events: none;
-  border-color: rgba(249, 153, 38, 0.3);
-  color: var(--vl-accent);
-  background: rgba(249, 153, 38, 0.08);
-}
-
-/* ---- PDP polish (homepage parity) ---- */
-
-.product-wrapper.vl-pdp .vl-pdp-buy {
-  padding: clamp(18px, 3vw, 24px);
-  background: var(--vl-product-card);
-  border: 1px solid var(--vl-border);
-  border-radius: var(--vl-product-radius);
-}
-
-.product-wrapper.vl-pdp .carousel img,
-.product-wrapper.vl-pdp .card-img-top,
-.product-wrapper.vl-pdp .product-img-placeholder {
-  background: var(--vl-product-media);
-  border-radius: var(--vl-product-radius);
-}
-
-.product-wrapper.vl-pdp .fs-5 {
-  font-family: var(--vl-font-product);
-  font-size: clamp(1.375rem, 3vw, 1.5rem);
-  font-weight: 700;
-  color: var(--vl-accent);
-}
-
-.product-wrapper.vl-pdp .editor {
-  color: rgba(255, 255, 255, 0.74);
-}
-
-.product-wrapper.vl-pdp .editor :is(p, li) {
-  color: rgba(255, 255, 255, 0.74);
-}
-
-.product-wrapper.vl-pdp .editor :is(h1, h2, h3, h4, h5, h6) {
-  color: var(--vl-text);
-}
-
-.product-wrapper.vl-pdp .buy-buttons .btn-primary {
-  min-height: 48px;
-  border: 1px solid rgba(255, 168, 60, 0.7);
-  background: linear-gradient(180deg, #ffb038 0%, #ff8012 42%, #e87200 100%);
-  color: #1a1000;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28);
-  transition: filter 0.15s ease;
-}
-
-.product-wrapper.vl-pdp .buy-buttons .btn-primary:hover:not(:disabled) {
-  filter: brightness(1.06);
-  background: linear-gradient(180deg, #ffb038 0%, #ff8012 42%, #e87200 100%);
-  border-color: rgba(255, 168, 60, 0.85);
-  color: #1a1000;
-}
-
-.product-wrapper.vl-pdp .buy-buttons .btn-primary:focus-visible {
-  outline: 2px solid var(--vl-accent);
-  outline-offset: 2px;
-}
-
-.product-wrapper.vl-pdp .vl-pdp-upsells-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
-  max-width: 100%;
-  margin: 0;
-}
-
-.product-wrapper.vl-pdp .vl-pdp-upsells-grid .product-card-container {
-  width: 100%;
-  min-width: 0;
-}
-
-.product-wrapper.vl-pdp .ps-product-card {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  background: var(--vl-product-card);
-  border: 1px solid var(--vl-border);
-  border-radius: var(--vl-product-radius);
-  overflow: hidden;
-  transition: transform 0.22s ease, border-color 0.2s ease;
-}
-
-.product-wrapper.vl-pdp .ps-product-card:hover:not(.is-out-of-stock) {
-  transform: translateY(-2px);
-  border-color: rgba(249, 153, 38, 0.32);
-}
-
-.product-wrapper.vl-pdp .ps-product-media {
-  aspect-ratio: 1 / 1;
-  background: var(--vl-product-media);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.product-wrapper.vl-pdp .ps-product-body {
-  padding: 12px 14px 14px;
-}
-
-.product-wrapper.vl-pdp .ps-product-name {
-  font-family: var(--vl-font-product);
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--vl-text);
-}
-
-.product-wrapper.vl-pdp .ps-product-price {
-  font-family: var(--vl-font-product);
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--vl-accent);
-}
-
-@media (min-width: 768px) {
-  .product-wrapper.vl-pdp .vl-pdp-upsells-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 16px;
-  }
-}
-
-@media (max-width: 479px) {
-  .product-wrapper.vl-pdp .vl-pdp-upsells-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* ---- Cart ---- */
+/* ---- Cart shell (matches PDP vl-pdp-section) ---- */
 
 .vl-cart-page {
-  padding-top: clamp(2rem, 5vw, 3rem);
-  padding-bottom: clamp(3rem, 6vw, 5rem);
+  --vl-cart-font: var(--font-body, var(--vl-font-header-sans, Arial, Helvetica, sans-serif));
+  --vl-cart-font-product: var(--vl-font-product, Inter, system-ui, -apple-system, "Segoe UI", sans-serif);
+  --vl-cart-card-bg: rgba(14, 14, 14, 0.72);
+  --vl-cart-card-bg-glass: rgba(255, 255, 255, 0.035);
+  --vl-cart-card-border: var(--vl-border, rgba(255, 255, 255, 0.1));
+  --vl-cart-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 18px 44px rgba(0, 0, 0, 0.38);
+  font-family: var(--vl-cart-font);
+  color: var(--vl-muted);
+}
+
+.vl-cart-section {
+  position: relative;
+  isolation: isolate;
+  padding: calc(var(--vl-nav-h, 56px) + 20px) 0 48px;
+}
+
+.vl-cart-section::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: min(520px, 70vh);
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 100% 58% at 50% 0%,
+    rgba(255, 136, 24, 0.1) 0%,
+    rgba(255, 114, 10, 0.04) 30%,
+    transparent 68%
+  );
+}
+
+.vl-cart-shell {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: min(1200px, 94vw);
+  margin-inline: auto;
+  padding-inline: max(clamp(1rem, 4vw, 2.5rem), env(safe-area-inset-left, 0px)) max(clamp(1rem, 4vw, 2.5rem), env(safe-area-inset-right, 0px));
+}
+
+.vl-cart-page :is(
+  .vl-cart-item,
+  .vl-cart-summary,
+  .vl-cart-empty,
+  .vl-cart-loading,
+  .vl-cart-qty
+) {
+  border: 1px solid var(--vl-cart-card-border);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.28);
+  background: var(--vl-cart-card-bg);
+}
+
+@supports ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
+  .vl-cart-page :is(
+    .vl-cart-item,
+    .vl-cart-summary,
+    .vl-cart-empty,
+    .vl-cart-loading,
+    .vl-cart-qty
+  ) {
+    background: var(--vl-cart-card-bg-glass);
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+  }
+
+  .vl-cart-page :is(.vl-cart-item, .vl-cart-summary) {
+    backdrop-filter: blur(22px) saturate(145%);
+    -webkit-backdrop-filter: blur(22px) saturate(145%);
+    box-shadow: var(--vl-cart-shadow);
+  }
+}
+
+.vl-cart-page :is(.vl-cart-item, .vl-cart-summary) {
+  position: relative;
+  overflow: hidden;
 }
 
 .vl-cart-head {
@@ -476,9 +103,11 @@
   margin: 0 0 8px;
   font-family: var(--vl-font-header-sans);
   font-size: clamp(1.75rem, 4vw, 2.25rem);
-  font-weight: 600;
+  font-weight: 500;
   letter-spacing: -0.03em;
+  line-height: 1.12;
   color: var(--vl-text);
+  text-wrap: balance;
 }
 
 .vl-cart-sub {
@@ -535,9 +164,7 @@
   align-items: center;
   justify-content: center;
   min-height: 160px;
-  border: 1px solid var(--vl-border);
-  border-radius: var(--vl-radius);
-  background: var(--vl-surface);
+  border-radius: var(--vl-product-radius);
 }
 
 .vl-cart-spinner {
@@ -559,9 +186,7 @@
   align-items: center;
   text-align: center;
   padding: clamp(2.5rem, 5vw, 3.5rem) 1.5rem;
-  border: 1px solid var(--vl-border);
   border-radius: var(--vl-product-radius);
-  background: var(--vl-product-card);
 }
 
 .vl-cart-empty-icon {
@@ -624,9 +249,12 @@
   grid-template-columns: 96px minmax(0, 1fr);
   gap: 14px;
   padding: 14px;
-  border: 1px solid var(--vl-border);
   border-radius: var(--vl-product-radius);
-  background: var(--vl-product-card);
+  transition: border-color 0.2s ease;
+}
+
+.vl-cart-item:hover {
+  border-color: var(--vl-border-hover, rgba(255, 255, 255, 0.15));
 }
 
 .vl-cart-item-media {
@@ -651,11 +279,14 @@
   justify-content: center;
   width: 100%;
   height: 100%;
-  font-family: var(--vl-font-header-serif);
-  font-style: italic;
-  font-size: 22px;
-  color: rgba(255, 154, 60, 0.75);
   background: radial-gradient(circle at 50% 42%, rgba(255, 122, 0, 0.12) 0%, transparent 58%);
+}
+
+.vl-cart-item-placeholder img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  opacity: 0.85;
 }
 
 .vl-cart-item-body {
@@ -734,10 +365,8 @@
 .vl-cart-qty {
   display: inline-flex;
   align-items: stretch;
-  border: 1px solid var(--vl-border);
   border-radius: var(--vl-btn-radius);
   overflow: hidden;
-  background: var(--vl-card);
 }
 
 .vl-cart-qty-btn {
@@ -810,9 +439,12 @@
 
 .vl-cart-summary {
   padding: 18px 18px 20px;
-  border: 1px solid var(--vl-border);
   border-radius: var(--vl-product-radius);
-  background: var(--vl-product-card);
+  transition: border-color 0.2s ease;
+}
+
+.vl-cart-summary:hover {
+  border-color: var(--vl-border-hover, rgba(255, 255, 255, 0.15));
 }
 
 .vl-cart-summary-form {
@@ -900,63 +532,203 @@
   animation: vl-cart-spin 0.7s linear infinite;
 }
 
-/* ---------- Responsive (shop pages) ---------- */
-@media (max-width: 767px) {
-  .product-wrapper.vl-pdp h1.display-6 {
-    font-size: clamp(1.5rem, 6vw, 1.875rem);
+/* Mobile sticky pay bar */
+.vl-cart-mobile-bar {
+  display: none;
+}
+
+@media (max-width: 991px) {
+  .vl-cart-section {
+    padding-bottom: calc(48px + 76px + env(safe-area-inset-bottom, 0px));
   }
 
-  .product-wrapper.vl-pdp .product-tabs .mb-4.d-flex {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    padding-bottom: 4px;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
+  .vl-cart-mobile-bar {
+    display: block;
+    position: fixed;
+    z-index: 1040;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 10px max(clamp(1rem, 4vw, 2.5rem), env(safe-area-inset-left, 0px)) max(10px, env(safe-area-inset-bottom, 0px)) max(clamp(1rem, 4vw, 2.5rem), env(safe-area-inset-right, 0px));
+    border-top: 1px solid var(--vl-border);
+    background: rgba(3, 3, 3, 0.92);
   }
 
-  .product-wrapper.vl-pdp .product-tabs .mb-4.d-flex::-webkit-scrollbar {
-    display: none;
+  @supports ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
+    .vl-cart-mobile-bar {
+      background: rgba(3, 3, 3, 0.78);
+      backdrop-filter: blur(18px) saturate(140%);
+      -webkit-backdrop-filter: blur(18px) saturate(140%);
+    }
   }
 
-  .product-wrapper.vl-pdp .product-tabs .btn {
-    flex: 0 0 auto;
-    white-space: nowrap;
-  }
-
-  .product-wrapper.vl-pdp .thumbnails {
+  .vl-cart-mobile-bar-inner {
     display: flex;
-    flex-wrap: nowrap;
-    gap: 8px;
-    overflow-x: auto;
-    padding-bottom: 4px;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    max-width: min(1200px, 94vw);
+    margin-inline: auto;
   }
 
-  .product-wrapper.vl-pdp .thumbnails::-webkit-scrollbar {
-    display: none;
-  }
-
-  .product-wrapper.vl-pdp .thumbnails button {
-    flex: 0 0 64px;
-    width: 64px;
-  }
-
-  .product-wrapper.vl-pdp .buy-buttons {
+  .vl-cart-mobile-bar-total {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 2px;
+    min-width: 0;
   }
 
-  .product-wrapper.vl-pdp .buy-buttons .btn {
-    width: 100%;
+  .vl-cart-mobile-bar-label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--vl-text-ghost, rgba(255, 255, 255, 0.38));
+  }
+
+  .vl-cart-mobile-bar-value {
+    font-family: var(--vl-cart-font-product);
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--vl-text);
+  }
+
+  .vl-cart-mobile-bar-btn {
+    flex-shrink: 0;
     min-height: 44px;
+    padding: 0 18px;
+    border: 1px solid rgba(255, 168, 60, 0.7);
+    border-radius: var(--vl-btn-radius);
+    background: linear-gradient(180deg, #ffb038 0%, #ff8012 42%, #e87200 100%);
+    color: #1a1000;
+    font-family: var(--vl-cart-font);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    cursor: pointer;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.28);
+    transition: filter 0.15s ease;
   }
 
-  .product-wrapper.vl-pdp .variants .variant {
-    padding: 12px;
+  .vl-cart-mobile-bar-btn:hover:not(:disabled) {
+    filter: brightness(1.06);
   }
 
+  .vl-cart-mobile-bar-btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+  }
+
+  .vl-cart-mobile-bar-btn:focus-visible {
+    outline: 2px solid var(--vl-accent);
+    outline-offset: 2px;
+  }
+}
+
+.vl-cart-page .vl-trust-micro {
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  margin-bottom: 16px;
+}
+
+/* Hosted SellAuth checkout — safe global overrides */
+.velora-inner-page .bg-gray,
+.velora-inner-page .card.bg-gray {
+  border: 1px solid var(--vl-border) !important;
+  border-radius: var(--vl-product-radius) !important;
+  background: rgba(255, 255, 255, 0.035) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+}
+
+@supports ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
+  .velora-inner-page .bg-gray,
+  .velora-inner-page .card.bg-gray {
+    backdrop-filter: blur(20px) saturate(140%);
+    -webkit-backdrop-filter: blur(20px) saturate(140%);
+  }
+}
+
+.velora-inner-page .bg-gray .btn-primary,
+.velora-inner-page .btn-primary {
+  border-radius: var(--vl-btn-radius) !important;
+}
+
+.velora-inner-page input.form-control,
+.velora-inner-page select.form-select,
+.velora-inner-page textarea.form-control {
+  border-color: var(--vl-border);
+  border-radius: var(--vl-btn-radius);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--vl-text);
+}
+
+.velora-inner-page input.form-control:focus,
+.velora-inner-page select.form-select:focus,
+.velora-inner-page textarea.form-control:focus {
+  border-color: rgba(249, 153, 38, 0.45);
+  box-shadow: 0 0 0 3px rgba(249, 153, 38, 0.12);
+}
+
+/* Payment methods block (optional landing section) */
+.vl-payment-methods {
+  position: relative;
+  isolation: isolate;
+}
+
+.vl-payment-head {
+  text-align: center;
+  max-width: 640px;
+  margin-inline: auto;
+}
+
+.vl-payment-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: clamp(1.5rem, 3vw, 2rem) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.vl-payment-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 16px;
+  border: 1px solid var(--vl-cart-card-border, var(--vl-border));
+  border-radius: var(--vl-btn-radius);
+  background: var(--vl-cart-card-bg-glass, rgba(255, 255, 255, 0.035));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  font-family: var(--vl-font-header-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--vl-text);
+}
+
+@supports ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
+  .vl-payment-chip {
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+  }
+}
+
+.vl-payment-chip i,
+.vl-payment-chip-mark {
+  font-size: 16px;
+  color: var(--vl-accent);
+}
+
+.vl-payment-chip-mark {
+  font-weight: 700;
+  line-height: 1;
+}
+
+/* ---------- Responsive (cart only) ---------- */
+@media (max-width: 767px) {
   .vl-cart-item {
     grid-template-columns: 72px minmax(0, 1fr);
     gap: 10px;
@@ -996,6 +768,9 @@
 
   .vl-cart-empty-cta,
   .vl-cart-checkout-btn,
+  .vl-cart-mobile-bar-btn,
+  .vl-cart-item,
+  .vl-cart-summary,
   .vl-cart-item-name,
   .vl-cart-item-remove,
   .vl-cart-qty-btn {
@@ -1003,3 +778,1002 @@
   }
 }
 
+/* Global page motion — inner pages */
+.velora-inner-page .vl-page-content {
+  min-height: 1px;
+}
+
+.velora-inner-page [data-reveal].is-visible {
+  backface-visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html.vl-page-exit #app {
+    opacity: 1;
+    filter: none;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ============================================================
+   TERMS OF SERVICE — Nebula-style premium layout (Velora DA)
+   ============================================================ */
+
+.vl-terms-page {
+  --vl-terms-accent: var(--vl-accent, #f99926);
+  --vl-terms-panel-bg: rgba(12, 12, 12, 0.55);
+  --vl-terms-panel-border: rgba(255, 255, 255, 0.1);
+  --vl-terms-row-bg: rgba(255, 255, 255, 0.035);
+  --vl-terms-row-border: rgba(255, 255, 255, 0.08);
+  --vl-glass-blur: blur(22px) saturate(145%);
+  --vl-glass-light: linear-gradient(90deg, transparent 0%, rgba(255, 154, 60, 0.45) 50%, transparent 100%);
+  --vl-glass-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 20px 48px rgba(0, 0, 0, 0.42);
+  font-family: var(--font-body, Arial, Helvetica, sans-serif);
+  color: var(--vl-muted, rgba(255, 255, 255, 0.62));
+}
+
+.vl-legal-page,
+.vl-premium-page {
+  --vl-terms-accent: var(--vl-accent, #f99926);
+  --vl-terms-panel-bg: rgba(12, 12, 12, 0.55);
+  --vl-terms-panel-border: rgba(255, 255, 255, 0.1);
+  --vl-terms-row-bg: rgba(255, 255, 255, 0.035);
+  --vl-terms-row-border: rgba(255, 255, 255, 0.08);
+  --vl-glass-blur: blur(22px) saturate(145%);
+  --vl-glass-light: linear-gradient(90deg, transparent 0%, rgba(255, 154, 60, 0.45) 50%, transparent 100%);
+  --vl-glass-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 20px 48px rgba(0, 0, 0, 0.42);
+}
+
+.vl-terms-section {
+  position: relative;
+  isolation: isolate;
+  padding: calc(var(--vl-nav-h, 56px) + 24px) 0 64px;
+}
+
+.vl-terms-section::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  inset: 0 0 auto 0;
+  height: min(560px, 75vh);
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 90% 55% at 50% -8%, rgba(249, 153, 38, 0.14) 0%, transparent 62%),
+    radial-gradient(ellipse 50% 40% at 85% 20%, rgba(249, 153, 38, 0.06) 0%, transparent 55%);
+}
+
+.vl-terms-shell {
+  position: relative;
+  z-index: 1;
+  width: min(920px, 100%);
+  margin: 0 auto;
+  padding: 0 max(clamp(1rem, 4vw, 2rem), env(safe-area-inset-left, 0px));
+}
+
+.vl-terms-back {
+  margin-bottom: clamp(1rem, 3vw, 1.5rem);
+}
+
+.vl-terms-hero {
+  text-align: center;
+  margin-bottom: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+.vl-terms-title {
+  margin: 0 0 0.75rem;
+  font-family: var(--vl-font-header-sans, Arial, Helvetica, sans-serif);
+  font-size: clamp(2.25rem, 6vw, 3.5rem);
+  font-weight: 500;
+  font-style: normal;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  color: var(--vl-text, #fff);
+}
+
+.vl-terms-title-plain {
+  display: inline;
+}
+
+.vl-terms-title-accent {
+  display: inline;
+  font-style: normal;
+  font-weight: 600;
+  background: linear-gradient(135deg, #ffc46a 0%, var(--vl-terms-accent) 45%, #e8840f 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.vl-terms-sub {
+  margin: 0 auto;
+  max-width: 36rem;
+  font-size: clamp(0.9375rem, 0.35vw + 0.85rem, 1.0625rem);
+  line-height: 1.65;
+  color: var(--vl-muted, rgba(255, 255, 255, 0.55));
+}
+
+.vl-terms-panel {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+  border-radius: 20px;
+  border: 1px solid var(--vl-terms-panel-border);
+  background:
+    linear-gradient(165deg, rgba(255, 255, 255, 0.05) 0%, transparent 42%),
+    var(--vl-terms-panel-bg);
+  box-shadow: var(--vl-glass-shadow);
+}
+
+@supports ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
+  .vl-terms-panel,
+  .vl-legal-panel {
+    backdrop-filter: var(--vl-glass-blur);
+    -webkit-backdrop-filter: var(--vl-glass-blur);
+  }
+}
+
+.vl-terms-highlights {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: clamp(1.5rem, 3vw, 2rem);
+  padding-bottom: clamp(1.25rem, 2.5vw, 1.75rem);
+}
+
+.vl-terms-highlight {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 14px;
+  border-radius: 14px;
+  border: 1px solid var(--vl-terms-row-border);
+  background: var(--vl-terms-row-bg);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+@supports ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
+  .vl-terms-highlight,
+  .vl-terms-row,
+  .vl-premium-page .feedback-card,
+  .vl-premium-page .status-card,
+  .vl-premium-page .blog-post-card,
+  .vl-customer-page .velora-customer .card,
+  .vl-customer-page .vl-customer-sidebar {
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+  }
+}
+
+.vl-terms-highlight:hover {
+  border-color: rgba(249, 153, 38, 0.28);
+  background: rgba(249, 153, 38, 0.06);
+  transform: translateY(-2px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 12px 28px rgba(249, 153, 38, 0.08);
+}
+
+.vl-terms-highlight-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  color: var(--vl-terms-accent);
+  background: rgba(249, 153, 38, 0.14);
+  border: 1px solid rgba(249, 153, 38, 0.28);
+  box-shadow: inset 0 1px 0 rgba(255, 200, 120, 0.12);
+  flex-shrink: 0;
+}
+
+.vl-terms-highlight-icon svg,
+.vl-legal-icon {
+  width: 18px;
+  height: 18px;
+  display: block;
+  flex-shrink: 0;
+  stroke: currentColor;
+  fill: none;
+}
+
+.vl-terms-row-icon .vl-legal-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.vl-legal-icon--dot {
+  fill: none;
+}
+
+.vl-legal-icon--dot circle {
+  fill: currentColor;
+  stroke: none;
+}
+
+.vl-terms-highlight-icon--x {
+  color: #ffb347;
+  background: rgba(249, 153, 38, 0.12);
+  border-color: rgba(249, 153, 38, 0.26);
+}
+
+.vl-terms-highlight-icon--info {
+  color: var(--vl-terms-accent);
+  background: rgba(249, 153, 38, 0.12);
+  border-color: rgba(249, 153, 38, 0.24);
+}
+
+.vl-terms-highlight-title {
+  margin: 0 0 4px;
+  font-family: var(--vl-font-product, Inter, system-ui, sans-serif);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--vl-text, #fff);
+}
+
+.vl-terms-highlight-text {
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: var(--vl-muted, rgba(255, 255, 255, 0.52));
+}
+
+.vl-terms-sections {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.5rem, 3vw, 2rem);
+}
+
+.vl-terms-block-title {
+  margin: 0 0 0.65rem;
+  font-family: var(--vl-font-product, Inter, system-ui, sans-serif);
+  font-size: clamp(1.125rem, 2vw, 1.3125rem);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: var(--vl-text, #fff);
+}
+
+.vl-terms-block-intro {
+  margin: 0 0 1rem;
+  max-width: 52rem;
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: var(--vl-muted, rgba(255, 255, 255, 0.55));
+}
+
+.vl-terms-rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.vl-terms-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--vl-terms-row-border);
+  background: var(--vl-terms-row-bg);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.78);
+  transition: border-color 0.18s ease, background 0.18s ease, transform 0.18s ease;
+}
+
+.vl-terms-row:hover {
+  border-color: rgba(249, 153, 38, 0.24);
+  background: rgba(249, 153, 38, 0.05);
+  transform: translateX(2px);
+}
+
+.vl-terms-row-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: 9px;
+  color: var(--vl-terms-accent);
+  background: rgba(249, 153, 38, 0.12);
+  border: 1px solid rgba(249, 153, 38, 0.24);
+  box-shadow: inset 0 1px 0 rgba(255, 200, 120, 0.1);
+}
+
+.vl-terms-row-icon svg {
+  stroke: currentColor;
+  fill: none;
+}
+
+.vl-terms-row--x .vl-terms-row-icon {
+  color: #ffb347;
+}
+
+.vl-terms-row--info .vl-terms-row-icon,
+.vl-terms-row--dot .vl-terms-row-icon {
+  color: var(--vl-terms-accent);
+}
+
+.vl-terms-row-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.vl-terms-extra {
+  margin-top: clamp(1.5rem, 3vw, 2rem);
+  padding-top: clamp(1.25rem, 2.5vw, 1.75rem);
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.vl-terms-prose {
+  max-width: none;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+}
+
+.vl-terms-prose :is(h1, h2, h3, h4) {
+  font-family: var(--vl-font-product, Inter, system-ui, sans-serif);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--vl-text, #fff);
+  margin: 1.5rem 0 0.75rem;
+}
+
+.vl-terms-prose :is(p, li) {
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.vl-terms-prose ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.vl-terms-prose ul > li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid var(--vl-terms-row-border);
+  background: var(--vl-terms-row-bg);
+}
+
+.vl-terms-prose ul > li::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  margin-top: 7px;
+  border-radius: 50%;
+  background: var(--vl-terms-accent);
+  flex-shrink: 0;
+}
+
+@media (max-width: 767.98px) {
+  .vl-terms-highlights {
+    grid-template-columns: 1fr;
+  }
+
+  .vl-terms-title {
+    font-size: clamp(2rem, 9vw, 2.75rem);
+  }
+
+  .vl-terms-panel {
+    padding: 1rem;
+    border-radius: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vl-terms-highlight,
+  .vl-terms-row {
+    transition: none;
+  }
+}
+
+/* Premium inner pages — feedback, status, blog, FAQ, customer */
+.vl-legal-shell--wide {
+  width: min(1040px, 100%);
+}
+
+.vl-legal-title--post {
+  font-size: clamp(1.75rem, 4.5vw, 2.75rem);
+  line-height: 1.12;
+}
+
+.vl-premium-page .vl-feedback-grid {
+  margin: 0 -0.5rem;
+}
+
+.vl-premium-page .feedback-card {
+  height: 100%;
+  background: var(--vl-terms-row-bg);
+  border: 1px solid var(--vl-terms-row-border);
+  border-radius: 14px;
+}
+
+.vl-premium-page .status-card {
+  background: var(--vl-terms-row-bg);
+  border: 1px solid var(--vl-terms-row-border);
+  border-radius: 14px;
+  transition: border-color 0.18s ease, transform 0.18s ease;
+}
+
+.vl-premium-page .status-card:hover {
+  border-color: rgba(249, 153, 38, 0.28);
+  transform: translateY(-2px);
+}
+
+.vl-status-group-title {
+  margin: 1.5rem 0 0.75rem;
+  font-family: var(--vl-font-product, Inter, system-ui, sans-serif);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--vl-text, #fff);
+}
+
+.vl-status-grid--nested {
+  margin-top: 0.5rem;
+}
+
+.vl-premium-pagination {
+  margin-top: 1.5rem;
+}
+
+.vl-premium-cta-wrap {
+  margin-top: 1.75rem;
+  text-align: center;
+}
+
+.vl-premium-cta {
+  display: inline-flex;
+}
+
+.vl-premium-empty {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--vl-muted);
+}
+
+.vl-blog-featured {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 1.5rem;
+  border-radius: 14px;
+  border: 1px solid var(--vl-terms-row-border);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.28);
+}
+
+.vl-blog-featured-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 420px;
+  object-fit: cover;
+}
+
+.vl-blog-meta {
+  margin: 1.5rem 0 0;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  color: var(--vl-muted);
+}
+
+.vl-premium-page .blog-post-card,
+.vl-premium-page .card.blog-post-card {
+  background: var(--vl-terms-row-bg);
+  border: 1px solid var(--vl-terms-row-border);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: border-color 0.18s ease, transform 0.18s ease;
+}
+
+.vl-premium-page .blog-post-card:hover {
+  border-color: rgba(249, 153, 38, 0.28);
+  transform: translateY(-2px);
+}
+
+.vl-faq-page .vl-faq-panel {
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+}
+
+.vl-faq-page .faq-modern-red--standalone {
+  padding: 0;
+  background: transparent;
+}
+
+.vl-faq-panel-inner {
+  width: 100%;
+}
+
+.vl-faq-page .faq-layout {
+  gap: clamp(1.25rem, 3vw, 2rem);
+}
+
+.vl-customer-page .vl-customer-panel {
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+}
+
+.vl-customer-page .vl-customer-trust-hint {
+  margin: 0 0 1.25rem;
+  padding: 10px 14px;
+  border-radius: var(--vl-btn-radius);
+  font-size: 13px;
+  color: var(--vl-muted);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--vl-border);
+}
+
+.vl-customer-page .velora-customer .card {
+  background: var(--vl-terms-row-bg);
+  border: 1px solid var(--vl-terms-row-border);
+  border-radius: 14px;
+}
+
+.vl-customer-page .velora-customer .table {
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.vl-customer-page .velora-customer .table thead th {
+  border-color: rgba(255, 255, 255, 0.08);
+  color: var(--vl-text, #fff);
+}
+
+.vl-customer-page .velora-customer .table td {
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+.vl-custom-page .vl-legal-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+}
+
+/* ============================================================
+   INNER PAGES — Glassmorphism system (buttons, icons, lights)
+   Terms · Privacy · Refund · FAQ · Blog · Status · Customer
+   ============================================================ */
+
+.velora-inner-page :is(.vl-premium-page, .vl-legal-page) .vl-page-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  margin-bottom: clamp(1rem, 3vw, 1.5rem);
+  border-radius: var(--vl-btn-radius, 10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.035);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: rgba(255, 255, 255, 0.72);
+  text-decoration: none;
+  transition:
+    color 0.18s ease,
+    border-color 0.18s ease,
+    background 0.18s ease,
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+@supports ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
+  .velora-inner-page :is(.vl-premium-page, .vl-legal-page) .vl-page-back {
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+  }
+}
+
+.velora-inner-page :is(.vl-premium-page, .vl-legal-page) .vl-page-back:hover {
+  color: var(--vl-accent, #f99926);
+  border-color: rgba(249, 153, 38, 0.35);
+  background: rgba(249, 153, 38, 0.08);
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 200, 120, 0.1),
+    0 8px 20px rgba(249, 153, 38, 0.1);
+}
+
+/* Glass primary CTA */
+.velora-inner-page :is(.vl-premium-page, .vl-legal-page, .vl-customer-page) :is(
+  .btn-primary,
+  .vl-page-cta,
+  .vl-premium-cta
+) {
+  position: relative;
+  isolation: isolate;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0.65rem 1.25rem !important;
+  border-radius: var(--vl-btn-radius, 10px) !important;
+  border: 1px solid rgba(255, 210, 90, 0.55) !important;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 200, 74, 0.96) 0%,
+    rgba(249, 153, 38, 0.94) 45%,
+    rgba(232, 135, 15, 0.96) 100%
+  ) !important;
+  box-shadow:
+    0 10px 28px rgba(249, 153, 38, 0.22) !important;
+  color: #1a1000 !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    filter 0.18s ease,
+    border-color 0.18s ease !important;
+}
+
+@supports ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
+  .velora-inner-page :is(.vl-premium-page, .vl-legal-page, .vl-customer-page) :is(
+    .btn-primary,
+    .vl-page-cta,
+    .vl-premium-cta
+  ) {
+    backdrop-filter: blur(10px) saturate(130%);
+    -webkit-backdrop-filter: blur(10px) saturate(130%);
+  }
+}
+
+.velora-inner-page :is(.vl-premium-page, .vl-legal-page, .vl-customer-page) :is(
+  .btn-primary:hover,
+  .vl-page-cta:hover,
+  .vl-premium-cta:hover
+) {
+  transform: translateY(-2px) !important;
+  filter: brightness(1.04);
+  border-color: rgba(255, 225, 120, 0.75) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.32),
+    0 14px 32px rgba(249, 153, 38, 0.28) !important;
+  color: #1a1000 !important;
+}
+
+/* Glass secondary / outline buttons */
+.velora-inner-page :is(.vl-premium-page, .vl-legal-page, .vl-customer-page) :is(
+  .btn-outline-primary,
+  .btn-secondary,
+  .btn-outline-secondary
+) {
+  min-height: 40px;
+  padding: 0.5rem 1rem !important;
+  border-radius: var(--vl-btn-radius, 10px) !important;
+  border: 1px solid rgba(255, 255, 255, 0.12) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+  color: rgba(255, 255, 255, 0.88) !important;
+  transition:
+    border-color 0.18s ease,
+    background 0.18s ease,
+    color 0.18s ease,
+    transform 0.18s ease !important;
+}
+
+@supports ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
+  .velora-inner-page :is(.vl-premium-page, .vl-legal-page, .vl-customer-page) :is(
+    .btn-outline-primary,
+    .btn-secondary,
+    .btn-outline-secondary
+  ) {
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+  }
+}
+
+.velora-inner-page :is(.vl-premium-page, .vl-legal-page, .vl-customer-page) :is(
+  .btn-outline-primary:hover,
+  .btn-secondary:hover,
+  .btn-outline-secondary:hover
+) {
+  border-color: rgba(249, 153, 38, 0.35) !important;
+  background: rgba(249, 153, 38, 0.08) !important;
+  color: var(--vl-accent, #f99926) !important;
+  transform: translateY(-1px);
+}
+
+.velora-inner-page :is(.vl-premium-page, .vl-legal-page, .vl-customer-page) .btn-outline-primary svg,
+.velora-inner-page :is(.vl-premium-page, .vl-legal-page, .vl-customer-page) .btn-primary svg,
+.velora-inner-page :is(.vl-premium-page, .vl-legal-page, .vl-customer-page) .btn svg {
+  stroke: currentColor;
+  color: inherit;
+}
+
+/* Glass cards */
+.vl-premium-page :is(.feedback-card, .status-card, .blog-post-card),
+.vl-customer-page .velora-customer .card,
+.vl-customer-page .vl-customer-sidebar {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.24);
+}
+
+.vl-premium-page :is(.feedback-card, .status-card, .blog-post-card):hover,
+.vl-customer-page .velora-customer .card:hover {
+  box-shadow: 0 16px 36px rgba(249, 153, 38, 0.08);
+}
+
+/* Status / feedback icons → orange */
+.vl-premium-page .status-card svg,
+.vl-premium-page .feedback-card svg,
+.vl-premium-page .status-card i,
+.vl-premium-page .feedback-card i {
+  color: var(--vl-accent, #f99926);
+}
+
+/* Pagination glass */
+.vl-premium-page .vl-pagination .page-link,
+.vl-customer-page .vl-pagination .page-link {
+  background: rgba(255, 255, 255, 0.035) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+@supports ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
+  .vl-premium-page .vl-pagination .page-link,
+  .vl-customer-page .vl-pagination .page-link {
+    backdrop-filter: blur(14px) saturate(140%);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+  }
+}
+
+.vl-premium-page .vl-pagination .page-item.active .page-link,
+.vl-customer-page .vl-pagination .page-item.active .page-link {
+  background: linear-gradient(180deg, #ffc84a 0%, #f99926 50%, #e8870f 100%) !important;
+  border-color: rgba(255, 210, 90, 0.55) !important;
+  color: #1a1000 !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+/* Customer sidebar nav — glass pills */
+.vl-customer-page .vl-customer-sidebar .nav-link {
+  border-radius: var(--vl-btn-radius, 10px) !important;
+  border: 1px solid transparent;
+  color: rgba(255, 255, 255, 0.72) !important;
+  background: transparent !important;
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease;
+}
+
+.vl-customer-page .vl-customer-sidebar .nav-link:hover {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-color: rgba(255, 255, 255, 0.08);
+  color: var(--vl-text, #fff) !important;
+}
+
+.vl-customer-page .vl-customer-sidebar .nav-link.active {
+  background: rgba(249, 153, 38, 0.12) !important;
+  border-color: rgba(249, 153, 38, 0.28) !important;
+  color: var(--vl-accent, #f99926) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 200, 120, 0.1);
+}
+
+/* Glass form controls on inner pages */
+.velora-inner-page :is(.vl-premium-page, .vl-legal-page, .vl-customer-page) :is(
+  .form-control,
+  .form-select
+) {
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+@supports ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
+  .velora-inner-page :is(.vl-premium-page, .vl-legal-page, .vl-customer-page) :is(
+    .form-control,
+    .form-select
+  ) {
+    backdrop-filter: blur(12px) saturate(130%);
+    -webkit-backdrop-filter: blur(12px) saturate(130%);
+  }
+}
+
+/* FAQ standalone — glass (mirrors landing FAQ DA) */
+.vl-faq-page .faq-layout {
+  display: grid;
+  align-items: start;
+  width: 100%;
+  grid-template-columns: minmax(280px, 380px) minmax(0, 1fr);
+  gap: clamp(32px, 5vw, 64px);
+}
+
+.vl-faq-page .faq-aside {
+  position: sticky;
+  top: calc(var(--vl-nav-h, 56px) + 24px);
+}
+
+.vl-faq-page .vl-faq-eyebrow {
+  display: inline-block;
+  margin: 0 0 12px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--vl-accent, #f99926);
+}
+
+.vl-faq-page .faq-aside-title {
+  margin: 0 0 14px !important;
+  font-family: var(--vl-font-header-sans);
+  font-size: clamp(1.625rem, 2.8vw, 2.25rem) !important;
+  font-weight: 500 !important;
+  line-height: 1.1 !important;
+  color: var(--vl-text, #fff) !important;
+  letter-spacing: -0.03em !important;
+}
+
+.vl-faq-page .faq-aside-sub {
+  margin: 0 0 24px !important;
+  color: rgba(255, 255, 255, 0.74) !important;
+  font-size: 14px !important;
+  line-height: 1.6 !important;
+}
+
+.vl-faq-page .faq-help-card,
+.vl-faq-page .faq-card-red {
+  position: relative;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.035) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: var(--vl-product-radius, 14px) !important;
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.32);
+}
+
+@supports ((backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px))) {
+  .vl-faq-page .faq-help-card,
+  .vl-faq-page .faq-card-red {
+    backdrop-filter: blur(22px) saturate(145%);
+    -webkit-backdrop-filter: blur(22px) saturate(145%);
+  }
+}
+
+.vl-faq-page .faq-help-card {
+  padding: 20px !important;
+}
+
+.vl-faq-page .faq-help-card:hover,
+.vl-faq-page .faq-card-red:hover {
+  border-color: rgba(249, 153, 38, 0.22) !important;
+  transform: translateY(-2px);
+}
+
+.vl-faq-page .faq-help-icon {
+  width: 40px !important;
+  height: 40px !important;
+  border-radius: var(--vl-btn-radius, 10px) !important;
+  background: rgba(249, 153, 38, 0.14) !important;
+  border: 1px solid rgba(249, 153, 38, 0.28);
+  color: var(--vl-accent, #f99926) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 200, 120, 0.1);
+}
+
+.vl-faq-page .faq-help-icon svg {
+  stroke: var(--vl-accent, #f99926);
+  color: var(--vl-accent, #f99926);
+}
+
+.vl-faq-page .faq-help-btn {
+  min-height: 44px;
+  width: 100%;
+  border-radius: var(--vl-btn-radius, 10px) !important;
+  border: 1px solid rgba(255, 210, 90, 0.55) !important;
+  background: linear-gradient(180deg, #ffc84a 0%, #f99926 45%, #e8870f 100%) !important;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.28),
+    0 10px 24px rgba(249, 153, 38, 0.2) !important;
+  color: #1a1000 !important;
+  font-weight: 600 !important;
+  text-decoration: none !important;
+}
+
+.vl-faq-page .faq-help-btn:hover {
+  filter: brightness(1.05);
+  transform: translateY(-2px);
+  color: #1a1000 !important;
+}
+
+.vl-faq-page .faq-accordion-red {
+  display: flex;
+  flex-direction: column;
+  gap: 10px !important;
+}
+
+.vl-faq-page .faq-header-red {
+  display: grid;
+  align-items: center;
+  width: 100%;
+  padding: 16px 18px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-align: left;
+}
+
+.vl-faq-page .faq-q-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgba(249, 153, 38, 0.14);
+  border: 1px solid rgba(249, 153, 38, 0.24);
+  color: var(--vl-accent, #f99926);
+}
+
+.vl-faq-page .faq-chevron svg {
+  stroke: var(--vl-accent, #f99926);
+  color: var(--vl-accent, #f99926);
+}
+
+.vl-faq-page .faq-header-red:not(.collapsed) .faq-q-icon,
+.vl-faq-page .faq-card-red:has(.faq-header-red:not(.collapsed)) {
+  border-color: rgba(249, 153, 38, 0.28) !important;
+}
+
+.vl-faq-page .faq-q-text {
+  color: var(--vl-text, #fff);
+  font-weight: 500;
+}
+
+.vl-faq-page .faq-content-red {
+  padding: 0 18px 16px;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.vl-faq-page .faq-inline-link {
+  color: var(--vl-accent, #f99926);
+}
+
+@media (max-width: 991px) {
+  .vl-faq-page .faq-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .vl-faq-page .faq-aside {
+    position: static;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .velora-inner-page :is(.vl-premium-page, .vl-legal-page) .vl-page-back,
+  .velora-inner-page :is(.vl-premium-page, .vl-legal-page, .vl-customer-page) :is(
+    .btn-primary,
+    .vl-page-cta,
+    .vl-premium-cta,
+    .btn-outline-primary,
+    .btn-secondary
+  ),
+  .vl-terms-highlight,
+  .vl-terms-row,
+  .vl-faq-page .faq-help-card,
+  .vl-faq-page .faq-card-red {
+    transition: none;
+    transform: none;
+  }
+}

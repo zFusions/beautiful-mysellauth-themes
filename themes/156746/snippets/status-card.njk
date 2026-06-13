@@ -1,4 +1,4 @@
-<a href="{{ ('/product/' + product.path) | shopUrl }}" class="status-card">
+<a href="{{ ('/product/' + product.path) | shopUrl }}" class="status-card" data-reveal>
   <h3>{{ product.name }}</h3>
   <div class="status" data-color="{{ product.status_color }}" data-label="{{ product.status_text }}">
     <div class="indicator" style="background-color: {{ product.status_color }}">

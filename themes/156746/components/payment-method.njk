@@ -1,12 +1,35 @@
-<section class="container py-20 component" data-component-id="{{ componentId }}">
-  <div class="text-center mb-5">
-    {% if properties.title %}<h2>{{ properties.title | renderString }}</h2>{% endif %}
-    {% if properties.subtitle %}<p class="text-muted">{{ properties.subtitle | renderString }}</p>{% endif %}
-  </div>
-  <div class="d-flex flex-wrap justify-content-center gap-3">
-    {% if properties.show_bitcoin %}<span class="card px-4 py-3"><i class="fab fa-bitcoin"></i> Bitcoin</span>{% endif %}
-    {% if properties.show_litecoin %}<span class="card px-4 py-3">Litecoin</span>{% endif %}
-    {% if properties.show_stripe %}<span class="card px-4 py-3"><i class="fab fa-stripe"></i> Stripe</span>{% endif %}
-    {% if properties.show_paypal %}<span class="card px-4 py-3"><i class="fab fa-paypal"></i> PayPal</span>{% endif %}
+<section class="vl-page-section component vl-payment-methods" data-component-id="{{ componentId }}">
+  <div class="vl-cart-shell">
+    <header class="vl-page-head vl-payment-head">
+      {% if properties.title %}<h1>{{ properties.title | renderString }}</h1>{% endif %}
+      {% if properties.subtitle %}<p class="vl-page-sub">{{ properties.subtitle | renderString }}</p>{% endif %}
+    </header>
+
+    <ul class="vl-payment-grid" role="list">
+      {% if properties.show_bitcoin %}
+      <li class="vl-payment-chip">
+        <i class="fab fa-bitcoin" aria-hidden="true"></i>
+        <span>Bitcoin</span>
+      </li>
+      {% endif %}
+      {% if properties.show_litecoin %}
+      <li class="vl-payment-chip">
+        <span class="vl-payment-chip-mark" aria-hidden="true">Ł</span>
+        <span>Litecoin</span>
+      </li>
+      {% endif %}
+      {% if properties.show_stripe %}
+      <li class="vl-payment-chip">
+        <i class="fab fa-stripe" aria-hidden="true"></i>
+        <span>Stripe</span>
+      </li>
+      {% endif %}
+      {% if properties.show_paypal %}
+      <li class="vl-payment-chip">
+        <i class="fab fa-paypal" aria-hidden="true"></i>
+        <span>PayPal</span>
+      </li>
+      {% endif %}
+    </ul>
   </div>
 </section>

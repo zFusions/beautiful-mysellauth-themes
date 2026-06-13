@@ -1,10 +1,11 @@
-<div class="container component velora-customer" data-component-id="{{ componentId }}">
-  <section class="py-5-nav">
+{% render_snippet "vl-customer-shell-open.njk", prefix='My', accent='Dashboard', subtitle='Your orders, balance and account overview.' %}
+<div class="container-fluid px-0 component velora-customer" data-component-id="{{ componentId }}">
     <div class="row">
       <div class="col-12 col-lg-3 mb-4">
         {% render_snippet "customer-sidebar.njk" %}
       </div>
       <div class="col-12 col-lg-9">
+        <p class="vl-customer-trust-hint">Instant delivery on digital orders · Need help? Open a ticket from Support.</p>
         <div class="row">
           <div class="col-12 col-md-6 col-lg-4 mb-4">
             <div class="card p-4">
@@ -82,5 +83,5 @@
         </div>
       </div>
     </div>
-  </section>
 </div>
+{% render_snippet "vl-customer-shell-close.njk" %}

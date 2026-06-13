@@ -26,14 +26,26 @@ Inline or separate: scroll reveal + hero entrance + Lenis. Event: `theme:motion-
 ## shop.njk
 
 ```nunjucks
-<div class="shop-home">
+<div class="t-home">
   {% for componentId in components_order %}
     {% render_component componentId %}
   {% endfor %}
 </div>
 ```
 
-Class `shop-home` scopes Lenis + motion.
+Class `t-home` scopes Lenis + motion + section alternation.
+
+### Section background alternation (landing)
+
+```css
+.t-home > .component { background: var(--t-section-alt) !important; }
+.t-home > .component:nth-child(even) { background: var(--t-bg) !important; }
+.t-home > .component.t-hero { background: transparent !important; }
+```
+
+Hero = child 1 (odd, overridden transparent). How-it-works = child 2 (even, black). Products = child 3 (gray). Continue down the page.
+
+Full depth rules: [03-design-system.md](03-design-system.md#page-depth--background-dark-saas).
 
 ---
 

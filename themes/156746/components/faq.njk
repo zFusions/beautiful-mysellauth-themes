@@ -1,5 +1,22 @@
-<section id="faq" class="ps-section component faq-modern-red" data-component-id="{{ componentId }}" data-scroll-section>
-  <div class="container">
+{% if templateName == 'faq' %}
+<div class="component vl-premium-page vl-faq-page" data-component-id="{{ componentId }}">
+  <section class="vl-legal-section vl-terms-section" aria-labelledby="vl-faq-page-title">
+    <div class="vl-legal-shell vl-terms-shell vl-legal-shell--wide">
+      <a href="{{ '/' | shopUrl }}" class="vl-page-back vl-legal-back" data-reveal>← Back to store</a>
+      <header class="vl-legal-hero vl-terms-hero" data-reveal>
+        <h1 id="vl-faq-page-title" class="vl-legal-title vl-terms-title">
+          <span class="vl-terms-title-plain">{{ properties.page_title_prefix | default('Frequently') | renderString }}</span>
+          <em class="vl-terms-title-accent">{{ properties.page_title_accent | default('Asked') | renderString }}</em>
+        </h1>
+        {% if properties.page_subtitle %}
+        <p class="vl-legal-sub vl-terms-sub">{{ properties.page_subtitle | renderString }}</p>
+        {% endif %}
+      </header>
+      <div class="vl-legal-panel vl-terms-panel vl-faq-panel" data-reveal>
+{% endif %}
+
+<section id="faq" class="ps-section component faq-modern-red{% if templateName == 'faq' %} faq-modern-red--standalone{% endif %}"{% if templateName != 'faq' %} data-component-id="{{ componentId }}" data-scroll-section{% endif %}>
+  <div class="{% if templateName == 'faq' %}vl-faq-panel-inner{% else %}container{% endif %}">
     <div class="faq-layout">
       <aside class="faq-aside" data-reveal>
         <header class="faq-aside-head">
@@ -76,3 +93,10 @@
     </div>
   </div>
 </section>
+
+{% if templateName == 'faq' %}
+      </div>
+    </div>
+  </section>
+</div>
+{% endif %}
